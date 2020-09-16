@@ -17,9 +17,9 @@ import { Requirement } from 'src/app/models/requirement';
 import { userLite } from 'src/app/models/userLite';
 import { userCard } from 'src/app/models/userCard';
 import { UserProfile } from 'src/app/models/userProfile';
-import { filterName } from 'src/app/components/system/pipes/filterName.pipe';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditJobCard } from 'src/app/models/editJobCard';
+import { FilterName } from 'src/app/components/system/pipes/filterName.pipe'
 
 @Component({
   selector: 'app-job-card-create',
@@ -150,7 +150,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
     this.payload.tests = this.testsObj();
     this.payload.id = this.requestDetails.jobCardId;
     console.log(this.payload);
-    this.api.populateJobCard(this.payload).subscribe( success => this.successUploadCard(success),err => this.failUploadCard(err));
+    //this.api.populateJobCard(this.payload).subscribe( success => this.successUploadCard(success),err => this.failUploadCard(err));
   }
   getData(){
     this.getLocations();

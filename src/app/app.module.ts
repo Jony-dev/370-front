@@ -96,7 +96,7 @@ import { InterceptorService } from './services/interceptor.service';
 import { ResetPasswordComponent } from './components/modals/reset-password/reset-password.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { JobCardHelperService } from './services/job-card-helper.service';
-import { filterName } from './components/system/pipes/filterName.pipe';
+import { FilterName } from './components/system/pipes/filterName.pipe';
 import { RejectCardComponent } from './components/ApproveJobCard/modals/reject-card/reject-card.component';
 import { StageReportComponent } from './components/reports/stage-report/stage-report.component';
 import { InterviewReportComponent } from './components/reports/interview-report/interview-report.component';
@@ -189,8 +189,8 @@ import { BookingReportComponent } from './components/reports/booking-report/book
     ViewApplicationComponent,
     ResetPasswordComponent,
     ResetPasswordComponent,
-    filterName,
-    RejectCardComponent
+    RejectCardComponent,
+    FilterName
     
      
   ],
@@ -206,7 +206,8 @@ import { BookingReportComponent } from './components/reports/booking-report/book
     ReactiveFormsModule,
     FormsModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
     
      
   ],
