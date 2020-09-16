@@ -35,8 +35,8 @@ export class CreateAccountComponent implements OnInit {
 
   buildForm(){
     this.userProfile = this.formBuilder.group({
-      name : ['',[Validators.required, Validators.pattern("[a-zA-Z]+")]],
-      surname : ['',[Validators.required,  Validators.pattern("[a-zA-Z%\\s]+ ")]],
+      name : ['',[Validators.required, Validators.pattern("^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$")]],
+      surname : ['',[Validators.required,  Validators.pattern("^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$")]],
       contact : ['',[Validators.required,  Validators.pattern("[0-9]+"), Validators.minLength(10) ]], //SHOULD I KEEP THE TEN DIGIT LIMIT OR LEAVE IT ?
       email : ['',[Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9._]+\.[a-z]{2,4}")]],
       password : ['',[Validators.required, Validators.minLength(8), Validators.pattern("^^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{8,}") ]], //any specific business roles to the structure of the password

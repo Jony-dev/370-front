@@ -38,7 +38,7 @@ export class EditAddQuestionComponent implements OnInit {
     }
   }
   save(){
-    
+
     let question : LongQuestion = <LongQuestion>this.getFormDetails();
     if(!this.editLongQuestion)
       this.api.addLongQuestions(question).subscribe( success => this.addQuestionSuccess(success),error => this.addQuestionFailed(error));
@@ -46,7 +46,7 @@ export class EditAddQuestionComponent implements OnInit {
       question.id = this.editLongQuestion.id;
       this.api.editLongQuestion(question).subscribe( success => this.editQuestionSuccess(success),error => this.editQuestionFailed(error));
     }
-      
+
   }
 
   addQuestionSuccess(success){
@@ -86,6 +86,10 @@ export class EditAddQuestionComponent implements OnInit {
     this.toast.display(toast);
     this.activeModal.close();
 
+  }
+
+  get userQuestion(){
+    return this.questionForm.get('question');
   }
 
 }

@@ -9,13 +9,16 @@
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <label for="skill">Skill</label>
-                    <input type="text" name="skill" id="skill" class="form-control" formControlName="skill">
+                    <input type="text" name="skill" id="skill" class="form-control" formControlName="skill" [class.is-invalid]="userSkill.touched && !userSkill.valid">
                 </div>
             </div>
             <div class="col-md-6 col-sm-0"></div>
             <div class="col-12">
                 <button class="btn btn-outline-primary mb-4 float-right" (click)="save()">Save</button>
             </div>
+        </div>
+        <div *ngIf="userSkill.invalid && ( userSkill.dirty || userSkill.touched)" class="alert alert-danger">
+          Skill is required.
         </div>
     </form>
 </div>

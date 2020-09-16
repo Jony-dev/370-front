@@ -111,4 +111,13 @@ export class EditAddFloorComponent implements OnInit {
 
   }
 
+  get buildingId(){
+     return this.floorForm.get("buildingId");
+  }
+
+  get floorNumber(){
+
+    return this.floorForm.get("floorNumber");
+  }
+
 }

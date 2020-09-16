@@ -38,7 +38,7 @@ export class EditAddRequirementComponent implements OnInit {
     }
   }
   save(){
-    
+
     let requirement : Requirement = <Requirement>this.getFormDetails();
     if(!this.editRequirement)
       this.api.addRequirement(requirement).subscribe( success => this.addRequirementSuccess(success),error => this.addRequirementFailed(error));
@@ -46,7 +46,7 @@ export class EditAddRequirementComponent implements OnInit {
       requirement.id = this.editRequirement.id;
       this.api.editRequirement(requirement).subscribe( success => this.editRequirementSuccess(success),error => this.editRequirementFailed(error));
     }
-      
+
   }
 
   addRequirementSuccess(success){
@@ -86,6 +86,10 @@ export class EditAddRequirementComponent implements OnInit {
     this.toast.display(toast);
     this.activeModal.close();
 
+  }
+
+  get userRequirement(){
+    return this.requirementForm.get('requirement');
   }
 
 }

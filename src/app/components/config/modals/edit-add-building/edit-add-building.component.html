@@ -9,7 +9,7 @@
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="locationSelect">Location</label>
-                <select name="location" id="location"  formControlName="locationId" class="form-control">
+                <select name="location" id="location"  formControlName="locationId" class="form-control" [class.is-invalid]="LocationId.touched && !LocationId.valid">
                     <option value="null" selected disabled>Please Select a building</option>
                     <option *ngFor="let item of locations" [value]="item.locationId">{{item.name}}</option>
                 </select>
@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label for="location">Building Name</label>
-                <input type="text" name="name" id="name" formControlName="name" class="form-control">
+                <input type="text" name="name" id="name" formControlName="name" class="form-control" [class.is-invalid]="name.touched && !name.valid">
             </div>
         </div>
         <div class="col-md-6 col-sm-0"></div>
@@ -26,5 +26,15 @@
           <button class="btn btn-outline-primary mb-4 float-right" [disabled]="!buildingForm.valid" (click)="save()" >Save</button>
         </div>
       </div>
+
+      <div *ngIf="LocationId.invalid && ( LocationId.dirty || LocationId.touched)" class="alert alert-danger">
+        Location is required.
+      </div>
+
+      <div *ngIf="name.invalid && ( name.dirty || name.touched)" class="alert alert-danger">
+        Building name is required.
+      </div>
+
+
     </form>
 </div>

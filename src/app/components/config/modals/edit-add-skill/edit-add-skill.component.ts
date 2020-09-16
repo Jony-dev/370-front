@@ -38,7 +38,7 @@ export class EditAddSkillComponent implements OnInit {
     }
   }
   save(){
-    
+
     let skill : Skill = <Skill>this.getFormDetails();
     if(!this.editSkill)
       this.api.addSkill(skill).subscribe( success => this.addSkillSuccess(success),error => this.addSkillFailed(error));
@@ -46,7 +46,7 @@ export class EditAddSkillComponent implements OnInit {
       skill.id = this.editSkill.id;
       this.api.editSkill(skill).subscribe( success => this.editSkillSuccess(success),error => this.editSkillFailed(error));
     }
-      
+
   }
 
   addSkillSuccess(success){
@@ -86,6 +86,10 @@ export class EditAddSkillComponent implements OnInit {
     this.toast.display(toast);
     this.activeModal.close();
 
+  }
+
+  get userSkill(){
+    return this.skillForm.get('skill');
   }
 
 }

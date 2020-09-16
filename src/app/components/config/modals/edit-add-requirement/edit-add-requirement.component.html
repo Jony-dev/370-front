@@ -9,13 +9,17 @@
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
                     <label for="requirement">Requirement</label>
-                    <input type="text" name="requirement" id="requirement" class="form-control" formControlName="requirement">
+                    <input type="text" name="requirement" id="requirement" class="form-control" formControlName="requirement" [class.is-invalid]="userRequirement.touched && !userRequirement.valid">
                 </div>
             </div>
             <div class="col-md-3 col-sm-0"></div>
             <div class="col-12">
                 <button class="btn btn-outline-primary mb-4 float-right"[disabled]="!requirementForm.valid" (click)="save()">Save</button>
             </div>
+        </div>
+
+        <div *ngIf="userRequirement.invalid && ( userRequirement.dirty || userRequirement.touched)" class="alert alert-danger">
+          Requirement is required.
         </div>
     </form>
 </div>

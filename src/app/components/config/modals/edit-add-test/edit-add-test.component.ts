@@ -107,6 +107,21 @@ export class EditAddTestComponent implements OnInit {
 
   }
 
+  get testName(){
+
+    return this.testForm.get("test");
+  }
+
+  get testDescription(){
+
+    return this.testForm.get("testDescription");
+  }
+
+  get testUrl(){
+
+    return this.testForm.get("testUrl");
+  }
+
 
 
 

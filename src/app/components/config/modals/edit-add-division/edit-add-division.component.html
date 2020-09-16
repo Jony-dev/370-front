@@ -9,18 +9,26 @@
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="division">Division Name</label>
-                <input type="text" name="division" id="division" class="form-control" formControlName="name">
-            </div>
+                <input type="text" name="division" id="division" class="form-control" formControlName="name" [class.is-invalid]="divisionName.touched && !divisionName.valid" >
+              </div>
         </div>
         <div class="col-md-6 col-sm-0"></div>
 
         <div class="col-12">
             <div class="form-group">
                 <label for="divisionDetails">Division Details</label>
-                <textarea name="divisionDetails" id="divisionDetails" cols="30" rows="3" class="form-control" formControlName="description"></textarea>
+                <textarea name="divisionDetails" id="divisionDetails" cols="30" rows="3" class="form-control" formControlName="description" [class.is-invalid]="divisionDescription.touched && !divisionDescription.valid"></textarea>
             </div>
             <button class="btn btn-outline-primary mb-4 float-right" [disabled]="!divisionForm.valid" (click)="save()">Save</button>
         </div>
+    </div>
+
+    <div *ngIf="divisionName.invalid && ( divisionName.dirty || divisionName.touched)" class="alert alert-danger">
+      Division name is required.
+    </div>
+
+    <div *ngIf="divisionDescription.invalid && ( divisionDescription.dirty || divisionDescription.touched)" class="alert alert-danger">
+      Division description is required.
     </div>
     </form>
 </div>

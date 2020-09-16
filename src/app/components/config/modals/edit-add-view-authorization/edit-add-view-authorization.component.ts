@@ -98,7 +98,12 @@ export class EditAddViewAuthorizationComponent implements OnInit {
     this.activeModal.close();
 
   }
+  get userView(){
+    return this.viewAuthForm.get('viewId');
+  }
 
-
+  get userRole(){
+    return this.viewAuthForm.get("roleId");
+  }
 
 }

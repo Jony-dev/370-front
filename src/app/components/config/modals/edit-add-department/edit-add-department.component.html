@@ -9,7 +9,7 @@
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="division">Select Division</label>
-                <select name="division" id="division" class="form-control" formControlName="divisionId">
+                <select name="division" id="division" class="form-control" formControlName="divisionId"  [class.is-invalid]="divisionID.touched && !divisionID.valid">
                     <option value="null" selected disabled>Please select a division</option>
                     <option *ngFor="let item of divisions" [value]="item.divisionId">{{item.description}} </option>
 
@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label for="department">Department Name</label>
-                <input type="text" name="department" id="department" class="form-control" formControlName="name">
+                <input type="text" name="department" id="department" class="form-control" formControlName="name"  [class.is-invalid]="divisionName.touched && !divisionName.valid">
             </div>
         </div>
         <div class="col-md-6 col-sm-0"></div>
@@ -25,10 +25,22 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="departmentDetails">Department Details</label>
-                <textarea name="departmentDetails" id="departmentDetails" cols="30" rows="3" class="form-control" formControlName="description"></textarea>
+                <textarea name="departmentDetails" id="departmentDetails" cols="30" rows="3" class="form-control" formControlName="description"  [class.is-invalid]="divisionDescription.touched && !divisionDescription.valid"></textarea>
             </div>
             <button class="btn btn-outline-primary mb-4 float-right" [disabled]="!departmentForm.valid" (click)="save()">Save</button>
         </div>
+    </div>
+
+    <div *ngIf="divisionID.invalid && ( divisionID.dirty || divisionID.touched)" class="alert alert-danger">
+      Division is required.
+    </div>
+
+    <div *ngIf="divisionName.invalid && ( divisionName.dirty || divisionName.touched)" class="alert alert-danger">
+      Department name  is required.
+    </div>
+
+    <div *ngIf="divisionDescription.invalid && ( divisionDescription.dirty || divisionDescription.touched)" class="alert alert-danger">
+      Department description  is required.
     </div>
   </form>
 </div>

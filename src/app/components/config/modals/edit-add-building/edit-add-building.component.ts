@@ -110,6 +110,16 @@ export class EditAddBuildingComponent implements OnInit {
 
   }
 
+  get LocationId(){
+
+    return this.buildingForm.get("locationId");
+  }
+
+  get name(){
+
+    return this.buildingForm.get("name");
+  }
+
 
 
 }

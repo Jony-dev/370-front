@@ -116,4 +116,21 @@ export class EditAddDepartmentComponent implements OnInit {
     this.activeModal.close();
   }
 
+  get divisionID(){
+
+    return this.departmentForm.get('divisionId');
+  }
+
+  get divisionName(){
+
+    return this.departmentForm.get('name');
+  }
+
+  get divisionDescription(){
+
+    return this.departmentForm.get('description');
+  }
+
+
+
 }

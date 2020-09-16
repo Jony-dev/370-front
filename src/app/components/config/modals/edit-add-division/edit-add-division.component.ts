@@ -105,4 +105,16 @@ export class EditAddDivisionComponent implements OnInit {
     this.activeModal.close();
   }
 
+  get divisionName(){
+
+    return this.divisionForm.get("name");
+
+  }
+
+  get divisionDescription(){
+
+    return this.divisionForm.get("description");
+
+  }
+
 }

@@ -18,6 +18,7 @@ export class EditAddRoleComponent implements OnInit {
   @Input() editRole : Role = null;
 
   roleForm : FormGroup;
+
   ngOnInit(): void {
     this.buildForm();
 
@@ -29,6 +30,7 @@ export class EditAddRoleComponent implements OnInit {
     this.roleForm = this.formBuilder.group({
       role : ['',[Validators.required]]
     });
+
   }
 
   getFormDetails(){
@@ -88,6 +90,10 @@ export class EditAddRoleComponent implements OnInit {
     this.toast.display(toast);
     this.activeModal.close();
 
+  }
+
+  get userRole(){
+    return this.roleForm.get('role');
   }
 
 

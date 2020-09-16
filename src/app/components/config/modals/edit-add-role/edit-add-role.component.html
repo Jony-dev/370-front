@@ -9,7 +9,7 @@
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label for="role">Role</label>
-                <input type="text" name="role" id="role" class="form-control" formControlName="role">
+                <input type="text" name="role" id="role" class="form-control" formControlName="role" [class.is-invalid]="userRole.touched && !userRole.valid">
             </div>
         </div>
         <div class="col-md-6 col-sm-0"></div>
@@ -17,5 +17,9 @@
             <button class="btn btn-outline-primary mb-4 float-right" [disabled]="!roleForm.valid" (click)="save()">Save</button>
         </div>
     </div>
-    </form>
+
+    <div *ngIf="userRole.invalid && ( userRole.dirty || userRole.touched)" class="alert alert-danger">
+      Role is required.
+    </div>
+  </form>
 </div>

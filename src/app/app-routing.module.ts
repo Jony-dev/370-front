@@ -29,6 +29,11 @@ import { ApproveJobCardComponent } from './components/ApproveJobCard/approve-job
 import { JobApplicationViewComponent } from './components/jobListing/job-application-view/job-application-view.component';
 import { BookingComponent } from './components/booking/booking/booking.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { InterviewReportComponent } from './components/reports/interview-report/interview-report.component';
+import { StageReportComponent } from './components/reports/stage-report/stage-report.component';
+import { TeamReportComponent } from './components/reports/team-report/team-report.component';
+import { CandidateReportComponent } from './components/reports/candidate-report/candidate-report.component';
+import { BookingReportComponent } from './components/reports/booking-report/booking-report.component';
 
 const routes: Routes = [
 { path: "", component : LoginComponent},
@@ -58,6 +63,12 @@ const routes: Routes = [
       { path : "JobCardApproval", component : ApproveJobCardComponent},
       { path : "JobView/:id", component : JobApplicationViewComponent},
       { path : "Booking", component : BookingComponent},
+      { path : "InterviewReport", component : InterviewReportComponent},
+      { path : "StageReport", component : StageReportComponent},
+      { path : "TeamReport", component : TeamReportComponent},
+      { path : "CandidateReport", component : CandidateReportComponent},
+      { path : "BookingReport", component : BookingReportComponent,
+      },
   ]},
 { path: "AccountCreated", component : AccountSuccessCreateComponent},
 ];

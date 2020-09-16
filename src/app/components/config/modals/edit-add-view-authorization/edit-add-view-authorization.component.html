@@ -8,14 +8,14 @@
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <label for="view">View</label>
-                    <select name="view" id="view" class="form-control" formControlName="viewId">
+                    <select name="view" id="view" class="form-control" formControlName="viewId" [class.is-invalid]="userView.touched && !userView.valid">
                         <option value="null" Disabled Selected>Select a view</option>
                         <option *ngFor="let item of views" [value]="item.id">{{item.view}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="role">Role</label>
-                    <select name="role" id="role" class="form-control" formControlName="roleId">
+                    <select name="role" id="role" class="form-control" formControlName="roleId" [class.is-invalid]="userRole.touched && !userRole.valid">
                         <option value="null" Disabled Selected>Select a role</option>
                         <option *ngFor="let item of roles" [value]="item.roleId">{{item.roleName}}</option>
                     </select>
@@ -25,6 +25,14 @@
             <div class="col-12">
                 <button class="btn btn-outline-primary mb-4 float-right" [disabled]="!viewAuthForm.valid" (click)="saveViewAuth()">Save</button>
             </div>
+        </div>
+
+        <div *ngIf="userView.invalid && ( userView.dirty || userView.touched)" class="alert alert-danger">
+          View is required.
+        </div>
+
+        <div *ngIf="userRole.invalid && ( userRole.dirty || userRole.touched)" class="alert alert-danger">
+          Role is required.
         </div>
     </form>
 </div>

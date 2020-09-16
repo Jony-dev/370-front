@@ -9,13 +9,17 @@
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
                     <label for="question">Question</label>
-                    <input type="text" name="question" id="question" class="form-control" formControlName="question">
+                    <input type="text" name="question" id="question" class="form-control" formControlName="question" [class.is-invalid]="userQuestion.touched && !userQuestion.valid">
                 </div>
             </div>
             <div class="col-md-3 col-sm-0"></div>
             <div class="col-12">
                 <button class="btn btn-outline-primary mb-4 float-right" [disabled]="!questionForm.valid" (click)="save()">Save</button>
             </div>
+        </div>
+
+        <div *ngIf="userQuestion.invalid && ( userQuestion.dirty || userQuestion.touched)" class="alert alert-danger">
+          Question is required.
         </div>
     </form>
 </div>

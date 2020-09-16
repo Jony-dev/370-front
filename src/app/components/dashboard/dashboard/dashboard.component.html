@@ -41,7 +41,11 @@
       </li>
       <li class="accordian-parent" (click)="managerToggle = !managerToggle" *ngIf="searchView('manager')"><i class="fad fa-glasses"></i><span>Manger</span><span class="arrow"><i [class]="(!managerToggle) ? 'far fa-chevron-down' : 'far fa-chevron-up'"></i></span>
         <ul class="accordian" *ngIf="managerToggle" (click)="managerToggle = !managerToggle">
-          <li><span>Reports</span></li>
+          <li [routerLink]="['/Dashboard/InterviewReport']" routerLinkActive="active-link" ><span>Interview Report</span></li>
+          <li [routerLink]="['/Dashboard/StageReport']" routerLinkActive="active-link" ><span>Stage Report</span></li>
+          <li [routerLink]="['/Dashboard/TeamReport']" routerLinkActive="active-link" ><span>TeamReport</span></li>
+          <li [routerLink]="['/Dashboard/CandidateReport']" routerLinkActive="active-link" ><span>Candidate Report</span></li>
+          <li [routerLink]="['/Dashboard/BookingReport']" routerLinkActive="active-link" ><span>Booking Report</span></li>
           <li [routerLink]="['/Dashboard/SearchEmployee']" routerLinkActive="active-link" ><span>Search User</span></li>
           <li [routerLink]="['/Dashboard/HireRequest']" routerLinkActive="active-link" ><span>Employee Requests</span></li>
         </ul>

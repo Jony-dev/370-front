@@ -92,5 +92,4 @@ export class EditAddJobComponent implements OnInit {
 
 
 
-
 }

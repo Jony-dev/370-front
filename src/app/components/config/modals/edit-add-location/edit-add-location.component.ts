@@ -112,4 +112,14 @@ export class EditAddLocationComponent implements OnInit {
 
   }
 
+  get countryId(){
+    return this.locationForm.get("countryId");
+
+  }
+
+  get location(){
+
+    return this.locationForm.get("location");
+  }
+
 }
