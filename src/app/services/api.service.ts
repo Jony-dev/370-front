@@ -30,6 +30,10 @@ import { Language } from '../models/language';
 import { Tafel } from '../models/tafel';
 import { TableType } from '../models/tableType';
 import { OperationAuthorisation } from '../models/operationAuthorization';
+import { MyWorkingCards } from '../models/myWorkingCards';
+import { JobCardInfo } from '../models/jobCardInfo';
+import { MyApprovers } from '../models/myApprovers';
+import { UserApprover } from '../models/userApprover';
 
 
 
@@ -70,6 +74,7 @@ export class ApiService {
   table : string = `${this.globalRoot}API/Tafel/`;
   tableType : string = `${this.globalRoot}API/TableType/`;
   operationAuthorisation : string = `${this.globalRoot}API/OperationAuthorisation/`;
+  approver : string = `${this.globalRoot}API/JobCardApprover/`;
 
   constructor( private http: HttpClient){ }
   
@@ -207,7 +212,7 @@ export class ApiService {
   }
 
   getSkills(){
-    return this.http.post(this.skill, {request : "getSkills"});
+    return this.http.post(this.skill, {request : "getApprovedSkills"});
   }
 
   addSkill( skill : any){
@@ -222,7 +227,7 @@ export class ApiService {
   }
 
   getRequirements(){
-      return this.http.post(this.requirement, {request : "getRequirements"});
+      return this.http.post(this.requirement, {request : "getApprovedRequirements"});
   }
 
   addRequirement(requirement : Requirement){
@@ -238,7 +243,7 @@ export class ApiService {
   }
 
   getLongQuestions(){
-    return this.http.post<LongQuestion[]>(this.longQuestion, {request : "getLongQuestions"});
+    return this.http.post<LongQuestion[]>(this.longQuestion, {request : "getApprovedLongQuestions"});
   }
 
   addLongQuestions(question : LongQuestion){
@@ -416,6 +421,34 @@ export class ApiService {
 
   forgotPasswordReq(email : string){
     return this.http.post( this.user, {request : "forgotPassword", payload : { email }});
+  }
+
+  populateJobCard( jobCard : any){
+    return this.http.post( this.jobCard, {request : "createJobCard", payload : jobCard});
+  }
+
+  getMyWorkingCards(){
+    return this.http.post<MyWorkingCards[]>( this.jobCard, { request : "getAssignedCurrentJobCards"});
+  }
+
+  getMyApprovals(){
+    return this.http.post<MyApprovers[]>(this.approver, { request : "myApprovals"});
+  }
+
+  getJobCardInfo(cardId : number){
+    return this.http.post<JobCardInfo>(this.jobCard, {request : "getCardInformation", payload : { id : cardId}});
+  }
+  
+  approveJobCard(cardId : number){
+    return this.http.post(this.approver, { request : "approveJobCard", payload : {cardId}});
+  }
+
+  rejectJobCard( cardId : number , comment : string){
+    return this.http.post(this.approver, { request : "rejectJobCard", payload : {cardId , comment}});
+  }
+
+  getCardApproverList(cardId : number){
+    return this.http.post<UserApprover[]>(this.approver , {request : "getApproverByCard", payload : {cardId} })
   }
 
 

@@ -4,6 +4,7 @@ import { JobRequestInfo } from 'src/app/models/jobReqDetails';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { ApiService } from 'src/app/services/api.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
 
 @Component({
   selector: 'app-reject-request',
@@ -14,7 +15,7 @@ export class RejectRequestComponent implements OnInit {
 
   @Input() jobRequest : JobRequestInfo;
 
-  constructor( public activeModal : NgbActiveModal, private modal : NgbModal, private toast : ToastsService, private api : ApiService, private formBuilder : FormBuilder) { }
+  constructor( public activeModal : NgbActiveModal, private modal : NgbModal, private toast : ToastsService, private api : ApiService, private formBuilder : FormBuilder, private jobHelper : JobCardHelperService) { }
 
   rejectForm : FormGroup;
   ngOnInit(): void {
@@ -45,6 +46,7 @@ export class RejectRequestComponent implements OnInit {
 
   rejectSuccess( success ){
     this.toast.display({type : "Success", heading : success.Title, message : success.message});
+    this.jobHelper.emitRefresh();
     this.modal.dismissAll();
   }
 

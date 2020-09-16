@@ -1,15 +1,16 @@
 <div class="flex-container">
     <div>
-        <img src="../../../../../assets/profile/Calvin.jpg" alt="test">
+        <img [src]="user.url ? user.url: '../../../../../assets/profile/empty.png' " alt="test">
     </div>
     <div>
-        <p>Jonathan</p>
-        <p>van der Breggen</p>
+        <p>{{user.name}}</p>
+        <p>{{user.surname}}</p>
     </div>
     <div class="fill-flex">
         <div class="container-fluid">
-            <h2 *ngIf="accepted" class="text-center mt-3"><i class="far fa-check-square"></i></h2>
-            <h2 *ngIf="!accepted"class="text-center mt-3"><i class="far fa-times-square"></i></h2>
+            <h2 *ngIf="user.approved == true" class="float-right mt-3"><i class="far fa-check-square"></i></h2>
+            <h2 *ngIf="user.approved == false"class="float-right mt-3"><i class="far fa-times-square"></i></h2>
+            <h2 *ngIf="user.approved == null"class="float-right mt-3"><i class="far fa-square"></i></h2>
         </div>
         
     </div>

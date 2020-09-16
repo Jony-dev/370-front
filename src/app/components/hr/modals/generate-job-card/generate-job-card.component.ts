@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { UserProfile } from 'src/app/models/userProfile';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
 
 @Component({
   selector: 'app-generate-job-card',
@@ -14,12 +15,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class GenerateJobCardComponent implements OnInit {
 
-  @Input() requestDetails : JobRequestInfo;
+  @Input() requestDetails : JobRequestInfo = null;
 
   managerList : UserProfile [] = [];
   reqruiterList : UserProfile [] = [];
   accepted : boolean = false;
-  constructor( private modal: NgbModal, public activeModal : NgbActiveModal, private api : ApiService, private toast : ToastsService, private formBuilder : FormBuilder) { }
+  constructor( private modal: NgbModal, public activeModal : NgbActiveModal, private api : ApiService, private toast : ToastsService, private formBuilder : FormBuilder, private jobHelper : JobCardHelperService) { }
 
   ngOnInit(): void {
     this.getData();
@@ -83,6 +84,7 @@ export class GenerateJobCardComponent implements OnInit {
 
   saveSuccess( success ){
     this.toast.display({type : "Success", heading : success.Title, message : success.message});
+    this.jobHelper.emitRefresh();
     this.activeModal.close();
   }
   saveError( error){

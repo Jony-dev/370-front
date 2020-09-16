@@ -96,6 +96,8 @@ import { InterceptorService } from './services/interceptor.service';
 import { ResetPasswordComponent } from './components/modals/reset-password/reset-password.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { JobCardHelperService } from './services/job-card-helper.service';
+import { filterName } from './components/system/pipes/filterName.pipe';
+import { RejectCardComponent } from './components/ApproveJobCard/modals/reject-card/reject-card.component';
 
 @NgModule({
   declarations: [
@@ -182,6 +184,8 @@ import { JobCardHelperService } from './services/job-card-helper.service';
     ViewApplicationComponent,
     ResetPasswordComponent,
     ResetPasswordComponent,
+    filterName,
+    RejectCardComponent
     
      
   ],

@@ -4,239 +4,236 @@
             <button class="form-control btn-outline-danger">Unpublish</button>
         </div>
         <div class="col-md-2 col-sm-12">
-            <button class="form-control btn-outline-warning">Edit</button>
+            <button class="form-control btn-outline-warning"(click)="editCard()">Edit</button>
         </div>
         <div class="col-md-8 col-sm-0"></div>
     </div>
     <ngb-tabset #t="ngbTabset">
-        <ngb-tab id="tab1" >
-            <ng-template ngbTabTitle><h3>Card Information</h3></ng-template>
-            <ng-template ngbTabContent>
-              <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12 col-lg-3" >
-                        <br>
-                        <h2>Approvers List</h2>
-                            <div id="approvers-panel" class="sm-container">
-                                <div class="container-fluid">      
-                                    <app-approver-card class="img-sm"></app-approver-card>
-                                    <app-approver-card accepted="True" class="img-sm"></app-approver-card>
-                                </div>
-                            </div>
-                        <h2 class="mt-2">Upcomming Interviews</h2>
-                        <div id="interview-panel">
-                            <table class="table">
-                                <thead>
-                                    <th>Applicant</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                </thead>
-                                <tbody>
-                                    <!-- ADD ROWS HERE -->
-                                    <tr>
-                                        <td>Jonathan van der Breggen</td>
-                                        <td>20-08-2020</td>
-                                        <td>16:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonathan van der Breggen</td>
-                                        <td>20-08-2020</td>
-                                        <td>16:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonathan van der Breggen</td>
-                                        <td>20-08-2020</td>
-                                        <td>16:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonathan van der Breggen</td>
-                                        <td>20-08-2020</td>
-                                        <td>16:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonathan van der Breggen</td>
-                                        <td>20-08-2020</td>
-                                        <td>16:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jonathan van der Breggen</td>
-                                        <td>20-08-2020</td>
-                                        <td>16:30</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                    </div>
-                    <div class="col-md-12 col-lg-6 ">
-                        <br>
-                        <h2>Job Card Information</h2>
-                        <div id="jobInfo-panel">
-                            <app-job-information></app-job-information>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-3">
-                        <br>
+            <ngb-tab id="tabs1" >
+                <ng-template ngbTabTitle><h3>Card Information</h3></ng-template>
+                <ng-template ngbTabContent>
+                    <div class="container-fluid">
                         <div class="row">
-                            <div class="col-12">
-                                <h2>Applicants X</h2>
+                            <div class="col-md-12 col-lg-3" >
+                                <br>
+                                <h2>Approvers List</h2>
+                                    <div id="approvers-panel" class="sm-container">
+                                        <div class="container-fluid">
+                                            <app-approver-card class="img-sm" [user]="item" *ngFor="let item of approvers"></app-approver-card>      
+                                        </div>
+                                    </div>
+                                <h2 class="mt-2">Upcomming Interviews</h2>
+                                <div id="interview-panel">
+                                    <table class="table">
+                                        <thead>
+                                            <th>Applicant</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                        </thead>
+                                        <tbody>
+                                            <!-- ADD ROWS HERE -->
+                                            <tr>
+                                                <td>Jonathan van der Breggen</td>
+                                                <td>20-08-2020</td>
+                                                <td>16:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jonathan van der Breggen</td>
+                                                <td>20-08-2020</td>
+                                                <td>16:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jonathan van der Breggen</td>
+                                                <td>20-08-2020</td>
+                                                <td>16:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jonathan van der Breggen</td>
+                                                <td>20-08-2020</td>
+                                                <td>16:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jonathan van der Breggen</td>
+                                                <td>20-08-2020</td>
+                                                <td>16:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jonathan van der Breggen</td>
+                                                <td>20-08-2020</td>
+                                                <td>16:30</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-12 col-lg-6 ">
+                                <br>
+                                <h2>Job Card Information</h2>
+                                <div id="jobInfo-panel">
+                                    <app-job-information [cardId]="routeId"></app-job-information>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-3">
+                                <br>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2>Applicants X</h2>
+                                    </div>
+                                </div>
+                                <div id="applicant-panel" class="mt-1">
+                                    <div class="applicants">
+                                        <h4>Internal Applicants</h4>
+                                        <hr>
+                                        <div class="container">
+                                            <div class="row">
+                                                <!-- ADD ALL THE INTERNAL ONES HERE -->
+                                                <div class="col-12">
+                                                    <!-- <app-profile-card class="img-sm border-el"></app-profile-card> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="applicants">
+                                        <h4>External Applicants</h4>
+                                        <hr>
+                                        <div class="container">
+                                            <div class="row">
+                                                <!-- ADD ALL THE INTERNAL ONES HERE -->
+                                                <div class="col-12">
+                                                    <!-- <app-profile-card class="img-sm border-el"></app-profile-card> -->
+                                                </div>
+                                                <div class="col-12">
+                                                    <!-- <app-profile-card class="img-sm border-el"></app-profile-card> -->
+                                                </div>
+                                                <div class="col-12">
+                                                    <!-- <app-profile-card class="img-sm border-el"></app-profile-card> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div id="applicant-panel" class="mt-1">
-                            <div class="applicants">
-                                <h4>Internal Applicants</h4>
-                                <hr>
-                                <div class="container">
-                                    <div class="row">
-                                        <!-- ADD ALL THE INTERNAL ONES HERE -->
-                                        <div class="col-12">
-                                            <app-profile-card class="img-sm border-el"></app-profile-card>
-                                        </div>
-                                    </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab2">
+                <ng-template ngbTabTitle><h3>Applicant Pool</h3></ng-template>
+                <ng-template ngbTabContent>
+                <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="searchApplicant">Search Applicant</label>
+                                    <input type="text" name="searchApplicant" id="searchApplicant" class="form-control">
                                 </div>
-
                             </div>
-                            <div class="applicants">
-                                <h4>External Applicants</h4>
-                                <hr>
-                                <div class="container">
-                                    <div class="row">
-                                        <!-- ADD ALL THE INTERNAL ONES HERE -->
-                                        <div class="col-12">
-                                            <app-profile-card class="img-sm border-el"></app-profile-card>
-                                        </div>
-                                        <div class="col-12">
-                                            <app-profile-card class="img-sm border-el"></app-profile-card>
-                                        </div>
-                                        <div class="col-12">
-                                            <app-profile-card class="img-sm border-el"></app-profile-card>
-                                        </div>
-                                        
-                                    </div>
+                            <div class="col-lg-3 col-sm-12">
+                                <div class="form-group">
+                                    <label for="applicantType">Applicant Type</label>
+                                    <select name="applicantType" id="applicantType" class="form-control">
+                                        <option value="all">All</option>
+                                        <option value="internal">Internal</option>
+                                        <option value="internal">External</option>
+                                    </select>
                                 </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                <h2 class="mt-4 ml-4">Application list status: <span class="text-danger">Unconfirmed</span></h2>
+                            </div>
+                        </div>
+                        <div class="container-fluid mb-4">
+                            <h3>Hiring Manager Controls</h3>
+                            <hr>
+                            <div class="row mt-4">                        
+                                <div class="col-lg-2 col-md-12">
+                                    <button class="btn btn-outline-warning form-control">Confirm List</button>
+                                </div>
+                                <div class="col-lg-3 col-md-12">
+                                    <button class="btn btn-outline-danger form-control">Disqualify Non Shortlisted</button>
+                                </div>
+                                <div class="col-lg-2 col-md-12">
+                                    <button class="btn btn-outline-danger form-control">Close Job Card</button>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="row mb-4">
+                            <div class="col-lg-4 col-sm-12">
+                                <h3>Shortlist</h3>
+                                <div class="panel-container panel-ext sm-container">
+                                    <app-applicant-pool-card class="img-sm border-el mt-2"></app-applicant-pool-card>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-12">
+                                <h3>Undecided</h3>
+                                <div class="panel-container panel-ext sm-container">
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-12">
+                                <h3>Disqualified</h3>
+                                <div class="panel-container panel-ext sm-container">
+
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab id="tab3">
+                <ng-template ngbTabTitle><h3>Interviews</h3></ng-template>
+                <ng-template ngbTabContent>
+                <div class="container-fluid">
+                    <div class="row mb-2 mt-2">
+                        <div class="col-md-4">
+                            <h2>Upcoming Interviews</h2>
+                            <div class="panel-container">
+                                <table class="table">
+                                    <thead>
+                                        <th>Applicant Name</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Jonathan van der Breggen</td>
+                                            <td>17-08-2020</td>
+                                            <td>16:30</td>
+                                            <td><i class="far fa-pencil-alt"></i><i class="fas fa-trash-alt ml-4"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h2>Passed Interviews</h2>
+                            <div class="panel-container">
+                                <table class="table">
+                                    <thead>
+                                        <th>Applicant Name</th>
+                                        <th>Applicant Surname</th>
+                                        <th>Score</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Jonathan</td>
+                                            <td>van der Breggen</td>
+                                            <td>7.2</td>
+                                            <td>17-08-2020</td>
+                                            <td (click)="openOverallInterview()"><i class="fas fa-eye ml-4"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab id="tab2">
-            <ng-template ngbTabTitle><h3>Applicant Pool</h3></ng-template>
-            <ng-template ngbTabContent>
-              <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-12">
-                            <div class="form-group">
-                                <label for="searchApplicant">Search Applicant</label>
-                                <input type="text" name="searchApplicant" id="searchApplicant" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-12">
-                            <div class="form-group">
-                                <label for="applicantType">Applicant Type</label>
-                                <select name="applicantType" id="applicantType" class="form-control">
-                                    <option value="all">All</option>
-                                    <option value="internal">Internal</option>
-                                    <option value="internal">External</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-12">
-                            <h2 class="mt-4 ml-4">Application list status: <span class="text-danger">Unconfirmed</span></h2>
-                        </div>
-                    </div>
-                    <div class="container-fluid mb-4">
-                        <h3>Hiring Manager Controls</h3>
-                        <hr>
-                        <div class="row mt-4">                        
-                            <div class="col-lg-2 col-md-12">
-                                <button class="btn btn-outline-warning form-control">Confirm List</button>
-                            </div>
-                            <div class="col-lg-3 col-md-12">
-                                <button class="btn btn-outline-danger form-control">Disqualify Non Shortlisted</button>
-                            </div>
-                            <div class="col-lg-2 col-md-12">
-                                <button class="btn btn-outline-danger form-control">Close Job Card</button>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="row mb-4">
-                        <div class="col-lg-4 col-sm-12">
-                            <h3>Shortlist</h3>
-                            <div class="panel-container panel-ext sm-container">
-                                <app-applicant-pool-card class="img-sm border-el mt-2"></app-applicant-pool-card>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <h3>Undecided</h3>
-                            <div class="panel-container panel-ext sm-container">
-
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <h3>Disqualified</h3>
-                            <div class="panel-container panel-ext sm-container">
-
-                            </div>
-                        </div>
-                    </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
-          <ngb-tab id="tab3">
-            <ng-template ngbTabTitle><h3>Interviews</h3></ng-template>
-            <ng-template ngbTabContent>
-              <div class="container-fluid">
-                <div class="row mb-2 mt-2">
-                    <div class="col-md-4">
-                        <h2>Upcoming Interviews</h2>
-                        <div class="panel-container">
-                            <table class="table">
-                                <thead>
-                                    <th>Applicant Name</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Action</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Jonathan van der Breggen</td>
-                                        <td>17-08-2020</td>
-                                        <td>16:30</td>
-                                        <td><i class="far fa-pencil-alt"></i><i class="fas fa-trash-alt ml-4"></i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <h2>Passed Interviews</h2>
-                        <div class="panel-container">
-                            <table class="table">
-                                <thead>
-                                    <th>Applicant Name</th>
-                                    <th>Applicant Surname</th>
-                                    <th>Score</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Jonathan</td>
-                                        <td>van der Breggen</td>
-                                        <td>7.2</td>
-                                        <td>17-08-2020</td>
-                                        <td (click)="openOverallInterview()"><i class="fas fa-eye ml-4"></i></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </ng-template>
-          </ngb-tab>
+                </ng-template>
+            </ngb-tab>
     </ngb-tabset>
 </div>

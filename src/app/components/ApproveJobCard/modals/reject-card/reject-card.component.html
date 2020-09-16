@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>Reject Card</h2>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <form [formGroup]="rejection">
+                <label for="rejection">Please provide reason for rejection</label>
+                <textarea name="rejection" id="rejection" cols="30" rows="10" formControlName="comment" class="form-control"></textarea>
+                <button class="btn btn-outline-danger float-right ml-2 mt-2 mb-2" (click)="reject()">Save</button>
+                <button class="btn btn-outline-primary float-right mt-2 mb-2" (click)="cancel()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

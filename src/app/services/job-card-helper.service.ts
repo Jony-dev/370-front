@@ -14,4 +14,12 @@ export class JobCardHelperService {
   changeCard(card : JobRequestInfo){
     this.jobInfo.next(card);
   }
+
+  private refreshList = new Subject<boolean>();
+  shouldRefresh$ = this.refreshList.asObservable();
+
+  emitRefresh(){
+    this.refreshList.next(true);
+  }
+
 }

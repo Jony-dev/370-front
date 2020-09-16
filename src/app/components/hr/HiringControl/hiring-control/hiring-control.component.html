@@ -8,6 +8,10 @@
                         <div class="col-sm-12 col-lg-6" *ngFor="let item of jobRequests">
                             <app-approval-card [cardDetails]="item" (event)="updateRequests($event)"></app-approval-card>
                         </div> 
+                        <div class="col-12" *ngIf="jobRequests.length === 0">
+                            <h1 class="text-center no-content">No Job Requests</h1>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

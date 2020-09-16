@@ -1,50 +1,59 @@
-<div class="container-fluid">
-    <h1>The Job Name HERE</h1>
+<div class="container-fluid" *ngIf="!cardId">
+    <h1>Loading Card Information...</h1>
+</div>
+<div class="container-fluid" *ngIf="cardId">
+    <h1>{{cardInformation?.name}}</h1>
     <hr>
     <h4>Introduction:</h4>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta libero aliquam repudiandae commodi a, asperiores explicabo corporis perferendis, enim adipisci harum omnis perspiciatis inventore maiores cum ab, excepturi nemo! Expedita.</p>
+    <p>{{cardInformation?.introduction}}</p>
     <hr>
     <h4>Job Description:</h4>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam earum error minima ratione iste libero quasi, ipsum quae eius similique quam blanditiis asperiores et delectus temporibus magni rem laborum praesentium.</p>
+    <p>{{cardInformation?.description}}</p>
     <hr>
-    <h4>Requirements:</h4>
+    <h4 *ngIf="cardInformation?.requirements.length>0">Requirements:</h4>
     <ul>
         <!-- NGFOR HERE WITH ALL THE REQUIREMENTS -->
-        <li>Do 20 pushups</li>
-        <li>Has never stolen a chip from someone</li>
+        <li *ngFor="let item of cardInformation?.requirements">{{item}}</li>
     </ul>
     <br>
-    <h4>Skills:</h4>
+    <h4 *ngIf="cardInformation?.skills.length>0">Skills:</h4>
     <ul>
         <!-- NGFOR HERE WITH ALL THE SKILLS -->
-        <li>MySQL</li>
-        <li>AI</li>
+        <li *ngFor="let item of cardInformation?.skills">{{item}}</li>
     </ul>
-    <h4>Languages Needed:</h4>
+    <h4 *ngIf="cardInformation?.languages.length>0">Languages Needed:</h4>
     <ul>
         <!-- NGFOR HERE WITH ALL THE REQUIREMENTS -->
-        <li>German</li>
-        <li>English</li>
+        <li *ngFor="let item of cardInformation?.languages">{{item}}</li>
     </ul>
     <div class="row">
         <div class="col-lg-3 col-sm-12">
-            <h5>Start Date: dd/mm/yyyy</h5>
+            <h5>Start Date: {{cardInformation?.startDate | date : 'dd/MM/yyyy'}}</h5>
         </div>
         <div class="col-lg-3 col-sm-12">
-            <h5>End Date: dd/mm/yyyy</h5>
+            <h5>End Date: {{cardInformation?.endDate | date : 'dd/MM/yyyy'}}</h5>
         </div>
         <div class="col-lg-3 col-sm-12">
-            <h5>Travel Expected: Yes/No</h5>
+            <h5>Travel Expected: {{cardInformation?.travel ? 'Yes' : 'No'}}</h5>
         </div>
         <div class="col-lg-3 col-sm-12">
-            <h5>Avg Working Hours: XXX</h5>
+            <h5>Avg Working Hours: {{cardInformation?.workingHours}}</h5>
         </div>
     </div>
     <hr>
     <!-- WE WILL NEED TO NGIF HERE -->
-    <h3>Test you will need to complete</h3>
-    <h5>Casino Royale</h5>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae rem, sint sit illo quae ullam animi. Velit, molestias delectus laudantium, reprehenderit at officiis eaque ipsa ea, voluptatem distinctio quos iste.</p>
-    <h3>Find Test Here</h3>
-    <p><a href="">www.asdasdasdasdasd.com</a></p>
+    <ng-container *ngIf="cardInformation?.tests.length > 0">
+        <h3>Tests you will need to complete</h3>
+        <div *ngFor="let test of cardInformation?.tests">
+            <h5>{{test?.name}}</h5>
+            <p>{{test?.description}}</p>
+        </div>
+        
+        <h3>Find Test Here</h3>
+        <div *ngFor="let test of cardInformation?.tests">
+            <p><a [href]="'http://'+test.url" target="_blank">{{test.url}}</a></p>
+        </div>
+        
+    </ng-container>
+    
 </div>

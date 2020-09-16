@@ -10,5 +10,6 @@ export class JobRequestInfo{
     fulfilmentDate : Date;
     jobPosition : Job;
     brief : string;
+    jobCardId : number;
 
 }

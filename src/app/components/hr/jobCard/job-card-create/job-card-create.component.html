@@ -132,7 +132,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-0"></div>
+                                    <div class="col-lg-3 col-md-12">
+                                        <div class="form-group">
+                                            <label for="workingHrs">Working Hours</label>
+                                            <input type="number" name="workingHours" id="workingHours" class="form-control" formControlName="workingHours">
+                                        </div>
+                                    </div>
                                     <div class="col-lg-3 col-md-12">
                                         <div class="form-group">
                                             <label for="closingDate">Closing date</label>
@@ -183,7 +188,7 @@
                                 </div>
                                 <div class="col-12">
                                     <hr>
-                                    <h4 (click)=testing();>Added Tests</h4>
+                                    <h4>Added Tests</h4>
                                     <table class="table">
                                         <thead>
                                             <th>Test</th>
@@ -192,7 +197,7 @@
                                         </thead>
                                         
                                             <tbody>
-                                                <tr *ngFor="let item of addedTests; let i = index"><td>{{item.testName}}</td><td><input type="checkbox" [formControl]="testsFArray.controls[i]"></td><td><i class="fa fa-times" (click)="removeTest(item.testId)"></i></td></tr>
+                                                <tr *ngFor="let item of addedTests; let i = index"><td>{{item.testName}}</td><td><input type="checkbox" [formControl]="testsFArray.controls[i]" [id]="'test'+item.testId"><label class="ml-2" [for]="'test'+item.testId"> Mark as Critical</label></td><td><i class="fa fa-times" (click)="removeTest(item.testId)"></i></td></tr>
                                             </tbody>
                                         
                                     </table>
@@ -221,7 +226,7 @@
                                                 <th class="text-center">Action</th>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let item of languages | slice: (langPage-1) * pageSize : (langPage-1) * pageSize + pageSize"><td>{{item.language}}</td><td class="text-center"><i class="fa fa-plus"></i></td></tr>
+                                                <tr *ngFor="let item of languages | slice: (langPage-1) * pageSize : (langPage-1) * pageSize + pageSize"><td>{{item.language}}</td><td class="text-center"><i class="fa fa-plus" (click)="addLanguage(item.id)"></i></td></tr>
                                             </tbody>
                                         </table>
                                         <ngb-pagination [(page)]="langPage" [pageSize]="pageSize" [collectionSize]="languageCollectionSize"></ngb-pagination> 
@@ -231,36 +236,14 @@
                                         <table class="table">
                                             <thead>
                                                 <th>Language</th>
-                                                <th>Expected Answer</th>
                                                 <th>Critical</th>
                                                 <th class="text-center">Action</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>English</td>
-                                                    <td>
-
-                                                        <select class="form-control">
-                                                            <option value="null" selected disabled>Select Option</option>
-                                                            <option value="">True</option>
-                                                            <option value="">False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td><input type="checkbox"><label class="ml-2">Mark as critical</label></td>
-                                                    <td><i class="fas fa-times"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Afrikaans</td>
-                                                    <td>
-
-                                                        <select class="form-control">
-                                                            <option value="null" selected disabled>Select Option</option>
-                                                            <option value="">True</option>
-                                                            <option value="">False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td><input type="checkbox"><label class="ml-2">Mark as critical</label></td>
-                                                    <td><i class="fas fa-times"></i></td>
+                                                <tr *ngFor="let item of addedLanguages; let i = index;">
+                                                    <td>{{item.language}}</td>
+                                                    <td><input type="checkbox" [id]="'lang'+item.id" [formControl]="languageFArray.controls[i]"><label class="ml-2" [for]="'lang'+item.id">Mark as critical</label></td>
+                                                    <td><i class="fas fa-times" (click)="removeLanguage(item.id)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -275,7 +258,7 @@
                         <div id="test-l-4" class="content">
                             <!-- SKILL DETAILS -->
                             <div class="container-fluid">
-                                <h4>Add Skills</h4>
+                                <h4 (click)="test()">Add Skills</h4>
                                 <div class="row">
                                     <!-- <div class="col-lg-4 col-sm-12">
                                         <div class="form-group">
@@ -292,7 +275,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let item of skills | slice: (skillpage-1) * pageSize : (skillpage-1) * pageSize + pageSize">
-                                                    <td>{{item.skill}}</td><td class="text-center"><i class="fa fa-plus"></i></td>
+                                                    <td>{{item.skill}}</td><td class="text-center"><i class="fa fa-plus" (click)="addSkill(item.id)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -303,35 +286,16 @@
                                         <table class="table">
                                             <thead>
                                                 <th>Skill</th>
-                                                <th>Expected Answer</th>
                                                 <th>Critical</th>
                                                 <th class="text-center">Action</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Able to do 20 pushups</td>
+                                                <tr *ngFor="let skill of addedSkills; let i = index">
+                                                    <td>{{skill.skill}}</td>
                                                     <td>
-
-                                                        <select class="form-control">
-                                                            <option value="null" selected disabled>Select Option</option>
-                                                            <option value="">True</option>
-                                                            <option value="">False</option>
-                                                        </select>
+                                                        <input type="checkbox" [formControl]="skillFArray.controls[i]" [id]="'skill'+skill.id"><label class="ml-2" [for]="'skill'+skill.id"> Mark as critical</label>
                                                     </td>
-                                                    <td><input type="checkbox"><label class="ml-2">Mark as critical</label></td>
-                                                    <td><i class="fas fa-times"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Guess who will win bingo</td>
-                                                    <td>
-                                                        <select class="form-control">
-                                                            <option value="null" selected disabled>Select Option</option>
-                                                            <option value="">True</option>
-                                                            <option value="">False</option>
-                                                        </select>
-                                                    </td>
-                                                    <td><input type="checkbox"><label class="ml-2">Mark as critical</label></td>
-                                                    <td><i class="fas fa-times"></i></td>
+                                                    <td><i class="fas fa-times" (click)="removeSkill(skill.id)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -362,7 +326,7 @@
                                                 <th class="text-center">Action</th>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let item of longQuestions | slice: (questionPage-1) * pageSize : (questionPage-1) * pageSize + pageSize"><td>{{item.question}}</td><td class="text-center"><i class="fa fa-plus"></i></td></tr>
+                                                <tr *ngFor="let item of longQuestions | slice: (questionPage-1) * pageSize : (questionPage-1) * pageSize + pageSize"><td>{{item.question}}</td><td class="text-center"><i class="fa fa-plus" (click)="addLQuestion(item.id)"></i></td></tr>
                                             </tbody>
                                         </table>
                                         <ngb-pagination [(page)]="questionPage" [pageSize]="pageSize" [collectionSize]="longQuestionCollectionSize"></ngb-pagination>
@@ -376,10 +340,10 @@
                                                 <th class="text-center">Action</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>How do you cope under pressure</td>
-                                                    <td><input type="checkbox"><label class="ml-2">Mark as critical</label></td>
-                                                    <td><i class="fas fa-times"></i></td>
+                                                <tr *ngFor="let item of addedLongQuestions; let i = index;">
+                                                    <td>{{item.question}}</td>
+                                                    <td><input type="checkbox" [formControl]="questionFArray.controls[i]" [id]="'question'+item.id"><label class="ml-2" [for]="'question'+item.id">Mark as critical</label></td>
+                                                    <td><i class="fas fa-times" (click)="removeQuestion(item.id)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -411,7 +375,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let item of requirements | slice: (requirementPage-1) * pageSize : (requirementPage-1) * pageSize + pageSize">
-                                                    <td>{{item.requirement}}</td><td class="text-center"><i class="fa fa-plus"></i></td>
+                                                    <td>{{item.requirement}}</td><td class="text-center"><i class="fa fa-plus" (click)="addRequirement(item.id)"></i></td>
                                                 </tr>
                                                 
                                             </tbody>
@@ -419,7 +383,7 @@
                                         <ngb-pagination [(page)]="requirementPage" [pageSize]="pageSize" [collectionSize]="requirementCollectionSize"></ngb-pagination>
                                     </div>
                                     <div class="col-12">
-                                        <h4>Added Questions</h4>
+                                        <h4>Added Requirements</h4>
                                         <table class="table">
                                             <thead>
                                                 <th>Requirement</th>
@@ -428,17 +392,19 @@
                                                 <th class="text-center">Action</th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Able to do 20 pushups</td>
+                                                <tr *ngFor="let item of addedRequirements ; let i = index;">
+                                                    <td>{{item.requirement}}</td>
+                                                    <ng-container [formGroup]="requirementFArray.controls[i]">
                                                     <td>
-                                                    <select class="form-control">
+                                                    <select class="form-control" formControlName="expectedAnswr">
                                                         <option value="null" selected disabled>Select Option</option>
-                                                        <option value="">True</option>
-                                                        <option value="">False</option>
+                                                        <option value="1">True</option>
+                                                        <option value="0">False</option>
                                                     </select>
                                                     </td>
-                                                    <td><input type="checkbox"><label class="ml-2">Mark as critical</label></td>
-                                                    <td><i class="fas fa-times"></i></td>
+                                                    <td><input type="checkbox" [id]="'requirement'+item.id" formControlName="critical"><label [for]="'requirement'+item.id" class="ml-2">Mark as critical</label></td>
+                                                    </ng-container>
+                                                    <td><i class="fas fa-times" (click)="removeRequirement(item.id)"></i></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -458,8 +424,8 @@
                                         <div class="panel-container sm-container">
                                             <div class="container">
                                                 <div class="row">
-                                                    <div class="col-12">
-                                                        <!-- <app-profile-card removable="True" class="img-sm border-el mt-2"></app-profile-card> -->
+                                                    <div class="col-12" *ngFor="let item of approvers">
+                                                        <app-profile-card [cardDetails]="item" removable="True" class="img-sm border-el mt-2" (click)="removeApprover(item.id)"></app-profile-card>
                                                     </div>
                                                 </div>
                                             </div>
@@ -471,13 +437,13 @@
                                         <div class="panel-container sm-container">
                                             <div class="container-fluid">
                                                 <div class="row">
-                                                    <div class="col-lg-4 col-sm-12">
+                                                    <div class="col-lg-6 col-sm-12">
                                                         <div class="form-group">
                                                             <label for="nameSearch">Name or Surname</label>
-                                                            <input type="text" name="nameSearch" id="nameSearch" class="form-control">
+                                                            <input type="text" name="nameSearch" id="nameSearch" class="form-control" [(ngModel)]="applicantSearch">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4 col-sm-12">
+                                                    <!-- <div class="col-lg-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label for="divisionSearch">Division</label>
                                                             <select name="divisionSearch" id="divisionSearch" class="form-control">
@@ -494,12 +460,12 @@
                                                                 <option value="all">Fast</option>
                                                             </select>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                                 <hr>
                                                 <div class="row">
-                                                    <div class="col-lg-6 col-md-12" *ngFor="let item of employees">
-                                                        <app-profile-card [cardDetails]="item" addable="True" class="img-sm border-el mt-2"></app-profile-card>
+                                                    <div class="col-lg-6 col-md-12" *ngFor="let item of employees | filterName : applicantSearch">
+                                                        <app-profile-card [cardDetails]="item" addable="True" class="img-sm border-el mt-2" (click)="addApprover(item.id)"></app-profile-card>
                                                     </div>
                                                 </div>
                                             </div>
@@ -507,7 +473,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="btn btn-outline-primary float-right mt-4 ml-2">Save</button>
+                                    <button class="btn btn-outline-primary float-right mt-4 ml-2" (click)="saveJobCard()">Save</button>
                                     <button (click)="previous()" class="btn btn-outline-primary float-right mt-4 mb-4">Previous</button>
                                 </div>
                             </div>

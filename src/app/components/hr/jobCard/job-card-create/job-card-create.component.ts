@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import Stepper from 'bs-stepper';
 import { JobRequestInfo } from 'src/app/models/jobReqDetails';
 import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
-import { Observer, Observable, Subject } from 'rxjs';
+import { Observer, Observable, Subject, Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { Schedule } from 'src/app/models/schedule';
 import { RequisitionApproval } from 'src/app/models/requisitionApproval';
@@ -17,17 +17,20 @@ import { Requirement } from 'src/app/models/requirement';
 import { userLite } from 'src/app/models/userLite';
 import { userCard } from 'src/app/models/userCard';
 import { UserProfile } from 'src/app/models/userProfile';
-
+import { filterName } from 'src/app/components/system/pipes/filterName.pipe';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-job-card-create',
   templateUrl: './job-card-create.component.html',
   styleUrls: ['./job-card-create.component.css']
 })
-export class JobCardCreateComponent implements OnInit {
+export class JobCardCreateComponent implements OnInit, OnDestroy {
 
-  
+  @Input() editing : boolean = false;
 
+  applicantSearch : string
+  payload : any = {};
 
   basicDetails : FormGroup;
   testForm : FormGroup;
@@ -36,10 +39,8 @@ export class JobCardCreateComponent implements OnInit {
   longQuestion : FormGroup;
   requirement : FormGroup;
 
-
-
-
   requestDetails : JobRequestInfo;
+
   pageSize : number = 10;
   testCollectionSize : number;
   languageCollectionSize : number;
@@ -81,10 +82,10 @@ export class JobCardCreateComponent implements OnInit {
   tests : Test [] = [];
   addedTests : Test [] = [];
 
-  constructor(private cardHelper : JobCardHelperService , private formBuilder : FormBuilder, private api : ApiService, private toast : ToastsService) { }
+  constructor(private cardHelper : JobCardHelperService , private formBuilder : FormBuilder, private api : ApiService, private toast : ToastsService, private activeModal : NgbActiveModal) { }
 
   private stepper: Stepper;
-
+  private jobHelpSub : Subscription;
   buildForm(){
     this.basicDetails = this.formBuilder.group({
       jobCardName : ['',[Validators.required]],
@@ -97,7 +98,8 @@ export class JobCardCreateComponent implements OnInit {
       closingDate : ['',[Validators.required]],
       scheduleId : [null, [Validators.required]],
       locationId : [null, [Validators.required]],
-      raApprovalId : [null, [Validators.required]]
+      raApprovalId : [null, [Validators.required]],
+      workingHours : [null,[Validators.required]]
     });
 
     this.testForm = this.formBuilder.group({questions : FormArray});
@@ -116,6 +118,7 @@ export class JobCardCreateComponent implements OnInit {
       scheduleId : this.basicDetails.get('scheduleId').value,
       locationId : this.basicDetails.get('locationId').value,
       raApprovalId : this.basicDetails.get('raApprovalId').value,
+      workingHours : this.basicDetails.get('workingHours').value,
 
     }
 
@@ -128,7 +131,24 @@ export class JobCardCreateComponent implements OnInit {
       animation: true
     });
 
-    this.cardHelper.jobDescriptionInfo.subscribe( val => this.setJobRequest(val));
+    this.jobHelpSub = this.cardHelper.jobDescriptionInfo.subscribe( val => this.setJobRequest(val));
+  }
+
+  ngOnDestroy(){
+    this.jobHelpSub.unsubscribe();
+  }
+
+  saveJobCard(){
+    this.payload.approvers = this.approversObj();
+    this.payload.longQuestions = this.questionsObj();
+    this.payload.requirements = this.requirementsObj();
+    this.payload.languages = this.languagesObj();
+    this.payload.skills = this.skillsObj();
+    this.payload.basicDetails = this.getBasicFrom();
+    this.payload.tests = this.testsObj();
+    this.payload.id = this.requestDetails.jobCardId;
+    console.log(this.payload);
+    this.api.populateJobCard(this.payload).subscribe( success => this.successUploadCard(success),err => this.failUploadCard(err));
   }
   getData(){
     this.getLocations();
@@ -150,10 +170,6 @@ export class JobCardCreateComponent implements OnInit {
 
   onSubmit() {
     return false;
-  }
-
-  
-  ngOnDestroy(){
   }
 
   setJobRequest(val){
@@ -235,6 +251,8 @@ export class JobCardCreateComponent implements OnInit {
 
   gotEmployees(success){
     this.employees = success;
+    this.approvers.push(this.employees.find(x => x.id == this.requestDetails.user.id));
+    this.employees = this.employees.filter( x => x.id != this.requestDetails.user.id);
   }
   fetchFailed(error){
     this.toast.display({type:"Error",heading: error.error.Title, message : error.error.message});
@@ -247,66 +265,138 @@ export class JobCardCreateComponent implements OnInit {
     this.addedTests.push(obj);
     this.tests = this.tests.filter( x => x.testId != id);
     this.testsFArray.push(new FormControl(false));
-    //this.tControl.push( new FormControl(false));
   }
 
   removeTest(id : number){
     let index = this.addedTests.map( x => {return x.testId;}).indexOf(id);
     let obj = this.addedTests.find(x => x.testId == id);
+    this.addedTests = this.addedTests.filter( x => x.testId != id);
     this.testsFArray.removeAt(index);
     this.tests.push(obj);
-    this.addedTests = this.addedTests.filter( x => x.testId != id);
     
   }
-  testing(){
-    console.log(this.testsFArray.value);
-  }
+  
+  languageFArray = new FormArray([]);
   addLanguage(id : number){
     let obj = this.languages.find(x => x.id == id);
     this.addedLanguages.push(obj);
     this.languages = this.languages.filter( x => x.id != id);
+    this.languageFArray.push(new FormControl(false));
   }
 
   removeLanguage(id : number){
+    let index = this.addedLanguages.map( x => { return x.id }).indexOf(id);
     let obj = this.addedLanguages.find(x => x.id == id);
     this.languages.push(obj);
     this.addedLanguages = this.addedLanguages.filter( x => x.id != id);
+    this.languageFArray.removeAt(index);
   }
 
+  skillFArray = new FormArray([]);
   addSkill(id : number){
     let obj = this.skills.find(x => x.id == id);
     this.addedSkills.push(obj);
     this.skills = this.skills.filter( x => x.id != id);
+    this.skillFArray.push(new FormControl(false));
+  }
+  test(){
+    console.log(this.skillFArray.value);
   }
 
   removeSkill(id : number){
+    let index = this.addedSkills.map( x => { return x.id }).indexOf(id);
     let obj = this.addedSkills.find(x => x.id == id);
     this.skills.push(obj);
     this.addedSkills = this.addedSkills.filter( x => x.id != id);
+    this.skillFArray.removeAt(index);
   }
+  requirementFArray = new FormArray([]);
   addRequirement(id : number){
     let obj = this.requirements.find(x => x.id == id);
     this.addedRequirements.push(obj);
     this.requirements = this.requirements.filter( x => x.id != id);
+    let group = new FormGroup({expectedAnswr : new FormControl(null,[Validators.required]), critical : new FormControl(false)});
+    this.requirementFArray.push(group);
   }
 
   removeRequirement(id : number){
+    let index = this.addedRequirements.map( x => { return x.id }).indexOf(id);
     let obj = this.addedRequirements.find(x => x.id == id);
     this.requirements.push(obj);
-    this.addedRequirements.filter( x => x.id != id);
+    this.addedRequirements = this.addedRequirements.filter( x => x.id != id);
+    this.requirementFArray.removeAt(index);
   }
 
+  questionFArray = new FormArray([]);
   addLQuestion(id : number){
     let obj = this.longQuestions.find(x => x.id == id);
     this.addedLongQuestions.push(obj);
     this.longQuestions = this.longQuestions.filter( x => x.id != id);
+    this.questionFArray.push(new FormControl(false));
   }
 
   removeQuestion(id : number){
+    let index = this.addedLongQuestions.map( x => { return x.id }).indexOf(id);
     let obj = this.addedLongQuestions.find(x => x.id == id);
     this.longQuestions.push(obj);
-    this.addedLongQuestions.filter( x => x.id != id);
+    this.addedLongQuestions = this.addedLongQuestions.filter( x => x.id != id);
+    this.questionFArray.removeAt(index);
   }
 
+  addApprover(id : number){
+    let person = this.employees.find(x => x.id === id);
+    this.approvers.push(person);
+    this.employees = this.employees.filter( x => x.id != id);
 
+  }
+  removeApprover(id : number){
+    let person = this.approvers.find(x => x.id === id);
+    this.employees.push(person);
+    this.approvers = this.approvers.filter( x => x.id != id);
+  }
+
+  languagesObj(){
+    return this.addedLongQuestions.map( (x, i)=>{
+      return { id : x.id, critical : this.skillFArray.at(i).value};
+  });
+  }
+
+  skillsObj(){
+    return this.addedSkills.map( (x, i)=>{
+        return { id : x.id, critical : this.skillFArray.at(i).value};
+    });
+  }
+  requirementsObj(){
+    return this.addedRequirements.map( (x, i) =>{
+      return { id : x.id, expectedAnswer : this.requirementFArray.at(i).get('expectedAnswr').value, critical : this.requirementFArray.at(i).get('critical').value};
+    });
+  }
+
+  questionsObj(){
+      return this.addedLongQuestions.map( (x , i) =>{
+        return { id : x.id, critical : this.questionFArray.at(i).value };
+      });
+  }
+
+  approversObj(){
+    return this.approvers.map(x => {
+      return { id : x.id};
+    });
+  }
+
+  testsObj(){
+    return this.addedTests.map( (x , i)=>{
+      return { id : x.testId, critical : this.testsFArray.at(i).value};
+    });
+  }
+
+  successUploadCard(success){
+    this.cardHelper.emitRefresh();
+    this.toast.display({type : "Success", heading : success.Title, message : success.message});
+    this.activeModal.close();
+  }
+
+  failUploadCard(error){
+    this.toast.display({type:"Error",heading: error.error.Title, message : error.error.message});
+  }
 }
