@@ -19,6 +19,7 @@ import { userCard } from 'src/app/models/userCard';
 import { UserProfile } from 'src/app/models/userProfile';
 import { filterName } from 'src/app/components/system/pipes/filterName.pipe';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditJobCard } from 'src/app/models/editJobCard';
 
 @Component({
   selector: 'app-job-card-create',
@@ -124,6 +125,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
 
   }
   ngOnInit() {
+    this.jobHelpSub = this.cardHelper.jobDescriptionInfo.subscribe( val => this.setJobRequest(val));
     this.buildForm();
     this.getData();
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
@@ -131,7 +133,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
       animation: true
     });
 
-    this.jobHelpSub = this.cardHelper.jobDescriptionInfo.subscribe( val => this.setJobRequest(val));
+    
   }
 
   ngOnDestroy(){
@@ -160,6 +162,13 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
     this.getLongQuestions();
     this.getRequirements();
     this.getEmployees();
+
+    if(this.editing)
+    {
+      console.log()
+      //DO STUFF HERE
+      this.getCardValues();
+    }
   }
   next() {
     this.stepper.next();
@@ -399,4 +408,69 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
   failUploadCard(error){
     this.toast.display({type:"Error",heading: error.error.Title, message : error.error.message});
   }
+
+  getCardValues(){
+    this.api.getEditJobCard(this.requestDetails.jobCardId).subscribe( succ => this.getCardValueSucc(succ), err => this.getCardValueFailed(err))
+  }
+  getCardValueSucc(succ : EditJobCard){
+    console.log(succ);
+    this.setBasicDetails(succ);
+    this.setTests(succ);
+    this.setSkills(succ);
+    this.setApprovers(succ);
+    this.setLanguages(succ);
+    this.setRequirements(succ);
+    this.setLongQuestions(succ);
+  }
+  getCardValueFailed(err){
+    this.failUploadCard(err);
+    this.activeModal.close();
+  }
+
+  setBasicDetails(details : EditJobCard){
+    this.basicDetails.setValue(details.basicDetails);
+  }
+
+  setTests(details : EditJobCard){
+    details.tests.forEach( (el, index) => {
+      this.addTest(el.testId);
+      this.testsFArray.controls[index].setValue(el.critical);
+    });
+  }
+  setRequirements(details : EditJobCard){
+    details.requirements.forEach( (el, index) => {
+      this.addRequirement(el.id);
+      this.requirementFArray.controls[index].setValue({expectedAnswr : el.expectedAnswer, critical : el.critical});
+    });
+  }
+  setLanguages(details : EditJobCard){
+    details.languages.forEach( (el, index) => {
+      this.addLanguage(el.id);
+      this.languageFArray.controls[index].setValue(el.critical);
+    });
+  }
+  setSkills(details : EditJobCard){
+    details.skills.forEach( (el, index) => {
+      this.addSkill(el.id);
+      this.skillFArray.controls[index].setValue(el.critical);
+    });
+  }
+  setLongQuestions(details : EditJobCard){
+    details.longQuestions.forEach( (el, index) => {
+      this.addLQuestion(el.id);
+      this.questionFArray.controls[index].setValue(el.critical);
+    });
+  }
+
+  setApprovers(details : EditJobCard){
+    setTimeout( ()=>{
+      details.approvers.forEach(el => {
+        if(!this.approvers.map(x => x.id).includes(el.id))
+          this.addApprover(el.id)});
+    },1500)
+    
+    // this.employees = this.employees.filter( emp => details.approvers.find(x => x.id = emp.id));
+  }
+
+
 }

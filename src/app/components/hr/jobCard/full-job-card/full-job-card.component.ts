@@ -6,6 +6,8 @@ import { ToastsService } from 'src/app/services/toasts.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserApprover } from 'src/app/models/userApprover';
+import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
+import { JobCardCreateComponent } from '../job-card-create/job-card-create.component';
 
 @Component({
   selector: 'app-full-job-card',
@@ -19,15 +21,16 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
   routeId : number;
   approvers : UserApprover [] = [];
 
-  constructor( private modal : NgbModal, private api : ApiService, private toast : ToastsService, private router : ActivatedRoute) { }
+  constructor( private modal : NgbModal, private api : ApiService, private toast : ToastsService, private router : ActivatedRoute, private helper : JobCardHelperService) { }
 
   ngOnInit(): void {
-    this.routeSub =  this.router.params.subscribe( params => {this.routeId = params['id']; console.log(this.routeId)});
+    this.routeSub =  this.router.params.subscribe( params => {this.routeId = params['id']});
     this.loadData();
   }
 
   loadData(){
     this.getApproverList();
+    this.getJobRequest();
   }
   ngOnDestroy(){
     this.routeSub.unsubscribe();
@@ -46,11 +49,17 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
   }
   getApproversSuccess(success : UserApprover []){
     this.approvers = success;
-    console.log(success);
   }
 
-  editCard(){
+  getJobRequest(){
     
+    this.api.getEditJobCardReq(this.routeId).subscribe( succ => {this.helper.changeCard(succ);
+      console.log(succ);
+    }, err=> this.loadError(err));
+  }
+  editCard(){
+   const modalInstance = this.modal.open(JobCardCreateComponent,{windowClass : "hugeModal"});
+   modalInstance.componentInstance.editing = true;
   }
 
 }

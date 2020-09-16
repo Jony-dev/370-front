@@ -4,5 +4,5 @@ export class Test{
   description: string;
   url : string;
   testName : string;
-
+  critical : boolean;
 }

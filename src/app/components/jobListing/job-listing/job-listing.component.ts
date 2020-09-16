@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MyListings } from 'src/app/models/myListings';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-job-listing',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobListingComponent implements OnInit {
 
-  constructor() { }
+  listings : MyListings[] = [];
+
+  constructor(private api : ApiService) { }
 
   ngOnInit(): void {
+  }
+
+  loadData(){
+
+  }
+
+  getListings(){
+    
   }
 
 }

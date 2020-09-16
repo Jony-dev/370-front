@@ -34,6 +34,8 @@ import { MyWorkingCards } from '../models/myWorkingCards';
 import { JobCardInfo } from '../models/jobCardInfo';
 import { MyApprovers } from '../models/myApprovers';
 import { UserApprover } from '../models/userApprover';
+import { EditJobCard } from '../models/editJobCard';
+import { MyListings } from '../models/myListings';
 
 
 
@@ -75,7 +77,8 @@ export class ApiService {
   tableType : string = `${this.globalRoot}API/TableType/`;
   operationAuthorisation : string = `${this.globalRoot}API/OperationAuthorisation/`;
   approver : string = `${this.globalRoot}API/JobCardApprover/`;
-
+  jobListing : string = `${this.globalRoot}API/JobListing/`;
+  application : string = `${this.globalRoot}API/Application/`;
   constructor( private http: HttpClient){ }
   
   makeRequest(){
@@ -448,9 +451,22 @@ export class ApiService {
   }
 
   getCardApproverList(cardId : number){
-    return this.http.post<UserApprover[]>(this.approver , {request : "getApproverByCard", payload : {cardId} })
+    return this.http.post<UserApprover[]>(this.approver , {request : "getApproverByCard", payload : {cardId} });
   }
 
+  getEditJobCardReq(cardId : number){
+    return this.http.post<JobRequestInfo>( this.jobRequest, {request : "getRequestByJobCardId", payload : { cardId }});
+  }
+  getEditJobCard( cardId : number){
+    return this.http.post<EditJobCard>( this.jobCard, {request : "getJobCardDetails", payload : { cardId }});
+  }
+
+  getJobListing(){
+    return this.http.post<MyListings[]>( this.jobListing, { request : "getMyJobListings" } );
+  }
+  getMyApplication(){
+    return this.http.post( this.application, { request : ""})
+  }
 
 
 }
