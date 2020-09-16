@@ -1,9 +1,9 @@
 <div class="flex-container">
     <div class="flex-left">
-        <h2>Job Name</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere sapiente quas, velit consectetur possimus aperiam nostrum beatae fugiat atque, illo molestiae voluptatibus deserunt, ipsum repellendus soluta veritatis perspiciatis nulla officia!</p>
+        <h2>{{jobInformation?.cardName}}</h2>
+        <p>{{description}}</p>
     </div>
     <div class="flex-right">
-        <h3 [routerLink]="['/Dashboard/JobView/2']" routerLinkActive="router-link-active"  class="text-center"><i class="fas fa-eye"></i></h3>
+        <h3 [routerLink]="['/Dashboard/JobView/'+jobInformation.cardId]" routerLinkActive="router-link-active"  class="text-center"><i class="fas fa-eye"></i></h3>
     </div>
 </div>

@@ -39,64 +39,58 @@
                     </div>
                     <div class="col-lg-3 col-md-0 col-sm-0"></div>
                     <!-- FOR EACH REQUIREMENT ADD IT BELOW HERE -->
-                    <div class="col-lg-6 col-md-12">
-                        <!-- QUESTION -->
-                        <p>Have you got more than 10 years work experience?</p>
-                    </div>
-                    <div class="col-lg-6 col-md-0 col-sm-0">
-                        <!-- ANSWER -->
-                        <select class="form-control">
-                            <option value="null" selected disabled>Select Option</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <!-- QUESTION -->
-                        <p>Have you got a criminal record?</p>
-                    </div>
-                    <div class="col-lg-6 col-md-0 col-sm-0">
-                        <!-- ANSWER -->
-                        <select class="form-control">
-                            <option value="null" selected disabled>Select Option</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
+                    <ng-container *ngFor="let item of requirements; let i = index;">
+                        <div class="col-lg-6 col-md-12">
+                            <!-- QUESTION -->
+                            <p>{{item.requirement}}</p>
+                        </div>
+                        <div class="col-lg-6 col-md-0 col-sm-0">
+                            <!-- ANSWER -->
+                            <select class="form-control" [formControl]="requirementAnswers.controls[i]">
+                                <option value="null" selected disabled>Select Option</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </ng-container>
                     <div class="col-lg-9 col-md-12  mt-4">
                         <h2>Skills</h2>
                         <hr>
                     </div>
                     <div class="col-lg-3 col-md-0 col-sm-0"></div>
                     <!-- FOR EACH SKILL ADD IT BELOW HERE -->
-                    <div class="col-lg-6 col-md-12">
-                        <!-- QUESTION -->
-                        <p>Can you eat an entire box of cookies in 5 minutes or less?</p>
-                    </div>
-                    <div class="col-lg-6 col-md-0 col-sm-0">
-                        <!-- ANSWER -->
-                        <select class="form-control">
-                            <option value="null" selected disabled>Select Option</option>
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-9 col-md-12  mt-4">
-                        <h2>Questions</h2>
-                        <hr>
-                    </div>
-                    <div class="col-lg-3 col-md-0 col-sm-0"></div>
-                    <!-- FOR EACH LONG QUESTION ADD IT BELOW HERE -->
-                    <div class="col-12">
-                        <!-- QUESTION -->
-                        <p>How do you handle conflict?</p>
-                        <!-- ANSWER -->
-                        <textarea cols="30" rows="5" class="form-control"></textarea>
-                        <br>
-                    </div>
+                    <ng-container *ngFor="let item of skills; let i = index">
+                        <div class="col-lg-6 col-md-12" >
+                            <!-- QUESTION -->
+                            <p>{{item.skill}}</p>
+                        </div>
+                        <div class="col-lg-6 col-md-0 col-sm-0">
+                            <!-- ANSWER -->
+                            <select class="form-control" [formControl]="skillAnswers.controls[i]">
+                                <option value="null" selected disabled>Select Option</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </ng-container>
                     
+                        <div class="col-lg-9 col-md-12  mt-4">
+                            <h2>Questions</h2>
+                            <hr>
+                        </div>
+                    <ng-container *ngFor="let item of longQuestions; let i = index;">
+                        <div class="col-lg-3 col-md-0 col-sm-0"></div>
+                        <!-- FOR EACH LONG QUESTION ADD IT BELOW HERE -->
+                        <div class="col-12">
+                            <!-- QUESTION -->
+                            <p>{{item.question}}</p>
+                            <!-- ANSWER -->
+                            <textarea cols="30" rows="5" class="form-control" [formControl]="longQuestionAnswers.controls[i]"></textarea>
+                            <br>
+                        </div>
+                    </ng-container>
                     <div class="col-12">
-                        <button (click)="next()" class="btn btn-outline-primary float-right">Next</button>
+                        <button (click)="next();" class="btn btn-outline-primary float-right">Next</button>
                     </div>
                 </div>
             </div>
@@ -107,19 +101,21 @@
                         <hr>
                     </div>
                     <div class="col-lg-4 col-sm-0 col-md-0"></div>
-                    <div class="col-12">
-                        <!-- TEST NAME -->
-                        <h3>Black Jack Game</h3>
-                        <h4>Description:</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque culpa ut officia est magnam iste ipsam mollitia velit, minus dignissimos excepturi rerum rem in voluptas? Exercitationem nesciunt repellendus unde itaque!</p>
-                        <h4>Test URL</h4>
-                        <a href="">www.sometest.co.za</a>
-                        <br>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <label for="testFile">Upload Test <small>(Please upload .zip file)</small></label>
-                        <input type="file" class="form-control">
-                    </div>
+                    <ng-container *ngFor="let item of tests; let i = index">
+                        <div class="col-12">
+                            <!-- TEST NAME -->
+                            <h3>{{item.testName}}</h3>
+                            <h4>Description:</h4>
+                            <p>{{item.description}}</p>
+                            <h4>Test URL</h4>
+                            <a [href]="'http://'+item.url">{{item.testName}}</a>
+                            <br>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <label [for]="'testFile'+i">Upload Test <small>(Please upload .zip file)</small></label>
+                            <input type="file" class="form-control"(change)="attachTests($event)" [formControl]='testFile'>
+                        </div>
+                    </ng-container>
                     <div class="col-12">
                         <button (click)="next()" class="btn btn-outline-primary mt-2 ml-4 float-right">Next</button>
                         <button (click)="previous()" class="btn btn-outline-primary mt-2 float-right">Previous</button>
@@ -135,7 +131,7 @@
                     <div class="col-md-4 colsm-0"></div>
                     <div class="col-md-4 col-sm-12">
                         <label for="cv">Upload CV <small>(Please upload .pdf)</small></label>
-                        <input type="file" class="form-control">
+                        <input type="file" class="form-control" (change)="attachCV($event)" [formControl]="cvFile">
                     </div>
                     <div class="col-12">
                         <button (click)="next()" class="btn btn-outline-primary mt-2 ml-4 float-right">Next</button>
@@ -153,17 +149,13 @@
                     <div class="col-12">
                         <h3>Test File Uploaded</h3>
                         <!-- TEST NAME -->
-                        <p>test.zip</p>
+                        <p>{{testFiles? testFiles.name: 'No File Attached'}}</p>
                         <br>
                         <h3>CV Uploaded</h3>
                         <!-- TEST NAME-->
-                        <p>CV.pdf</p>
-                        <br>
-                        <h3>Questions Answered</h3>
-                        <!-- TOTAL ANSWERED -->
-                        <p>8/12</p>
+                        <p>{{cv? cv.name: 'No File Attached'}}</p>
 
-                        <button class="btn btn-outline-primary mt-2 ml-4 float-right">Save</button>
+                        <button class="btn btn-outline-primary mt-2 ml-4 float-right" (click)="getAnswers()">Save</button>
                         <button (click)="previous()" class="btn btn-outline-primary mt-2 float-right">Previous</button>
                     </div>
                 </div>

@@ -38,6 +38,7 @@ import { EditJobCard } from '../models/editJobCard';
 import { MyListings } from '../models/myListings';
 import { DatabaseTable } from '../models/databaseTable';
 import { Operation } from '../models/operation';
+import { ApplicationQuestions } from '../models/applicationQuestions';
 
 
 
@@ -83,7 +84,8 @@ export class ApiService {
   application : string = `${this.globalRoot}API/Application/`;
   databaseTable : string = `${this.globalRoot}API/DatabaseTable/`;
   operation : string = `${this.globalRoot}API/Operation/`;
-
+  question : string = `${this.globalRoot}API/Question/`;
+  answer : string = `${this.globalRoot}API/Answer/`;
   constructor( private http: HttpClient){ }
 
   makeRequest(){
@@ -130,7 +132,6 @@ export class ApiService {
     return this.http.post(this.user,uploadData);
   }
   changePassword(password : string){
-    console.log({request : "changePassword", payload : {password : password}});
     return this.http.post(this.user,{request : "changePassword", payload : {password : password}})
   }
 
@@ -514,10 +515,23 @@ export class ApiService {
   getJobListing(){
     return this.http.post<MyListings[]>( this.jobListing, { request : "getMyJobListings" } );
   }
-  getMyApplication(){
-    return this.http.post( this.application, { request : ""})
+  // getMyApplication(){
+  //   return this.http.post( this.application, { request : ""});
+  // }
+
+  getApplicationQuestions(cardId : number){
+    return this.http.post<ApplicationQuestions>( this.question, { request : "getCardQuestions", payload : { cardId }});
   }
 
+  applyForJob(data, cv : File, test :File){
+
+    let uploadData : FormData = new FormData();
+    uploadData.append('request','applyForJob');
+    uploadData.append('cv',cv);
+    uploadData.append('test',test);
+    uploadData.append( 'answers', JSON.stringify(data));
+    return this.http.post(this.answer,uploadData);
+  }
 
 }
 

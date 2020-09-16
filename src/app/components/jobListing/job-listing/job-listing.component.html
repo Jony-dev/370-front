@@ -12,8 +12,7 @@
                             </div>
                         </div>
                     </div>
-                    <app-job-listing-card></app-job-listing-card>
-                    <app-job-listing-card></app-job-listing-card>
+                    <app-job-listing-card *ngFor="let item of listings" [jobInformation]="item"></app-job-listing-card>
                 </div>
                 
             </div>

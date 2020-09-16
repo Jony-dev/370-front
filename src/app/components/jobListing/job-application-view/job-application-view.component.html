@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row" >
         <div class="col-lg-9 col-sm-12">
-            <app-job-information></app-job-information>
+            <app-job-information [cardId]="cardId"></app-job-information>
         </div>
         <div class="col-lg-3 col-sm-12 text-center">
             <button (click)="jobApply()" class="btn btn-outline-primary" id="apply"><h1>Apply</h1></button>

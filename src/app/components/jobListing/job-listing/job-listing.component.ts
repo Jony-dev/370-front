@@ -14,14 +14,23 @@ export class JobListingComponent implements OnInit {
   constructor(private api : ApiService) { }
 
   ngOnInit(): void {
+    this.loadData();
   }
 
   loadData(){
-
+    this.getListings();
   }
 
   getListings(){
-    
+    this.api.getJobListing().subscribe( succ => this.listSuccess(succ), err => this.loadError(err))
+  }
+
+  loadError(err){
+
+  }
+  listSuccess(listings : MyListings []){
+    console.log(listings);
+    this.listings = listings;
   }
 
 }
