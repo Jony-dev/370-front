@@ -287,6 +287,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
   
   languageFArray = new FormArray([]);
   addLanguage(id : number){
+    console.log(id);
     let obj = this.languages.find(x => x.id == id);
     this.addedLanguages.push(obj);
     this.languages = this.languages.filter( x => x.id != id);
@@ -365,8 +366,8 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
   }
 
   languagesObj(){
-    return this.addedLongQuestions.map( (x, i)=>{
-      return { id : x.id, critical : this.skillFArray.at(i).value};
+    return this.addedLanguages.map( (x, i)=>{
+      return { id : x.id, critical : this.languageFArray.at(i).value};
   });
   }
 
