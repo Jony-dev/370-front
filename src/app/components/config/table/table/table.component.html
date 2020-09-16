@@ -1,182 +1,182 @@
-  <div class="container-fluid">
-      <div class="row">
-          <!-- Tables Section -->
-          <div class="col-md-6 col-sm-12">
-              <div class="sm-container panel-container sm-container panel-ext">
-                  <h1>Tables</h1>
-                  <form [formGroup]="tableForm">
-                      <div class="container-fluid">
-                      <div class="row">
-                        <!--Search Table-->
-                              <div class="col-lg-3 col-sm-12">
-                                  <div class="form-group">
-                                      <label for="tableSearch">Search Table</label>
-                                      <input class="form-control" type="text" name="tableSearch" id="tableSearch">
-                                  </div>
-                              </div>
-                              <!--TableType Dropdown-->
-                              <div class="col-lg-3 col-sm-12">
-                                  <div class="form-group">
-                                      <label for="tableType">Table Type</label>
-                                      <select class="form-control" name="ttypeId" id="ttypeId" formControlName="ttypeId">
-                                        <option value="null" selected disabled>Please Select a Table Type</option>
-                                        <option *ngFor="let item of tableTypes" [value]="item.id" >{{item.type}} </option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <!--Building dropdown-->
-                              <div class="col-lg-3 col-sm-12">
-                                  <div class="form-group">
-                                      <label for="building">Building</label>
-                                      <select class="form-control" name="building" id="building" formControlName="buildingId">
-                                          <option value="null" selected disabled>Please Select a building</option>
-                                          <option *ngFor="let item of buildings" [value]="item.buildingId" >{{item.name}} </option>
-                                      </select>
-                                  </div>
-                              </div>
-                              <!--Floor Dropdown-->
-                              <div class="col-lg-3 col-sm-12">
-                                  <div class="form-group">
-                                      <label for="floor">Floor</label>
-                                      <select class="form-control" name="floor" id="floor" formControlName="floorId">
-                                        <option value="null" selected disabled>Please Select a floor</option>
-                                        <option *ngFor="let item of floors" [value]="item.floorId" >{{item.floorNumber}} </option>
-                                      </select>
-                                  </div>
-                              </div>
-                      </div>
-                      </div>
-                  </form>
-                  <table class="greyHead table">
-                      <thead>
-                          <th>Table</th>
-                          <th>Table Type</th>
-                          <th>Building</th>
-                          <th>Floor</th>
-                          <th class="text-right">Actions</th>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let item of tables"><td>{{item.name}}</td><td>{{item.ttypeId}}</td><td>{{item.buildingId}}</td><td>{{item.floorId}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-          <!-- Other Config Section -->
-          <div class="col-md-6 col-sm-12 mt-sm-4 mt-md-0">
-              <div class="sm-container panel-container sm-container panel-ext">
-                  <ngb-tabset #t="ngbTabset">
-                      <ngb-tab id="tab-selectbyid1">
-                        <ng-template ngbTabTitle><h3>Tables & Settings</h3></ng-template>
-                        <ng-template ngbTabContent>
-                          <div class="container-fluid">
-                                  <h1>Add Table</h1>
-                                  <div class="row">
-                                      <div class="col-lg-6 col-sm-12">
-                                          <div class="form-group">
-                                              <label for="tableName">Table ID/Name</label>
-                                              <input class="form-control" type="text" name="tableName" id="tableName">
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-4 col-sm-12">
-                                          <div class="form-group">
-                                              <label for="newTableType">Table Type</label>
-                                              <select name="newtableType" id="newtableType" class="form-control" formControlName="ttypeId">
-                                                <option value="null" selected disabled>Please select a TableType</option>
-                                                <option *ngFor="let item of tableTypes" [value]="item.id">{{item.type}} </option>
-                                              </select>
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-4 col-sm-12">
-                                          <div class="form-group">
-                                              <label for="newBuilding">Building</label>
-                                              <select class="form-control" name="newBuilding" id="newBuilding" formControlName="buildingId">
-                                                <option value="null" selected disabled>Please select a Building</option>
-                                                <option *ngFor="let item of buildings" [value]="item.buildingId">{{item.name}} </option>
-                                              </select>
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-4 col-sm-12">
-                                          <div class="form-group">
-                                              <label for="newFloor">Floor</label>
-                                              <select class="form-control" name="newFloor" id="newFloor" formControlName="floorId">
-                                                  <option value="null" selected disabled>Select Floor</option>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Tables Section -->
+            <div class="col-md-6 col-sm-12">
+                <div class="sm-container panel-container sm-container panel-ext">
+                    <h1>Tables</h1>
+                    <form [formGroup]="tableForm">
+                        <div class="container-fluid">
+                        <div class="row">
+                          <!--Search Table-->
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="tableSearch">Search Table</label>
+                                        <input class="form-control" type="text" name="tableSearch" id="tableSearch">
+                                    </div>
+                                </div>
+                                <!--TableType Dropdown-->
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="tableType">Table Type</label>
+                                        <select class="form-control" name="ttypeId" id="ttypeId" formControlName="ttypeId">
+                                          <option value="null" selected disabled>Please Select a Table Type</option>
+                                          <option *ngFor="let item of tableTypes" [value]="item.id" >{{item.type}} </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--Building dropdown-->
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="building">Building</label>
+                                        <select class="form-control" name="building" id="building" formControlName="buildingId">
+                                            <option value="null" selected disabled>Please Select a building</option>
+                                            <option *ngFor="let item of buildings" [value]="item.buildingId" >{{item.name}} </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--Floor Dropdown-->
+                                <div class="col-lg-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="floor">Floor</label>
+                                        <select class="form-control" name="floor" id="floor" formControlName="floorId">
+                                          <option value="null" selected disabled>Please Select a floor</option>
+                                          <option *ngFor="let item of floors" [value]="item.floorId" >{{item.floorNumber}} </option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+                        </div>
+                    </form>
+                    <table class="greyHead table">
+                        <thead>
+                            <th>Table</th>
+                            <th>Table Type</th>
+                            <th>Building</th>
+                            <th>Floor</th>
+                            <th class="text-right">Actions</th>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of tables"><td>{{item.name}}</td><td>{{item.ttypeId}}</td><td><!--{{item.buildingId}}--></td><td>{{item.floorId}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Other Config Section -->
+            <div class="col-md-6 col-sm-12 mt-sm-4 mt-md-0">
+                <div class="sm-container panel-container sm-container panel-ext">
+                    <ngb-tabset #t="ngbTabset">
+                        <ngb-tab id="tab-selectbyid1">
+                          <ng-template ngbTabTitle><h3>Tables & Settings</h3></ng-template>
+                          <ng-template ngbTabContent>
+                            <div class="container-fluid">
+                                    <h1>Add Table</h1>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="tableName">Table ID/Name</label>
+                                                <input class="form-control" type="text" name="tableName" id="tableName">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="newTableType">Table Type</label>
+                                                <select name="newtableType" id="newtableType" class="form-control" formControlName="ttypeId">
+                                                  <option value="null" selected disabled>Please select a TableType</option>
+                                                  <option *ngFor="let item of tableTypes" [value]="item.id">{{item.type}} </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="newBuilding">Building</label>
+                                                <select class="form-control" name="newBuilding" id="newBuilding" formControlName="buildingId">
+                                                  <option value="null" selected disabled>Please select a Building</option>
+                                                  <option *ngFor="let item of buildings" [value]="item.buildingId">{{item.name}} </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="newFloor">Floor</label>
+                                                <select class="form-control" name="newFloor" id="newFloor" formControlName="floorId">
+                                                    <option value="null" selected disabled>Select Floor</option>
 
-                                                <option *ngFor="let item of floors" [value]="item.floorId">{{item.floorNumber}} </option>
-                                              </select>
-                                          </div>
-                                      </div>
-                                      <div class="col-sm-12 col-lg-4">
-                                          <button class="btn btn-outline-primary float-right mt-lg-4 mt-sm-0" [disabled]="!tableForm.valid" (click)="addTable()">Add Table</button>
-                                      </div>
-                                      <hr>
-                                  </div>
-                                  <h1>Setting Group Slots</h1>
-                                  <div class="row">
-                                      <div class="col-lg-4 col-sm-12">
-                                          <div class="form-group">
-                                              <label for="slotStartTime">First Slot Starting Time</label>
-                                              <input class="form-control" type="time" name="slotStartTime" id="slotStartTime">
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-4 col-sm-12">
-                                          <div class="form-group">
-                                              <label for="slotEndTime">Last Slot Ending Time</label>
-                                              <input class="form-control" type="time" name="slotEndTime" id="slotEndTime">
-                                          </div>
-                                      </div>
-                                      <div class="col-lg-4 col-sm-12">
-                                          <div class="form-group">
-                                              <label for="noSlots">No. Slots per hour</label>
-                                              <input class="form-control" type="number" name="noSlots" id="noSlots">
-                                          </div>
-                                      </div>
-                                      <div class="col-12">
-                                          <button class="btn btn-outline-primary float-right mt-lg-4 mt-md-0">Set Slots</button>
-                                      </div>
-                                      <hr>
-                                  </div>
-                          </div>
-                        </ng-template>
-                      </ngb-tab>
-                      <ngb-tab id="tab-selectbyid2">
-                        <ng-template ngbTabTitle><h3>Bookable Dates</h3></ng-template>
-                        <ng-template ngbTabContent>
-                          <div class="container-fluid">
-                              <h2>Filter Dates</h2>
-                              <div class="row">
-                                  <div class="col-lg-4 col-sm-12">
-                                      <div class="form-group">
-                                          <label for="startDate">Starting Date</label>
-                                          <input class="form-control" type="date" name="startDate" id="startDate">
-                                      </div>
-                                  </div>
-                                  <div class="col-lg-4 col-sm-12">
-                                      <div class="form-group">
-                                          <label for="endDate">Ending Date</label>
-                                          <input class="form-control" type="date" name="endDate" id="endDate">
-                                      </div>
-                                  </div>
-                                  <table class="table greyHead">
-                                      <thead>
-                                          <th>#</th>
-                                          <th>Date</th>
-                                          <th>Allow Booking</th>
-                                      </thead>
-                                      <tbody>
-                                          <!-- DATES GO HERE -->
-                                        <!-- <tr *ngFor="let item of tables"><td>{{item.name}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable()(item.id)"></i></td></tr>-->
-                                          <tr><td>1</td><td>01-26-2020</td><td><input type="checkbox" name="date1" id="date1"></td></tr>
-                                          <tr><td>2</td><td>01-27-2020</td><td><input type="checkbox" name="date2" id="date2"></td></tr>
-                                      </tbody>
-                                  </table>
-                              </div>
-                          </div>
-                        </ng-template>
-                      </ngb-tab>
-                    </ngb-tabset>
-              </div>
+                                                  <option *ngFor="let item of floors" [value]="item.floorId">{{item.floorNumber}} </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-lg-4">
+                                            <button class="btn btn-outline-primary float-right mt-lg-4 mt-sm-0" [disabled]="!tableForm.valid" (click)="addTable()">Add Table</button>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <h1>Setting Group Slots</h1>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="slotStartTime">First Slot Starting Time</label>
+                                                <input class="form-control" type="time" name="slotStartTime" id="slotStartTime">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="slotEndTime">Last Slot Ending Time</label>
+                                                <input class="form-control" type="time" name="slotEndTime" id="slotEndTime">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="noSlots">No. Slots per hour</label>
+                                                <input class="form-control" type="number" name="noSlots" id="noSlots">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-outline-primary float-right mt-lg-4 mt-md-0">Set Slots</button>
+                                        </div>
+                                        <hr>
+                                    </div>
+                            </div>
+                          </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="tab-selectbyid2">
+                          <ng-template ngbTabTitle><h3>Bookable Dates</h3></ng-template>
+                          <ng-template ngbTabContent>
+                            <div class="container-fluid">
+                                <h2>Filter Dates</h2>
+                                <div class="row">
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="startDate">Starting Date</label>
+                                            <input class="form-control" type="date" name="startDate" id="startDate">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="endDate">Ending Date</label>
+                                            <input class="form-control" type="date" name="endDate" id="endDate">
+                                        </div>
+                                    </div>
+                                    <table class="table greyHead">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Date</th>
+                                            <th>Allow Booking</th>
+                                        </thead>
+                                        <tbody>
+                                            <!-- DATES GO HERE -->
+                                          <!-- <tr *ngFor="let item of tables"><td>{{item.name}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable()(item.id)"></i></td></tr>-->
+                                            <tr><td>1</td><td>01-26-2020</td><td><input type="checkbox" name="date1" id="date1"></td></tr>
+                                            <tr><td>2</td><td>01-27-2020</td><td><input type="checkbox" name="date2" id="date2"></td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                          </ng-template>
+                        </ngb-tab>
+                      </ngb-tabset>
+                </div>
 
-          </div>
+            </div>
 
-      </div>
-  </div>
+        </div>
+    </div>

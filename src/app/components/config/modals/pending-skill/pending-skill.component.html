@@ -5,22 +5,16 @@
             <div class="col-md-4 col-sm-12 border-el">
                 <div class="row">
                     <div class="col-8">
-                        <h4>Can throw a ball 1 m</h4>
-                    </div>
-                    <div class="col-4">
-                        <button class="btn"><h2><i class="far fa-check-circle"></i></h2></button>
-                        <button class="btn"><h2><i class="far fa-times-circle"></i></h2></button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12 border-el">
-                <div class="row">
-                    <div class="col-8">
-                        <h4>Knows how to tell kick ass jokes</h4>
-                    </div>
-                    <div class="col-4">
-                        <button class="btn"><h2><i class="far fa-check-circle"></i></h2></button>
-                        <button class="btn"><h2><i class="far fa-times-circle"></i></h2></button>
+                      <table class="table greyHead">
+                        <thead>
+                          <tr>
+                            <th>Pending Skills</th>
+                            <th class="text-center">Action</th>
+                          </tr>
+                        </thead>
+                          <tr *ngFor="let item of skills"><td>{{item.skill}}</td><h2><i class="far fa-check-circle"  (click)="save(item.id)"></i></h2><td class="text-center"><h2><i class="far fa-times-circle" (click)="deleteSkill(item.id)"></i></h2></td></tr>
+                      </table>
+
                     </div>
                 </div>
             </div>

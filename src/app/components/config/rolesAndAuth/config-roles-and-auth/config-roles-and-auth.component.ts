@@ -19,32 +19,11 @@ export class ConfigRolesAndAuthComponent implements OnInit {
   roles : Role [] = [];
   jobs : Job [] = [];
   viewAuth : ViewAuth [] = [];
+
   constructor(private modal: NgbModal, private api : ApiService, private toast : ToastsService) { }
 
   ngOnInit(): void {
     this.getData();
-  }
-
-  addRole(){
-      const modalInstance = this.modal.open(EditAddRoleComponent);
-      modalInstance.result.then((res)=>{
-
-          this.getRoles();
-      });
-  }
-  addJob(){
-    const modalInstance = this.modal.open(EditAddJobComponent);
-    modalInstance.result.then((res)=>{
-
-        this.getJobs();
-    });
-  }
-  addViewAuth(){
-    const modalInstance = this.modal.open(EditAddViewAuthorizationComponent);
-    modalInstance.result.then((res)=>{
-
-        this.getViewAuths();
-    });
   }
 
   getData(){
@@ -53,31 +32,34 @@ export class ConfigRolesAndAuthComponent implements OnInit {
     this.getViewAuths();
   }
 
+  ///////////////////////// /////////////////////////  ROLES  /////////////////////////////////////////////////
+
   getRoles(){
-    this.api.getRoles().subscribe( success => this.getRolesSuccess(success), error => this.getRolesFail(error))
+    this.api.getRoles().subscribe( success => this.getRolesSuccess(success), error => this.getRolesFail(error));
   }
   getRolesSuccess(roles: Role[]){
-    console.log(roles);
     this.roles = roles;
   }
   getRolesFail(error){
     this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
   }
 
-  getViewAuth(){
-
+  addRole(){
+    const modalInstance = this.modal.open(EditAddRoleComponent);
+    modalInstance.result.then((res)=>{
+        this.getRoles();
+    });
   }
 
   editRole(id : number){
-    console.log(this.roles);
     const modalInstance = this.modal.open(EditAddRoleComponent);
     let role = this.roles.find( x => x.roleId == id);
     modalInstance.componentInstance.editRole = role;
     modalInstance.result.then(res =>{
 
-      this.getData(); ////// getRoles();
+      this.getRoles();
     })
-    console.log(this.roles);
+
   }
 
   deleteRole(id : number){
@@ -96,36 +78,47 @@ export class ConfigRolesAndAuthComponent implements OnInit {
 
   /////////////////////////////////////////////////////// JOBS //////////////////////////////////////////////////////////////////////
 
-  editJob(id : number){
+  addJob(){
     const modalInstance = this.modal.open(EditAddJobComponent);
-    modalInstance.componentInstance.editJob = this.jobs.find( x => x.id == id);
-    modalInstance.result.then( res =>{
-      if(res)
+    modalInstance.result.then((res)=>{
         this.getJobs();
     });
   }
-  deleteJob(id : number){
 
+  editJob(id : number){
+    const modalInstance = this.modal.open(EditAddJobComponent);
+    let job = this.jobs.find( x => x.id == id );
+    modalInstance.componentInstance.editJob = job;
+    modalInstance.result.then( res =>{
+        this.getJobs();
+    });
+
+    //console.log(this.jobs);
+  }
+
+  deleteJob(id : number){
+    this.api.deleteJob(id).subscribe( suc => this.deleteJobSuccess(suc), err => this.deleteJobFail(err));
+  }
+  deleteJobSuccess(success){
+    this.toast.display({type:"Success", heading : success.Title, message : success.message});
+    this.getJobs();
+  }
+  deleteJobFail(error){
+    this.toast.display({type:"Error", heading : error.error.Title, message : error.error.message});
   }
 
   getJobs(){
     this.api.getJobPositions().subscribe( success => this.getJobSuccess(success), err => this.getJobFail(err))
   }
-
   getJobSuccess(success){
     this.jobs = success;
   }
-
   getJobFail(failed){
     this.toast.display({type: "Error", heading : failed.error.Title, message : failed.error.message});
   }
 
 
-
-
-
-
-  //VIEW AUTHORIZATION
+  ////////////////////////////////////////////////////    VIEW AUTHORIZATION   ////////////////////////////////////
 
   getViewAuths(){
     this.api.getViewAuths().subscribe( succ => this.succGetViewAuth(succ), err => this.errGetViewAuth(err))
@@ -133,19 +126,28 @@ export class ConfigRolesAndAuthComponent implements OnInit {
   succGetViewAuth(succ){
     this.viewAuth = succ;
   }
-
   errGetViewAuth(err){
-    console.log(err);
+    this.toast.display({type: "Error", heading : err.error.Title, message : err.error.message});
   }
 
-  editViewAuth(vId : number, rId : number ){
+  createViewAuthorisation(){
     const modalInstance = this.modal.open(EditAddViewAuthorizationComponent);
-    modalInstance.componentInstance.viewId = vId;
-    modalInstance.componentInstance.roleId = rId;
-
+    modalInstance.result.then((res)=>{
+        this.getViewAuths();
+    });
   }
-  deleteViewAuth(vId : number, rId : number ){
 
+  deleteViewAuthorisation(viewId : number, roleId: number){
+    //console.log(viewAuth);
+    this.api.deleteViewAuthorisation(viewId, roleId).subscribe( suc => this.deleteViewSuccess(suc), err => this.deleteViewFail(err));
+  }
+
+  deleteViewSuccess(success){
+    this.toast.display({type:"Success", heading : success.Title, message : success.message});
+    this.getViewAuths();
+  }
+  deleteViewFail(error){
+    this.toast.display({type:"Error", heading : error.error.Title, message : error.error.message});
   }
 
 }

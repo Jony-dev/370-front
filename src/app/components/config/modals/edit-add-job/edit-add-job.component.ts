@@ -4,6 +4,7 @@ import { Job } from 'src/app/models/job';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { ApiService } from 'src/app/services/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Toast } from 'src/app/models/toast';
 
 @Component({
   selector: 'app-edit-add-job',
@@ -15,56 +16,81 @@ export class EditAddJobComponent implements OnInit {
   @Input() editJob : Job = null;
 
   jobForm : FormGroup;
+
   constructor(public activeModal: NgbActiveModal, private toast : ToastsService, private api : ApiService, private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
     this.buildForm();
+
+    if(this.editJob)
+      this.jobForm.get("name").setValue(this.editJob.name);
   }
+
+
 
   buildForm(){
     this.jobForm = this.formBuilder.group({
-      jobName : ['',[Validators.required]]
+      name : ['',[Validators.required]]
     });
-
-    if(this.editJob)
-      this.jobForm.get("jobName").setValue(this.editJob.name)
-  }
-
-  saveJob(){
-    if(this.editJob){
-      let job : any = this.getFormDetails()
-      job.id = this.editJob.id;
-      console.log(job);
-      this.api.editJob(job).subscribe( success => this.editJobSuccess(success), err => this.editJobFailed(err));
-    }
-    else
-      this.api.createJob(this.getFormDetails()).subscribe( succ => this.newJobSucc(succ), err => this.newJobFailed(err));
-      
-  }
-  editJobSuccess(succ){
-    this.toast.display({type :"Success", heading : succ.Title, message : succ.message});
-    this.activeModal.close('success');
-  }
-  
-  editJobFailed(err){
-    this.toast.display({type :"Error", heading : err.error.Title, message : err.error.message});
-    this.activeModal.close();
-  }
-  newJobSucc(succ){
-    this.toast.display({type :"Success", heading : succ.Title, message : succ.message});
-    this.activeModal.close('success');
-  }
-  
-  newJobFailed(err){
-    this.toast.display({type :"Error", heading : err.error.Title, message : err.error.message});
-    this.activeModal.close();
   }
 
   getFormDetails(){
-
     return {
-      jobName : this.jobForm.get('jobName').value,
-    } 
+      name : this.jobForm.get('name').value,
+    }
   }
+
+  saveJob(){
+    let job : any = this.getFormDetails();
+    //console.log(job);
+    if(!this.editJob)
+      this.api.createJob(job).subscribe( success => this.addJobSuccess(success),error => this.addJobFailed(error));
+    else{
+      job.id = this.editJob.id;
+      this.editJob.name = job.name;
+      this.api.editJob(job).subscribe( success => this.editJobSuccess(success),error => this.editJobFailed(error));
+    }
+  }
+
+  addJobSuccess(success){
+    let toast = new Toast;
+    toast.type = "Success";
+    toast.heading = success.Title;
+    toast.message = success.message;
+    this.toast.display(toast);
+    this.activeModal.close();
+  }
+
+  addJobFailed(error){
+    console.log(error);
+    let toast = new Toast;
+    toast.type = "Error";
+    toast.heading = error.error.Title;
+    toast.message = error.error.message;
+    this.toast.display(toast);
+    this.activeModal.close();
+
+  }
+  editJobSuccess(succ){
+    let toast = new Toast;
+    toast.type = "Success";
+    toast.heading = succ.Title;
+    toast.message = succ.message;
+    this.toast.display(toast);
+    this.activeModal.close();
+  }
+
+  editJobFailed(err){
+    console.log(err);
+    let toast = new Toast;
+    toast.type = "Error";
+    toast.heading = err.error.Title;
+    toast.message = err.error.message;
+    this.toast.display(toast);
+    this.activeModal.close();
+  }
+
+
+
 
 }

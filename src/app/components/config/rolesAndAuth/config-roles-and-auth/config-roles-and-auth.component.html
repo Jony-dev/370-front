@@ -1,77 +1,73 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12 col-md-4 mt-2">
-            <div class="panel-container panel-ext sm-container">
-                <h1>Roles</h1>
-                <form>
-                    <div class="form-group form-inline">
-                        <h5>Search Role:</h5> <input type="text" class="form-control ml-2">
-                    </div>
-                </form>
-                <div>
-                    <div class="group-right" (click)="addRole()">
-                        <h5>New Role</h5><h5><i class="fa fa-plus" aria-hidden="true"></i></h5>
-                    </div>
-                    <table class="table greyHead">
-                        <thead>
-                            <tr>
-                                <th>Role</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <!-- LOCATIONS GO HERE -->
-                        <tr *ngFor="let item of roles"><td>{{item.roleName}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editRole(item.roleId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteRole(item.roleId)"></i></td></tr>
-                    </table>
-                </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-4 mt-2">
+      <div class="panel-container panel-ext sm-container">
+        <h1>Roles</h1>
+          <form>
+            <div class="form-group form-inline">
+              <h5>Search Role:</h5> <input type="text" class="form-control ml-2">
             </div>
+          </form>
+          <div>
+            <div class="group-right" (click)="addRole()">
+              <h5>New Role</h5><h5><i class="fa fa-plus" aria-hidden="true"></i></h5>
+            </div>
+            <table class="table greyHead">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                    <th class="text-center">Action</th>
+                </tr>
+              </thead>
+                <tr *ngFor="let item of roles"><td>{{item.roleName}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editRole(item.roleId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteRole(item.roleId)"></i></td></tr>
+            </table>
+          </div>
         </div>
+      </div>
         <div class="col-sm-12 col-md-4 mt-2">
-            <div class="panel-container panel-ext sm-container">
-                <h1>Jobs</h1>
-                <form>
-                    <div class="form-group form-inline">
-                        <h5>Search Jobs:</h5> <input type="text" class="form-control ml-2">
-                    </div>
-                </form>
+          <div class="panel-container panel-ext sm-container">
+            <h1>Jobs</h1>
+              <form>
+                <div class="form-group form-inline">
+                  <h5>Search Jobs:</h5> <input type="text" class="form-control ml-2">
+                </div>
+              </form>
                 <div class="group-right" (click)="addJob()">
-                    <h5>New Job</h5><h5><i class="fa fa-plus" aria-hidden="true"></i></h5>
+                  <h5>New Job</h5><h5><i class="fa fa-plus" aria-hidden="true"></i></h5>
                 </div>
                 <table class="table greyHead">
-                    <thead>
-                        <tr>
-                            <th>Job</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <!-- BUILDINGS GO HERE -->
+                  <thead>
+                    <tr>
+                      <th>Job</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
                     <tr *ngFor="let item of jobs"><td>{{item.name}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editJob(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteJob(item.id)"></i></td></tr>
                 </table>
-            </div>
+          </div>
         </div>
         <div class="col-sm-12 col-md-4 mt-2">
-            <div class="panel-container panel-ext sm-container">
-                <h1>View Authorization</h1>
-                <form>
-                    <div class="form-group form-inline">
-                        <h5>Search Authorizations:</h5> <input type="text" class="form-control ml-2">
-                    </div>
-                </form>
-                <div class="group-right" (click)="addViewAuth()">
-                    <h5>New View Authorization</h5><h5><i class="fa fa-plus" aria-hidden="true"></i></h5>
+          <div class="panel-container panel-ext sm-container">
+            <h1>View Authorization</h1>
+              <form>
+                <div class="form-group form-inline">
+                  <h5>Search Authorizations:</h5> <input type="text" class="form-control ml-2">
                 </div>
+              </form>
+              <div class="group-right" (click)="createViewAuthorisation()">
+                <h5>New View Authorization</h5><h5><i class="fa fa-plus" aria-hidden="true"></i></h5>
+              </div>
                 <table class="table greyHead">
-                    <thead>
-                        <tr>
-                            <th>View</th>
-                            <th>Role</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <!-- Floors GO HERE -->
-                    <tr *ngFor="let item of viewAuth"><td>{{item.view.view}}</td><td>{{item.role.roleName}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editViewAuth(item.view.id, item.role.roleId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteViewAuth(item.view.id, item.role.roleId)"></i></td></tr><!--Chaged the role (id) to roleId-->
+                  <thead>
+                    <tr>
+                      <th>View</th>
+                      <th>Role</th>
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tr *ngFor="let item of viewAuth"><td>{{item.view.view}}</td><td>{{item.role.roleName}}</td><td class="text-center"><i class="fas fa-trash-alt ml-4" (click)="deleteViewAuthorisation(item.view.id, item.role.id)"></i></td></tr><!--Chaged the role (id) to roleId-->
                 </table>
             </div>
-
         </div>
     </div>
 </div>

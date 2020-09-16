@@ -177,7 +177,7 @@ export class ApiService {
   getJobPositions(){
     return this.http.post<Job[]>(this.jobPositions,{request: "getJobs"})
   }
-  editJob(jobName){
+  editJob(jobName : any){
     return this.http.post(this.job, {request: "updateJob", payload: jobName});
   }
   deleteJob(id : number){
@@ -187,18 +187,25 @@ export class ApiService {
   createJob(job : any){
     return this.http.post(this.job, {request: "createJob", payload : job});
   }
-
+  /////////////////////////////  ViewAuth   ////////////////////////////////////////////////////////
   getViewAuths(){
     return this.http.post<ViewAuth>(this.viewAuth, {request : "getViewAuthorisations"});
   }
 
-  editViewAuths(){
-
+  createViewAuthorisation(viewAuth : any){
+    return this.http.post(this.viewAuth, {request: "createViewAuthorisation", payload : viewAuth});
   }
 
-  delteViewAuths(){
+  // editViewAuths(vId: number, rId :number){
+  //   return this.http.post(this.viewAuth, {request: "updateViewAuth", payload:vId, rId });///// need to get 2 variables
+  // }
 
+  deleteViewAuthorisation(viewId: number, roleId: number){
+    return this.http.post(this.viewAuth,{request : "deleteViewAuthorisation", payload: {viewId, roleId }}); //the name of the function in backend
   }
+
+  ////////////////////////////////  VIEW   ///////////////////////////////////////////
+
   getViews(){
     return this.http.post<View[]>(this.view, {request: "getViews"});
   }
@@ -210,8 +217,9 @@ export class ApiService {
     return this.http.post(this.jobRequest,{request : "updateJobRequest", payload: obj});
   }
 
+  //////////////////////////////////////////   SKILLS   //////////////////////////////////////
   getSkills(){
-    return this.http.post(this.skill, {request : "getSkills"});
+    return this.http.post(this.skill, {request : "getApprovedSkills"});
   }
 
   addSkill( skill : any){
@@ -221,12 +229,22 @@ export class ApiService {
   editSkill( skill : any){
     return this.http.post(this.skill,{request : "updateSkill", payload: skill});
   }
-  deleteSkill( skill : any){
-    return this.http.post(this.skill,{request : "updateSkill", payload: skill});
+  deleteSkill( id : number){
+    return this.http.post(this.skill,{request : "deleteSkill", payload: {id}});
   }
 
+  getPendingSkills(){
+    return this.http.post(this.skill, {request : "getPendingSkills"});
+  }
+
+  approveSkill(id : number){
+    return this.http.post(this.skill, {request : "approveSkill", payload : {id}});
+  }
+
+  ////////////////////////////////////////////////////////   REQUIREMENT  ////////////////////////////////////////
+
   getRequirements(){
-      return this.http.post(this.requirement, {request : "getRequirements"});
+      return this.http.post(this.requirement, {request : "getApprovedRequirements"});
   }
 
   addRequirement(requirement : Requirement){
@@ -238,11 +256,20 @@ export class ApiService {
   }
 
   deleteRequirement(id : number){
-    return this.http.post(this.requirement, {request : "updateRequirement", payload : "s"});
+    return this.http.post(this.requirement, {request : "deleteRequirement", payload : {id}});
   }
 
+  getPendingRequirements(){
+    return this.http.post(this.requirement, {request : "getPendingRequirements"});
+  }
+
+  approveRequirement(id : number){
+    return this.http.post(this.requirement, {request : "approveRequirement", payload : {id}});
+  }
+
+  ///////////////////////////////////////////////////// LONG QUESTION ////////////////////////////////////
   getLongQuestions(){
-    return this.http.post<LongQuestion[]>(this.longQuestion, {request : "getLongQuestions"});
+    return this.http.post<LongQuestion[]>(this.longQuestion, {request : "getApprovedLongQuestions"});
   }
 
   addLongQuestions(question : LongQuestion){
@@ -254,8 +281,18 @@ export class ApiService {
   }
 
   deleteLongQuestion(id : number){
-    return this.http.post(this.longQuestion, {request : "getLongQuestions"});
+    return this.http.post(this.longQuestion, {request : "deleteLongQuestion", payload : {id}});
   }
+  getPendingLongQuestions(){
+    return this.http.post(this.longQuestion, {request : "getPendingLongQuestions"});
+  }
+
+  approveLongQuestion(id : number){
+    return this.http.post(this.longQuestion, {request : "approveLongQuestion", payload : {id}});
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
 
   getJobRequests(){
     return this.http.post<JobRequestInfo[]>(this.jobRequest, { request : "getJobRequests"});
@@ -384,22 +421,21 @@ export class ApiService {
   getLanguages(){
     return this.http.post<Language[]>( this.language , { request : "getLanguages"});
   }
-  /////table
+  ////////////////////////////////////////////////////  table  /////////////////////////
+  getTables(){
+    return this.http.post<Tafel[]>(this.table, {request: "getTables"});
+  }
   addTable(table: any ){
     return this.http.post(this.table,{request :"createTable", payload : table});
   }
   editTable(table: any){
-
     return this.http.post(this.table,{request :"updateTable", payload: table });
-  }
-  getTables(){
-    return this.http.post<Tafel[]>(this.table, {request: "getTables"});
   }
   deleteTable(id: number){
     return this.http.post(this.table, {request : "deleteTable", payload : {id}})
   }
 
-  ///tableType
+  ///////////////////////////////////////////////////  tableType /////////////////////////////////////////////
   getTableTypes(){
     return this.http.post<TableType[]>(this.tableType, {request: "getTableTypes"});
   }
