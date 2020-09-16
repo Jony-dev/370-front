@@ -1,1 +1,26 @@
-<p>pending-requirement works!</p>
+<div class="container-fluid">
+    <h1>Confirm Requirement</h1>
+      <!--<form [formGroup]="pendingReqform">-->
+        <div class="sm-container">
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="container">
+                <div class="row border-el">
+                  <div class="col-10">
+                    <table class="table greyHead">
+                      <thead>
+                        <tr>
+                          <th>Pending Requirements</th>
+                          <th class="text-center">Action</th>
+                        </tr>
+                      </thead>
+                        <tr *ngFor="let item of requirements"><td>{{item.requirement}}</td><h2><i class="far fa-check-circle"  (click)="save(item.id)"></i></h2><h2><td class="text-center"></td></h2></tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!--</form>-->
+</div>

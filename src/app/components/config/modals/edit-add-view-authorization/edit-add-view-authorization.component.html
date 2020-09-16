@@ -2,8 +2,7 @@
     <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
         <span aria-hidden="true">&times;</span>
     </button>
-    <h1 *ngIf="viewId">Edit View Authorization</h1>
-    <h1 *ngIf="!viewId">Add View Authorization</h1>
+    <h1>Add View Authorization</h1>
     <form [formGroup]="viewAuthForm">
         <div class="row">
             <div class="col-md-6 col-sm-12">

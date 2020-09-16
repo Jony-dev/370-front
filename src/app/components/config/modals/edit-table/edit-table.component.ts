@@ -36,13 +36,15 @@ export class EditTableComponent implements OnInit {
     {
       this.tableForm.get('name').setValue(this.editTable.name);
       this.tableForm.get('ttypeId').setValue(this.editTable.ttypeId);
-      //this.tableForm.get('buildingId').setValue(this.editTable.);///need to fix building id
+      //this.tableForm.get('buildingId').setValue(this.editTable.buildingId);///need to fix building id
       this.tableForm.get('floorId').setValue(this.editTable.floorId);
     }
   }
 
   getData(){
     this.getTableTypes();
+    this.getBuildings();
+    this.getFloors();
   }
   getTableTypes(){
     this.api.getTableTypes().subscribe( succ => this.retTableSucc(succ), err => this.retTableErr(err))
@@ -54,6 +56,7 @@ export class EditTableComponent implements OnInit {
   retTableErr(err){
     this.toast.display({type:"Error", heading : err.error.Title, message : err.error.message + "\n" + err.message})
   }
+
   getBuildings(){
     this.api.getBuildings().subscribe( succ => this.retBuildingSucc(succ), err => this.retBuildingErr(err))
 
@@ -64,9 +67,9 @@ export class EditTableComponent implements OnInit {
   retBuildingErr(err){
     this.toast.display({type:"Error", heading : err.error.Title, message : err.error.message + "\n" + err.message})
   }
+
   getFloors(){
     this.api.getFloors().subscribe( succ => this.retFloorSucc(succ), err => this.retFloorErr(err))
-
   }
   retFloorSucc(succ){
     this.floors = succ;
@@ -74,7 +77,6 @@ export class EditTableComponent implements OnInit {
   retFloorErr(err){
     this.toast.display({type:"Error", heading : err.error.Title, message : err.error.message + "\n" + err.message})
   }
-
 
   buildForm(){
     this.tableForm = this.formBuilder.group({
@@ -89,23 +91,21 @@ export class EditTableComponent implements OnInit {
     return {
       name: this.tableForm.get('name').value,
       ttypeId: this.tableForm.get('ttypeId').value,
-      //buildingId: this.tableForm.get('buildingId').value,
+      buildingId: this.tableForm.get('buildingId').value,
       floorId: this.tableForm.get('floorId').value,
 
     }
   }
 
   save(){
-    let tableObj : Tafel = <Tafel>this.getFormDetails();
-    //let tableObj : any = this.getFormDetails();
+    //let tableObj : Tafel = <Tafel>this.getFormDetails();
+    let tableObj : any = this.getFormDetails();
     if(!this.editTable)
       this.api.addTable(tableObj).subscribe( success => this.addTableSuccess(success),error => this.addTableFailed(error));
     else{
       tableObj.id = this.editTable.id;
-
       this.api.editTable(tableObj).subscribe( success => this.editTableSuccess(success),error => this.editTableFailed(error));
      }
-
   }
 
 

@@ -1,105 +1,153 @@
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-8 col-md-12">
-                <div class="panel-container sm-container panel-ext">
-                    <h2>Filter</h2>
-                    <form [formGroup]="authForm">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-12">
-                                    <div class="form-group">
-                                        <label for="roleEffecting">Role Effecting</label>
-                                        <select name="roleEffecting" id="roleEffecting" class="form-control" formControlName="roleaffecting">
-                                            <option value="null">All</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-12">
-                                        <label for="roleTarget">Role Target</label>
-                                        <select name="roleTarget" id="roleTarget" class="form-control" formControlName="roleTarget">
-                                            <option value="null">All</option>
-                                        </select>
-                                </div>
-                                <div class="col-lg-3 col-md-12">
-                                        <label for="database">Database Table</label>
-                                        <select name="database" id="database" class="form-control"formControlName="dbtableid" >
-                                            <option value="null">All</option>
-                                        </select>
-                                </div>
-                                <div class="col-lg-3 col-md-12">
-                                    <label for="operation">Operation</label>
-                                    <select name="operation" id="operation" class="form-control">
-                                        <option value="null">All</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <hr>
-                    <div class="container-fluid">
-                        <h2>Operation Authorisations</h2>
-                        <table class="table greyHead">
-                            <thead>
-                                <th>Role Affecting</th>
-                                <th>Role Target</th>
-                                <th>Operation</th>
-                                <th>Database Table</th>
-                                <th class="text-center">Action</th>
-                            </thead>
-                            <tbody>
-                              <tr *ngFor="let item of operationAuthorisations"><td>{{item.roleaffected}}</td><td>{{item.roletarget}}</td><td>{{item.operationid}}</td><td>{{item.dbtableid}}</td><td class="text-center"><i class="fas fa-trash-alt ml-4" (click)="deleteOperationAuthorisation(item.roleaffected, item.roletarget, item.operationid,item.dbtableid)"></i></td></tr>
-                                <tr>
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-lg-8 col-md-12">
+                  <div class="panel-container sm-container panel-ext">
+                      <h2>Filter</h2>
+                      <form [formGroup]="authForm">
+                          <div class="container-fluid">
+                              <div class="row">
+                                  <div class="col-lg-3 col-md-12">
+                                      <div class="form-group">
+                                          <label for="roleEffecting">Role Effecting</label>
+                                          <select name="roleEffecting" id="roleEffecting" class="form-control" formControlName="roleaffected" [class.is-invalid]="roleEffected.touched && !roleEffected.valid">
+                                            <option value="null" selected disabled>Select a Role affected</option>
+                                            <option *ngFor="let item of roles" [value]="item.roleId">{{item.roleName}} </option>
 
-                                    <td>Manager</td>
-                                    <td>Manager</td>
-                                    <td>Update</td>
-                                    <td>Report</td>
-                                    <td class="text-center"><i class="fas fa-trash-alt ml-4"></i></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12 mt-lg-0 mt-md-4">
-                <div class="sm-container">
-                    <form [formGroup]= "newAuthForm">
-                        <div class=" sm-container panel pt-2 pb-2">
-                            <h2>Add Operation Authorisation</h2>
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12">
-                                            <label for="addRoleAffecting">Role Affecting</label>
-                                            <select name="addRoleAffecting" id="addRoleAffecting" class="form-control">
-                                                <option value="null" selected disabled>Select Role</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12">
-                                            <label for="addRoleTarget">Role Target</label>
-                                            <select name="addRoleTarget" id="addRoleTarget" class="form-control">
-                                                <option value="null" selected disabled>Select Role</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12">
-                                            <label for="addOperation">Operation</label>
-                                            <select name="addOperation" id="addOperation" class="form-control">
-                                                <option value="null" selected disabled>Select Operation</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12">
-                                            <label for="addDatabase">Database Table</label>
-                                            <select name="addDatabase" id="addDatabase" class="form-control">
-                                                <option value="null" selected disabled>Select Database</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <button class="btn btn-outline-primary float-right mt-lg-4 mt-md-0">Add Operation</button>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
+
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-3 col-md-12">
+                                          <label for="roleTarget">Role Target</label>
+                                          <select name="roleTarget" id="roleTarget" class="form-control" formControlName="roletarget"  [class.is-invalid]="roleTarget.touched && !roleTarget.valid">
+                                            <!--<tr *ngFor="let item of operationAuthorisations"><td>{{item.roletarget}}</td><td class="text-center"><i class="fas fa-trash-alt ml-4" (click)="deleteOperationAuthorisation(item.roleaffected, item.roletarget, item.operationid, item.dbtableid)"></i></td></tr>-->
+                                            <option value="null" selected disabled>Select a Role target</option>
+                                            <option *ngFor="let item of roles" [value]="item.roleId">{{item.roleName}} </option>
+
+
+                                          </select>
+                                  </div>
+                                  <div class="col-lg-3 col-md-12">
+                                          <label for="database">Database Table</label>
+                                          <select name="database" id="database" class="form-control" formControlName="dbtableid"  [class.is-invalid]="database.touched && !database.valid">
+                                            <option value="null" selected disabled>Select a Database Table</option>
+                                            <option *ngFor="let item of databaseTables" [value]="item.id">{{item.name}} </option>
+
+                                          </select>
+                                  </div>
+                                  <div class="col-lg-3 col-md-12">
+                                      <label for="operation">Operation</label>
+                                      <select name="operation" id="operation" class="form-control" formControlName="operationid" [class.is-invalid]="Operation.touched && !Operation.valid">
+                                        <option value="null" selected disabled>Select an Operation</option>
+                                        <option *ngFor="let item of operations" [value]="item.operationid">{{item.operationname}} </option>
+
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+
+                      <hr>
+                      <div class="container-fluid">
+                          <h2>Operation Authorisations</h2>
+                          <table class="table greyHead">
+                              <thead>
+                                  <th>Role Affecting</th>
+                                  <th>Role Target</th>
+                                  <th>Operation</th>
+                                  <th>Database Table</th>
+                                  <th class="text-center">Action</th>
+                              </thead>
+                              <tbody>
+
+                                <tr *ngFor="let item of operationAuthorisations"><td>{{item.roleaffected}}</td><td>{{item.roletarget}}</td><td>{{item.operationid}}</td><td>{{item.dbtableid}}</td><td class="text-center"><i class="fas fa-trash-alt ml-4" (click)="deleteOperationAuthorisation(item.operationid)"></i></td></tr>
+
+
+                              </tbody>
+                          </table>
+                      </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                  </div>
+
+              </div>
+              <div class="col-lg-4 col-md-12 mt-lg-0 mt-md-4">
+                  <div class="sm-container">
+                      <form [formGroup]= "newAuthForm">
+                          <div class=" sm-container panel pt-2 pb-2">
+                              <h2>Add Operation Authorisation</h2>
+                                  <div class="container-fluid">
+                                      <div class="row">
+                                          <div class="col-lg-6 col-md-12">
+                                              <label for="addRoleAffecting">Role Affecting</label>
+                                              <select name="addRoleAffecting" id="addRoleAffecting" class="form-control" formControlName="roleaffected"  [class.is-invalid]="roleEffectedn.touched && !roleEffectedn.valid">
+
+                                                  <option value="null" selected disabled>Select a Role affected</option>
+                                                  <option *ngFor="let item of roles" [value]="item.roleId">{{item.roleName}} </option>
+                                              </select>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12">
+                                              <label for="addRoleTarget">Role Target</label>
+                                              <select name="addRoleTarget" id="addRoleTarget" class="form-control" formControlName="roletarget"  [class.is-invalid]="roleTargetn.touched && !roleTargetn.valid">
+                                                <option value="null" selected disabled>Select a Role target</option>
+                                                  <option *ngFor="let item of roles" [value]="item.roleId">{{item.roleName}} </option>
+
+                                              </select>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12">
+                                              <label for="addOperation">Operation</label>
+                                              <select name="addOperation" id="addOperation" class="form-control" formControlName="dbtableid" [class.is-invalid]="databasen.touched && !databasen.valid">
+                                                <option value="null" selected disabled>Select an Operation</option>
+                                                  <option *ngFor="let item of operations" [value]="item.operationid">{{item.operationname}} </option>
+
+                                              </select>
+                                          </div>
+                                          <div class="col-lg-6 col-md-12">
+                                              <label for="addDatabase">Database Table</label>
+                                              <select name="addDatabase" id="addDatabase" class="form-control" formControlName="operationid" [class.is-invalid]="Operationn.touched && !Operationn.valid">
+                                                <option value="null" selected disabled>Select a Database table</option>
+                                                  <option *ngFor="let item of databaseTables" [value]="item.id">{{item.name}} </option>
+
+                                              </select>
+                                          </div>
+                                          <div class="col-12">
+                                              <button class="btn btn-outline-primary float-right mt-lg-4 mt-md-0" [disabled]="!newAuthForm.valid" (click)="save()">Add Operation</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                          </div>
+
+                          <div *ngIf="roleEffected.invalid && ( roleEffected.dirty || roleEffected.touched)" class="alert alert-danger">
+                            Role Effected is required.
+                          </div>
+
+                          <div *ngIf="roleTarget.invalid && ( roleTarget.dirty || roleTarget.touched)" class="alert alert-danger">
+                            Role Target is required.
+                          </div>
+
+                          <div *ngIf="database.invalid && ( database.dirty || database.touched)" class="alert alert-danger">
+                            Database is required.
+                          </div>
+
+                          <div *ngIf="Operation.invalid && ( Operation.dirty || Operation.touched)" class="alert alert-danger">
+                            Operation is required.
+                          </div>
+
+                          <div *ngIf="roleEffectedn.invalid && ( roleEffectedn.dirty || roleEffectedn.touched)" class="alert alert-danger">
+                            Role Effected is required.
+                          </div>
+
+                          <div *ngIf="roleTargetn.invalid && ( roleTargetn.dirty || roleTargetn.touched)" class="alert alert-danger">
+                            Role Target is required.
+                          </div>
+
+                          <div *ngIf="databasen.invalid && ( databasen.dirty || databasen.touched)" class="alert alert-danger">
+                            Database is required.
+                          </div>
+
+                          <div *ngIf="Operationn.invalid && ( Operationn.dirty || Operationn.touched)" class="alert alert-danger">
+                            Operation is required.
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>

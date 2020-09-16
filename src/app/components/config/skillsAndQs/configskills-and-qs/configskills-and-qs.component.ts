@@ -35,27 +35,27 @@ export class ConfigskillsAndQsComponent implements OnInit {
     this.getQuestions();
   }
 
-  addSkill(){
-    const modalIntance = this.modal.open(EditAddSkillComponent);
-    modalIntance.result.then( ()=>{
-      this.getSkills();
-    });
-  }
-  addQuestion(){
-    const modalIntance = this.modal.open(EditAddQuestionComponent);
-    modalIntance.result.then( ()=>{
-      this.getQuestions();
-    });
-  }
-  addRequirement(){
-    const modalIntance = this.modal.open(EditAddRequirementComponent);
-    modalIntance.result.then( ()=>{
-      this.getRequirements();
-    });
-  }
+
+
+  /////////////////////////////////  Pending  //////////////////////////////////////////////////
   pendingSkills(){
     const modalInstance = this.modal.open(PendingSkillComponent, {windowClass : "largeModal"});
+    modalInstance.result.then((res)=>{
+      this.getPendingRequirements();
+    })
   }
+  getPendingRequirements(){
+    this.api.getPendingRequirements().subscribe( success => this.getPendReqSuccess(success), error => this.getPendReqFail(error))
+    }
+    //success
+    getPendReqSuccess(requirements: any){
+      console.log(requirements);
+      this.requirements = requirements;
+    }
+    //fail
+    getPendReqFail(error){
+      this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
+    }
 
   pendingQuestions(){
     const modalInstance = this.modal.open(PendingQuestionComponent, {windowClass : "largeModal"});
@@ -64,7 +64,7 @@ export class ConfigskillsAndQsComponent implements OnInit {
   pendingRequirements(){
     const modalInstance = this.modal.open(PendingRequirementComponent, {windowClass : "largeModal"});
   }
-
+  /////////////////////////////  Skills  ////////////////////////////////////////////////////////////////////////
   getSkills(){
     this.api.getSkills().subscribe( s => this.getSkillsSuccess(s), e => this.getSkillsError(e));
   }
@@ -72,8 +72,16 @@ export class ConfigskillsAndQsComponent implements OnInit {
     this.skills = s;
   }
   getSkillsError(e){
-    this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message + " \n" + e.message });
+    this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message });
   }
+
+  addSkill(){
+    const modalIntance = this.modal.open(EditAddSkillComponent);
+    modalIntance.result.then( ()=>{
+      this.getSkills();
+    });
+  }
+
   editSkill(id : number){
     const modalInstance = this.modal.open(EditAddSkillComponent)
     modalInstance.componentInstance.editSkill = this.skills.find( x => x.id == id);
@@ -81,10 +89,19 @@ export class ConfigskillsAndQsComponent implements OnInit {
       this.getSkills();
     })
   }
-  deleteSkill(id : number){
 
+  deleteSkill(id : number){
+    this.api.deleteSkill(id).subscribe( suc => this.deleteSkillSuccess(suc), err => this.deleteSkillFail(err))
+  }
+  deleteSkillSuccess(success){
+    this.toast.display({type:"Success", heading : success.Title, message : success.message});
+    this.getSkills();
+  }
+  deleteSkillFail(error){
+    this.toast.display({type:"Error", heading : error.error.Title, message : error.error.message});
   }
 
+  ///////////////////////////////  Requirements  //////////////////////////////////////////////////////////////
   getRequirements(){
     this.api.getRequirements().subscribe(success => this.getReqSuccess(success), err => this.getReqFailed(err));
   }
@@ -94,6 +111,14 @@ export class ConfigskillsAndQsComponent implements OnInit {
   getReqFailed(err){
     this.toast.display({type: "Error", heading : err.error.title, message : err.error.message});
   }
+
+  addRequirement(){
+    const modalIntance = this.modal.open(EditAddRequirementComponent);
+    modalIntance.result.then( ()=>{
+      this.getRequirements();
+    });
+  }
+
   editRequirement(id : number){
     const modalInstance = this.modal.open(EditAddRequirementComponent);
     modalInstance.componentInstance.editRequirement = this.requirements.find(x => x.id == id);
@@ -101,10 +126,20 @@ export class ConfigskillsAndQsComponent implements OnInit {
       this.getRequirements();
     });
   }
-  deleteRequirement(id : number){
 
+  deleteRequirement(id : number){
+    this.api.deleteRequirement(id).subscribe( suc => this.deleteRequirementSuccess(suc), err => this.deleteRequirementFail(err))
   }
 
+  deleteRequirementSuccess(success){
+    this.toast.display({type:"Success", heading : success.Title, message : success.message});
+    this.getRequirements();
+  }
+  deleteRequirementFail(error){
+    this.toast.display({type:"Error", heading : error.error.Title, message : error.error.message});
+  }
+
+  ///////////////////////////////  Questions  ////////////////////////////////////////////
   getQuestions(){
     this.api.getLongQuestions().subscribe( success => this.getLongQSuccess(success), err => this.getLongQFail(err))
   }
@@ -117,6 +152,13 @@ export class ConfigskillsAndQsComponent implements OnInit {
     this.toast.display({type: "Error", heading : err.error.title, message : err.error.message});
   }
 
+  addQuestion(){
+    const modalIntance = this.modal.open(EditAddQuestionComponent);
+    modalIntance.result.then( ()=>{
+      this.getQuestions();
+    });
+  }
+
   editLongQuestion(id : number){
     const modalInstance = this.modal.open(EditAddQuestionComponent);
     modalInstance.componentInstance.editLongQuestion = this.longQuestions.find(x => x.id == id);
@@ -124,8 +166,18 @@ export class ConfigskillsAndQsComponent implements OnInit {
       this.getQuestions();
     });
   }
+
   deleteLongQuestion(id : number){
-    this.api.deleteLongQuestion(id);
+    this.api.deleteLongQuestion(id).subscribe( suc => this.deleteLongQSuccess(suc), err => this.deleteLongQFail(err))
   }
+  deleteLongQSuccess(success){
+    this.toast.display({type:"Success", heading : success.Title, message : success.message});
+    this.getQuestions();
+  }
+  deleteLongQFail(error){
+    this.toast.display({type:"Error", heading : error.error.Title, message : error.error.message});
+  }
+
+
 
 }

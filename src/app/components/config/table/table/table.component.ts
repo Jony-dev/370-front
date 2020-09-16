@@ -36,38 +36,29 @@ export class TableComponent implements OnInit {
     this.getTableTypes();
     this.getBuildings();
     this.getFloors();
-    console.log(this.buildings);
-    console.log(this.floors);
   }
 
   buildForm(){
     this.tableForm = this.formBuilder.group({
-
       ttypeId : [null,[Validators.required]],
       buildingId : [null,[Validators.required]],
       floorId : [null,[Validators.required]],
 
     });
-
   }
-
-
 
   addTable(){
     const modalInstance = this.modal.open(EditTableComponent);
     modalInstance.result.then((res)=>{
-
       this.getTables();
- });
-}
+    });
+  }
 
-getTables()
-  {
+  getTables(){
     this.api.getTables().subscribe( success => this.getTableSuccess(success), error => this.getTableFail(error))
   }
 
   getTableSuccess(tafels: Tafel[]){
-    console.log(tafels);
     this.tables = tafels;
   }
   //fail
@@ -75,9 +66,9 @@ getTables()
     this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
   }
   deleteTable(id : number){
-    this.api.deleteTable(id).subscribe( suc => this.deleteSuccess(suc, id), err => this.deleteFail(err))
+    this.api.deleteTable(id).subscribe( suc => this.deleteSuccess(suc), err => this.deleteFail(err))
   }
-  deleteSuccess(success, id){
+  deleteSuccess(success){
     this.toast.display({type:"Success", heading : success.Title, message : success.message});
     this.getTables();
   }
@@ -86,16 +77,15 @@ getTables()
   }
 
   editTable(id : number){
-      const modalInstance = this.modal.open(EditTableComponent);
+    const modalInstance = this.modal.open(EditTableComponent);
     console.log(this.tables);
     let table = this.tables.find( x => x.id == id);
     //let location = this.locations.find( x => x.name == lo);
     modalInstance.componentInstance.editTable = table;
     modalInstance.result.then(res =>{
-
       this.getTables();
-    })
-    console.log(this.tables);
+    });
+   // console.log(this.tables);
   }
 
   ////////////////Building//////////////////////

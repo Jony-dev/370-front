@@ -1,31 +1,26 @@
 <div class="container-fluid">
     <h1>Confirm Question</h1>
-    <div class="sm-container">
-        <div class="row">
+
+        <div class="sm-container">
+          <div class="row">
             <div class="col-md-6 col-sm-12">
-                <div class="container">
-                    <div class="row border-el">
-                        <div class="col-10">
-                            <h4>How would you approach baking a cake</h4>
-                        </div>
-                        <div class="col-2">
-                            <button class="btn text-center"><h2><i class="far fa-check-circle"></i></h2></button>
-                        </div>
-                    </div>
+              <div class="container">
+                <div class="row border-el">
+                  <div class="col-10">
+                    <table class="table greyHead">
+                      <thead>
+                        <tr>
+                          <th>Pending Questions</th>
+                          <th class="text-center">Action</th>
+                        </tr>
+                      </thead>
+                        <tr *ngFor="let item of questions"><td>{{item.question}}</td><h2><i class="far fa-check-circle"   (click)="save(item.id)"></i></h2><h2><td class="text-center"></td></h2></tr>
+                    </table>
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="col-md-6 col-sm-12">
-                <div class="container">
-                    <div class="row border-el">
-                        <div class="col-10">
-                            <h4>How would you approach baking a cake</h4>
-                        </div>
-                        <div class="col-2">
-                            <button class="btn text-center"><h2><i class="far fa-check-circle"></i></h2></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
+
 </div>

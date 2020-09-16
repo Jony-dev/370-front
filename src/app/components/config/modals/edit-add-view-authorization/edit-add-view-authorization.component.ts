@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { Role } from 'src/app/models/role';
 import { View } from 'src/app/models/view';
+import { ViewAuth } from 'src/app/models/viewAuth';
+import { Toast } from 'src/app/models/toast';
 
 @Component({
   selector: 'app-edit-add-view-authorization',
@@ -12,9 +14,12 @@ import { View } from 'src/app/models/view';
   styleUrls: ['./edit-add-view-authorization.component.css']
 })
 export class EditAddViewAuthorizationComponent implements OnInit {
+  [x: string]: any;
 
   @Input() viewId : number = null;
   @Input() roleId : number = null;
+
+  //@Input() editViewAuth : ViewAuth = null;
 
 
   roles : Role[] = [];
@@ -40,12 +45,12 @@ export class EditAddViewAuthorizationComponent implements OnInit {
     });
   }
 
-  // getFormDetails(){
-
-  //   return {
-
-  //   }
-  // }
+  getFormDetails(){
+    return {
+      viewId : this.viewAuthForm.get('viewId').value,
+      roleId : this.viewAuthForm.get('roleId').value,
+    }
+  }
 
   getRoles(){
     this.api.getRoles().subscribe( succ => this.retRolesSucc(succ), err => this.retRolesErr(err))
@@ -69,7 +74,31 @@ export class EditAddViewAuthorizationComponent implements OnInit {
   }
 
   saveViewAuth(){
-    alert("not done");
+    let viewAuthObj : any = this.getFormDetails();
+    console.log(viewAuthObj);
+    this.api.createViewAuthorisation(viewAuthObj).subscribe( success => this.addViewAuthSuccess(success),error => this.addViewAuthFailed(error));
+
   }
+
+  addViewAuthSuccess(success){
+    let toast = new Toast;
+    toast.type = "Success";
+    toast.heading = success.Title;
+    toast.message = success.message;
+    this.toast.display(toast);
+    this.activeModal.close();
+  }
+  addViewAuthFailed(error){
+    console.log(error);
+    let toast = new Toast;
+    toast.type = "Error";
+    toast.heading = error.error.Title;
+    toast.message = error.error.message;
+    this.toast.display(toast);
+    this.activeModal.close();
+
+  }
+
+
 
 }
