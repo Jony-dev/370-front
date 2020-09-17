@@ -150,7 +150,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
     this.payload.tests = this.testsObj();
     this.payload.id = this.requestDetails.jobCardId;
     console.log(this.payload);
-    //this.api.populateJobCard(this.payload).subscribe( success => this.successUploadCard(success),err => this.failUploadCard(err));
+    this.api.populateJobCard(this.payload).subscribe( success => this.successUploadCard(success),err => this.failUploadCard(err));
   }
   getData(){
     this.getLocations();

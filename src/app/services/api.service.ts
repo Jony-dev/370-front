@@ -39,6 +39,9 @@ import { MyListings } from '../models/myListings';
 import { DatabaseTable } from '../models/databaseTable';
 import { Operation } from '../models/operation';
 import { ApplicationQuestions } from '../models/applicationQuestions';
+import { MyApplication } from '../models/myApplication';
+import { ApplicantPoolCard } from '../models/applicantPool';
+import { UpCommingInterviews } from '../models/upComingInterviews';
 
 
 
@@ -86,6 +89,10 @@ export class ApiService {
   operation : string = `${this.globalRoot}API/Operation/`;
   question : string = `${this.globalRoot}API/Question/`;
   answer : string = `${this.globalRoot}API/Answer/`;
+  interview: string = `${this.globalRoot}API/Interview/`;
+
+
+
   constructor( private http: HttpClient){ }
 
   makeRequest(){
@@ -515,9 +522,9 @@ export class ApiService {
   getJobListing(){
     return this.http.post<MyListings[]>( this.jobListing, { request : "getMyJobListings" } );
   }
-  // getMyApplication(){
-  //   return this.http.post( this.application, { request : ""});
-  // }
+  getMyApplication(){
+    return this.http.post<MyApplication[]>( this.jobListing, { request : "getMyApplications"});
+  }
 
   getApplicationQuestions(cardId : number){
     return this.http.post<ApplicationQuestions>( this.question, { request : "getCardQuestions", payload : { cardId }});
@@ -531,6 +538,36 @@ export class ApiService {
     uploadData.append('test',test);
     uploadData.append( 'answers', JSON.stringify(data));
     return this.http.post(this.answer,uploadData);
+  }
+
+  getInternalAppJobCard(cardId : number){
+    return this.http.post<userCard[]>(this.user, {request : "getInternalApplicants", payload : { cardId } });
+  }
+
+  getExternalAppJobCard(cardId : number){
+    return this.http.post<userCard[]>(this.user, {request : "getExternalApplicants", payload : { cardId } });
+  }
+
+  getApplicantPool(cardId : number){
+    return this.http.post<ApplicantPoolCard []>(this.user, {request : "getApplicantsForCard", payload : { cardId }});
+  }
+
+  changeApplicantPool(applicationId : number , statusId : number){
+    return this.http.post(this.application, { request : "changeStatus", payload : { applicationId , statusId}});
+  }
+
+  createInterviews(payload : any){
+    return this.http.post( this.interview, {request : "createInterview", payload});
+  }
+  getUpComingInterviews(cardId : number){
+    return this.http.post<UpCommingInterviews[]>( this.interview, {request : "getInterViewByCard", payload : { cardId } });
+  }
+
+  getMyInterviews(){
+
+  }
+  rateInterview(){
+
   }
 
 }

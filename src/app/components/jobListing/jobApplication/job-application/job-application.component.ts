@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Stepper from "bs-stepper";
 import { ApplicationQuestions } from 'src/app/models/applicationQuestions';
@@ -38,7 +39,7 @@ export class JobApplicationComponent implements OnInit {
   testFiles : File;
   cv : File;
 
-  constructor(private api : ApiService , private toast : ToastsService, private activeModal : NgbActiveModal, private helper : JobCardHelperService) { }
+  constructor(private api : ApiService , private toast : ToastsService, private activeModal : NgbActiveModal, private helper : JobCardHelperService, private router : Router) { }
 
   next() {
     this.stepper.next();
@@ -168,5 +169,6 @@ export class JobApplicationComponent implements OnInit {
     this.helper.emitRefresh();
     this.toast.display({type : "Success", heading : succ.Title,message : succ.message });
     this.activeModal.close();
+    this.router.navigate(["Dashboard/JobListing"])
   }
 }

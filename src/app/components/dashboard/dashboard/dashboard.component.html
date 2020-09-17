@@ -29,8 +29,8 @@
     <ul class="sideBarNav">
       <h3>NAVIGATION</h3>
       <li [routerLink]="['/Dashboard']"><i class="fad fa-home"></i><span>Home</span></li>
-      <li [routerLink]="['/Dashboard/Booking']" routerLinkActive="active-link" *ngIf="searchView('booking')"><i class="fas fa-calendar-minus"></i><span>Booking</span></li>
-      <li *ngIf="searchView('assistant booking')"><i class="fal fa-calendar-alt"></i><span>Assistant Booking</span></li>
+      <li [routerLink]="['/Dashboard/Booking']" routerLinkActive="active-link" *ngIf="searchView('!booking')"><i class="fas fa-calendar-minus"></i><span>Booking</span></li>
+      <li *ngIf="searchView('!assistant booking')"><i class="fal fa-calendar-alt"></i><span>Assistant Booking</span></li>
       <li [routerLink]="['/Dashboard/Teams']" routerLinkActive="active-link" *ngIf="searchView('team')"><i class="fas fa-user-friends"></i><span>Team</span></li>
       <li [routerLink]="['/Dashboard/Interviews']" routerLinkActive="active-link" ><i class="fal fa-copy"></i><span>Interviews</span></li>
       <li class="accordian-parent" (click)="hrToggle = !hrToggle" *ngIf="searchView('hr')"><i class="far fa-share-alt"></i><span>HR</span><span class="arrow"><i [class]="(!hrToggle) ? 'far fa-chevron-down' : 'far fa-chevron-up'"></i></span>

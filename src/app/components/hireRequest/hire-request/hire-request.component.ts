@@ -70,6 +70,7 @@ export class HireRequestComponent implements OnInit {
   requestSuccess(success : any){
     this.toast.display({type:"Success", heading : success.Title, message : success.message});
     this.requestForm.reset();
+    this.getData();
   }
   requestFailed(error : any){
     this.toast.display({type:"error", heading : error.Title, message : error.message});

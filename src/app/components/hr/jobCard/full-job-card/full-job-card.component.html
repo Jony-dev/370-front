@@ -78,7 +78,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-12">
-                                        <h2>Applicants X</h2>
+                                        <h2>Applicants</h2>
                                     </div>
                                 </div>
                                 <div id="applicant-panel" class="mt-1">
@@ -88,9 +88,9 @@
                                         <div class="container">
                                             <div class="row">
                                                 <!-- ADD ALL THE INTERNAL ONES HERE -->
-                                                <div class="col-12">
-                                                    <!-- <app-profile-card class="img-sm border-el"></app-profile-card> -->
-                                                </div>
+                                                <div class="col-12" *ngFor="let item of internalApplicants">
+                                                    <app-profile-card class="img-sm border-el" [cardDetails]="item"></app-profile-card>
+                                               </div>
                                             </div>
                                         </div>
                                     </div>
@@ -100,14 +100,8 @@
                                         <div class="container">
                                             <div class="row">
                                                 <!-- ADD ALL THE INTERNAL ONES HERE -->
-                                                <div class="col-12">
-                                                    <!-- <app-profile-card class="img-sm border-el"></app-profile-card> -->
-                                                </div>
-                                                <div class="col-12">
-                                                    <!-- <app-profile-card class="img-sm border-el"></app-profile-card> -->
-                                                </div>
-                                                <div class="col-12">
-                                                    <!-- <app-profile-card class="img-sm border-el"></app-profile-card> -->
+                                                <div class="col-12" *ngFor="let item of externalApplicants">
+                                                     <app-profile-card class="img-sm border-el" [cardDetails]="item"></app-profile-card>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,11 +133,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-12">
+                            <div class="col-lg-6 col-sm-12" hidden>
                                 <h2 class="mt-4 ml-4">Application list status: <span class="text-danger">Unconfirmed</span></h2>
                             </div>
                         </div>
-                        <div class="container-fluid mb-4">
+                        <div class="container-fluid mb-4" hidden>
                             <h3>Hiring Manager Controls</h3>
                             <hr>
                             <div class="row mt-4">                        
@@ -163,19 +157,19 @@
                             <div class="col-lg-4 col-sm-12">
                                 <h3>Shortlist</h3>
                                 <div class="panel-container panel-ext sm-container">
-                                    <app-applicant-pool-card class="img-sm border-el mt-2"></app-applicant-pool-card>
+                                    <app-applicant-pool-card [cardDetails]="item" *ngFor="let item of shortList" class="img-sm border-el mt-2" (changePool)="routeRequest($event)"></app-applicant-pool-card>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <h3>Undecided</h3>
                                 <div class="panel-container panel-ext sm-container">
-
+                                    <app-applicant-pool-card [cardDetails]="item" *ngFor="let item of undecided" class="img-sm border-el mt-2" (changePool)="routeRequest($event)"></app-applicant-pool-card>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <h3>Disqualified</h3>
                                 <div class="panel-container panel-ext sm-container">
-
+                                    <app-applicant-pool-card [cardDetails]="item" *ngFor="let item of disqualified" class="img-sm border-el mt-2" (changePool)="routeRequest($event)"></app-applicant-pool-card>
                                 </div>
                             </div>
                         </div>
@@ -198,10 +192,10 @@
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Jonathan van der Breggen</td>
-                                            <td>17-08-2020</td>
-                                            <td>16:30</td>
+                                        <tr *ngFor="let item of upComingInterviews">
+                                            <td>{{item.applicantName}} {{item.applicantSurname}}</td>
+                                            <td>{{item.date | date : "dd/MM/yyyy"}}</td>
+                                            <td>{{item.time}}</td>
                                             <td><i class="far fa-pencil-alt"></i><i class="fas fa-trash-alt ml-4"></i></td>
                                         </tr>
                                     </tbody>

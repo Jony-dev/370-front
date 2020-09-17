@@ -1,19 +1,19 @@
 <div class="flex-container">
     <div (click)="viewApplication()">
-        <img src="../../../../../assets/profile/Calvin.jpg" alt="test">
+        <img src="{{cardDetails.imgUrl ? cardDetails.imgUrl : '../../../../../assets/profile/empty.png'}}" alt="test">
     </div>
     <div (click)="viewApplication()">
-        <p>Jonathan</p>
-        <p>van der Breggen</p>
+        <p>{{cardDetails?.userName}}</p>
+        <p>{{cardDetails?.userSurname}}</p>
     </div>
     <div class="fill-flex">
         <div class="top-right"  ngbDropdown container="body" display="dynamic" #dropper="ngbDropdown">
             <button ngbDropdownToggle  class="btn elipse" id="dropdownManual" (focus)="dropper.open()" ><i class="fas fa-ellipsis-h"></i></button>
             <div ngbDropdownMenu aria-labelledby="dropdownManual" >
-              <button ngbDropdownItem (click)="createInterview()">Interview</button>
-              <button ngbDropdownItem>Shortlist</button>
-              <button ngbDropdownItem>Undecided</button>
-              <button ngbDropdownItem>Disqualify</button>
+              <button ngbDropdownItem (click)="createInterview()" *ngIf="cardDetails.status == 'successful'">Interview</button>
+              <button ngbDropdownItem *ngIf="cardDetails.status == 'undecided' || cardDetails.status == 'unsuccessful'" (click)="moveShortList()">Shortlist</button>
+              <button ngbDropdownItem *ngIf="cardDetails.status == 'successful' || cardDetails.status == 'unsuccessful'" (click)="moveUndecided()">Undecided</button>
+              <button ngbDropdownItem *ngIf="cardDetails.status == 'successful' || cardDetails.status == 'undecided'" (click)="moveDisqualify()">Disqualify</button>
             </div>
         </div>
     </div>
