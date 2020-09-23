@@ -152,6 +152,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
     console.log(this.payload);
     this.api.populateJobCard(this.payload).subscribe( success => this.successUploadCard(success),err => this.failUploadCard(err));
   }
+  
   getData(){
     this.getLocations();
     this.getSchedule();
