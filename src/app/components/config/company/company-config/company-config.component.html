@@ -23,7 +23,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <tr *ngFor="let item of departments"><td>{{item.description}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editDepartment(item.departmentId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteDepartment(item.departmentId)"></i></td></tr>
+                                    <tr *ngFor="let item of departments"><td>{{item.name}}</td><td class="text-center"><i class="fas fa-eye ml-4"(click)="viewDepartment(item.departmentId)"></i><i class="far fa-pencil-alt ml-4" (click)="editDepartment(item.departmentId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteDepartment(item.departmentId)"></i></td></tr>
                                 <tr>
                                 </tr>
                             </tbody>
@@ -32,23 +32,12 @@
 
                 </div>
                 <div class="col-sm-12 col-md-6">
-                   <div class="panel-container sm-container">
+                   <div class="panel-container sm-container" *ngIf="departmentView">
                        <h2>Department Details</h2>
-                        <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quis eaque delectus blanditiis molestiae itaque, asperiores cupiditate error corrupti accusamus aliquid ducimus magni officiis enim eos amet aspernatur nesciunt illo!</p>
+                        <p>Description: {{departmentView.description}}</p>
                         <h2>Teams</h2>
                         <table class="table">
-                            <tr>
-                                <td>Fast</td>
-                            </tr>
-                            <tr>
-                                <td>Fast</td>
-                            </tr>
-                            <tr>
-                                <td>Test</td>
-                            </tr>
-                            <tr>
-                                <td>Test</td>
-                            </tr>
+                            <tr *ngFor="let team of departmentTeams"><td>{{team.name}}</td></tr>
                         </table>
                    </div>
                 </div>
@@ -77,7 +66,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                  <tr *ngFor="let item of divisions"><td>{{item.description}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editDivision(item.divisionId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteDivision(item.divisionId)"></i></td></tr>
+                                  <tr *ngFor="let item of divisions"><td>{{item.description}}</td><td class="text-center"><i class="fas fa-eye ml-4"(click)="viewDivision(item.divisionId)"></i><i class="far fa-pencil-alt" (click)="editDivision(item.divisionId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteDivision(item.divisionId)"></i></td></tr>
                                 <tr>
                             </tbody>
                         </table>
@@ -87,7 +76,7 @@
                 <div class="col-sm-12 col-md-6">
                    <div class="panel-container sm-container">
                        <h2>Division Details</h2>
-                        <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quis eaque delectus blanditiis molestiae itaque, asperiores cupiditate error corrupti accusamus aliquid ducimus magni officiis enim eos amet aspernatur nesciunt illo!</p>
+                        <p>Description: </p>
                         <h2>Departments</h2>
                         <table class="table">
                             <tr>

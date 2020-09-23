@@ -6,6 +6,7 @@ import { Department } from 'src/app/models/department';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { Division } from 'src/app/models/division';
+import { Team } from 'src/app/models/team';
 
 @Component({
   selector: 'app-company-config',
@@ -17,6 +18,12 @@ export class CompanyConfigComponent implements OnInit {
 
   departments : Department [] = [];
   divisions : Division [] = [];
+
+  departmentView : Department = null;
+  departmentTeams : Team [] = []
+
+  divisionView : Division = null;
+  divisionDepartments : Department [] = [];
   constructor( private modal : NgbModal , private api : ApiService, private toast : ToastsService) { }
 
   ngOnInit(): void {
@@ -118,7 +125,17 @@ export class CompanyConfigComponent implements OnInit {
 
       this.getDivisions();
     })
-    console.log(this.divisions);
+  }
+
+  viewDepartment(id : number){
+    this.departmentView = this.departments.find( x => x.departmentId == id);
+    this.api.getTeamsByDepartment(+id).subscribe( x => {
+      this.departmentTeams = x;
+    });
+  }
+
+  viewDivision(id : number){
+
   }
 
 }

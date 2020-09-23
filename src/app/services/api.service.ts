@@ -563,12 +563,6 @@ export class ApiService {
     return this.http.post<UpCommingInterviews[]>( this.interview, {request : "getInterViewByCard", payload : { cardId } });
   }
 
-  getMyInterviews(){
-
-  }
-  rateInterview(){
-
-  }
 
 }
 
