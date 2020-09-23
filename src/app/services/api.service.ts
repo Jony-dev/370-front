@@ -414,6 +414,9 @@ export class ApiService {
   getTeamsByDepartment(departmentId: number){
     return this.http.post<Team[]>(this.team, {request: "getTeamsByDepartment", payload: {departmentId} });
   }
+  getDepartmentsByDivision(divisionId : number){
+    return this.http.post<Department[]>(this.department, {request: "getDepartmentsByDivision", payload: {divisionId} });
+  }
 
   deleteDepartment(departmentId: number){
     return this.http.post(this.department, {request : "deleteDepartment", payload : {departmentId}});

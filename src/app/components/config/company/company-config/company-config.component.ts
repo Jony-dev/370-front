@@ -135,7 +135,9 @@ export class CompanyConfigComponent implements OnInit {
   }
 
   viewDivision(id : number){
-
+    this.divisionView = this.divisions.find( x => x.divisionId == id);
+    this.divisionDepartments = this.departments.filter(x => x.divisionId == id);
+    console.log(this.divisionDepartments);
   }
 
 }
