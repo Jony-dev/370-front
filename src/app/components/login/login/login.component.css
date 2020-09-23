@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4,25vh);
-    grid-template-areas: 
+    grid-template-areas:
     "header header header header header header"
     " . login login signup signup ."
     " . login login signup signup ."
@@ -11,13 +11,15 @@
 }
 
 .signup{
-    grid-area: signup;  
+    grid-area: signup;
     justify-content: center;
+    color: white;
 }
 .login{
     grid-area: login;
-    border-right: solid 2px grey;
+    border-right: solid 2px white;
     justify-content: center;
+    color: white;
 }
 .login-container{
     width: 90%;
@@ -32,8 +34,22 @@
 }
 .forgot{
     float: right;
-    color: #007bff;
+    color: #000000;
 }
 .forgot:hover{
   cursor: pointer;
 }
+.bg-img {
+    /* The image used */
+    background-image: url("https://wallup.net/wp-content/uploads/2016/01/269216-BMW-logo-brand.jpg");
+
+    /* Control the height of the image */
+    min-height: 270px;
+
+    /* Center and scale the image nicely */
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: unset;
+  }
+

@@ -83,7 +83,7 @@ nav li{
     height: 70px;
 }
 
-nav li h6{ 
+nav li h6{
     margin-top: 1.5rem;
     color: #98a6ad;
     font-family: 'Muli', sans-serif;
@@ -112,7 +112,7 @@ nav li:last-of-type{
 }
 
 .notificationImg{
-    width: 25; 
+    width: 25;
     height:25px;
     margin-top: 1.5rem;
 }
@@ -135,8 +135,8 @@ nav li:last-of-type{
     list-style: none;
     height: 90%;
     overflow: auto;
-    
-    
+
+
 }
 .sideBarNav h3{
     color: #8391a2;
@@ -177,5 +177,18 @@ nav li:last-of-type{
 }
 .logout:hover{
     cursor: pointer;
+}
+.bg-img {
+  /* The image used */
+  background-image: url("https://wallup.net/wp-content/uploads/2016/01/269216-BMW-logo-brand.jpg");
+
+  /* Control the height of the image */
+  min-height: 660px;
+
+  /* Center and scale the image nicely */
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: unset;
 }
 

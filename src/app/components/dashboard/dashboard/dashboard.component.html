@@ -19,13 +19,13 @@
         <app-profile-card class="profileContainer img-sm" (click)="editProfile()" [cardDetails]="userProfileCard"></app-profile-card>
       </li>
     </ul>
-    
+
   </nav>
   <div class="sideBar">
     <div class="logo text-right">
       <img class="hamburger" src="../assets/icons/hamburger.svg" alt="Hamburger" (click)="toggleSideBar()">
     </div>
-    
+
     <ul class="sideBarNav">
       <h3>NAVIGATION</h3>
       <li [routerLink]="['/Dashboard']"><i class="fad fa-home"></i><span>Home</span></li>
@@ -72,8 +72,10 @@
     </ul>
   </div>
   <div class="dash">
+    <div class="bg-img">
     <div class="container-fluid" style="overflow: auto;">
       <router-outlet></router-outlet>
     </div>
+  </div>
   </div>
 </div>

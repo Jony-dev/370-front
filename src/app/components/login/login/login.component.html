@@ -1,16 +1,18 @@
+<div class="bg-img">
 <div class="grid-container">
     <div class="header"></div>
     <div class="login">
+
         <div class="login-container">
             <form [formGroup]="userDetails">
                 <div class="from-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" formControlName="email">
+                    <input type="email" name="email" id="email" class="form-control" formControlName="email" >
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <label for="password" class="forgot" [routerLink]="['ForgotPassword']" routerLinkActive="router-link-active" ><i>Forgot Password?</i></label>
-                    <input type="password" name="password" id="password" class="form-control" formControlName="password">
+                    <input type="password" name="password" id="password" class="form-control" formControlName="password" >
                 </div>
                 <!--Validation-->
                 <div *ngIf="password.invalid && ( password.dirty || password.touched) && (password.errors.required  || password.errors.invalid)" class="alert alert-danger text-center">
@@ -23,6 +25,10 @@
 
                 <div *ngIf=" email.invalid && email.touched && email.errors.pattern" class="alert alert-danger text-center">
                   Email needs to be a valid email with an @-sign and dot-character (.)
+                </div>
+
+                <div *ngIf ="emailInvalid==true"class="alert alert-danger text-center">
+                    {{displayError}}
                 </div>
 
                 <div class="form-group">
@@ -47,5 +53,5 @@
 
 
 
-
+  </div>
 </div>
