@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastsService } from 'src/app/services/toasts.service';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +11,15 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth : AuthService, private builder : FormBuilder, private router : Router) { }
+  constructor(private auth : AuthService, private builder : FormBuilder, private router : Router, private toast : ToastsService) { }
   userDetails : FormGroup;
+
+  emailInvalid = false;
+  displayError : any;
 
   ngOnInit(): void {
     this.buildForm();
+    this.emailInvalid = false;
   }
 
 
@@ -46,7 +51,8 @@ export class LoginComponent implements OnInit {
   }
 
   loginFailed(error: any){
-    console.log(error)
+    this.emailInvalid = true;
+    this.displayError = error.error.message;
   }
 
   get email(){
