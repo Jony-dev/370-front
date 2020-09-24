@@ -11,7 +11,7 @@
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
                                         <label for="tableSearch">Search Table</label>
-                                        <input class="form-control" type="text" name="tableSearch" id="tableSearch">
+                                        <input class="form-control" type="text" name="tableSearch" id="tableSearch" [ngModel]="tableSearch">
                                     </div>
                                 </div>
                                 <!--TableType Dropdown-->
@@ -40,7 +40,7 @@
                                         <label for="floor">Floor</label>
                                         <select class="form-control" name="floor" id="floor" formControlName="floorId">
                                           <option value="null" selected disabled>Please Select a floor</option>
-                                          <option *ngFor="let item of floors" [value]="item.floorId" >{{item.floorNumber}} </option>
+                                          <option *ngFor="let item of floors | filterName : tableSearch" [value]="item.floorId" >{{item.floorNumber}} </option>
                                         </select>
                                     </div>
                                 </div>
@@ -49,14 +49,15 @@
                     </form>
                     <table class="greyHead table">
                         <thead>
-                            <th>Table</th>
+                            <th>Table</th> <!---->
                             <th>Table Type</th>
                             <th>Building</th>
                             <th>Floor</th>
                             <th class="text-right">Actions</th>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of tables"><td>{{item.name}}</td><td>{{item.ttypeId}}</td><td><!--{{item.buildingId}}--></td><td>{{item.floorId}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
+                          <tr *ngFor="let item of tables"><td>{{item.name}}</td><td>{{item.ttypeId}}</td><td>{{item.floorId}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
+                        <!--<td>{{item.buildingId}}</td>-->
                         </tbody>
                     </table>
                 </div>
@@ -70,7 +71,8 @@
                           <ng-template ngbTabContent>
                             <div class="container-fluid">
                                     <h1>Add Table</h1>
-                                    <div class="row">
+                                    <form [formGroup]="addTableForm">
+                                      <div class="row">
                                         <div class="col-lg-6 col-sm-12">
                                             <div class="form-group">
                                                 <label for="tableName">Table ID/Name</label>
@@ -99,9 +101,8 @@
                                             <div class="form-group">
                                                 <label for="newFloor">Floor</label>
                                                 <select class="form-control" name="newFloor" id="newFloor" formControlName="floorId">
-                                                    <option value="null" selected disabled>Select Floor</option>
-
-                                                  <option *ngFor="let item of floors" [value]="item.floorId">{{item.floorNumber}} </option>
+                                                  <option value="null" selected disabled>Select Floor</option>
+                                                  <option *ngFor="let item of floors" [value]="item.floorId" >{{item.floorNumber}} </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -109,7 +110,8 @@
                                             <button class="btn btn-outline-primary float-right mt-lg-4 mt-sm-0" [disabled]="!tableForm.valid" (click)="addTable()">Add Table</button>
                                         </div>
                                         <hr>
-                                    </div>
+                                      </div>
+                                    </form>
                                     <h1>Setting Group Slots</h1>
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">

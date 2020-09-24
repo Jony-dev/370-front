@@ -379,6 +379,8 @@ export class ApiService {
     return this.http.post<Floor[]>(this.floor, {request: "getFloorsByBuilding", payload: {buildingId}}); //Move this into the ts
   }
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+
   setUpHiringTeam( card : any){
     return this.http.post(this.jobCard, { request : "generateJobCard", payload : card});
   }
@@ -499,7 +501,7 @@ export class ApiService {
   getJobCardInfo(cardId : number){
     return this.http.post<JobCardInfo>(this.jobCard, {request : "getCardInformation", payload : { id : cardId}});
   }
-  
+
   approveJobCard(cardId : number){
     return this.http.post(this.approver, { request : "approveJobCard", payload : {cardId}});
   }
