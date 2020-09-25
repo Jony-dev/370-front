@@ -374,7 +374,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
 
   skillsObj(){
     return this.addedSkills.map( (x, i)=>{
-        return { id : x.id, critical : this.skillFArray.at(i).value};
+        return { id : +x.id, critical : +this.skillFArray.at(i).value};
     });
   }
   requirementsObj(){
