@@ -32,10 +32,10 @@ export class EditAddFloorComponent implements OnInit {
   }
 
   getData(){
-    this.getBuildings();
+    this.getDeletedBuildings();
   }
-  getBuildings(){
-    this.api.getBuildings().subscribe( succ => this.retBuildingsSucc(succ), err => this.retBuildingsErr(err))
+  getDeletedBuildings(){
+    this.api.getDeletedBuildings().subscribe( succ => this.retBuildingsSucc(succ), err => this.retBuildingsErr(err))
 
   }
   retBuildingsSucc(succ){

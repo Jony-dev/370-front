@@ -32,10 +32,10 @@ export class EditAddBuildingComponent implements OnInit {
   }
 
   getData(){
-    this.getLocations();
+    this.getDeletedLocations();
   }
-  getLocations(){
-    this.api.getLocations().subscribe( succ => this.retLocationSucc(succ), err => this.retLocationsErr(err))
+  getDeletedLocations(){
+    this.api.getDeletedLocations().subscribe( succ => this.retLocationSucc(succ), err => this.retLocationsErr(err))
 
   }
   retLocationSucc(succ){

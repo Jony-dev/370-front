@@ -194,6 +194,10 @@ export class ApiService {
   getJobPositions(){
     return this.http.post<Job[]>(this.jobPositions,{request: "getJobs"})
   }
+
+  getDeletedJobPositions(){
+    return this.http.post<Job[]>(this.jobPositions,{request: "getDeletedJobs"})
+  }
   editJob(jobName : any){
     return this.http.post(this.job, {request: "updateJob", payload: jobName});
   }
@@ -327,6 +331,10 @@ export class ApiService {
     return this.http.post<Location[]>(this.location, {request: "getLocations"});
   }
 
+  getDeletedLocations(){
+    return this.http.post<Location[]>(this.location, {request: "getDeletedLocations"});
+  }
+
   addLocation(location : any){
     return this.http.post(this.location,{request :"createLocation",payload : location});
   }
@@ -350,6 +358,10 @@ export class ApiService {
   }
   getBuildings(){
     return this.http.post<Building[]>(this.building, {request: "getBuildings"});
+  }
+
+  getDeletedBuildings(){
+    return this.http.post<Building[]>(this.building, {request: "getDeletedBuildings"});
   }
 
   deleteBuilding(buildingId : number){
@@ -407,6 +419,10 @@ export class ApiService {
 
   getDivisions(){
     return this.http.post<Division[]>(this.division, {request: "getDivisions"});
+  }
+
+  getDeletedDivisions(){
+    return this.http.post<Division[]>(this.division, {request: "getDeletedDivisions"});
   }
 
   getDepartments(){
