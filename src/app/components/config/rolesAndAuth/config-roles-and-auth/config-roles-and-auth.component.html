@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
   <div class="row">
     <div class="col-sm-12 col-md-4 mt-2">
       <div class="panel-container panel-ext sm-container">
@@ -19,7 +20,13 @@
                     <th class="text-center">Action</th>
                 </tr>
               </thead>
-                <tr *ngFor="let item of roles"><td>{{item.roleName}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editRole(item.roleId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteRole(item.roleId)"></i></td></tr>
+                <tr *ngFor="let item of roles"><td>{{item.roleName}}</td><td class="text-center">
+                  <a placement="top" ngbTooltip="Select this to edit the corresponding role.">
+                    <i class="far fa-pencil-alt" (click)="editRole(item.roleId)"></i>
+                  </a>
+                  <a placement="top" ngbTooltip="Select this to delete the corresponding role.">
+                    <i class="fas fa-trash-alt ml-4" (click)="deleteRole(item.roleId)"></i>
+                  </a></td></tr>
             </table>
           </div>
         </div>
@@ -42,7 +49,13 @@
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
-                    <tr *ngFor="let item of jobs"><td>{{item.name}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editJob(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteJob(item.id)"></i></td></tr>
+                    <tr *ngFor="let item of jobs"><td>{{item.name}}</td><td class="text-center">
+                      <a placement="top" ngbTooltip="Select this to edit the corresponding job.">
+                        <i class="far fa-pencil-alt" (click)="editJob(item.id)"></i>
+                      </a>
+                      <a placement="top" ngbTooltip="Select this to delete the corresponding job.">
+                        <i class="fas fa-trash-alt ml-4" (click)="deleteJob(item.id)"></i>
+                      </a></td></tr>
                 </table>
           </div>
         </div>
@@ -65,7 +78,10 @@
                       <th class="text-center">Action</th>
                     </tr>
                   </thead>
-                  <tr *ngFor="let item of viewAuth"><td>{{item.view.view}}</td><td>{{item.role.roleName}}</td><td class="text-center"><i class="fas fa-trash-alt ml-4" (click)="deleteViewAuthorisation(item.view.id, item.role.id)"></i></td></tr><!--Chaged the role (id) to roleId-->
+                  <tr *ngFor="let item of viewAuth"><td>{{item.view.view}}</td><td>{{item.role.roleName}}</td><td class="text-center">
+                    <a placement="top" ngbTooltip="Select this to delete the corresponding role.">
+                      <i class="fas fa-trash-alt ml-4" (click)="deleteViewAuthorisation(item.view.id, item.role.id)"></i>
+                    </a></td></tr><!--Chaged the role (id) to roleId-->
                 </table>
             </div>
         </div>

@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <h1>Jobs</h1>
@@ -14,7 +15,7 @@
                     </div>
                     <app-job-listing-card *ngFor="let item of listings" [jobInformation]="item"></app-job-listing-card>
                 </div>
-                
+
             </div>
         </div>
         <div class="col-md-2 col-sm-0"></div>

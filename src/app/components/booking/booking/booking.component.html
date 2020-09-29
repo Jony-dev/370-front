@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <ngb-tabset #t="ngbTabset">
         <ngb-tab id="tab-selectbyid1">
           <ng-template ngbTabTitle><h3>Desk Booking</h3></ng-template>
@@ -14,21 +15,25 @@
                                     <button class="btn btn-outline-primary btn-lg" disabled style="width: 150px;">{{monthName}}</button>
                                     <button class="next round btn btn-outline-primary btn-lg" (click)="nextMonth()">&#8250;</button>
                                 </div>
-                                
+
                             </div>
                             <div class="col-md-4 col-sm-12">
-                                <label for="month">Select No. Months</label>
+                                <label for="month">
+                                  <a placement="top" ngbTooltip="Select the number of months you would like to view after the current month you have selected." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Select No. Months</label>
                                 <input type="number" class="form-control" [formControl]="numMonths" min="1">
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div *ngFor="let item of displayMonths; trackBy : trackByFn">
                     <app-calendar [changeCalendarInput]="item"></app-calendar>
                 </div>
-                
-                    
+
+
             </div>
           </ng-template>
         </ngb-tab>
@@ -46,18 +51,18 @@
                                         <button class="btn btn-outline-primary btn-lg" disabled style="width: 150px;">{{monthName}}</button>
                                         <button class="next round btn btn-outline-primary btn-lg" (click)="nextMonth()">&#8250;</button>
                                     </div>
-                                    
+
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
-                    
+
                         <app-calendar [calendarType]="'slot'" [changeCalendarInput]="displayMonths[0]"></app-calendar>
-                     
+
                 </div>
             </ng-template>
           </ngb-tab>
     </ngb-tabset>
-    
+
 </div>

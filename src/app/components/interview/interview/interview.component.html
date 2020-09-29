@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row">
         <div class="col-lg-5 col-md-12">
             <h1>Scheduled Interviews</h1>
@@ -18,7 +19,11 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-12">
                                 <div class="form-group">
-                                    <label for="rating">Rating</label>
+                                    <label for="rating">
+                                      <a placement="right" ngbTooltip="Enter in a rating for the selected interviewee." style="font-size: xx-small;">
+                                        <i class="fa fa-info-circle"></i>
+                                      </a>
+                                      Rating</label>
                                     <input type="number" name="rating" id="rating" class="form-control">
                                 </div>
                             </div>
@@ -27,7 +32,11 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="comment">Comment</label>
+                                    <label for="comment">
+                                      <a placement="right" ngbTooltip="Enter in a comment for the selected interviewee." style="font-size: xx-small;">
+                                        <i class="fa fa-info-circle"></i>
+                                      </a>
+                                      Comment</label>
                                     <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
                                 </div>
                             </div>
@@ -37,7 +46,7 @@
                         </div>
                     </div>
                 </form>
-                
+
             </div>
         </div>
     </div>

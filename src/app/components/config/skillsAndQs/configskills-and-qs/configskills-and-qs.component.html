@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row">
         <div class="col-sm-12 col-md-4 mt-2">
             <div class="panel-container panel-ext sm-container">
@@ -22,7 +23,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </form>
                 <div>
                     <div class="group-right" (click)="addSkill()">
@@ -36,7 +37,13 @@
                             </tr>
                         </thead>
                         <!-- Skills GO HERE -->
-                        <tr *ngFor="let item of skills"><td>{{item.skill}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editSkill(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteSkill(item.id)"></i></td></tr>
+                        <tr *ngFor="let item of skills"><td>{{item.skill}}</td><td class="text-center">
+                          <a placement="top" ngbTooltip="Select this to edit the corresponding skill.">
+                            <i class="far fa-pencil-alt" (click)="editSkill(item.id)"></i>
+                          </a>
+                          <a placement="top" ngbTooltip="Select this to delete the corresponding skill.">
+                            <i class="fas fa-trash-alt ml-4" (click)="deleteSkill(item.id)"></i>
+                          </a></td></tr>
                     </table>
                 </div>
             </div>
@@ -72,8 +79,14 @@
                                                 </tr>
                                             </thead>
                                             <!-- Requirements GO HERE -->
-                                            <tr *ngFor="let item of requirements"><td>{{item.requirement}}</td><td class="text-right"><i class="far fa-pencil-alt" (click)="editRequirement(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteRequirement(item.id)"></i></td></tr>
-                                        
+                                            <tr *ngFor="let item of requirements"><td>{{item.requirement}}</td><td class="text-right">
+                                              <a placement="top" ngbTooltip="Select this to edit the corresponding requirement.">
+                                                <i class="far fa-pencil-alt" (click)="editRequirement(item.id)"></i>
+                                              </a>
+                                              <a placement="top" ngbTooltip="Select this to delete the corresponding requirement.">
+                                                <i class="fas fa-trash-alt ml-4" (click)="deleteRequirement(item.id)"></i>
+                                              </a></td></tr>
+
                                         </table>
                                     </div>
                                 </div>
@@ -109,7 +122,13 @@
                                                 </tr>
                                             </thead>
                                             <!-- QUESTIONS GO HERE -->
-                                            <tr *ngFor="let item of longQuestions"><td>{{item.question}}</td><td class="text-right"><i class="far fa-pencil-alt" (click)="editLongQuestion(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteLongQuestion(item.id)"></i></td></tr>
+                                            <tr *ngFor="let item of longQuestions"><td>{{item.question}}</td><td class="text-right">
+                                              <a placement="top" ngbTooltip="Select this to edit the corresponding question.">
+                                                <i class="far fa-pencil-alt" (click)="editLongQuestion(item.id)"></i>
+                                              </a>
+                                              <a placement="top" ngbTooltip="Select this to delete the corresponding question.">
+                                                <i class="fas fa-trash-alt ml-4" (click)="deleteLongQuestion(item.id)"></i>
+                                              </a></td></tr>
                                         </table>
                                     </div>
                                 </div>

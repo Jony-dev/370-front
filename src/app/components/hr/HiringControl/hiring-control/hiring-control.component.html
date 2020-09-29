@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row">
         <div class="col-lg-5 col-md-12">
             <h1>Job Requests</h1>
@@ -7,11 +8,11 @@
                     <div class="row">
                         <div class="col-sm-12 col-lg-6" *ngFor="let item of jobRequests">
                             <app-approval-card [cardDetails]="item" (event)="updateRequests($event)"></app-approval-card>
-                        </div> 
+                        </div>
                         <div class="col-12" *ngIf="jobRequests.length === 0">
                             <h1 class="text-center no-content">No Job Requests</h1>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

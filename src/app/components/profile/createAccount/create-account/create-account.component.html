@@ -1,5 +1,6 @@
 <!-- test -->
 <div class="container">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <h1 class="intro">Join the party and create your account!</h1>
     <div>
         <form [formGroup]="userProfile">
@@ -8,44 +9,76 @@
                 <!-- LEFT SIDE OF FORM-->
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">
+                          <a placement="top" ngbTooltip="Enter in your first name." style="font-size: xx-small;">
+                            <i class="fa fa-info-circle"></i>
+                          </a>
+                          Name</label>
                         <input class="form-control" [class.is-invalid]="userName.touched && !userName.valid" type="text" name="name" id="name" formControlName='name' >
                     </div>
                     <div class="form-group">
-                        <label for="contact">Contact</label>
+                        <label for="contact">
+                          <a placement="top" ngbTooltip="Enter in your current phone number." style="font-size: xx-small;">
+                            <i class="fa fa-info-circle"></i>
+                          </a>
+                          Contact</label>
                         <input class="form-control" [class.is-invalid]="userContact.touched && !userContact.valid" type="tel" name="contact" id="contact" formControlName='contact' minlength="10" maxlength="10" >
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">
+                          <a placement="top" ngbTooltip="Enter in your current, valid email address." style="font-size: xx-small;">
+                            <i class="fa fa-info-circle"></i>
+                          </a>
+                          Email</label>
                         <input class="form-control" [class.is-invalid]="userEmail.touched && !userEmail.valid" type="email" name="email" id="email" formControlName='email' pattern="^[a-z0-9._%+-]+@[a-z0-9._]+\.[a-z]{2,4}$" >
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">
+                          <a placement="left" ngbTooltip="Ensure your password has a minimum of 8 characters containing 1 uppercase letter and 1 number." style="font-size: xx-small;">
+                            <i class="fa fa-info-circle"></i>
+                          </a>
+                          Password</label>
                         <input class="form-control" [class.is-invalid]="userPass.touched && !userPass.valid" type="password" name="password" id="password" formControlName='password' minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" >
                     </div>
                 </div>
                 <!-- RIGHT SIDE OF FORM-->
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
-                        <label for="surname">Surname</label>
+                        <label for="surname">
+                          <a placement="top" ngbTooltip="Enter in your surname." style="font-size: xx-small;">
+                            <i class="fa fa-info-circle"></i>
+                          </a>
+                          Surname</label>
                         <input class="form-control" [class.is-invalid]="userSurname.touched && !userSurname.valid" type="text" name="surname" id="surname" formControlName='surname'>
                     </div>
                     <div class="form-group">
-                        <label for="country">Select which country you live in</label>
+                        <label for="country">
+                          <a placement="top" ngbTooltip="Select the country you currently reside in." style="font-size: xx-small;">
+                            <i class="fa fa-info-circle"></i>
+                          </a>
+                          Select which country you live in</label>
                         <select class="form-control" [class.is-invalid]="userCountry.touched && !userCountry.valid" name="country" id="country" formControlName='countryId' >
                             <option value="null" selected disabled>Select Country</option>
                             <option *ngFor="let country of countries" [value]="country.id">{{country.country}}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="nationality">Select your nationality</label>
+                        <label for="nationality">
+                          <a placement="top" ngbTooltip="Select your nationality of which you were born." style="font-size: xx-small;">
+                            <i class="fa fa-info-circle"></i>
+                          </a>
+                          Select your nationality</label>
                         <select class="form-control" [class.is-invalid]="userNationality.touched && !userNationality.valid" name="nationality" id="nationality" formControlName='nationalityId'>
                             <option value="null" selected disabled>Select Nationality</option>
                             <option *ngFor="let national of nationalities" [value]="national.nationalityId">{{national.nationality}}</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="confrimPass">Confirmation Password</label>
+                        <label for="confrimPass">
+                          <a placement="top" ngbTooltip="Enter in the matching password as to the password you just entered." style="font-size: xx-small;">
+                            <i class="fa fa-info-circle"></i>
+                          </a>
+                          Confirm Password</label>
                         <input class="form-control" [class.is-invalid]="userPassConfirm.touched && !userPassConfirm.valid" type="password" name="confrimPass" id="confrimPass" formControlName='passconfirm' minlength="8" >
                     </div>
                 </div>

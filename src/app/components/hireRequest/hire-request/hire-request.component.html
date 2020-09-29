@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row">
         <div class="col-lg-4 col-md-12">
             <h2>My Hire Requests</h2>
@@ -14,7 +15,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-lg-7 col-md-12" id="request" [class]=" editToggle ? 'hide' : ''">
             <h2 *ngIf="!editing">Create New Hire Request</h2>
             <h2 *ngIf="editing">Edit Hire Request</h2>
@@ -25,7 +26,11 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-12">
                                 <div class="form-group">
-                                    <label for="justification">Justification</label>
+                                    <label for="justification">
+                                      <a placement="right" ngbTooltip="Select the justification of the new postiion." style="font-size: xx-small;">
+                                        <i class="fa fa-info-circle"></i>
+                                      </a>
+                                      Justification</label>
                                     <select name="justification" id="justification" class="form-control" formControlName="justification">
                                         <option value="null" selected disabled>Select a justification</option>
                                         <option *ngFor="let item of justifications" [value]="item.id">{{item.justification}}</option>
@@ -34,7 +39,11 @@
                             </div>
                             <div class="col-lg-3 col-md-12">
                                 <div class="form-group">
-                                    <label for="jobPosition">Job Position</label>
+                                    <label for="jobPosition">
+                                      <a placement="bottom" ngbTooltip="Select the job the contractor will filful." style="font-size: xx-small;">
+                                        <i class="fa fa-info-circle"></i>
+                                      </a>
+                                      Job Position</label>
                                     <select name="jobPosition" id="jobPosition" class="form-control" formControlName="job">
                                         <option value="null" selected disabled>Select a Job Position</option>
                                         <option *ngFor="let item of jobs" [value]="item.id">{{item.name}}</option>
@@ -43,13 +52,21 @@
                             </div>
                             <div class="col-lg-3 col-md-12">
                                 <div class="form-group">
-                                    <label for="fulfilldate">Fulfilment Date</label>
+                                    <label for="fulfilldate">
+                                      <a placement="bottom" ngbTooltip="Select the date by which you want a contractor to be hired." style="font-size: xx-small;">
+                                        <i class="fa fa-info-circle"></i>
+                                      </a>
+                                      Fulfilment Date</label>
                                     <input type="date" name="fulfilldate" id="fulfilldate" class="form-control" formControlName="requestDate">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="brief"><h4>Brief</h4></label>
+                                    <label for="brief"><h4>
+                                      <a placement="right" ngbTooltip="Enter in a description of what the contractor will do and what will be required of them." style="font-size: xx-small;">
+                                        <i class="fa fa-info-circle"></i>
+                                      </a>
+                                      Brief</h4></label>
                                     <textarea name="brief" id="brief" cols="30" rows="13" class="form-control" formControlName="brief"></textarea>
                                 </div>
                             </div>

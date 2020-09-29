@@ -3,7 +3,11 @@
         <div class="col-11">
             <h4 class="mt-2">{{cardDetails.jobPosition.name}}</h4>
             <p>Submitted by: {{cardDetails.user.name}} {{cardDetails.user.surname}}</p>
-        </div>     
-        <button (click)="createJobCard()" class="btn top-right"><h3><i class="fa fa-plus"></i></h3></button>
-    </div>  
+        </div>
+        <button (click)="createJobCard()" class="btn top-right"><h3>
+          <a placement="top" ngbTooltip="Select this to create the corresponding job card.">
+            <i class="fa fa-plus"></i>
+          </a></h3></button>
+
+    </div>
 </div>
