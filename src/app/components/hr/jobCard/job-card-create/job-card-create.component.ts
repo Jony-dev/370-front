@@ -368,7 +368,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
 
   languagesObj(){
     return this.addedLanguages.map( (x, i)=>{
-      return { id : x.id, critical : this.languageFArray.at(i).value};
+      return { id : +x.id, critical : +this.languageFArray.at(i).value};
   });
   }
 
@@ -379,19 +379,19 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
   }
   requirementsObj(){
     return this.addedRequirements.map( (x, i) =>{
-      return { id : x.id, expectedAnswer : this.requirementFArray.at(i).get('expectedAnswr').value, critical : this.requirementFArray.at(i).get('critical').value};
+      return { id : +x.id, expectedAnswer : +this.requirementFArray.at(i).get('expectedAnswr').value, critical : +this.requirementFArray.at(i).get('critical').value};
     });
   }
 
   questionsObj(){
       return this.addedLongQuestions.map( (x , i) =>{
-        return { id : x.id, critical : this.questionFArray.at(i).value };
+        return { id : +x.id, critical : +this.questionFArray.at(i).value };
       });
   }
 
   approversObj(){
     return this.approvers.map(x => {
-      return { id : x.id};
+      return { id : +x.id};
     });
   }
 

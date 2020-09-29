@@ -1,19 +1,20 @@
 <div class="container-fluid">
     <div class="row mt-4">
-        <div class="col-2">
-            <h1 class="text-center"><i class="fas fa-stars"></i> 8.2</h1>
+        <div class="col-4">
+            <h1 class="text-center"><i class="fas fa-stars"></i> {{interviewDetails?.totalScore ? interviewDetails?.totalScore : "No Ratings"}}</h1>
         </div>
-        <div class="col-2">
-            <button (click)="hire()" [routerLink]="['/Dashboard/CreateEmployee/1']" routerLinkActive="router-link-active"  class="btn btn-outline-primary mt-2">Hire</button>
+        <div class="col-3">
+            <button (click)="hire()" [routerLink]="['/Dashboard/CreateEmployee/'+interviewId]" routerLinkActive="router-link-active"  class="btn btn-outline-primary mt-2 form-control">Hire</button>
+            <button (click)="saveComment()" class="btn btn-outline-primary mt-2 form-control" [disabled]="!commentForm.valid">Save</button>
         </div>
         <div class="col-8"></div>
         <div class="col-12">
             <h1>Overall Comment:</h1>
-            <textarea name="overalComment" id="overalComment" cols="30" rows="5" class="form-control mb-4"></textarea>
+            <form [formGroup]="commentForm">
+                <textarea name="overalComment" id="overalComment" cols="30" rows="5" class="form-control mb-4" formControlName="comment"></textarea>
+            </form>
         </div>
     </div>
-    <app-interview-comment></app-interview-comment>
-    <app-interview-comment></app-interview-comment>
-    <app-interview-comment></app-interview-comment>
-    <app-interview-comment></app-interview-comment>
+    <app-interview-comment [commentCard]="item" *ngFor="let item of interviewDetails?.interviews"></app-interview-comment>
+    
 </div>

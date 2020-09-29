@@ -71,6 +71,7 @@ export class JobApplicationComponent implements OnInit {
     this.setSkillQuestions(data.skills);
     this.setLongQuestions(data.longQuestions);
     this.setRequirements(data.requirements);
+    this.setLanguages(data.languages);
     this.setTests(data.tests);
   }
 
@@ -97,6 +98,14 @@ export class JobApplicationComponent implements OnInit {
     this.requirements = requirements;
     this.requirements.forEach( el =>{
       this.requirementAnswers.push(new FormControl(null));
+      
+    });
+  }
+
+  setLanguages( langs : Language[]){
+    this.languages = langs;
+    this.requirements.forEach( el =>{
+      this.languageAnswers.push(new FormControl(null));
       
     });
   }
@@ -160,7 +169,7 @@ export class JobApplicationComponent implements OnInit {
     answer.requirements = requirements;
     answer.languages = languages;
     answer.cardId = this.cardId;
-    console.log(answer);
+    console.log("ANSWER",answer);
     this.api.applyForJob(answer, this.cv, this.testFiles).subscribe( succ => this.applySuccess(succ),err => this.loadError(err))
 
   }

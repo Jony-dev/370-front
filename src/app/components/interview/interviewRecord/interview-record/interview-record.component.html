@@ -8,40 +8,24 @@
             <th>Rate</th>
         </thead>
         <tbody>
-            <tr>
+            <tr *ngFor="let interview of myInterviews">
                 <td>
-                   <app-profile-card></app-profile-card> 
+                   <app-profile-card [cardDetails]="interview"></app-profile-card> 
                 </td>
                 <td>
-                    26-01-2020 
+                    {{interview.date}}
                 </td>
                 <td>
-                    14:30 
+                    {{interview.time}}
                 </td>
                 <td>
-                    None
+                    {{interview.booking ? "BOOKING HERE" :"None"}}
                 </td>
-                <td class="text-center">
+                <td class="text-center" (click)="rate(interview.interviewId)">
                     <i class="fad fa-star-half"></i>
                 </td>
             </tr>
-            <tr>
-                <td>
-                   <app-profile-card></app-profile-card> 
-                </td>
-                <td>
-                    26-01-2020 
-                </td>
-                <td>
-                    14:30 
-                </td>
-                <td>
-                    ZF-24
-                </td>
-                <td class="text-center">
-                    <i class="fad fa-star-half"></i>
-                </td>
-            </tr>
+            
         </tbody>
     </table>
 </div>

@@ -1,5 +1,9 @@
 <div class="container-fluid">
-    <h1>Create Interview</h1>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h1 *ngIf="!interviewId">Create Interview</h1>
+    <h1 *ngIf="interviewId">Edit Interview</h1>
     <div class="row">
         <div class="col-lg-4 col-md-12">
             <h1>Applicant</h1>

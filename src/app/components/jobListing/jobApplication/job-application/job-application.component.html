@@ -73,11 +73,32 @@
                             </select>
                         </div>
                     </ng-container>
-                    
-                        <div class="col-lg-9 col-md-12  mt-4">
-                            <h2>Questions</h2>
-                            <hr>
+                    <div class="col-lg-9 col-md-12  mt-4">
+                        <h2>Languages</h2>
+                        <hr>
+                    </div>
+                    <div class="col-lg-3 col-md-0 col-sm-0"></div>
+                    <!-- FOR EACH SKILL ADD IT BELOW HERE -->
+                    <ng-container *ngFor="let item of languages; let i = index">
+                        <div class="col-lg-6 col-md-12" >
+                            <!-- QUESTION -->
+                            <p>{{item.language}}</p>
                         </div>
+                        <div class="col-lg-6 col-md-0 col-sm-0">
+                            <!-- ANSWER -->
+                            <select class="form-control" [formControl]="languageAnswers.controls[i]">
+                                <option value="null" selected disabled>Select Option</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </ng-container>
+                    
+                    
+                    <div class="col-lg-9 col-md-12  mt-4">
+                        <h2>Questions</h2>
+                        <hr>
+                    </div>
                     <ng-container *ngFor="let item of longQuestions; let i = index;">
                         <div class="col-lg-3 col-md-0 col-sm-0"></div>
                         <!-- FOR EACH LONG QUESTION ADD IT BELOW HERE -->

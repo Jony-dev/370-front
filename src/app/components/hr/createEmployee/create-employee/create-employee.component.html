@@ -1,4 +1,5 @@
 <div class="container-fluid">
+    <Form [formGroup]="employementForm">
     <div class="row">
         <div class="col-lg-6 col-sm-12">
             <h2>Employee Details</h2>
@@ -8,54 +9,75 @@
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="jobPosition">Job Position</label>
-                                <select name="jobPosition" id="jobPosition" class="form-control">
+                                <select name="jobPosition" id="jobPosition" class="form-control" formControlName="jobId">
                                     <option value="null" selected disabled>Please Select Job Position</option>
-                                    <option value="1">Manager</option>
+                                    <option [value]="item.id" *ngFor="let item of jobs">{{item.name}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="jobSchedule">Schedule</label>
-                                <select name="jobSchedule" id="jobSchedule" class="form-control">
+                                <select name="jobSchedule" id="jobSchedule" class="form-control" formControlName="scheduleId">
                                     <option value="null" selected disabled>Please Select Schedule</option>
-                                    <option value="1">Temporary</option>
-                                    <option value="1">Permanent</option>
+                                    <option [value]="item.id" *ngFor="let item of schedule">{{item.schedule}}</option>
+                                    
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="jobSalary">Salary</label>
-                                <input type="number" name="jobSalary" id="jobSalary" class="form-control">
+                                <input type="number" name="jobSalary" id="jobSalary" class="form-control" formControlName="salary">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label for="jobLocation">Location</label>
-                                <select name="jobSchedule" id="jobSchedule" class="form-control">
+                                <select name="jobLocation" id="jobLocation" class="form-control" formControlName="locationId">
                                     <option value="null" selected disabled>Please Select Location</option>
-                                    <option value="1">Menlyn</option>
-                                    <option value="1">Midrand</option>
+                                    <option [value]="item.locationId" *ngFor="let item of locations">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="startDate">Start Date</label>
+                                <input class="form-control" type="date" name="startDate" id="startDate" formControlName="startDate">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="endDate">End Date</label>
+                                <input class="form-control" type="date" name="endDate" id="endDate" formControlName="endDate">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="department">Department</label>
+                                <select name="department" id="department" class="form-control" formControlName="departmentId">
+                                    <option value="null" selected disabled>Please Select Department</option>
+                                    <option [value]="item.departmentId" *ngFor="let item of departments">{{item.name}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-8 col-sm-12">
                             <div class="form-group">
                                 <label for="contract">Contract</label>
-                                <input type="file" name="contract" id="contract" class="form-control">
+                                <input type="file" name="contract" id="contract" class="form-control" (change)="uploadFile($event)">
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group">
-                                <button class="btn btn-outline-primary mt-4">Download Contract</button>
+                                <button class="btn btn-outline-primary mt-4" *ngIf="userDetails?.contract">Download Contract</button>
                             </div>
                         </div>
                         <div class="col-12">
-                            <app-role-picker></app-role-picker>
+                            <app-role-picker [setUser]="userDetails?.userId"></app-role-picker>
                         </div>
                         <div class="col-12">
-                            <button class="btn btn-outline-primary float-right mt-4"><h3>Make Employee</h3></button>
+                            <button class="btn btn-outline-primary float-right mt-4 mb-4" *ngIf="userDetails?.userType==1"(click)="createEmploye()"><h3>Make Employee</h3></button>
+                            <button class="btn btn-outline-primary float-right mt-4 mb-4" *ngIf="userDetails?.userType==2" (click)="updateDetails()"><h3>Update Details</h3></button>
                         </div>
                     </div>
                 </div>
@@ -66,7 +88,7 @@
             <div class="panel-container sm-container panel-ext">
                 <div class="container mt-4">
                     <div class="img-container">
-                        <img src="../../../../../assets/profile/Calvin.jpg" alt="Profile" class="profile-img">
+                        <img src="{{userDetails?.picture }}" alt="Profile" class="profile-img">
                     </div>
                 </div>
                 <div class="container">
@@ -74,12 +96,12 @@
                         <div class="col-md-2 col-sm-0"></div>
                         <div class="col-md-4 col-sm-12">
                             <h3>Name</h3>
-                            <p>Calvin</p>
+                            <p>{{userDetails?.name}}</p>
                         </div>
                         <div class="col-md-2 col-sm-0"></div>
                         <div class="col-md-4 col-sm-12">
                             <h3>Surname</h3>
-                            <p>Hoffman</p>
+                            <p>{{userDetails?.surname}}</p>
                         </div>
                         <div class="col-md-2 col-sm-0"></div>
                         <div class="col-md-4 col-sm-12">
@@ -89,18 +111,18 @@
                         <div class="col-md-2 col-sm-0"></div>
                         <div class="col-md-4 col-sm-12">
                             <h3>Country</h3>
-                            <p>South Africa</p>
+                            <p>{{userDetails?.country}}</p>
                         </div>
                         <div class="col-md-2 col-sm-0"></div>
                         <div class="col-md-4 col-sm-12">
                             <h3>Contact</h3>
-                            <p>0826541258</p>
+                            <p>{{userDetails?.contact}}</p>
                         </div>
                         <div class="col-md-2 col-sm-0"></div>
                         <div class="col-md-3 col-sm-12">
                            <div class="form-group">
                                 <h3>Email</h3>
-                                <input type="text" name="email" id="email" class="form-control">
+                                <input type="text" name="email" id="email" class="form-control" formControlName="email">
                            </div>
                         </div>
                         <div class="col-md-1 col-sm-0"></div>
@@ -109,4 +131,5 @@
             </div>
         </div>
     </div>
+    </Form>
 </div>

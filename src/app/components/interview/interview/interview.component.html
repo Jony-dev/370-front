@@ -3,23 +3,23 @@
         <div class="col-lg-5 col-md-12">
             <h1>Scheduled Interviews</h1>
             <div class="sm-container panel-container">
-                <app-interview-record class="img-sm"></app-interview-record>
+                <app-interview-record class="img-sm" (rateApplication)="rateInterview($event)"></app-interview-record>
             </div>
         </div>
-        <div class="col-lg-7 col-md-12">
+        <div class="col-lg-7 col-md-12 transitioner" [class.display]="interview" [class.hidden]="!interview">
             <h1>Interview</h1>
-            <div class="sm-container panel-container">
+            <div class="sm-container panel-container" >
                 <div>
-                    <app-profile-card class="img-fit clickable"></app-profile-card>
+                    <app-profile-card class="img-fit clickable" [cardDetails]="interview"></app-profile-card>
                 </div>
                 <hr>
-                <form>
+                <form [formGroup]="interviewForm">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-lg-3 col-md-12">
                                 <div class="form-group">
                                     <label for="rating">Rating</label>
-                                    <input type="number" name="rating" id="rating" class="form-control">
+                                    <input type="number" name="rating" id="rating" class="form-control" formControlName="rating">
                                 </div>
                             </div>
                             <div class="col-lg-9 col-md-0">
@@ -28,11 +28,11 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="comment">Comment</label>
-                                    <textarea name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea name="comment" id="comment" cols="30" rows="5" class="form-control" formControlName="comment"></textarea>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-outline-primary float-right pr-4 pl-4">Save</button>
+                                <button class="btn btn-outline-primary float-right pr-4 pl-4" [disabled]="!interviewForm.valid" (click)="makeRating()">Save</button>
                             </div>
                         </div>
                     </div>

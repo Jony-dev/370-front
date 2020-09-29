@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 export class HiringControlComponent implements OnInit, OnDestroy {
 
   jobRequests : JobRequestInfo [] = [];
+  hrConfirmations : any [] = [];
   constructor( private api : ApiService, private toasts : ToastsService, private jobHelper : JobCardHelperService) { }
   refresher : Subscription;
   ngOnInit(): void {
@@ -26,6 +27,7 @@ export class HiringControlComponent implements OnInit, OnDestroy {
 
   getData(){
     this.getRequests();
+    this.getMyConfirmations();
   }
 
   getRequests(){
@@ -43,6 +45,10 @@ export class HiringControlComponent implements OnInit, OnDestroy {
 
   updateRequests(event){
     this.getRequests();
+  }
+
+  getMyConfirmations(){
+    this.api.getHrConfirmations().subscribe(x => this.hrConfirmations = <any>x, e => this.reRequestsFail(e));
   }
 
 }

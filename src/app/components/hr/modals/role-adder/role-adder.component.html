@@ -13,18 +13,11 @@
             <th>Action</th>
         </thead>
         <tbody>
-            <tr>
-                <td>Employee</td>
-                <td><i class="fa fa-plus" aria-hidden="true"></i></td>
+            <tr *ngFor="let item of roles">
+                <td>{{item.roleName}}</td>
+                <td><i class="fa fa-plus" aria-hidden="true" (click)="addRole(item.roleId)"></i></td>
             </tr>
-            <tr>
-                <td>Manager</td>
-                <td><i class="fa fa-plus" aria-hidden="true"></i></td>
-            </tr>
-            <tr>
-                <td>Hiring Manager</td>
-                <td><i class="fa fa-plus" aria-hidden="true"></i></td>
-            </tr>
+            
         </tbody>
     </table>
 </div>

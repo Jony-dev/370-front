@@ -48,8 +48,10 @@ export class AuthService {
 
   }
   setLogin(token){
-      console.log(token);
+      
       let uncompress = jwt_decode(token);
+      this.userId = uncompress.userId;
+      console.log("USER ID", this.userId);
       const expiry = new Date(uncompress.endSession);
       let difference = expiry.getTime() - new Date().getTime();
       

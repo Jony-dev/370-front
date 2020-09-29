@@ -11,6 +11,10 @@ import { JobCardCreateComponent } from '../job-card-create/job-card-create.compo
 import { userCard } from 'src/app/models/userCard';
 import { ApplicantPoolCard } from 'src/app/models/applicantPool';
 import { UpCommingInterviews } from 'src/app/models/upComingInterviews';
+import { PassedInterview } from 'src/app/models/passedInterview';
+import { CardStatus } from 'src/app/models/cardStatus';
+import { AuthService } from 'src/app/services/auth.service';
+import { CreateInterviewComponent } from '../../modals/create-interview/create-interview.component';
 
 @Component({
   selector: 'app-full-job-card',
@@ -21,21 +25,35 @@ import { UpCommingInterviews } from 'src/app/models/upComingInterviews';
 export class FullJobCardComponent implements OnInit, OnDestroy {
 
   private routeSub : Subscription;
+  private helperSub : Subscription;
+
+  cardStatus : CardStatus = null;
+  isHrManager : boolean = false;
+  isReqruiter : boolean = false;
+  cardPublished : boolean = false;
+
   routeId : number;
   approvers : UserApprover [] = [];
   internalApplicants : userCard [] = [];
   externalApplicants : userCard [] = [];
 
   upComingInterviews : UpCommingInterviews [] = [];
+  passedInterviews : PassedInterview [] = [];
   
   shortList : ApplicantPoolCard [] = [];
   undecided : ApplicantPoolCard [] = [];
   disqualified : ApplicantPoolCard [] = [];
 
-  constructor( private modal : NgbModal, private api : ApiService, private toast : ToastsService, private router : ActivatedRoute, private helper : JobCardHelperService) { }
+  constructor( private modal : NgbModal, 
+    private api : ApiService,
+     private toast : ToastsService,
+      private router : ActivatedRoute,
+       private helper : JobCardHelperService, 
+       private auth : AuthService) { }
 
   ngOnInit(): void {
     this.routeSub =  this.router.params.subscribe( params => {this.routeId = params['id']});
+    this.helperSub = this.helper.shouldRefresh$.subscribe(x => this.getUpComing(this.routeId))
     this.loadData();
   }
 
@@ -46,13 +64,17 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
     this.getExternalApplicants();
     this.getAllApplicants();
     this.getUpComing(this.routeId);
+    this.getCardStatus();
+    this.getPassedInterviews();
   }
   ngOnDestroy(){
     this.routeSub.unsubscribe();
+    this.helperSub.unsubscribe();
   }
 
-  openOverallInterview(){
+  openOverallInterview(interviewId : number){
     const modalInstance = this.modal.open(InterviewOverviewComponent, {windowClass :"largeModal"});
+    modalInstance.componentInstance.interviewId = interviewId;
   }
 
   getApproverList(){
@@ -67,7 +89,6 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
   }
 
   getJobRequest(){
-    
     this.api.getEditJobCardReq(this.routeId).subscribe( succ => {this.helper.changeCard(succ);
     }, err=> this.loadError(err));
   }
@@ -77,7 +98,8 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
   }
 
   getAllApplicants(){
-    this.api.getApplicantPool(this.routeId).subscribe( succ => this.gotAllApplicants(succ), err => this.loadError(err))
+    this.api.getApplicantPool(this.routeId).subscribe( succ => this.gotAllApplicants(succ), err => this.loadError(err));
+    this.getCardStatus();
   }
   gotAllApplicants( success : ApplicantPoolCard []){
     this.undecided = [];
@@ -109,7 +131,6 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
   }
 
   routeRequest(event){
-    console.log(event);
     if(event.to == "shortList"){
       this.moveToShortList(event.applicationId);
     }
@@ -139,5 +160,88 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
 
   getUpComing(cardId : number){
     this.api.getUpComingInterviews(cardId).subscribe( s => this.upComingInterviews = s, err => this.loadError(err));
+  }
+
+  approved(){
+    let answers = this.approvers.map(x => x.approved);
+    let approved = answers.reduce((t,current)=>{
+      if(current)
+        return t+=1;
+    },0);
+  
+    if(approved == answers.length){
+      return true;
+    } 
+    else{
+      return false;
+    }
+  }
+  getCardStatus(){
+    this.api.cardPublished(this.routeId).subscribe(x => this.cardPublished = (<any>x).published, e => this.loadError(e));
+    this.api.getCardStatus(this.routeId).subscribe(
+      x => {this.cardStatus = x;
+        console.log(this.cardStatus);
+        console.log(this.auth.userId);
+        if(this.cardStatus.recruiterId == this.auth.userId)
+          this.isReqruiter = true;
+        else if(this.cardStatus.hrManagerId == this.auth.userId)
+          this.isHrManager = true;
+
+      }, e => this.loadError(e))
+  }
+  togglePublish(){
+    if(!this.cardPublished){
+      this.api.publishCard(this.routeId).subscribe( x => 
+        {
+          this.toast.display({type:"Success",heading : (<any>x).Title, message: (<any>x).message});
+          this.getCardStatus();
+        }
+        ,e =>  this.toast.display({type:"Success",heading : (<any>e).Title, message: (<any>e).message})
+       );
+    }
+    else{
+      this.api.unPublishCard(this.routeId).subscribe( x => 
+        {
+          this.toast.display({type:"Success",heading : (<any>x).Title, message: (<any>x).message});
+          this.getCardStatus();
+        }
+        ,e =>  this.toast.display({type:"Success",heading : (<any>e).Title, message: (<any>e).message})
+       );
+    }
+  }
+
+  getPassedInterviews(){
+    this.api.getPassedInterviews(this.routeId).subscribe( res => {
+      this.passedInterviews = res
+      console.log(res);
+    }, er => this.loadError(er));
+  }
+
+  recruiterConfirm(){
+    this.api.requestConfirmation(this.routeId).subscribe( suc =>
+      { 
+        this.toast.display({type : "Success", heading : (<any>suc).Title, message : (<any>suc).message});
+    }, e => this.loadError(e))
+  }
+
+  hrConfirm(){
+    this.api.confirmCard(this.routeId).subscribe( suc =>
+      { 
+        this.toast.display({type : "Success", heading : (<any>suc).Title, message : (<any>suc).message});
+        this.getCardStatus();
+    }, e => this.loadError(e))
+  }
+
+  editInterview(id : number){
+    const modalInstance = this.modal.open(CreateInterviewComponent,{ windowClass : "largeModal"});
+    modalInstance.componentInstance.interviewId = id;
+  }
+
+  disqualifyNonShortlisted(){
+    this.undecided.forEach(x => this.moveToDisqualified(x.applicationId));
+  }
+
+  closeJobCard(){
+    
   }
 }

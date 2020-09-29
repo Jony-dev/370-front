@@ -3,14 +3,56 @@
     <hr>
     <div class="row">
         <div class="col-sm-12 col-md-3">
-            <app-profile-card class="img-md"></app-profile-card>
+            <app-profile-card [cardDetails]="applicantDetails" class="img-md"></app-profile-card>
         </div>
         <div class="col-sm-12 col-md-4 text-center">
-            <button class="btn btn-outline-primary">Download CV</button>
+            <a [href]="'http://bmwBackend.edumarx.co.za/cvs/'+cvLocation" target="_blank" *ngIf="cvLocation!=null"><button class="btn btn-outline-primary">Download CV</button></a>
+            <button class="btn btn-outline-primary disabled" *ngIf="cvLocation ==null">No CV Attached</button>
             <br>
             <br>
             <button class="btn btn-outline-primary">Download Test</button>
         </div>
-
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <h2>Languages</h2>
+            <hr>
+            <div class="panel-container  sm-container">
+                <div *ngFor="let lang of languages">
+                    <h4>{{lang.question}}</h4>
+                    <p>{{lang.answer? "Yes" : "No"}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <h2>Skills</h2>
+            <hr>
+            <div class="panel-container sm-container">
+                <div *ngFor="let skill of skills">
+                    <h4>{{skill.question}}</h4>
+                    <p>{{skill.answer? "Yes" : "No"}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <h2>Requirements</h2>
+            <hr>
+            <div class="panel-container sm-container">
+                <div *ngFor="let requirement of requirements">
+                    <h4>{{requirement.question}}</h4>
+                    <p>{{requirement.answer? "Yes" : "No"}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <h2>Long Questions</h2>
+            <hr>
+            <div class="panel-container sm-container">
+                <div *ngFor="let lQuestion of lQuestions">
+                    <h4>{{lQuestion.question}}</h4>
+                    <p>{{lQuestion.answer}}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -42,6 +42,11 @@ import { ApplicationQuestions } from '../models/applicationQuestions';
 import { MyApplication } from '../models/myApplication';
 import { ApplicantPoolCard } from '../models/applicantPool';
 import { UpCommingInterviews } from '../models/upComingInterviews';
+import { ScheduledInterview } from '../models/scheduledInterview';
+import { PassedInterview } from '../models/passedInterview';
+import { CardStatus } from '../models/cardStatus';
+import { CreateEmployee } from '../models/createEmployee';
+import { EditInterview } from '../models/editInterview';
 
 
 
@@ -564,10 +569,95 @@ export class ApiService {
   createInterviews(payload : any){
     return this.http.post( this.interview, {request : "createInterview", payload});
   }
+
+  editInterview(payload : any){
+    return this.http.post( this.interview, {request : "editInterview", payload});
+  }
+
   getUpComingInterviews(cardId : number){
     return this.http.post<UpCommingInterviews[]>( this.interview, {request : "getInterViewByCard", payload : { cardId } });
   }
 
+  getPassedInterviews(cardId : number){
+    return this.http.post<PassedInterview[]>( this.interview, {request : "getPassedInterviews", payload : { cardId } });
+  }
+
+  cardPublished(id:number){
+    return this.http.post( this.jobCard, {request : "isCardPublished", payload : { id } });
+  }
+
+  getCardStatus(cardId: number){
+    return this.http.post<CardStatus>( this.jobCard, { request : "getCardStatus", payload : { cardId } })
+  }
+
+  confirmCard( cardId : number){
+    return this.http.post(this.jobCard, {request : "hrManagerConfirmation", payload : { cardId }});
+  }
+
+  requestConfirmation(cardId : number){
+    return this.http.post(this.jobCard, {request : "recruiterConfirmation", payload : { cardId }});
+  }
+
+  publishCard(id:number){
+    return this.http.post( this.jobCard, {request : "publishJobCard", payload : { id } });
+  }
+
+  unPublishCard(id:number){
+    return this.http.post( this.jobCard, {request : "unPublishJobCard", payload : { id } });
+  }
+
+  getApplication(id:number){
+    return this.http.post( this.application, {request : "getApplication", payload : { id } });
+  }
+
+  getMyInterviews(){
+    return this.http.post<ScheduledInterview>( this.interview, {request :"getMyInterviews"});
+  }
+
+  getInterviewDetails(interviewId : number){
+    return this.http.post( this.interview, { request : "getApplicantInterviews", payload : { interviewId} })
+  }
+
+  makeRating( obj : any){
+    return this.http.post( this.interview, { request : "makeInterviewRating", payload : obj })
+  }
+
+  overAllComment( obj : any){
+    return this.http.post( this.interview, {request : "updateOverallComment", payload : obj});
+  }
+
+  getHrConfirmations(){
+    return this.http.post( this.jobCard, { request : "getMyHrConfirmations"});
+  }
+
+  createEmployeeDetails(interviewId : number){
+    return this.http.post<CreateEmployee>( this.user, { request : "getUserByInterview", payload : { interviewId }});
+  }
+
+  getUserRoles(userId : number){
+    return this.http.post<Role[]>( this.user, { request : "getUserRoles", payload : { userId }});
+  }
+
+  addUserRole(roleId : number,userId : number){
+    return this.http.post( this.role, {request : "addAUserRole", payload : { roleId, userId}});
+  }
+
+  removeUserRole(roleId : number,userId : number){
+    return this.http.post( this.role, {request : "removeAUserRole", payload : { roleId, userId}});
+  }
+  getInterviewById(id){
+    return this.http.post<EditInterview>( this.interview, {request : "getInterviewById", payload : { id }});
+  }
+  updateEmployeeAccount( payload : any){
+    return this.http.post( this.user, {request : "updateEmployeeAccountDetails", payload });
+  }
+  createEmployee( payload : any){
+    return this.http.post( this.user, {request : "createAEmployee", payload });
+  }
+  uploadContract(formData : FormData){
+    formData.append('request','applyForJob');
+    return this.http.post(this.user,formData);
+  }
 
 }
 

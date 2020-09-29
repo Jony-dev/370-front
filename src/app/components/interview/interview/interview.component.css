@@ -1,0 +1,11 @@
+.hidden{
+    visibility: hidden;
+    opacity: 0;
+}
+.display{
+    visibility: visible;
+    opacity: 100%;
+}
+.transitioner{
+    transition: 0.5s ease-in-out all;
+}

@@ -9,11 +9,8 @@
             <th>Action</th>
         </thead>
         <tbody>
-            <tr><td>Role</td><td><i class="fas fa-trash-alt ml-4"></i></td></tr>
-            <tr><td>Role</td><td><i class="fas fa-trash-alt ml-4"></i></td></tr>
-            <tr><td>Role</td><td><i class="fas fa-trash-alt ml-4"></i></td></tr>
-            <tr><td>Role</td><td><i class="fas fa-trash-alt ml-4"></i></td></tr>
-            <tr><td>Role</td><td><i class="fas fa-trash-alt ml-4"></i></td></tr>
+            <tr *ngFor="let item of userRoles"><td>{{item.roleName}}</td><td><i class="fas fa-trash-alt ml-4" (click)="removeRole(item.roleId)"></i></td></tr>
+           
         </tbody>
     </table>
     

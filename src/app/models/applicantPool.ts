@@ -8,5 +8,6 @@ export class ApplicantPoolCard {
     imgUrl : string;
     status : string;
     statusId : number;
+    internal : boolean;
 
 }

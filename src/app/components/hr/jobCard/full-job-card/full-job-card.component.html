@@ -1,10 +1,10 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-md-2 col-sm-12">
-            <button class="form-control btn-outline-danger">Unpublish</button>
+            <button class="form-control btn-outline-danger" [disabled]="!approved()" (click)="togglePublish()">{{cardPublished ? "UnPublish":"Publish"}}</button>
         </div>
         <div class="col-md-2 col-sm-12">
-            <button class="form-control btn-outline-warning"(click)="editCard()">Edit</button>
+            <button class="form-control btn-outline-warning"(click)="editCard()" [disabled]="internalApplicants.length > 0 || externalApplicants.length > 0 || cardPublished == true">Edit</button>
         </div>
         <div class="col-md-8 col-sm-0"></div>
     </div>
@@ -22,8 +22,8 @@
                                             <app-approver-card class="img-sm" [user]="item" *ngFor="let item of approvers"></app-approver-card>      
                                         </div>
                                     </div>
-                                <h2 class="mt-2">Upcomming Interviews</h2>
-                                <div id="interview-panel">
+                                <h2 class="mt-2" hidden>Upcomming Interviews</h2>
+                                <div id="interview-panel" hidden>
                                     <table class="table">
                                         <thead>
                                             <th>Applicant</th>
@@ -133,22 +133,31 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-12" hidden>
-                                <h2 class="mt-4 ml-4">Application list status: <span class="text-danger">Unconfirmed</span></h2>
+                            <div class="col-lg-6 col-sm-12">
+                                <h2 class="mt-4 ml-4">Application list status: <span class="text-success" *ngIf="cardStatus.isConfirmed">Confirmed</span><span class="text-danger" *ngIf="!cardStatus.isConfirmed">UnConfirmed</span></h2>
                             </div>
                         </div>
-                        <div class="container-fluid mb-4" hidden>
-                            <h3>Hiring Manager Controls</h3>
+                        <div class="container-fluid mb-4" *ngIf="isReqruiter">
+                            <h3>Recruiter Manager Controls</h3>
                             <hr>
                             <div class="row mt-4">                        
                                 <div class="col-lg-2 col-md-12">
-                                    <button class="btn btn-outline-warning form-control">Confirm List</button>
+                                    <button class="btn btn-outline-warning form-control" (click)="recruiterConfirm()">Confirm List</button>
                                 </div>
                                 <div class="col-lg-3 col-md-12">
-                                    <button class="btn btn-outline-danger form-control">Disqualify Non Shortlisted</button>
+                                    <button class="btn btn-outline-danger form-control" (click)="disqualifyNonShortlisted()">Disqualify Non Shortlisted</button>
                                 </div>
                                 <div class="col-lg-2 col-md-12">
                                     <button class="btn btn-outline-danger form-control">Close Job Card</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid mb-4" *ngIf="isHrManager">
+                            <h3>HR Manager Controls</h3>
+                            <hr>
+                            <div class="row mt-4">                        
+                                <div class="col-lg-2 col-md-12">
+                                    <button class="btn btn-outline-warning form-control" (click)="hrConfirm()">Confirm List</button>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +205,7 @@
                                             <td>{{item.applicantName}} {{item.applicantSurname}}</td>
                                             <td>{{item.date | date : "dd/MM/yyyy"}}</td>
                                             <td>{{item.time}}</td>
-                                            <td><i class="far fa-pencil-alt"></i><i class="fas fa-trash-alt ml-4"></i></td>
+                                            <td><i class="far fa-pencil-alt" (click)="editInterview(item.id)"></i><i class="fas fa-trash-alt ml-4"></i></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -214,12 +223,12 @@
                                         <th>Action</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Jonathan</td>
-                                            <td>van der Breggen</td>
-                                            <td>7.2</td>
-                                            <td>17-08-2020</td>
-                                            <td (click)="openOverallInterview()"><i class="fas fa-eye ml-4"></i></td>
+                                        <tr *ngFor="let interview of passedInterviews">
+                                            <td>{{interview.applicantName}}</td>
+                                            <td>{{interview.applicantSurname}}</td>
+                                            <td>{{interview.score ? interview.score : "No Score Yet"}}</td>
+                                            <td>{{interview.date}}</td>
+                                            <td (click)="openOverallInterview(interview.id)"><i class="fas fa-eye ml-4"></i></td>
                                         </tr>
                                     </tbody>
                                 </table>

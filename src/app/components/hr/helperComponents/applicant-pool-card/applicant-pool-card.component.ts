@@ -28,6 +28,7 @@ export class ApplicantPoolCardComponent implements OnInit {
 
   viewApplication(){
     const modalInstance = this.modal.open(ViewApplicationComponent,{ windowClass : "hugeModal"});
+    modalInstance.componentInstance.applicantDetails = this.cardDetails;
   }
 
   moveDisqualify(){
@@ -43,6 +44,10 @@ export class ApplicantPoolCardComponent implements OnInit {
   moveUndecided(){
     let obj = { applicationId : this.cardDetails.applicationId, to : "undecided"};
     this.changePool.emit(obj);
+  }
+
+  getApplication(id){
+
   }
 
 }
