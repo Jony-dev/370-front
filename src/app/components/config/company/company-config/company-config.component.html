@@ -1,4 +1,5 @@
 <div class="sm-container container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row" style="height: 100%;">
         <div class="col-sm-12 col-md-6">
             <h1>Department</h1>
@@ -23,7 +24,16 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <tr *ngFor="let item of departments"><td>{{item.name}}</td><td class="text-center"><i class="fas fa-eye ml-4"(click)="viewDepartment(item.departmentId)"></i><i class="far fa-pencil-alt ml-4" (click)="editDepartment(item.departmentId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteDepartment(item.departmentId)"></i></td></tr>
+                                    <tr *ngFor="let item of departments"><td>{{item.name}}</td><td class="text-center">
+                                      <a placement="top" ngbTooltip="Select this to view the corresponding department">
+                                        <i class="fas fa-eye ml-4"(click)="viewDepartment(item.departmentId)"></i>
+                                      </a>
+                                      <a placement="top" ngbTooltip="Select this to edit the corresponding department">
+                                        <i class="far fa-pencil-alt ml-4" (click)="editDepartment(item.departmentId)"></i>
+                                      </a>
+                                      <a placement="top" ngbTooltip="Select this to delete the corresponding department">
+                                        <i class="fas fa-trash-alt ml-4" (click)="deleteDepartment(item.departmentId)"></i>
+                                      </a></td></tr>
                                 <tr>
                                 </tr>
                             </tbody>
@@ -66,7 +76,16 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                  <tr *ngFor="let item of divisions"><td>{{item.name}}</td><td class="text-center"><i class="fas fa-eye ml-4"(click)="viewDivision(item.divisionId)"></i><i class="far fa-pencil-alt ml-4" (click)="editDivision(item.divisionId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteDivision(item.divisionId)"></i></td></tr>
+                                  <tr *ngFor="let item of divisions"><td>{{item.name}}</td><td class="text-center">
+                                    <a placement="top" ngbTooltip="Select this to view the corresponding division details">
+                                      <i class="fas fa-eye ml-4"(click)="viewDivision(item.divisionId)"></i>
+                                    </a>
+                                    <a placement="top" ngbTooltip="Select this to edit the corresponding division">
+                                      <i class="far fa-pencil-alt ml-4" (click)="editDivision(item.divisionId)"></i>
+                                    </a>
+                                    <a placement="top" ngbTooltip="Select this to delete the corresponding division">
+                                      <i class="fas fa-trash-alt ml-4" (click)="deleteDivision(item.divisionId)"></i>
+                                    </a></td></tr>
                                 <tr>
                             </tbody>
                         </table>

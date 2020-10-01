@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Font Awesome Icons</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
   <div class="container-fluid">
       <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
           <span aria-hidden="true">&times;</span>
@@ -8,14 +17,22 @@
       <div class="row">
           <div class="col-md-6 col-sm-12">
               <div class="form-group">
-                  <label for="buildingSelect">Building</label>
+                  <label for="buildingSelect">
+                    <a placement="top" ngbTooltip="Select the building the floor will be in." style="font-size: xx-small;">
+                      <i class="fa fa-info-circle"></i>
+                    </a>
+                    Building</label>
                   <select name="buildingName" id="buildingName"  formControlName="buildingId" class="form-control" [class.is-invalid]="buildingId.touched && !buildingId.valid">
                     <option value="null" selected disabled>Please Select a building</option>
                     <option *ngFor="let item of buildings" [value]="item.buildingId">{{item.name}}</option>
                  </select>
               </div>
               <div class="form-group">
-                  <label for="floor">Floor</label>
+                  <label for="floor">
+                    <a placement="top" ngbTooltip="Enter the floor number." style="font-size: xx-small;">
+                      <i class="fa fa-info-circle"></i>
+                    </a>
+                    Floor</label>
                   <input type="text" name="floor" id="floor" formControlName="floorNumber"  class="form-control" [class.is-invalid]="floorNumber.touched && !floorNumber.valid">
               </div>
           </div>
@@ -32,3 +49,5 @@
       </div>
     </form>
   </div>
+</body>
+</html>

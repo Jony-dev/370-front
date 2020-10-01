@@ -36,10 +36,10 @@ export class EditAddDepartmentComponent implements OnInit {
 
   }
   getData(){
-    this.getDivisions();
+    this.getDeletedDivisions();
   }
-  getDivisions(){
-    this.api.getDivisions().subscribe( succ => this.retDivisionSucc(succ), err => this.retDivisionsErr(err))
+  getDeletedDivisions(){
+    this.api.getDeletedDivisions().subscribe( succ => this.retDivisionSucc(succ), err => this.retDivisionsErr(err))
 
   }
   retDivisionSucc(succ){

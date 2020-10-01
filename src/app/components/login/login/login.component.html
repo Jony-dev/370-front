@@ -1,3 +1,4 @@
+<button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
 <div class="bg-img">
 <div class="grid-container">
     <div class="header"></div>
@@ -6,12 +7,23 @@
         <div class="login-container">
             <form [formGroup]="userDetails">
                 <div class="from-group">
-                    <label for="email">Email</label>
+                    <label for="email">
+                      <a placement="top" ngbTooltip="Enter in your registered email address." style="font-size: xx-small;">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                      Email</label>
                     <input type="email" name="email" id="email" class="form-control" formControlName="email" >
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <label for="password" class="forgot" [routerLink]="['ForgotPassword']" routerLinkActive="router-link-active" ><i>Forgot Password?</i></label>
+                    <label for="password">
+                      <a placement="top" ngbTooltip="Enter in your password that you registered with." style="font-size: xx-small;">
+                        <i class="fa fa-info-circle"></i>
+                      </a>
+                      Password</label>
+                    <label for="password" class="forgot" [routerLink]="['ForgotPassword']" routerLinkActive="router-link-active" >
+                      <a placement="top" ngbTooltip="Click if you would like to reset your password.">
+                        <i>Forgot Password?</i>
+                      </a></label>
                     <input type="password" name="password" id="password" class="form-control" formControlName="password" >
                 </div>
                 <!--Validation-->
@@ -42,7 +54,9 @@
             <h3>Don't have an account?</h3>
             <p>No problem create one and start applying for jobs at BMW</p>
             <div class="text-right">
+              <a placement="top" ngbTooltip="Click if you would like to create your applicant account.">
                 <button [routerLink]="['CreateAccount']" routerLinkActive="router-link-active"  class="btn btn-primary">Create Account</button>
+              </a>
             </div>
 
         </div>

@@ -8,7 +8,10 @@
     </div>
     <div class="fill-flex">
         <div class="top-right"  ngbDropdown container="body" display="dynamic" #dropper="ngbDropdown">
-            <button ngbDropdownToggle  class="btn elipse" id="dropdownManual" (focus)="dropper.open()" ><i class="fas fa-ellipsis-h"></i></button>
+            <button ngbDropdownToggle  class="btn elipse" id="dropdownManual" (focus)="dropper.open()" >
+              <a placement="left" ngbTooltip="Select to move the applicant to a different pool." style="font-size: xx-small;">
+                <i class="fas fa-ellipsis-h"></i>
+              </a></button>
             <div ngbDropdownMenu aria-labelledby="dropdownManual" >
               <button ngbDropdownItem (click)="createInterview()" *ngIf="cardDetails.status == 'successful'">Interview</button>
               <button ngbDropdownItem *ngIf="cardDetails.status == 'undecided' || cardDetails.status == 'unsuccessful'" (click)="moveShortList()">Shortlist</button>
@@ -17,5 +20,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>

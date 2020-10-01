@@ -6,7 +6,13 @@
                 <p>Requested Date: {{cardDetails?.requestedDate | date : 'short'}}</p>
             </div>
             <div class="col-3">
-                <h4 class="mt-4"><i class="far fa-pencil-alt" *ngIf="!cardDetails?.jobCardId && (cardDetails?.status !='Rejected')" (click)="outputRequest()"></i><i class="fas fa-trash-alt ml-4"></i></h4>
+                <h4 class="mt-4">
+                  <a placement="left" ngbTooltip="Select this to edit the corresponding request">
+                    <i class="far fa-pencil-alt" *ngIf="!cardDetails?.jobCardId && (cardDetails?.status !='Rejected')" (click)="outputRequest()"></i>
+                  </a>
+                  <a placement="left" ngbTooltip="Select this to delete the corresponding request">
+                    <i class="fas fa-trash-alt ml-4"></i>
+                  </a></h4>
             </div>
         </div>
 </div>

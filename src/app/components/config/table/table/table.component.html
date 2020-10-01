@@ -1,4 +1,5 @@
     <div class="container-fluid">
+      <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
         <div class="row">
             <!-- Tables Section -->
             <div class="col-md-6 col-sm-12">
@@ -17,7 +18,11 @@
                                 <!--TableType Dropdown-->
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
-                                        <label for="tableType">Table Type</label>
+                                        <label for="tableType">
+                                          <a placement="top" ngbTooltip="Select to filter by table type." style="font-size: xx-small;">
+                                            <i class="fa fa-info-circle"></i>
+                                          </a>
+                                          Table Type</label>
                                         <select class="form-control" name="ttypeId" id="ttypeId" formControlName="ttypeId">
                                           <option value="null" selected disabled>Please Select a Table Type</option>
                                           <option *ngFor="let item of tableTypes" [value]="item.id" >{{item.type}} </option>
@@ -27,7 +32,11 @@
                                 <!--Building dropdown-->
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
-                                        <label for="building">Building</label>
+                                        <label for="building">
+                                          <a placement="top" ngbTooltip="Select to filter by building." style="font-size: xx-small;">
+                                            <i class="fa fa-info-circle"></i>
+                                          </a>
+                                          Building</label>
                                         <select class="form-control" name="building" id="building" formControlName="buildingId">
                                             <option value="null" selected disabled>Please Select a building</option>
                                             <option *ngFor="let item of buildings" [value]="item.buildingId" >{{item.name}} </option>
@@ -37,7 +46,11 @@
                                 <!--Floor Dropdown-->
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
-                                        <label for="floor">Floor</label>
+                                        <label for="floor">
+                                          <a placement="top" ngbTooltip="Select to filter by floor number." style="font-size: xx-small;">
+                                            <i class="fa fa-info-circle"></i>
+                                          </a>
+                                          Floor</label>
                                         <select class="form-control" name="floor" id="floor" formControlName="floorId">
                                           <option value="null" selected disabled>Please Select a floor</option>
                                           <option *ngFor="let item of floors | filterName : tableSearch" [value]="item.floorId" >{{item.floorNumber}} </option>
@@ -75,13 +88,21 @@
                                       <div class="row">
                                         <div class="col-lg-6 col-sm-12">
                                             <div class="form-group">
-                                                <label for="tableName">Table ID/Name</label>
+                                                <label for="tableName">
+                                                  <a placement="top" ngbTooltip="Enter the table ID." style="font-size: xx-small;">
+                                                    <i class="fa fa-info-circle"></i>
+                                                  </a>
+                                                  Table ID/Name</label>
                                                 <input class="form-control" type="text" name="tableName" id="tableName">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="form-group">
-                                                <label for="newTableType">Table Type</label>
+                                                <label for="newTableType">
+                                                  <a placement="top" ngbTooltip="Select the table type the table will fall under." style="font-size: xx-small;">
+                                                    <i class="fa fa-info-circle"></i>
+                                                  </a>
+                                                  Table Type</label>
                                                 <select name="newtableType" id="newtableType" class="form-control" formControlName="ttypeId">
                                                   <option value="null" selected disabled>Please select a TableType</option>
                                                   <option *ngFor="let item of tableTypes" [value]="item.id">{{item.type}} </option>
@@ -90,7 +111,11 @@
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="form-group">
-                                                <label for="newBuilding">Building</label>
+                                                <label for="newBuilding">
+                                                  <a placement="top" ngbTooltip="Select the building the table will be in." style="font-size: xx-small;">
+                                                    <i class="fa fa-info-circle"></i>
+                                                  </a>
+                                                  Building</label>
                                                 <select class="form-control" name="newBuilding" id="newBuilding" formControlName="buildingId">
                                                   <option value="null" selected disabled>Please select a Building</option>
                                                   <option *ngFor="let item of buildings" [value]="item.buildingId">{{item.name}} </option>
@@ -99,7 +124,11 @@
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="form-group">
-                                                <label for="newFloor">Floor</label>
+                                                <label for="newFloor">
+                                                  <a placement="top" ngbTooltip="Select the floor the table will be on." style="font-size: xx-small;">
+                                                    <i class="fa fa-info-circle"></i>
+                                                  </a>
+                                                  Floor</label>
                                                 <select class="form-control" name="newFloor" id="newFloor" formControlName="floorId">
                                                   <option value="null" selected disabled>Select Floor</option>
                                                   <option *ngFor="let item of floors" [value]="item.floorId" >{{item.floorNumber}} </option>
@@ -116,19 +145,31 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="form-group">
-                                                <label for="slotStartTime">First Slot Starting Time</label>
+                                                <label for="slotStartTime">
+                                                  <a placement="top" ngbTooltip="Enter in what the first time slot will be of the day." style="font-size: xx-small;">
+                                                    <i class="fa fa-info-circle"></i>
+                                                  </a>
+                                                  First Slot Starting Time</label>
                                                 <input class="form-control" type="time" name="slotStartTime" id="slotStartTime">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="form-group">
-                                                <label for="slotEndTime">Last Slot Ending Time</label>
+                                                <label for="slotEndTime">
+                                                  <a placement="top" ngbTooltip="Enter in what the last time slot will be of the day." style="font-size: xx-small;">
+                                                    <i class="fa fa-info-circle"></i>
+                                                  </a>
+                                                  Last Slot Ending Time</label>
                                                 <input class="form-control" type="time" name="slotEndTime" id="slotEndTime">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="form-group">
-                                                <label for="noSlots">No. Slots per hour</label>
+                                                <label for="noSlots">
+                                                  <a placement="top" ngbTooltip="Enter in how many slots you want to be in a one hour time period." style="font-size: xx-small;">
+                                                    <i class="fa fa-info-circle"></i>
+                                                  </a>
+                                                  No. Slots per hour</label>
                                                 <input class="form-control" type="number" name="noSlots" id="noSlots">
                                             </div>
                                         </div>

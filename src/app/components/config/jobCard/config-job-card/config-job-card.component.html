@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row">
         <div class="col-sm-12 col-md-6 mt-2">
             <div class="panel-container panel-ext sm-container">
@@ -42,7 +43,13 @@
                         </tr>
                     </thead>
                     <!-- BUILDINGS GO HERE -->
-                    <tr *ngFor="let item of tests"><td>{{item.testName}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTest(item.testId)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTest(item.testId)"></i></td></tr>
+                    <tr *ngFor="let item of tests"><td>{{item.testName}}</td><td class="text-center">
+                      <a placement="top" ngbTooltip="Select this to edit the corresponding test">
+                        <i class="far fa-pencil-alt" (click)="editTest(item.testId)"></i>
+                      </a>
+                      <a placement="top" ngbTooltip="Select this to delete the corresponding test">
+                        <i class="fas fa-trash-alt ml-4" (click)="deleteTest(item.testId)"></i>
+                      </a></td></tr>
                 </table>
             </div>
         </div>

@@ -1,11 +1,12 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row">
         <div class="col-lg-4 col-md-12">
             <h3>Request Details</h3>
             <div class="panel-container panel-ext sm-container">
                 <app-job-request-details></app-job-request-details>
             </div>
-            
+
         </div>
         <div class="col-lg-8 col-md-12">
             <h3>Configure Job Card</h3>
@@ -15,49 +16,49 @@
                       <div class="step" data-target="#test-l-1">
                         <button class="step-trigger">
                           <span class="bs-stepper-circle">1</span>
-                          
+
                         </button>
                       </div>
                       <div class="line"></div>
                       <div class="step" data-target="#test-l-2">
                         <button class="step-trigger">
                           <span class="bs-stepper-circle">2</span>
-                          
+
                         </button>
                       </div>
                       <div class="line"></div>
                       <div class="step" data-target="#test-l-3">
                         <button class="step-trigger">
                           <span class="bs-stepper-circle">3</span>
-                          
+
                         </button>
                       </div>
                       <div class="line"></div>
                       <div class="step" data-target="#test-l-4">
                         <button class="step-trigger">
                           <span class="bs-stepper-circle">4</span>
-                          
+
                         </button>
                       </div>
                       <div class="line"></div>
                       <div class="step" data-target="#test-l-5">
                         <button class="step-trigger">
                           <span class="bs-stepper-circle">5</span>
-                          
+
                         </button>
                       </div>
                       <div class="line"></div>
                       <div class="step" data-target="#test-l-6">
                         <button class="step-trigger">
                           <span class="bs-stepper-circle">6</span>
-                          
+
                         </button>
                       </div>
                       <div class="line"></div>
                       <div class="step" data-target="#test-l-7">
                         <button class="step-trigger">
                           <span class="bs-stepper-circle">7</span>
-                          
+
                         </button>
                       </div>
                     </div>
@@ -70,50 +71,82 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
-                                            <label for="cardName">Job Card Name</label>
+                                            <label for="cardName">
+                                              <a placement="bottom" ngbTooltip="This will identify the job card." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              Job Card Name</label>
                                             <input type="text" id="cardName" name="cardName" class="form-control" formControlName="jobCardName">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
-                                            <label for="startDate">Start Date</label>
+                                            <label for="startDate">
+                                              <a placement="bottom" ngbTooltip="Select the contractors start date." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              Start Date</label>
                                             <input type="date" id="startDate" name="startDate" class="form-control" formControlName="startDate">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
-                                            <label for="endDate">End Date</label>
+                                            <label for="endDate">
+                                              <a placement="bottom" ngbTooltip="Select the contractors end date." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              End Date</label>
                                             <input type="date" id="endDate" name="endDate" class="form-control" formControlName="endDate">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="intro">Introduction</label>
+                                            <label for="intro">
+                                              <a placement="top" ngbTooltip="This will be the introduction the applicants see." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              Introduction</label>
                                             <textarea name="intro" id="intro" cols="30" rows="2" class="form-control" formControlName="introduction"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="description">Description</label>
+                                            <label for="description">
+                                              <a placement="top" ngbTooltip="This will add more details as to what the job entails." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              Description</label>
                                             <textarea name="description" id="description" cols="30" rows="2" class="form-control" formControlName="description"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
                                         <div class="form-group">
-                                            <label for="travel">Expected to travel</label>
+                                            <label for="travel">
+                                              <a placement="top" ngbTooltip="Select if the contractor is expected to travel." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              Expected to travel</label>
                                             <input id="travel" name="travel" type="checkbox" class="form-control" formControlName="travel">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
                                         <div class="form-group">
-                                            <label for="publishDate">Publishing date</label>
+                                            <label for="publishDate">
+                                              <a placement="top" ngbTooltip="Select the date the job will start to be advertised to the public." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              Publishing date</label>
                                             <input id="publishDate" name="publishDate" type="date" class="form-control" formControlName="publishDate">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
                                         <div class="form-group">
                                             <div class="form-group">
-                                                <label for="location">Primary Location</label>
+                                                <label for="location">
+                                                  <a placement="top" ngbTooltip="Select the primary location the contractor will work at." style="font-size: xx-small;">
+                                                    <i class="fa fa-info-circle"></i>
+                                                  </a>
+                                                  Primary Location</label>
                                                 <select name="location" id="location" class="form-control" formControlName="locationId">
                                                     <option value="null" selected disabled>Select Location</option>
                                                     <option *ngFor="let item of locations" [value]="item.locationId">{{item.name}}</option>
@@ -124,7 +157,11 @@
                                     <div class="col-lg-3 col-md-12">
                                         <div class="form-group">
                                             <div class="form-group">
-                                                <label for="requisition">Requisition Approval</label>
+                                                <label for="requisition">
+                                                  <a placement="top" ngbTooltip="Select the applicants that you would like to advertise to." style="font-size: xx-small;">
+                                                    <i class="fa fa-info-circle"></i>
+                                                  </a>
+                                                  Requisition Approval</label>
                                                 <select name="requisition" id="requisition"  class="form-control" formControlName="raApprovalId">
                                                     <option value="null" selected disabled>Select Requisition</option>
                                                     <option *ngFor="let item of rApprovals" [value]="item.id">{{item.approval}}</option>
@@ -134,19 +171,31 @@
                                     </div>
                                     <div class="col-lg-3 col-md-12">
                                         <div class="form-group">
-                                            <label for="workingHrs">Working Hours</label>
+                                            <label for="workingHrs">
+                                              <a placement="top" ngbTooltip="Enter in the working hours per week." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              Working Hours</label>
                                             <input type="number" name="workingHours" id="workingHours" class="form-control" formControlName="workingHours">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
                                         <div class="form-group">
-                                            <label for="closingDate">Closing date</label>
+                                            <label for="closingDate">
+                                              <a placement="top" ngbTooltip="Select the closing date that the listing will stop being advertised." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              Closing date</label>
                                             <input id="closingDate" name="closingDate" type="date" class="form-control" formControlName="closingDate">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
                                         <div class="form-group">
-                                            <label for="schedule">Schedule</label>
+                                            <label for="schedule">
+                                              <a placement="top" ngbTooltip="Select the schedule the contractor will have." style="font-size: xx-small;">
+                                                <i class="fa fa-info-circle"></i>
+                                              </a>
+                                              Schedule</label>
                                             <select name="schedule" id="schedule"  class="form-control" formControlName="scheduleId">
                                                 <option value="null" selected disabled>Select Schedule</option>
                                                 <option *ngFor="let item of schedules" [value]="item.id">{{item.schedule}}</option>
@@ -160,7 +209,7 @@
                             </div>
                             <!-- BASIC DETAILS END -->
                         </div>
-                        </form> 
+                        </form>
                         <div id="test-l-2" class="content">
                             <!-- TEST DETAILS -->
                           <div class="container-fluid">
@@ -181,7 +230,10 @@
                                             <th>Action</th>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let item of tests | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"><td>{{item.testName}}</td><td>{{item.description}}</td><td><i class="fa fa-plus" (click)="addTest(item.testId)"></i></td></tr>
+                                            <tr *ngFor="let item of tests | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"><td>{{item.testName}}</td><td>{{item.description}}</td><td>
+                                              <a placement="top" ngbTooltip="Select to add the test to the job listing.">
+                                                <i class="fa fa-plus" (click)="addTest(item.testId)"></i>
+                                              </a></td></tr>
                                         </tbody>
                                     </table>
                                     <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="testCollectionSize"></ngb-pagination>
@@ -195,11 +247,14 @@
                                             <th>Test Critical</th>
                                             <th>Action</th>
                                         </thead>
-                                        
+
                                             <tbody>
-                                                <tr *ngFor="let item of addedTests; let i = index"><td>{{item.testName}}</td><td><input type="checkbox" [formControl]="testsFArray.controls[i]" [id]="'test'+item.testId"><label class="ml-2" [for]="'test'+item.testId"> Mark as Critical</label></td><td><i class="fa fa-times" (click)="removeTest(item.testId)"></i></td></tr>
+                                                <tr *ngFor="let item of addedTests; let i = index"><td>{{item.testName}}</td><td><input type="checkbox" [formControl]="testsFArray.controls[i]" [id]="'test'+item.testId"><label class="ml-2" [for]="'test'+item.testId"> Mark as Critical</label></td><td>
+                                                  <a placement="top" ngbTooltip="Check to make the test essential for the applicant to submit.">
+                                                    <i class="fa fa-times" (click)="removeTest(item.testId)"></i>
+                                                  </a></td></tr>
                                             </tbody>
-                                        
+
                                     </table>
                                     <!-- <ngb-pagination [pageSize]="pageSize" [collectionSize]="collectionSize"></ngb-pagination> -->
                                     <button (click)="next()" class="btn btn-outline-primary float-right mt-4 ml-4">Next</button>
@@ -226,10 +281,13 @@
                                                 <th class="text-center">Action</th>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let item of languages | slice: (langPage-1) * pageSize : (langPage-1) * pageSize + pageSize"><td>{{item.language}}</td><td class="text-center"><i class="fa fa-plus" (click)="addLanguage(item.id)"></i></td></tr>
+                                                <tr *ngFor="let item of languages | slice: (langPage-1) * pageSize : (langPage-1) * pageSize + pageSize"><td>{{item.language}}</td><td class="text-center">
+                                                  <a placement="top" ngbTooltip="Check to add the language to the job listing.">
+                                                    <i class="fa fa-plus" (click)="addLanguage(item.id)"></i>
+                                                  </a></td></tr>
                                             </tbody>
                                         </table>
-                                        <ngb-pagination [(page)]="langPage" [pageSize]="pageSize" [collectionSize]="languageCollectionSize"></ngb-pagination> 
+                                        <ngb-pagination [(page)]="langPage" [pageSize]="pageSize" [collectionSize]="languageCollectionSize"></ngb-pagination>
                                     </div>
                                     <div class="col-12">
                                         <h4>Added Languages</h4>
@@ -242,8 +300,15 @@
                                             <tbody>
                                                 <tr *ngFor="let item of addedLanguages; let i = index;">
                                                     <td>{{item.language}}</td>
-                                                    <td><input type="checkbox" [id]="'lang'+item.id" [formControl]="languageFArray.controls[i]"><label class="ml-2" [for]="'lang'+item.id">Mark as critical</label></td>
-                                                    <td><i class="fas fa-times" (click)="removeLanguage(item.id)"></i></td>
+                                                    <td>
+                                                      <a placement="top" ngbTooltip="Click to make the skill critical for the applicant to answer.">
+                                                        <input type="checkbox" [id]="'lang'+item.id" [formControl]="languageFArray.controls[i]"><label class="ml-2" [for]="'lang'+item.id">Mark as critical</label>
+                                                      </a>
+                                                    </td>
+                                                    <td>
+                                                      <a placement="top" ngbTooltip="Check to remove the language from the job listing.">
+                                                        <i class="fas fa-times" (click)="removeLanguage(item.id)"></i>
+                                                      </a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -275,7 +340,10 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let item of skills | slice: (skillpage-1) * pageSize : (skillpage-1) * pageSize + pageSize">
-                                                    <td>{{item.skill}}</td><td class="text-center"><i class="fa fa-plus" (click)="addSkill(item.id)"></i></td>
+                                                    <td>{{item.skill}}</td><td class="text-center">
+                                                      <a placement="top" ngbTooltip="Check to add the skill to the job listing.">
+                                                        <i class="fa fa-plus" (click)="addSkill(item.id)"></i>
+                                                      </a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -293,9 +361,14 @@
                                                 <tr *ngFor="let skill of addedSkills; let i = index">
                                                     <td>{{skill.skill}}</td>
                                                     <td>
+                                                      <a placement="top" ngbTooltip="Click to make the skill critical for the applicant to answer.">
                                                         <input type="checkbox" [formControl]="skillFArray.controls[i]" [id]="'skill'+skill.id"><label class="ml-2" [for]="'skill'+skill.id"> Mark as critical</label>
+                                                      </a>
                                                     </td>
-                                                    <td><i class="fas fa-times" (click)="removeSkill(skill.id)"></i></td>
+                                                    <td>
+                                                      <a placement="top" ngbTooltip="Click to remove the skill from the job listing.">
+                                                        <i class="fas fa-times" (click)="removeSkill(skill.id)"></i>
+                                                      </a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -326,7 +399,10 @@
                                                 <th class="text-center">Action</th>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let item of longQuestions | slice: (questionPage-1) * pageSize : (questionPage-1) * pageSize + pageSize"><td>{{item.question}}</td><td class="text-center"><i class="fa fa-plus" (click)="addLQuestion(item.id)"></i></td></tr>
+                                                <tr *ngFor="let item of longQuestions | slice: (questionPage-1) * pageSize : (questionPage-1) * pageSize + pageSize"><td>{{item.question}}</td><td class="text-center">
+                                                  <a placement="top" ngbTooltip="Check to add the question to the job listing.">
+                                                    <i class="fa fa-plus" (click)="addLQuestion(item.id)"></i>
+                                                  </a></td></tr>
                                             </tbody>
                                         </table>
                                         <ngb-pagination [(page)]="questionPage" [pageSize]="pageSize" [collectionSize]="longQuestionCollectionSize"></ngb-pagination>
@@ -342,8 +418,14 @@
                                             <tbody>
                                                 <tr *ngFor="let item of addedLongQuestions; let i = index;">
                                                     <td>{{item.question}}</td>
-                                                    <td><input type="checkbox" [formControl]="questionFArray.controls[i]" [id]="'question'+item.id"><label class="ml-2" [for]="'question'+item.id">Mark as critical</label></td>
-                                                    <td><i class="fas fa-times" (click)="removeQuestion(item.id)"></i></td>
+                                                    <td>
+                                                      <a placement="top" ngbTooltip="Click to make the question critical for the applicant to answer.">
+                                                        <input type="checkbox" [formControl]="questionFArray.controls[i]" [id]="'question'+item.id"><label class="ml-2" [for]="'question'+item.id">Mark as critical</label>
+                                                      </a></td>
+                                                    <td>
+                                                      <a placement="top" ngbTooltip="Click to remove the question from the job listing.">
+                                                        <i class="fas fa-times" (click)="removeQuestion(item.id)"></i>
+                                                      </a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -375,9 +457,12 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let item of requirements | slice: (requirementPage-1) * pageSize : (requirementPage-1) * pageSize + pageSize">
-                                                    <td>{{item.requirement}}</td><td class="text-center"><i class="fa fa-plus" (click)="addRequirement(item.id)"></i></td>
+                                                    <td>{{item.requirement}}</td><td class="text-center">
+                                                      <a placement="top" ngbTooltip="Click to add the question to the job listing.">
+                                                        <i class="fa fa-plus" (click)="addRequirement(item.id)"></i>
+                                                      </a></td>
                                                 </tr>
-                                                
+
                                             </tbody>
                                         </table>
                                         <ngb-pagination [(page)]="requirementPage" [pageSize]="pageSize" [collectionSize]="requirementCollectionSize"></ngb-pagination>
@@ -402,9 +487,16 @@
                                                         <option value="0">False</option>
                                                     </select>
                                                     </td>
-                                                    <td><input type="checkbox" [id]="'requirement'+item.id" formControlName="critical"><label [for]="'requirement'+item.id" class="ml-2">Mark as critical</label></td>
+                                                    <td>
+                                                      <a placement="top" ngbTooltip="Check to make the requirement critical for the applicant to answer.">
+                                                        <input type="checkbox" [id]="'requirement'+item.id" formControlName="critical"><label [for]="'requirement'+item.id" class="ml-2">Mark as critical</label>
+                                                      </a></td>
                                                     </ng-container>
-                                                    <td><i class="fas fa-times" (click)="removeRequirement(item.id)"></i></td>
+                                                    <td>
+                                                      <a placement="top" ngbTooltip="Click to remove the question from the job listing.">
+                                                        <i class="fas fa-times" (click)="removeRequirement(item.id)"></i>
+                                                      </a>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -429,7 +521,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="col-md-8 col-sm-12">
@@ -480,7 +572,7 @@
                         </div>
                     </div>
                   </div>
-            </div>  
+            </div>
         </div>
     </div>
 </div>

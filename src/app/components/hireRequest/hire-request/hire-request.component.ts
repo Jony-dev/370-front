@@ -40,7 +40,7 @@ export class HireRequestComponent implements OnInit {
 
   getData(){
     this.api.getJustifications().subscribe( success => this.justificationRetSuccess(success), error => this.justificationRetFail(error));
-    this.api.getJobPositions().subscribe( success => this.jobRetSuccess(success), error => this.jobRetFail(error));
+    this.api.getDeletedJobPositions().subscribe( success => this.jobRetSuccess(success), error => this.jobRetFail(error));
     this.getRequestCards();
 
   }
@@ -50,7 +50,7 @@ export class HireRequestComponent implements OnInit {
   }
   justificationRetFail(error){
     this.toast.display({type:"Error",heading : error.error.Title, message : error.error.message + "\n"+ error.message});
-   
+
   }
   jobRetSuccess(success){
     this.jobs = success;
@@ -102,7 +102,7 @@ export class HireRequestComponent implements OnInit {
   }
   toggleForm(type : boolean){
     this.editToggle = !this.editToggle;
-    setTimeout( ()=>{ 
+    setTimeout( ()=>{
       this.editToggle = !this.editToggle;
       this.editing = type;
     },400);
@@ -114,7 +114,7 @@ export class HireRequestComponent implements OnInit {
     this.requestForm.reset();},300);
   }
   fillForm(event : JobReqCard){
-    
+
     this.editingCard = event;
     this.toggleForm(true);
     setTimeout( ()=>{
@@ -125,7 +125,7 @@ export class HireRequestComponent implements OnInit {
         brief : event.brief
       });
     },300)
-    
+
   }
 
   saveChanges(){

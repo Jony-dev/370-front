@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <Form [formGroup]="employementForm">
+    <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row">
         <div class="col-lg-6 col-sm-12">
             <h2>Employee Details</h2>
@@ -8,8 +9,12 @@
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="jobPosition">Job Position</label>
-                                <select name="jobPosition" id="jobPosition" class="form-control" formControlName="jobId">
+                                <label for="jobPosition">
+                                  <a placement="right" ngbTooltip="Select the job the contractor will fulfil." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Job Position</label>
+                                  <select name="jobPosition" id="jobPosition" class="form-control" formControlName="jobId">
                                     <option value="null" selected disabled>Please Select Job Position</option>
                                     <option [value]="item.id" *ngFor="let item of jobs">{{item.name}}</option>
                                 </select>
@@ -17,24 +22,35 @@
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="jobSchedule">Schedule</label>
+                                <label for="jobSchedule">
+                                  <a placement="bottom" ngbTooltip="Select the schedule the contractor will have." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Schedule</label>
                                 <select name="jobSchedule" id="jobSchedule" class="form-control" formControlName="scheduleId">
                                     <option value="null" selected disabled>Please Select Schedule</option>
                                     <option [value]="item.id" *ngFor="let item of schedule">{{item.schedule}}</option>
-                                    
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="jobSalary">Salary</label>
-                                <input type="number" name="jobSalary" id="jobSalary" class="form-control" formControlName="salary">
+                                <label for="jobSalary">
+                                  <a placement="right" ngbTooltip="Enter the contractors salary per month without tax." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Salary</label>
+                                  <input type="number" name="jobSalary" id="jobSalary" class="form-control" formControlName="salary">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="jobLocation">Location</label>
-                                <select name="jobLocation" id="jobLocation" class="form-control" formControlName="locationId">
+                                <label for="jobLocation">
+                                  <a placement="right" ngbTooltip="Select the location the contractor will primarily be at." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Location</label>
+                                  <select name="jobLocation" id="jobLocation" class="form-control" formControlName="locationId">
                                     <option value="null" selected disabled>Please Select Location</option>
                                     <option [value]="item.locationId" *ngFor="let item of locations">{{item.name}}</option>
                                 </select>
@@ -63,8 +79,12 @@
                         </div>
                         <div class="col-lg-8 col-sm-12">
                             <div class="form-group">
-                                <label for="contract">Contract</label>
-                                <input type="file" name="contract" id="contract" class="form-control" (change)="uploadFile($event)">
+                                <label for="contract">
+                                  <a placement="right" ngbTooltip="Download the contracors signed contract." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Contract</label>
+                                  <input type="file" name="contract" id="contract" class="form-control" (change)="uploadFile($event)">
                             </div>
                         </div>
                         <div class="col-lg-4 col-sm-12">
@@ -121,7 +141,11 @@
                         <div class="col-md-2 col-sm-0"></div>
                         <div class="col-md-3 col-sm-12">
                            <div class="form-group">
-                                <h3>Email</h3>
+                                <h3>
+                                  <a placement="right" ngbTooltip="Enter in the contractors new employee email address." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Email</h3>
                                 <input type="text" name="email" id="email" class="form-control" formControlName="email">
                            </div>
                         </div>

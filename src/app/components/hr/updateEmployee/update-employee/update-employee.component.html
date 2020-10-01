@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
     <div class="row">
         <div class="col-lg-6 col-sm-12">
             <h2>Employee Details</h2>
@@ -7,7 +8,11 @@
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="jobPosition">Job Position</label>
+                                <label for="jobPosition">
+                                  <a placement="top" ngbTooltip="Select the job the contractor will fulfil." style="font-size: xx-small;">
+                                   <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Job Position</label>
                                 <select name="jobPosition" id="jobPosition" class="form-control">
                                     <option value="null" selected disabled>Please Select Job Position</option>
                                     <option value="1">Manager</option>
@@ -16,7 +21,11 @@
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="jobSchedule">Schedule</label>
+                                <label for="jobSchedule">
+                                  <a placement="top" ngbTooltip="Select the schedule the contractor will have." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                   </a>
+                                   Schedule</label>
                                 <select name="jobSchedule" id="jobSchedule" class="form-control">
                                     <option value="null" selected disabled>Please Select Schedule</option>
                                     <option value="1">Temporary</option>
@@ -26,13 +35,21 @@
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="jobSalary">Salary</label>
+                                <label for="jobSalary">
+                                  <a placement="top" ngbTooltip="Enter the salary the contractor will have per month without tax." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                   </a>
+                                  Salary</label>
                                 <input type="number" name="jobSalary" id="jobSalary" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="jobLocation">Location</label>
+                                <label for="jobLocation">
+                                  <a placement="top" ngbTooltip="Select the primary location the contractor will work at." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                   </a>
+                                  Location</label>
                                 <select name="jobSchedule" id="jobSchedule" class="form-control">
                                     <option value="null" selected disabled>Please Select Location</option>
                                     <option value="1">Menlyn</option>
@@ -42,7 +59,11 @@
                         </div>
                         <div class="col-lg-8 col-sm-12">
                             <div class="form-group">
-                                <label for="contract">Contract</label>
+                                <label for="contract">
+                                  <a placement="top" ngbTooltip="Download the contractors signed contract." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                   </a>
+                                  Contract</label>
                                 <input type="file" name="contract" id="contract" class="form-control">
                             </div>
                         </div>
@@ -55,8 +76,12 @@
                             <app-role-picker></app-role-picker>
                         </div>
                         <div class="col-12">
+                          <a placement="top" ngbTooltip="Select the delete the employee.">
                             <button class="btn btn-outline-danger float-right mt-4 ml-4"><h3>Remove Employee</h3></button>
+                           </a>
+                           <a placement="top" ngbTooltip="Select to save the employee details.">
                             <button class="btn btn-outline-primary float-right mt-4"><h3>Save Details</h3></button>
+                           </a>
                         </div>
                     </div>
                 </div>
@@ -100,7 +125,11 @@
                         <div class="col-md-2 col-sm-0"></div>
                         <div class="col-md-3 col-sm-12">
                            <div class="form-group">
-                                <h3>Email</h3>
+                                <h3>
+                                  <a placement="top" ngbTooltip="Enter in the employees work email address.." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                   </a>
+                                  Email</h3>
                                 <input type="text" name="email" id="email" class="form-control">
                            </div>
                         </div>
