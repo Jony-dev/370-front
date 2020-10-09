@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="!bookingFor">
+        <div class="col-12">
+            <h2>Search Employee</h2>
+            <div class="panel-container sm-container panel-ext">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12">
+                            <label for="searchUser">Name or Surname</label>
+                            <input type="text" name="searchUser" id="searchUser" class="form-control">
+                        </div>
+                        <div class="col-md-2 col-sm-12">
+                            <label for="teamId">Team</label>
+                            <select name="teamId" id="teamId" class="form-control">
+                                <option value="null">All</option>
+                                <option [value]="item.teamId" *ngFor="let item of teams">{{item.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-2 col-md-1" *ngFor="let item of employees">
+                            <app-profile-card class="img-sm border-el" [cardDetails]="item" (click)="selectEmployee(item)"></app-profile-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="bookingFor">
+        <div class="row">
+            <div class="col-2 pb-4">
+                <h2 >Booking For</h2>
+            </div>
+            <div class="col">
+                <app-profile-card class="img-md" [cardDetails]="bookingFor"></app-profile-card>
+            </div>
+        </div>
+        <app-booking [user]="bookingFor"></app-booking>
+    </div>
+</div>

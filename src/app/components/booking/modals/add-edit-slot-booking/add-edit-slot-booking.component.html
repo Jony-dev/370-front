@@ -1,6 +1,5 @@
 <div class="container-fluid">
-    <h1 *ngIf="!booking">Book Boardroom</h1>
-    <h1 *ngIf="booking">Edit Boardroom Booking</h1>
+    <h1>Boardroom Bookings</h1>
     <div class="row">
         <div class="col-md-2 col-sm-12">
             <div class="form-group">
@@ -9,16 +8,17 @@
                     <i class="fa fa-info-circle"></i>
                   </a>
                   Select a Building</label>
-                <select name="building" id="building" class="form-control">
+                <select name="building" id="building" class="form-control" (change)="getSlots()" [formControl]="buildingId">
                     <option value="null" selected disabled>Select a Building</option>
+                    <option [value]="item.buildingId" *ngFor="let item of buildings">{{item.name}}</option>
                 </select>
             </div>
         </div>
         <div class="col-md-10 col-sm-12"></div>
-        <div class="col-1" *ngFor="let room of boardRooms">
+        <div class="col-1" *ngFor="let room of boardRooms; let ii = index">
             <div class="form-check">
               <a placement="top" ngbTooltip="Check this box if this is the room you would like to book.">
-                <input class="form-check-input" type="checkbox" [id]="room.id" value="room.id">
+                <input class="form-check-input" type="checkbox" [id]="room.id" value="room.id" [formControl]="boardRoomControls[ii]">
               </a>
                 <label  for="room.id">{{room.name}}</label>
             </div>
@@ -27,49 +27,13 @@
     <hr>
     <div class="sm-container">
         <div class="row">
-            <div class="col-sm-12 col-md-2 border-el">
-                <h3 class="text-center">Zf-3</h3>
+            <div class="col-sm-12 col-md-3 border-el ml-1 mt-2 mb-2" *ngFor="let item of tables; let i = index" [hidden]="!canBeSeen(i+1)">
+                <h3 class="text-center">{{item.name}}</h3>
                 <table class="table">
                     <tbody>
-                        <tr>
-                            <td>7:30</td>
-                            <td>You</td>
-                        </tr>
-                        <tr>
-                            <td>8:30</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>9:30</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>10:30</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>11:30</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>12:30</td>
-                            <td>Brandon van der Breggen</td>
-                        </tr>
-                        <tr>
-                            <td>13:30</td>
-                            <td>Brandon van der Breggen</td>
-                        </tr>
-                        <tr>
-                            <td>14:30</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>15:30</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>16:30</td>
-                            <td></td>
+                        <tr *ngFor="let slot of item.slots" [ngStyle]="{'background-color': usersId == slot.userId && usersId ? '#e7e7e7' : '#ffffff'}" (click)="toggleBooking(slot)">
+                            <td>{{slot.startTime}}</td>
+                            <td>{{slot.userName}} {{slot.userSurname}}</td>
                         </tr>
                     </tbody>
                 </table>

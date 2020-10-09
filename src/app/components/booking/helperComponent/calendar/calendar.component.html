@@ -25,12 +25,14 @@
             </div>
         </div>
         <div class="week">
-            <div *ngFor="let day of days" [className]=" day.date > 0 ? 'day' : 'day blank'">
+            <div *ngFor="let day of days" [className]=" day.date  > 0 && day.dateId && day.bookable == 1? 'day' : 'day blank'">
                 <h5 class="date">{{day.date}}</h5>
-                <div *ngIf="!day.bookingId && day.date > 0" class="text-center" (click)="openBookingScreen()">No Booking</div>
-                <div *ngIf="day.bookingId && day.date > 0 && !day.time" class="text-center"><span (click)="openBookingScreen(day)">{{day.tableName}}</span>
+                <div *ngIf="!day.bookingId && day.date > 0 && day.bookable == 1 && !day.tableName && calendarType=='individual'" class="text-center" (click)="openBookingScreen(day);">No Booking</div>
+                <div *ngIf="!day.bookingId && day.date > 0 && day.bookable == 1 && !day.tableName && calendarType !='individual'" class="text-center" (click)="openBookingScreen(day);">_____</div>
+                <div *ngIf="!day.bookingId && day.date > 0 && day.bookable == 1 && day.tableName" class="text-center" (click)="openBookingScreen(day);">{{day.tableName}} Booking</div>
+                <div *ngIf="day.bookingId && day.date > 0" class="text-center"><span>{{day.tableName}}</span>
                   <a placement="top" ngbTooltip="Delete booking." style="font-size: xx-small;">
-                    <button class="btn btn-sm btn-outline-danger ml-4">X</button>
+                    <button class="btn btn-sm btn-outline-danger ml-4"(click)="cancelBooking(day)">X</button>
                   </a></div>
                 <div *ngIf="day.bookingId && day.date > 0 && day.time" class="text-center"><span (click)="openBookingScreen(day)">{{day.time}} {{day.tableName}}</span>
                   <a placement="top" ngbTooltip="Delete booking." style="font-size: xx-small;">

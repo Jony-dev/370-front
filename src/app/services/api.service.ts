@@ -47,6 +47,10 @@ import { PassedInterview } from '../models/passedInterview';
 import { CardStatus } from '../models/cardStatus';
 import { CreateEmployee } from '../models/createEmployee';
 import { EditInterview } from '../models/editInterview';
+import { BookableDate } from '../models/bookableDate';
+import { BookingCap } from '../models/bookingCap';
+import { GroupBookingCap } from '../models/groupBookingCap';
+import { SlotTable } from '../models/slotTable';
 
 
 
@@ -95,8 +99,7 @@ export class ApiService {
   question : string = `${this.globalRoot}API/Question/`;
   answer : string = `${this.globalRoot}API/Answer/`;
   interview: string = `${this.globalRoot}API/Interview/`;
-
-
+  date : string = `${this.globalRoot}API/Date`;
 
   constructor( private http: HttpClient){ }
 
@@ -674,6 +677,54 @@ export class ApiService {
     formData.append('request','applyForJob');
     return this.http.post(this.user,formData);
   }
+  getBuildingTables(buildingId : number, dateId : number){
+    return this.http.post<Tafel[]>( this.building, {request : "getBuildingTables", payload : { buildingId , dateId} });
+  }
+  getBookableDates(month : number, year : number){
+    return this.http.post<BookingCap>( this.booking, { request : "getUserAndAvailable", payload : { month , year} });
+  }
+  getEmpBookableDates(month : number, year : number,userId : number){
+    return this.http.post<BookingCap>( this.booking, { request : "getEmpAndAvailable", payload : { month , year, userId }});
+  }
 
+  userBooking( payload : any){
+    return this.http.post( this.booking, {request: "makeIndividualBooking", payload });
+  }
+
+  userEmpBooking( payload : any){
+    return this.http.post( this.booking, {request: "makeIndividualBookingEmployee", payload });
+  }
+
+  cancelUserBooking(payload : any){
+    return this.http.post( this.booking, {request : "cancelBooking", payload })
+  }
+  // edituserBooking(){
+  //   THERE IS NO EDIT SO I DONNO IF I SHOULD EDIT OR A USER NEEDS TO FIRST CANCEL A BOOKING  
+  // }
+  getAssistantSearch(){
+    return this.http.post( this.booking, {request : "getAssistantSearch"});
+  }
+
+  getGroupDates(month : number, year : number){
+    return this.http.post<GroupBookingCap>( this.booking, { request : "getGroupAndAvailable", payload : { month , year} });
+  }
+
+  getBoardRoomSlots(buildingId,dateId){
+    return this.http.post<SlotTable[]>( this.booking, { request : "getBuildingSlots", payload : { buildingId , dateId} });
+  }
+
+  makeGroupBooking(){
+
+  }
+  cancelBooking(bookingId : number){
+    return this.http.post( this.booking, {request :"cancelBooking", payload : { bookingId}});
+  }
+
+  makeOwnGroupBooking( payload : any){
+    return this.http.post( this.booking, {request : "makeGroupBooking", payload})
+  }
+  makeEmpGroupBooking( payload : any){
+    return this.http.post( this.booking, {request : "makeGroupBookingEmployee", payload})
+  }
 }
 

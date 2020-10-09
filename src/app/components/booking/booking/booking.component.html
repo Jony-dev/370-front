@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div *ngFor="let item of displayMonths; trackBy : trackByFn">
-                    <app-calendar [changeCalendarInput]="item"></app-calendar>
+                    <app-calendar [changeCalendarInput]="item" [user]="user" [calendarType]="bookingType"></app-calendar>
                 </div>
 
 
@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-                        <app-calendar [calendarType]="'slot'" [changeCalendarInput]="displayMonths[0]"></app-calendar>
+                        <app-calendar [calendarType]="'group'" [changeCalendarInput]="displayMonths[0]" [user]="user"></app-calendar>
 
                 </div>
             </ng-template>

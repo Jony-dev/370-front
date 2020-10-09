@@ -26,7 +26,7 @@ export class AuthService {
     // });
   }
 
-  getUserId(){
+  public getUserId(){
 
     const token = localStorage.getItem("bmwToken");
     if(!token){

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { stringify } from 'querystring';
 import { FormControl } from '@angular/forms';
+import { UserProfile } from 'src/app/models/userProfile';
 
 export class bmwMonth{
   month : number;
@@ -17,7 +18,9 @@ export class bmwMonth{
 export class BookingComponent implements OnInit {
 
   
-
+  @Input() user : UserProfile = null;
+  @Input() bookingType : string = "individual";
+  
   monthName : string;
   currentMonth : bmwMonth = new bmwMonth;
   displayMonths : bmwMonth [] = [];

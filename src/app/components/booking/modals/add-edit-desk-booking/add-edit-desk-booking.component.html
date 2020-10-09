@@ -1,18 +1,20 @@
 <div class="container">
-    <h1 *ngIf="!booking">Desk Bookings</h1>
-    <h1 *ngIf="booking">Edit Desk Bookings</h1>
+    <h1 *ngIf="!editing">Desk Bookings</h1>
+    <h1 *ngIf="editing">Edit Desk Bookings</h1>
 <hr>
     <div class="row">
         <div class="col-md-4 col-sm-0"></div>
         <div class="col-md-4 col-sm-12">
+          <form [formGroup]="bookingForm">
             <div class="form-group">
                 <label for="building">
                   <a placement="top" ngbTooltip="Select the building you would like to make a booking in." style="font-size: xx-small;">
                     <i class="fa fa-info-circle"></i>
                   </a>
                   Select a building</label>
-                <select name="building" id="building" class="form-control">
+                <select name="building" id="building" class="form-control" formControlName="buildingId" (change)="getBuildingTables()">
                     <option value="null" selected disabled>Select a Building</option>
+                    <option [value]="item.buildingId" *ngFor="let item of buildings">{{item.name}}</option>
                 </select>
             </div>
             <div class="form-group">
@@ -21,12 +23,14 @@
                     <i class="fa fa-info-circle"></i>
                   </a>
                   Select a Table</label>
-                <select name="table" id="table" class="form-control">
+                <select name="table" id="table" class="form-control" formControlName="tableId">
                     <option value="null" selected disabled>Select a Table</option>
+                    <option [value]="item.id" *ngFor="let item of tables">{{item.name}}</option>
                 </select>
-                <button class="btn btn-outline-primary form-control mt-4" *ngIf="!booking">Book</button>
-                <button class="btn btn-outline-primary form-control mt-4" *ngIf="booking">Save Changes</button>
+                <button class="btn btn-outline-primary form-control mt-4" *ngIf="!editing" [disabled]="bookingForm.invalid" (click)="makeBooking()">Book</button>
+                <button class="btn btn-outline-primary form-control mt-4" *ngIf="editing">Save Changes</button>
             </div>
+          </form>
         </div>
         <div class="col-md-4 col-sm-0"></div>
 

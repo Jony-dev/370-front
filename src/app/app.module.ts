@@ -103,6 +103,8 @@ import { InterviewReportComponent } from './components/reports/interview-report/
 import { TeamReportComponent } from './components/reports/team-report/team-report.component';
 import { CandidateReportComponent } from './components/reports/candidate-report/candidate-report.component';
 import { BookingReportComponent } from './components/reports/booking-report/booking-report.component';
+import { AssistBookingComponent } from './components/booking/assist-booking/assist-booking.component';
+import { FilterStage } from './components/system/pipes/stageFilter.pipe';
 
 @NgModule({
   declarations: [
@@ -190,7 +192,9 @@ import { BookingReportComponent } from './components/reports/booking-report/book
     ResetPasswordComponent,
     ResetPasswordComponent,
     RejectCardComponent,
-    FilterName
+    FilterName,
+    FilterStage,
+    AssistBookingComponent
     
      
   ],

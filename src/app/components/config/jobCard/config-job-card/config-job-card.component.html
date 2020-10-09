@@ -6,7 +6,7 @@
                 <h1>Stages</h1>
                 <form>
                     <div class="form-group form-inline">
-                        <h5>Search Stages:</h5> <input type="text" class="form-control ml-2">
+                        <h5>Search Stages:</h5> <input type="text" class="form-control ml-2" [formControl]="stageSearch">
                     </div>
                 </form>
                 <div>
@@ -19,7 +19,7 @@
                             </tr>
                         </thead>
 
-                         <tr *ngFor="let item of stages"><td>{{item.stage}}</td><td class="text-center"></td></tr>
+                         <tr *ngFor="let item of stages | filterStage:this.stageSearch.value"><td>{{item.stage}}</td><td class="text-center"></td></tr>
                     </table>
                 </div>
             </div>

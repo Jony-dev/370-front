@@ -41,6 +41,7 @@
 .week .day:not(.blank ):hover{
     cursor: pointer;
     box-shadow: 0 .25rem .75rem 5px rgba(0,0,0,.5);
+    z-index: 20;
 }
 
 

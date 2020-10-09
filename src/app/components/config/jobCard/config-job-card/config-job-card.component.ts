@@ -6,6 +6,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { Stage } from 'src/app/models/stage';
 import { Test } from 'src/app/models/test';
+import { FilterStage } from 'src/app/components/system/pipes/stageFilter.pipe';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-config-job-card',
@@ -18,6 +20,7 @@ export class ConfigJobCardComponent implements OnInit {
   stages : Stage [] = [];
   tests : Test[] = [];
 
+  stageSearch : FormControl = new FormControl();
   constructor(private modal: NgbModal, private api : ApiService, private toast : ToastsService) { }
 
   ngOnInit(): void {

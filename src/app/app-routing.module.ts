@@ -34,6 +34,7 @@ import { StageReportComponent } from './components/reports/stage-report/stage-re
 import { TeamReportComponent } from './components/reports/team-report/team-report.component';
 import { CandidateReportComponent } from './components/reports/candidate-report/candidate-report.component';
 import { BookingReportComponent } from './components/reports/booking-report/booking-report.component';
+import { AssistBookingComponent } from './components/booking/assist-booking/assist-booking.component';
 
 const routes: Routes = [
 { path: "", component : LoginComponent},
@@ -67,8 +68,8 @@ const routes: Routes = [
       { path : "StageReport", component : StageReportComponent},
       { path : "TeamReport", component : TeamReportComponent},
       { path : "CandidateReport", component : CandidateReportComponent},
-      { path : "BookingReport", component : BookingReportComponent,
-      },
+      { path : "BookingReport", component : BookingReportComponent,},
+      { path : "AssistBooking", component : AssistBookingComponent,},
   ]},
 { path: "AccountCreated", component : AccountSuccessCreateComponent},
 ];
