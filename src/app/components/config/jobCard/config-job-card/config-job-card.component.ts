@@ -21,6 +21,7 @@ export class ConfigJobCardComponent implements OnInit {
   tests : Test[] = [];
 
   stageSearch : FormControl = new FormControl();
+  testSearch : FormControl = new FormControl();
   constructor(private modal: NgbModal, private api : ApiService, private toast : ToastsService) { }
 
   ngOnInit(): void {

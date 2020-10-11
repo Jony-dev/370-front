@@ -29,7 +29,7 @@
                 <h1>Tests</h1>
                 <form>
                     <div class="form-group form-inline">
-                        <h5>Search Tests:</h5> <input type="text" class="form-control ml-2">
+                    <h5>Search Tests:</h5> <input type="text" class="form-control ml-2" [formControl]="testSearch">
                     </div>
                 </form>
                 <div class="group-right" (click)="addTest()">
@@ -43,7 +43,7 @@
                         </tr>
                     </thead>
                     <!-- BUILDINGS GO HERE -->
-                    <tr *ngFor="let item of tests"><td>{{item.testName}}</td><td class="text-center">
+                    <tr *ngFor="let item of tests | filterTest : testSearch.value"><td>{{item.testName}}</td><td class="text-center">
                       <a placement="top" ngbTooltip="Select this to edit the corresponding test">
                         <i class="far fa-pencil-alt" (click)="editTest(item.testId)"></i>
                       </a>

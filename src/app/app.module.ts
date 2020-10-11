@@ -105,6 +105,7 @@ import { CandidateReportComponent } from './components/reports/candidate-report/
 import { BookingReportComponent } from './components/reports/booking-report/booking-report.component';
 import { AssistBookingComponent } from './components/booking/assist-booking/assist-booking.component';
 import { FilterStage } from './components/system/pipes/stageFilter.pipe';
+import { FilterTest } from './components/system/pipes/filterTest.pipe';
 
 @NgModule({
   declarations: [
@@ -194,6 +195,7 @@ import { FilterStage } from './components/system/pipes/stageFilter.pipe';
     RejectCardComponent,
     FilterName,
     FilterStage,
+    FilterTest,
     AssistBookingComponent
     
      
