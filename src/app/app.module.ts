@@ -242,17 +242,17 @@ import { FilterApplicants } from './components/system/pipes/filterPool.pipe';
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    
-    
-     
+
+
+
   ],
   providers: [
     FormBuilder,
     ToastsService,
     JobCardHelperService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
-    
-    
+
+
   ],
   bootstrap: [AppComponent],
   entryComponents: [ TestModalComponent ]

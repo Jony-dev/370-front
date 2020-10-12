@@ -72,7 +72,8 @@ export class ConfigRolesAndAuthComponent implements OnInit {
   }
 
   deleteSuccess(success, id){
-    this.toast.display({type:"Success", heading : success.Title, message : success.message});
+
+   this.toast.display({type:"Success", heading : success.Title, message : success.message});
     this.getRoles();
   }
   deleteFail(error){

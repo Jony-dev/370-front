@@ -51,6 +51,9 @@ import { BookableDate } from '../models/bookableDate';
 import { BookingCap } from '../models/bookingCap';
 import { GroupBookingCap } from '../models/groupBookingCap';
 import { SlotTable } from '../models/slotTable';
+import { Audit } from '../models/audit';
+
+
 
 
 
@@ -101,6 +104,10 @@ export class ApiService {
   interview: string = `${this.globalRoot}API/Interview/`;
   date : string = `${this.globalRoot}API/Date`;
   backUp : string = `${this.globalRoot}API/Backup`;
+  audit: string = `${this.globalRoot}API/Audit/`;
+
+
+
   constructor( private http: HttpClient){ }
 
   makeRequest(){
@@ -485,7 +492,7 @@ export class ApiService {
   getTableTypes(){
     return this.http.post<TableType[]>(this.tableType, {request: "getTableTypes"});
   }
-  ///operationauth
+  ////////////////////////////////////operationauth//////////////////////////////////////////////
   getOperationAuthorisation(){
     return this.http.post<OperationAuthorisation[]>(this.operationAuthorisation, {request : "getOperationAuthorisation"});
   }
@@ -515,9 +522,14 @@ export class ApiService {
   getMyApprovals(){
     return this.http.post<MyApprovers[]>(this.approver, { request : "myApprovals"});
   }
+  ///////////////////////////////////////////////////////
   getDatabaseTables(){
     return this.http.post<DatabaseTable[]>(this.databaseTable, {request : "getDatabaseTables"});
   }
+  getRecords(){
+    return this.http.post<DatabaseTable[]>(this.databaseTable, {request : "getRecords"});
+  }
+  //////////////////////////////////////////////////////
   getOperation(){
     return this.http.post<Operation[]>(this.operation, {request : "getOperation"});
   }
@@ -733,6 +745,11 @@ export class ApiService {
   restoreBackup(){
     return this.http.post( this.backUp, { request : "restore"})
   }
+  ////////////////////////////////////Audit Log////////////////////////////////////////////////////////
+  getAudits(){
+    return this.http.post<Audit[]>( this.audit, {request : "getAudits" });
+  }
+
+
 
 }
-

@@ -50,7 +50,6 @@ export class AuthorizationComponent implements OnInit {
     this.getRoles();
     this.getDatabaseTables();
     this.getOperation();
-    // this.getDivisions();
 
   }
 
