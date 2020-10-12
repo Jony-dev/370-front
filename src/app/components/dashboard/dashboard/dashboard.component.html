@@ -1,4 +1,7 @@
+
+
 <div [className]="viewSideBar ? 'grid-container-sidebar' : 'grid-container'">
+
   <div class="toast-container">
     <app-toast></app-toast>
   </div>
@@ -7,6 +10,7 @@
       <img [hidden]="viewSideBar" class="hamburger" src="../assets/icons/hamburger_open.svg" alt="Hamburger" (click)="toggleSideBar()">
       <h3>Dashboard</h3>
     </div>
+
     <ul>
       <li class="logout" (click)="logout()">
         <h6>Logout</h6>
@@ -73,6 +77,7 @@
     </ul>
   </div>
   <div class="dash">
+
     <div class="container-fluid" style="overflow: auto;">
       <router-outlet></router-outlet>
     </div>

@@ -2,3 +2,19 @@
 .intro{
    margin: 20px 0 20px 0;
 }
+.bg-img {
+   /* The image used */
+   background-image: url("https://cdn.wallpapersafari.com/36/32/s6l5Xf.jpg");
+
+   /* Control the height of the image */
+   min-height: 1000px;
+   
+
+   /* Center and scale the image nicely */
+   background-position: bottom;
+   background-repeat: no-repeat;
+   background-size: cover;
+   position: unset;
+ }
+
+
