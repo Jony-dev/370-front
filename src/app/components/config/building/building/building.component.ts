@@ -8,6 +8,7 @@ import { Building } from 'src/app/models/building';
 import { Floor } from 'src/app/models/floor';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastsService } from 'src/app/services/toasts.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-building',
@@ -20,6 +21,10 @@ export class BuildingComponent implements OnInit {
   buildings : Building [] = [];
   floors : Floor [] = [];
 
+  buildingControl : FormControl = new FormControl();
+  floorControl : FormControl = new FormControl();
+  locationControl : FormControl = new FormControl();
+  
   constructor(private modal: NgbModal,  private api : ApiService, private toast : ToastsService) { }
 
   ngOnInit(): void {

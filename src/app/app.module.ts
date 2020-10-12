@@ -106,6 +106,20 @@ import { BookingReportComponent } from './components/reports/booking-report/book
 import { AssistBookingComponent } from './components/booking/assist-booking/assist-booking.component';
 import { FilterStage } from './components/system/pipes/stageFilter.pipe';
 import { FilterTest } from './components/system/pipes/filterTest.pipe';
+import { FilterBuilding } from './components/system/pipes/filterBuilding.pipe';
+import { FilterFloor } from './components/system/pipes/filterFloor.pipe';
+import { FilterLocation } from './components/system/pipes/filterLocation.pipe';
+import { FilterDepartment } from './components/system/pipes/filterDepartment.pipe';
+import { FilterDivision } from './components/system/pipes/filterDivision.pipe';
+import { FilterSkills } from './components/system/pipes/filterSkills.pipe';
+import { FilterRequirements } from './components/system/pipes/filterRequirements.pipe';
+import { FilterQuestions } from './components/system/pipes/filterQuestions.pipe';
+import { FilterRoles } from './components/system/pipes/filterRoles.pipe';
+import { FilterJobs } from './components/system/pipes/filterJobs.pipe';
+import { FilterViewAuth } from './components/system/pipes/filterViewAuths.pipe';
+import { FilterMyListings } from './components/system/pipes/filterJobListing.pipe';
+import { BackupRestoreComponent } from './components/config/backup-restore/backup-restore.component';
+import { FilterApplicants } from './components/system/pipes/filterPool.pipe';
 
 @NgModule({
   declarations: [
@@ -196,7 +210,22 @@ import { FilterTest } from './components/system/pipes/filterTest.pipe';
     FilterName,
     FilterStage,
     FilterTest,
-    AssistBookingComponent
+    FilterBuilding,
+    FilterFloor,
+    FilterLocation,
+    FilterDepartment,
+    FilterDivision,
+    FilterSkills,
+    FilterRequirements,
+    FilterQuestions,
+    FilterRoles,
+    FilterJobs,
+    FilterViewAuth,
+    FilterMyListings,
+    FilterMyListings,
+    AssistBookingComponent,
+    FilterApplicants,
+    BackupRestoreComponent
     
      
   ],

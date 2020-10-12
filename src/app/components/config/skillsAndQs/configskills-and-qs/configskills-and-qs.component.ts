@@ -11,6 +11,7 @@ import { ToastsService } from 'src/app/services/toasts.service';
 import { Skill } from 'src/app/models/skill';
 import { Requirement } from 'src/app/models/requirement';
 import { LongQuestion } from 'src/app/models/longQuestion';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-configskills-and-qs',
@@ -21,6 +22,10 @@ import { LongQuestion } from 'src/app/models/longQuestion';
 export class ConfigskillsAndQsComponent implements OnInit {
 
   constructor(private modal : NgbModal , private api : ApiService, private toast : ToastsService) { }
+
+  skillControl : FormControl = new FormControl();
+  requirementControl : FormControl = new FormControl();
+  questionControl : FormControl = new FormControl();
 
   skills : Skill [] = [];
   requirements : Requirement [] = [];

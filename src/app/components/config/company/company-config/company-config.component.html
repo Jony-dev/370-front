@@ -5,7 +5,7 @@
             <h1>Department</h1>
             <form>
                 <div class="form-group form-inline">
-                    Search Department: <input type="text" class="form-control ml-2">
+                    Search Department: <input type="text" class="form-control ml-2" [formControl]="departmentControl">
                 </div>
             </form>
             <div class="row">
@@ -24,7 +24,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <tr *ngFor="let item of departments"><td>{{item.name}}</td><td class="text-center">
+                                    <tr *ngFor="let item of departments | filterDepartment:departmentControl.value"><td>{{item.name}}</td><td class="text-center">
                                       <a placement="top" ngbTooltip="Select this to view the corresponding department">
                                         <i class="fas fa-eye ml-4"(click)="viewDepartment(item.departmentId)"></i>
                                       </a>
@@ -57,7 +57,7 @@
             <h1>Division</h1>
             <form>
                 <div class="form-group form-inline">
-                    Search Division: <input type="text" class="form-control ml-2">
+                    Search Division: <input type="text" class="form-control ml-2" [formControl]="divisionControl">
                 </div>
             </form>
             <div class="row">
@@ -76,7 +76,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                  <tr *ngFor="let item of divisions"><td>{{item.name}}</td><td class="text-center">
+                                  <tr *ngFor="let item of divisions | filterDivision:divisionControl.value"><td>{{item.name}}</td><td class="text-center">
                                     <a placement="top" ngbTooltip="Select this to view the corresponding division details">
                                       <i class="fas fa-eye ml-4"(click)="viewDivision(item.divisionId)"></i>
                                     </a>

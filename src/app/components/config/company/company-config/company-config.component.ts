@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { Division } from 'src/app/models/division';
 import { Team } from 'src/app/models/team';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-company-config',
@@ -15,6 +16,10 @@ import { Team } from 'src/app/models/team';
   styleUrls: ['./company-config.component.css']
 })
 export class CompanyConfigComponent implements OnInit {
+
+
+  departmentControl : FormControl = new FormControl();
+  divisionControl : FormControl = new FormControl();
 
   departments : Department [] = [];
   divisions : Division [] = [];

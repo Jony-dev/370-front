@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MyApplication } from 'src/app/models/myApplication';
 import { MyListings } from 'src/app/models/myListings';
@@ -13,6 +14,7 @@ import { ToastsService } from 'src/app/services/toasts.service';
 })
 export class JobListingComponent implements OnInit, OnDestroy {
 
+  listingControl : FormControl = new FormControl();
   listings : MyListings[] = [];
   applications : MyApplication [] = [];
   refSub : Subscription;

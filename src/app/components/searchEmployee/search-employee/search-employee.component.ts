@@ -10,6 +10,7 @@ export class SearchEmployeeComponent implements OnInit {
 
   constructor() { }
 
+  
   ngOnInit(): void {
   }
 

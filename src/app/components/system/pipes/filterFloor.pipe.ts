@@ -16,7 +16,7 @@ export class FilterFloor implements PipeTransform {
 
         return items.filter( floors => {
            let buildingFloor = floors.buildingName + floors.floorNumber;
-           if(buildingFloor.includes(searchText.toLocaleLowerCase()))
+           if(buildingFloor.toLocaleLowerCase().includes(searchText))
                 return floors;
         });
 

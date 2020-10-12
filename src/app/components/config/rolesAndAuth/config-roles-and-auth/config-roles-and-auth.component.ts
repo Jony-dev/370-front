@@ -8,6 +8,7 @@ import { Role } from 'src/app/models/role';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { Job } from 'src/app/models/job';
 import { ViewAuth } from 'src/app/models/viewAuth';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-config-roles-and-auth',
@@ -15,6 +16,10 @@ import { ViewAuth } from 'src/app/models/viewAuth';
   styleUrls: ['./config-roles-and-auth.component.css']
 })
 export class ConfigRolesAndAuthComponent implements OnInit {
+
+  roleControl : FormControl = new FormControl();
+  jobControl : FormControl = new FormControl();
+  authControl : FormControl = new FormControl();
 
   roles : Role [] = [];
   jobs : Job [] = [];

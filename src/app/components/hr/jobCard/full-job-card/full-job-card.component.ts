@@ -15,6 +15,7 @@ import { PassedInterview } from 'src/app/models/passedInterview';
 import { CardStatus } from 'src/app/models/cardStatus';
 import { AuthService } from 'src/app/services/auth.service';
 import { CreateInterviewComponent } from '../../modals/create-interview/create-interview.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-full-job-card',
@@ -26,6 +27,10 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
 
   private routeSub : Subscription;
   private helperSub : Subscription;
+
+
+  searchControl : FormControl = new FormControl();
+  typeControl : FormControl = new FormControl();
 
   cardStatus : CardStatus = null;
   isHrManager : boolean = false;
@@ -102,6 +107,7 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
     this.getCardStatus();
   }
   gotAllApplicants( success : ApplicantPoolCard []){
+    console.log(success);
     this.undecided = [];
     this.shortList = [];
     this.disqualified = [];
@@ -180,8 +186,6 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
     this.api.cardPublished(this.routeId).subscribe(x => this.cardPublished = (<any>x).published, e => this.loadError(e));
     this.api.getCardStatus(this.routeId).subscribe(
       x => {this.cardStatus = x;
-        console.log(this.cardStatus);
-        console.log(this.auth.userId);
         if(this.cardStatus.recruiterId == this.auth.userId)
           this.isReqruiter = true;
         else if(this.cardStatus.hrManagerId == this.auth.userId)
@@ -213,7 +217,6 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
   getPassedInterviews(){
     this.api.getPassedInterviews(this.routeId).subscribe( res => {
       this.passedInterviews = res
-      console.log(res);
     }, er => this.loadError(er));
   }
 

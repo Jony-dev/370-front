@@ -121,16 +121,16 @@
                             <div class="col-lg-3 col-sm-12">
                                 <div class="form-group">
                                     <label for="searchApplicant">Search Applicant</label>
-                                    <input type="text" name="searchApplicant" id="searchApplicant" class="form-control">
+                                    <input type="text" name="searchApplicant" id="searchApplicant" class="form-control" [formControl]="searchControl">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-12">
                                 <div class="form-group">
                                     <label for="applicantType">Applicant Type</label>
-                                    <select name="applicantType" id="applicantType" class="form-control">
-                                        <option value="all">All</option>
-                                        <option value="internal">Internal</option>
-                                        <option value="internal">External</option>
+                                    <select name="applicantType" id="applicantType" class="form-control" [formControl]="typeControl">
+                                        <option [value]="null">All</option>
+                                        <option [value]="1">Internal</option>
+                                        <option [value]="0">External</option>
                                     </select>
                                 </div>
                             </div>
@@ -166,19 +166,19 @@
                             <div class="col-lg-4 col-sm-12">
                                 <h3>Shortlist</h3>
                                 <div class="panel-container panel-ext sm-container">
-                                    <app-applicant-pool-card [cardDetails]="item" *ngFor="let item of shortList" class="img-sm border-el mt-2" (changePool)="routeRequest($event)"></app-applicant-pool-card>
+                                    <app-applicant-pool-card [cardDetails]="item" *ngFor="let item of shortList | filterApplicants:searchControl.value:typeControl.value" class="img-sm border-el mt-2" (changePool)="routeRequest($event)"></app-applicant-pool-card>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <h3>Undecided</h3>
                                 <div class="panel-container panel-ext sm-container">
-                                    <app-applicant-pool-card [cardDetails]="item" *ngFor="let item of undecided" class="img-sm border-el mt-2" (changePool)="routeRequest($event)"></app-applicant-pool-card>
+                                    <app-applicant-pool-card [cardDetails]="item" *ngFor="let item of undecided | filterApplicants:searchControl.value:typeControl.value" class="img-sm border-el mt-2" (changePool)="routeRequest($event)"></app-applicant-pool-card>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <h3>Disqualified</h3>
                                 <div class="panel-container panel-ext sm-container">
-                                    <app-applicant-pool-card [cardDetails]="item" *ngFor="let item of disqualified" class="img-sm border-el mt-2" (changePool)="routeRequest($event)"></app-applicant-pool-card>
+                                    <app-applicant-pool-card [cardDetails]="item" *ngFor="let item of disqualified | filterApplicants:searchControl.value:typeControl.value" class="img-sm border-el mt-2" (changePool)="routeRequest($event)"></app-applicant-pool-card>
                                 </div>
                             </div>
                         </div>

@@ -9,11 +9,11 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group">
                                 <label for="jobSearch">Search Jobs</label>
-                                <input type="text" name="jobSearch" id="jobSearch" class="form-control">
+                                <input type="text" name="jobSearch" id="jobSearch" class="form-control" [formControl]="listingControl">
                             </div>
                         </div>
                     </div>
-                    <app-job-listing-card *ngFor="let item of listings" [jobInformation]="item"></app-job-listing-card>
+                    <app-job-listing-card *ngFor="let item of listings | filterMyListings:listingControl.value" [jobInformation]="item"></app-job-listing-card>
                 </div>
 
             </div>

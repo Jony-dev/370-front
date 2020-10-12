@@ -100,7 +100,7 @@ export class ApiService {
   answer : string = `${this.globalRoot}API/Answer/`;
   interview: string = `${this.globalRoot}API/Interview/`;
   date : string = `${this.globalRoot}API/Date`;
-
+  backUp : string = `${this.globalRoot}API/Backup`;
   constructor( private http: HttpClient){ }
 
   makeRequest(){
@@ -726,5 +726,13 @@ export class ApiService {
   makeEmpGroupBooking( payload : any){
     return this.http.post( this.booking, {request : "makeGroupBookingEmployee", payload})
   }
+
+  makeBackup(){
+    return this.http.post( this.backUp, { request : "backup"})
+  }
+  restoreBackup(){
+    return this.http.post( this.backUp, { request : "restore"})
+  }
+
 }
 

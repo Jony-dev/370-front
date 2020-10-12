@@ -6,7 +6,7 @@
                 <h1>Locations</h1>
                 <form>
                     <div class="form-group form-inline">
-                        <h5>Search Location:</h5> <input type="text" class="form-control ml-2">
+                        <h5>Search Location:</h5> <input type="text" class="form-control ml-2" [formControl]="locationControl">
                     </div>
                 </form>
                 <div>
@@ -21,7 +21,7 @@
                           </tr>
                       </thead>
                       <!-- LOCATIONS GO HERE -->
-                      <tr *ngFor="let item of locations"><td>{{item.name}}</td><td class="text-center"><a placement="top" ngbTooltip="Select this to edit the corresponding location">
+                      <tr *ngFor="let item of locations | filterLocation:locationControl.value"><td>{{item.name}}</td><td class="text-center"><a placement="top" ngbTooltip="Select this to edit the corresponding location">
                         <i class="far fa-pencil-alt" (click)="editLocation(item.locationId)"></i>
                       </a>
                       <a placement="top" ngbTooltip="Select this to delete the corresponding location">
@@ -37,7 +37,7 @@
                 <h1>Buildings</h1>
                 <form>
                     <div class="form-group form-inline">
-                        <h5>Search Buildings:</h5> <input type="text" class="form-control ml-2">
+                        <h5>Search Buildings:</h5> <input type="text" class="form-control ml-2" [formControl]="buildingControl">
                     </div>
                 </form>
                 <div class="group-right" (click)="addBuilding()">
@@ -51,7 +51,7 @@
                       </tr>
                   </thead>
                   <!-- Builiding GO HERE -->
-                  <tr *ngFor="let item of buildings" ><td>{{item.name}}</td><td class="text-center">
+                  <tr *ngFor="let item of buildings | filterBuilding:buildingControl.value" ><td>{{item.name}}</td><td class="text-center">
                     <a placement="top" ngbTooltip="Select this to edit the corresponding building">
                       <i class="far fa-pencil-alt" (click)="editBuilding(item.buildingId)"></i>
                     </a>
@@ -66,7 +66,7 @@
                 <h1>Floors</h1>
                 <form>
                     <div class="form-group form-inline">
-                        <h5>Search Floors:</h5> <input type="text" class="form-control ml-2">
+                        <h5>Search Floors:</h5> <input type="text" class="form-control ml-2" [formControl]="floorControl">
                     </div>
                 </form>
                 <div class="group-right" (click)="addFloor()">
@@ -82,7 +82,7 @@
                     </thead>
                     <!-- Floors GO HERE -->
 
-                    <tr *ngFor="let item of floors"><td>{{item.floorNumber}}</td><td>{{item.buildingName}}</td><td class="text-center">
+                    <tr *ngFor="let item of floors | filterFloor:floorControl.value"><td>{{item.floorNumber}}</td><td>{{item.buildingName}}</td><td class="text-center">
                       <a placement="top" ngbTooltip="Select this to edit the corresponding floor">
                         <i class="far fa-pencil-alt" (click)="editFloor(item.floorId)"></i>
                       </a>
