@@ -42,6 +42,9 @@ import { ApplicationQuestions } from '../models/applicationQuestions';
 import { MyApplication } from '../models/myApplication';
 import { ApplicantPoolCard } from '../models/applicantPool';
 import { UpCommingInterviews } from '../models/upComingInterviews';
+import { Audit } from '../models/audit';
+
+
 
 
 
@@ -90,6 +93,7 @@ export class ApiService {
   question : string = `${this.globalRoot}API/Question/`;
   answer : string = `${this.globalRoot}API/Answer/`;
   interview: string = `${this.globalRoot}API/Interview/`;
+  audit: string = `${this.globalRoot}API/Audit/`;
 
 
 
@@ -461,7 +465,7 @@ export class ApiService {
   getTableTypes(){
     return this.http.post<TableType[]>(this.tableType, {request: "getTableTypes"});
   }
-  ///operationauth
+  ////////////////////////////////////operationauth//////////////////////////////////////////////
   getOperationAuthorisation(){
     return this.http.post<OperationAuthorisation[]>(this.operationAuthorisation, {request : "getOperationAuthorisation"});
   }
@@ -491,9 +495,14 @@ export class ApiService {
   getMyApprovals(){
     return this.http.post<MyApprovers[]>(this.approver, { request : "myApprovals"});
   }
+  ///////////////////////////////////////////////////////
   getDatabaseTables(){
     return this.http.post<DatabaseTable[]>(this.databaseTable, {request : "getDatabaseTables"});
   }
+  getRecords(){
+    return this.http.post<DatabaseTable[]>(this.databaseTable, {request : "getRecords"});
+  }
+  //////////////////////////////////////////////////////
   getOperation(){
     return this.http.post<Operation[]>(this.operation, {request : "getOperation"});
   }
@@ -568,6 +577,11 @@ export class ApiService {
     return this.http.post<UpCommingInterviews[]>( this.interview, {request : "getInterViewByCard", payload : { cardId } });
   }
 
+  ////////////////////////////////////Audit Log////////////////////////////////////////////////////////
+  getAudits(){
+    return this.http.post<Audit[]>( this.audit, {request : "getAudits" });
+  }
+
+
 
 }
-

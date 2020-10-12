@@ -24,7 +24,7 @@ export class TableComponent implements OnInit {
   buildings : Building[] = [];
   floors : Floor[] = [];
   tableTypes : TableType[] = [];
-  tableSearch : string;
+  searchText : string;
   requestDetails : Building;
 
   tableForm:FormGroup;
@@ -36,14 +36,17 @@ export class TableComponent implements OnInit {
   }
 
   getData(){
+    this.getTables();
     this.getTableTypes();
     this.getBuildings();
     this.getFloors();
-    this.getFloorsByPipe();
+    //this.getFloorsByPipe();
+
   }
 
   buildForm(){
     this.tableForm = this.formBuilder.group({
+      tableSearch: ["",[Validators.required]],
       ttypeId : [null,[Validators.required]],
       buildingId : [null,[Validators.required]],
       floorId : [null,[Validators.required]],
@@ -51,6 +54,7 @@ export class TableComponent implements OnInit {
     });
 
     this.addTableForm = this.formBuilder.group({
+      tableId : ["", [Validators.required]],
       ttypeId : [null,[Validators.required]],
       buildingId : [null,[Validators.required]],
       floorId : [null,[Validators.required]],
@@ -65,6 +69,17 @@ export class TableComponent implements OnInit {
     });
   }
 
+  editTable(id : number){
+    const modalInstance = this.modal.open(EditTableComponent);
+    console.log(this.tables);
+    let table = this.tables.find( x => x.id == id);
+    //let location = this.locations.find( x => x.name == lo);
+    modalInstance.componentInstance.editTable = table;
+    modalInstance.result.then(res =>{
+      this.getTables();
+    });
+   // console.log(this.tables);
+  }
   getTables(){
     this.api.getTables().subscribe( success => this.getTableSuccess(success), error => this.getTableFail(error))
   }
@@ -87,17 +102,7 @@ export class TableComponent implements OnInit {
     this.toast.display({type:"Error", heading : error.error.Title, message : error.error.message});
   }
 
-  editTable(id : number){
-    const modalInstance = this.modal.open(EditTableComponent);
-    console.log(this.tables);
-    let table = this.tables.find( x => x.id == id);
-    //let location = this.locations.find( x => x.name == lo);
-    modalInstance.componentInstance.editTable = table;
-    modalInstance.result.then(res =>{
-      this.getTables();
-    });
-   // console.log(this.tables);
-  }
+
 
   ////////////////Building//////////////////////
   getBuildings(){
@@ -140,13 +145,18 @@ export class TableComponent implements OnInit {
   }
 
   gotFloors(success){
-    this.floors = success;
+    //this.floors = success;
     //this.approvers.push(this.employees.find(x => x.id == this.requestDetails.user.id));
-    this.floors = this.floors.filter( x => x.floorId == this.requestDetails.buildingId);
+    //this.floors = this.floors.filter( x => x.floorId == this.requestDetails.buildingId);
+    this.floors = success;
   }
   fetchFailed(error){
     this.toast.display({type:"Error",heading: error.error.Title, message : error.error.message});
   }
+
+  ////////////////////////////////////////////////////////////////
+
+
 
 
 

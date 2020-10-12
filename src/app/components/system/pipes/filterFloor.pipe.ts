@@ -15,9 +15,10 @@ export class FilterFloor implements PipeTransform {
         searchText = searchText.toLowerCase();
 
         return items.filter( floors => {
-           let buildingFloor = floors.buildingId;
-           if(buildingFloor.includes(searchText.toLocaleLowerCase()))
-                return floors;
+           //let buildingFloor = floors.buildingId;
+           //if(buildingFloor.includes(searchText.toLocaleLowerCase()))
+               // return floors;
+            return floors.includes(searchText);
         });
 
     }

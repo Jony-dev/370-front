@@ -6,14 +6,7 @@
                 <th>Number of records</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>Tables</td>
-                    <td>900</td>
-                </tr>
-                <tr>
-                    <td>JobCard</td>
-                    <td>1200</td>
-                </tr>
+              <tr *ngFor="let item of dataBaseTable"><td>{{item.name}}</td><td>{{item.rowCount}}</td>></tr>
             </tbody>
         </table>
     </div>

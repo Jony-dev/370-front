@@ -103,6 +103,7 @@ import { InterviewReportComponent } from './components/reports/interview-report/
 import { TeamReportComponent } from './components/reports/team-report/team-report.component';
 import { CandidateReportComponent } from './components/reports/candidate-report/candidate-report.component';
 import { BookingReportComponent } from './components/reports/booking-report/booking-report.component';
+import { FilterFloor } from './components/system/pipes/filterFloor.pipe';
 
 @NgModule({
   declarations: [
@@ -190,9 +191,10 @@ import { BookingReportComponent } from './components/reports/booking-report/book
     ResetPasswordComponent,
     ResetPasswordComponent,
     RejectCardComponent,
-    FilterName
-    
-     
+    FilterName,
+    FilterFloor
+
+
   ],
   imports: [
     HttpClientModule,
@@ -207,17 +209,17 @@ import { BookingReportComponent } from './components/reports/booking-report/book
     FormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    
-    
-     
+
+
+
   ],
   providers: [
     FormBuilder,
     ToastsService,
     JobCardHelperService,
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
-    
-    
+
+
   ],
   bootstrap: [AppComponent],
   entryComponents: [ TestModalComponent ]

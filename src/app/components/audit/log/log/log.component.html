@@ -36,8 +36,7 @@
                     <th class="text-right">Date Performed</th>
                 </thead>
                 <tbody>
-                    <tr><td>1</td><td>5</td><td>Jonathan</td><td>van der Breggen</td><td>Updated User 5 Profile</td><td class="text-right">08/05/2020 17:15</td></tr>
-                    <tr><td>2</td><td>6</td><td>Marli</td><td>Du Bison</td><td>Deleted User 5 Profile</td><td class="text-right">09/05/2020 17:15</td></tr>
+                    <tr *ngFor="let item of audits"><td>{{item.id}}</td><td>{{item.userId}}</td><td>{{item.userName}}</td><td>{{item.userSurname}} </td><td>{{item.operationPerformed}} </td><td class="text-right"> {{item.date}} </td></tr>
                 </tbody>
             </table>
             </div>
