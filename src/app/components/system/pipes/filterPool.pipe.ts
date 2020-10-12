@@ -15,8 +15,6 @@ export class FilterApplicants implements PipeTransform {
 
         if(!searchText && internal){
             return items.filter( applicant => {
-                let test = !!+applicant.internal;
-                let testA = !!+internal;
                 if(!!+applicant.internal == !!+internal)
                         return applicant;
                 });
@@ -33,7 +31,7 @@ export class FilterApplicants implements PipeTransform {
         else
             return items.filter( applicant => {
             let applicantRec = applicant.userName + applicant.userSurname;
-            if(applicantRec.toLocaleLowerCase().includes(searchText) && applicant.internal == internal)
+            if(applicantRec.toLocaleLowerCase().includes(searchText) && !!+applicant.internal == !!+internal)
                     return applicant;
             });
 
