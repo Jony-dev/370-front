@@ -23,23 +23,26 @@ export class DatabaseComponent implements OnInit {
   }
 
   getData(){
-    console.log(this.dataBaseTable);
+
     this.getRecords();
   }
 
   getRecords(){
-    console.log(this.dataBaseTable);
+
     this.api.getRecords().subscribe( success => this.getRecordSuccess(success), error => this.getRecordFail(error));
   }
   //success
   getRecordSuccess(success){
-    console.log('Success');
+
     this.dataBaseTable = success;
+    console.log(this.dataBaseTable);
   }
   //fail
   getRecordFail(error){
-    console.log('error');
+
     this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
+    console.log(this.dataBaseTable);
   }
+
 
 }

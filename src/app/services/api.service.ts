@@ -52,6 +52,8 @@ import { BookingCap } from '../models/bookingCap';
 import { GroupBookingCap } from '../models/groupBookingCap';
 import { SlotTable } from '../models/slotTable';
 import { Audit } from '../models/audit';
+import { SearchUser } from '../models/searchUser';
+import { TeamMembers } from '../models/teamMembers';
 
 
 
@@ -105,6 +107,8 @@ export class ApiService {
   date : string = `${this.globalRoot}API/Date`;
   backUp : string = `${this.globalRoot}API/Backup`;
   audit: string = `${this.globalRoot}API/Audit/`;
+
+  teamMember: string = `${this.globalRoot}API/TeamMembers/`;
 
 
 
@@ -236,8 +240,8 @@ export class ApiService {
   //   return this.http.post(this.viewAuth, {request: "updateViewAuth", payload:vId, rId });///// need to get 2 variables
   // }
 
-  deleteViewAuthorisation(viewId: number, roleId: number){
-    return this.http.post(this.viewAuth,{request : "deleteViewAuthorisation", payload: {viewId, roleId }}); //the name of the function in backend
+  deleteViewAuthorisation(viewId : number, roleId : number){
+    return this.http.post(this.viewAuth,{request : "deleteViewAuthorisation", payload: {viewId, roleId}}); //the name of the function in backend
   }
 
   ////////////////////////////////  VIEW   ///////////////////////////////////////////
@@ -527,7 +531,7 @@ export class ApiService {
     return this.http.post<DatabaseTable[]>(this.databaseTable, {request : "getDatabaseTables"});
   }
   getRecords(){
-    return this.http.post<DatabaseTable[]>(this.databaseTable, {request : "getRecords"});
+    return this.http.post<DatabaseTable[]>(this.audit, {request : "getRecords"});
   }
   //////////////////////////////////////////////////////
   getOperation(){
@@ -711,7 +715,7 @@ export class ApiService {
     return this.http.post( this.booking, {request : "cancelBooking", payload })
   }
   // edituserBooking(){
-  //   THERE IS NO EDIT SO I DONNO IF I SHOULD EDIT OR A USER NEEDS TO FIRST CANCEL A BOOKING  
+  //   THERE IS NO EDIT SO I DONNO IF I SHOULD EDIT OR A USER NEEDS TO FIRST CANCEL A BOOKING
   // }
   getAssistantSearch(){
     return this.http.post( this.booking, {request : "getAssistantSearch"});
@@ -748,6 +752,21 @@ export class ApiService {
   ////////////////////////////////////Audit Log////////////////////////////////////////////////////////
   getAudits(){
     return this.http.post<Audit[]>( this.audit, {request : "getAudits" });
+  }
+
+  ///////////////////////////////////////////////TEAM///////////////////////////////////////////////////
+  /*getTeams(){
+    return this.http.post<Team[]>( this.team, {request : "getTeams" });
+  }*/ //ask courtney about all the teams (getTeams)
+
+  getMembersInTeam(){
+    return this.http.post<TeamMembers[]>( this.teamMember, {request : "getMembersInTeam" });
+  }
+
+  ////////////////////////////////////USER//////////////////////////////////////////////////////////
+
+  getUsersForSearch(){
+    return this.http.post<SearchUser[]>( this.user, {request : "getUsersForSearch" });
   }
 
 

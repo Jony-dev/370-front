@@ -1,18 +1,62 @@
-<div class="teamCard container-fluid">
-    <h3 class="ml-1">FAST</h3>
-    <div class="flex-container">
-        <p class="membership ml-2" *ngIf="owner"><i class="fad fa-crown"></i> Owner</p>
-        <p class="membership ml-2" *ngIf="!owner"><i class="fad fa-users"></i> Member</p>
-        <p class="membership text-right mr-2">No. Members 8</p>
-    </div>
-    
-    <div class="top-right"  ngbDropdown container="body" display="dynamic" #dropper="ngbDropdown">
-        <button ngbDropdownToggle class="btn elipse" id="dropdownManual" (focus)="dropper.open()" ><i class="fas fa-ellipsis-h"></i></button>
-        <div ngbDropdownMenu aria-labelledby="dropdownManual" >
-          <button ngbDropdownItem>Leave Team</button>
-          <button ngbDropdownItem>Edit Team</button>
-          <button ngbDropdownItem>Delete Team</button>
+<!--<div class="col-sm-12 col-md-6">
+  <h1>Team</h1>
+  <!--<form>
+      <div class="form-group form-inline">
+          Search Team: <input type="text" class="form-control ml-2" [formControl]="teamControl">
+      </div>
+  </form>
+  <div class="row">
+      <div class="col-sm-12 col-md-6">
+          <div class="panel-container sm-container">
+              <div class="group-right mt-2" (click)="addTeam()">
+                  <h5>New Team <i class="fa fa-plus" aria-hidden="true"></i></h5>
+              </div>
+                <!--<tr *ngFor="let item of teams | filterTeam:teamControl.value"><td>{{item.name}}</td><td class="text-center">
+              <table class="table greyHead mt-2">
+                  <thead>
+                      <tr>
+
+                          <th>Team</th>
+                          <th class="text-center">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                           <!--                            <a placement="top" ngbTooltip="Select this to view the corresponding department">
+                              <i class="fas fa-eye ml-4"(click)="viewTeam(item.teamId)"></i>
+                            </a>
+                            <a placement="top" ngbTooltip="Select this to edit the corresponding department">
+                              <i class="far fa-pencil-alt ml-4" (click)="editTeam(item.teamId)"></i>
+                            </a>
+                            <a placement="top" ngbTooltip="Select this to delete the corresponding department">
+                              <i class="fas fa-trash-alt ml-4" (click)="deleteTeam(item.teamId)"></i>
+                            </a>
+
+
+                      <tr>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
+      </div>
+
+      <!-- kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk-->
+      <div class="teamCard container-fluid">
+        <h3 class="ml-1">FAST</h3>
+        <div class="flex-container">
+            <p class="membership ml-2" *ngIf="owner"><i class="fad fa-crown"></i> Owner</p>
+            <p class="membership ml-2" *ngIf="!owner"><i class="fad fa-users"></i> Member</p>
+            <p class="membership text-right mr-2">No. Members 8</p>
         </div>
-    </div>  
-    
-</div>
+
+        <div class="top-right"  ngbDropdown container="body" display="dynamic" #dropper="ngbDropdown">
+            <button ngbDropdownToggle class="btn elipse" id="dropdownManual" (focus)="dropper.open()" ><i class="fas fa-ellipsis-h"></i></button>
+            <div ngbDropdownMenu aria-labelledby="dropdownManual" >
+              <button ngbDropdownItem>Leave Team</button>
+              <button ngbDropdownItem>Edit Team</button>
+              <button ngbDropdownItem>Delete Team</button>
+            </div>
+        </div>
+
+    </div>
