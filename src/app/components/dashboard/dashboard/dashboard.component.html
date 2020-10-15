@@ -32,11 +32,11 @@
 
     <ul class="sideBarNav">
       <h3>NAVIGATION</h3>
-      <li [routerLink]="['/Dashboard']"><i class="fad fa-home"></i><span>Home</span></li>
+      <li [routerLink]="['/Dashboard/Home']" routerLinkActive="active-link"><i class="fad fa-home"></i><span>Home</span></li>
       <li [routerLink]="['/Dashboard/Booking']" routerLinkActive="active-link" *ngIf="searchView('booking')"><i class="fas fa-calendar-minus"></i><span>Booking</span></li>
       <li [routerLink]="['/Dashboard/AssistBooking']" routerLinkActive="active-link"  *ngIf="searchView('assistant booking')"><i class="fal fa-calendar-alt"></i><span>Assistant Booking</span></li>
       <li [routerLink]="['/Dashboard/Teams']" routerLinkActive="active-link" *ngIf="searchView('team')"><i class="fas fa-user-friends"></i><span>Team</span></li>
-      <li [routerLink]="['/Dashboard/Interviews']" routerLinkActive="active-link" ><i class="fal fa-copy"></i><span>Interviews</span></li>
+      <li [routerLink]="['/Dashboard/Interviews']" routerLinkActive="active-link" *ngIf="searchView('interview')"><i class="fal fa-copy"></i><span>Interviews</span></li>
       <li class="accordian-parent" (click)="hrToggle = !hrToggle" *ngIf="searchView('hr')"><i class="far fa-share-alt"></i><span>HR</span><span class="arrow"><i [class]="(!hrToggle) ? 'far fa-chevron-down' : 'far fa-chevron-up'"></i></span>
         <ul class="accordian" *ngIf="hrToggle" (click)="hrToggle = !hrToggle">
           <li [routerLink]="['/Dashboard/JobCardDashboard']" routerLinkActive="active-link" >Job Cards</li>
@@ -67,7 +67,7 @@
         </ul>
       </li>
       <li [routerLink]="['/Dashboard/JobListing']" routerLinkActive="active-link" *ngIf="searchView('job listing')"><i class="fad fa-list-alt"></i><span>Job Listings</span></li>
-      <li [routerLink]="['/Dashboard/JobCardApproval']" routerLinkActive="active-link"><i class="far fa-stamp"></i><span>Approve Job Card</span></li>
+      <li [routerLink]="['/Dashboard/JobCardApproval']" routerLinkActive="active-link"><i class="far fa-stamp" *ngIf="searchView('job approve')"></i><span>Approve Job Card</span></li>
       <li class="accordian-parent" (click)="auditToggle = !auditToggle" *ngIf="searchView('audit')"><i class="fas fa-eye"></i><span>Audit</span><span class="arrow"><i [class]="(!auditToggle) ? 'far fa-chevron-down' : 'far fa-chevron-up'"></i></span>
         <ul class="accordian" *ngIf="auditToggle" (click)="auditToggle = !auditToggle">
           <li [routerLink]="['/Dashboard/AuditLog']" routerLinkActive="active-link">Log</li>

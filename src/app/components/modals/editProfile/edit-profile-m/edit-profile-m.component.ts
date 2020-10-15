@@ -13,6 +13,8 @@ import { Observable } from 'rxjs';
 import { UserProfile } from 'src/app/models/userProfile';
 import { userCard } from 'src/app/models/userCard';
 import { ResetPasswordComponent } from '../../reset-password/reset-password.component';
+import { Skill } from 'src/app/models/skill';
+import { Language } from 'src/app/models/language';
 
 @Component({
   selector: 'app-edit-profile-m',
@@ -26,6 +28,8 @@ export class EditProfileMComponent implements OnInit {
   userDetails : User;
   country$ : Observable<Country[]>;
   nationality$ : Observable<Nationality[]>;
+  skills : Skill [] = [];
+  languages : Language [] = [];
 
   constructor( public activeModal : NgbActiveModal, private modal : NgbModal, private formBuilder : FormBuilder, private api : ApiService, private toast : ToastsService) {
 

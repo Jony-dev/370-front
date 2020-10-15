@@ -52,6 +52,7 @@ import { BookingCap } from '../models/bookingCap';
 import { GroupBookingCap } from '../models/groupBookingCap';
 import { SlotTable } from '../models/slotTable';
 import { Audit } from '../models/audit';
+import { HomeCard } from '../models/homeCard';
 
 
 
@@ -217,9 +218,11 @@ export class ApiService {
     return this.http.post(this.job, {request: "updateJob", payload: jobName});
   }
   deleteJob(id : number){
-    return this.http.post(this.job, {request: "deleteJob", payload : {id} }); // NEEDS BACK END
+    return this.http.post(this.job, {request: "deleteJob", payload : {id} });
   }
-
+  editJobCard(details : any){
+    return this.http.post(this.jobCard, {request: "updateJobCard", payload : details });
+  }
   createJob(job : any){
     return this.http.post(this.job, {request: "createJob", payload : job});
   }
@@ -748,6 +751,10 @@ export class ApiService {
   ////////////////////////////////////Audit Log////////////////////////////////////////////////////////
   getAudits(){
     return this.http.post<Audit[]>( this.audit, {request : "getAudits" });
+  }
+
+  getHomeCards(){
+    return this.http.post<HomeCard>( this.user, {request : "getHomeData"})
   }
 
 

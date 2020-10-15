@@ -7,10 +7,11 @@
         </div>
         <div class="col-sm-12 col-md-4 text-center">
             <a [href]="'http://bmwBackend.edumarx.co.za/cvs/'+cvLocation" target="_blank" *ngIf="cvLocation!=null"><button class="btn btn-outline-primary">Download CV</button></a>
-            <button class="btn btn-outline-primary disabled" *ngIf="cvLocation ==null">No CV Attached</button>
+            <button class="btn btn-outline-primary" *ngIf="test ==null">No CV Attached</button>
             <br>
             <br>
-            <button class="btn btn-outline-primary">Download Test</button>
+            <a [href]="'http://bmwbackend.edumarx.co.za/tests/'+test" target="_self" *ngIf="test!=null"><button class="btn btn-outline-primary">Download Test</button></a>
+            <button class="btn btn-outline-primary" *ngIf="test===null">No Test Attached</button>
         </div>
     </div>
     <div class="row">

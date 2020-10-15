@@ -76,7 +76,10 @@
                                                 <i class="fa fa-info-circle"></i>
                                               </a>
                                               Job Card Name</label>
-                                            <input type="text" id="cardName" name="cardName" class="form-control" formControlName="jobCardName">
+                                            <input type="text" id="cardName" name="cardName" class="form-control" formControlName="jobCardName" (change)="test()">
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('jobCardName').getError('required') && basicDetails.get('jobCardName').touched">
+                                              Please fill in job card name
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
@@ -87,6 +90,12 @@
                                               </a>
                                               Start Date</label>
                                             <input type="date" id="startDate" name="startDate" class="form-control" formControlName="startDate">
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('startDate').getError('required') && basicDetails.get('startDate').touched">
+                                              Please fill select a starting date
+                                            </div>
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.errors?.contract && basicDetails.get('startDate').touched">
+                                              Contract start date must be before end date
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-12">
@@ -97,6 +106,12 @@
                                               </a>
                                               End Date</label>
                                             <input type="date" id="endDate" name="endDate" class="form-control" formControlName="endDate">
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('endDate').getError('required') && basicDetails.get('endDate').touched">
+                                              Please fill select a ending date
+                                            </div>
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.errors?.contract && basicDetails.get('endDate').touched">
+                                              Contract start date must be before end date
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -107,6 +122,9 @@
                                               </a>
                                               Introduction</label>
                                             <textarea name="intro" id="intro" cols="30" rows="2" class="form-control" formControlName="introduction"></textarea>
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('introduction').getError('required') && basicDetails.get('introduction').touched">
+                                              Please fill in introduction
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -117,6 +135,9 @@
                                               </a>
                                               Description</label>
                                             <textarea name="description" id="description" cols="30" rows="2" class="form-control" formControlName="description"></textarea>
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('description').getError('required') && basicDetails.get('description').touched">
+                                              Please fill in the description
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
@@ -136,7 +157,13 @@
                                                 <i class="fa fa-info-circle"></i>
                                               </a>
                                               Publishing date</label>
-                                            <input id="publishDate" name="publishDate" type="date" class="form-control" formControlName="publishDate">
+                                            <input id="publishDate" name="publishDate" type="date" class="form-control" formControlName="publishDate" (change)="test()">
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('publishDate').getError('required') && basicDetails.get('publishDate').touched">
+                                              Please select a publishing date
+                                            </div>
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.errors?.publish && basicDetails.get('publishDate').touched">
+                                              Publish date needs to be before closing date
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
@@ -151,11 +178,14 @@
                                                     <option value="null" selected disabled>Select Location</option>
                                                     <option *ngFor="let item of locations" [value]="item.locationId">{{item.name}}</option>
                                                 </select>
+                                                <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('locationId').getError('required') && basicDetails.get('locationId').touched">
+                                                  Please select a location
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
-                                        <div class="form-group">
+                                        <div class="form-group" hidden>
                                             <div class="form-group">
                                                 <label for="requisition">
                                                   <a placement="top" ngbTooltip="Select the applicants that you would like to advertise to." style="font-size: xx-small;">
@@ -163,7 +193,7 @@
                                                   </a>
                                                   Requisition Approval</label>
                                                 <select name="requisition" id="requisition"  class="form-control" formControlName="raApprovalId">
-                                                    <option value="null" selected disabled>Select Requisition</option>
+                                                    <option [value]="3" selected disabled>Select Requisition</option>
                                                     <option *ngFor="let item of rApprovals" [value]="item.id">{{item.approval}}</option>
                                                 </select>
                                             </div>
@@ -177,6 +207,12 @@
                                               </a>
                                               Working Hours</label>
                                             <input type="number" name="workingHours" id="workingHours" class="form-control" formControlName="workingHours">
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('workingHours').getError('required') && basicDetails.get('workingHours').touched">
+                                              Please specify working hours
+                                            </div>
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('workingHours').getError('min') && basicDetails.get('workingHours').touched">
+                                              You cannot have less than zero hours
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
@@ -187,6 +223,12 @@
                                               </a>
                                               Closing date</label>
                                             <input id="closingDate" name="closingDate" type="date" class="form-control" formControlName="closingDate">
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.get('closingDate').getError('required') && basicDetails.get('closingDate').touched">
+                                              Please select a closing date
+                                            </div>
+                                            <div class="alert alert-danger mt-1" *ngIf="basicDetails.errors?.range && basicDetails.get('closingDate').touched">
+                                              Publish date needs to be before closing date
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-12">
@@ -565,7 +607,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="btn btn-outline-primary float-right mt-4 ml-2" (click)="saveJobCard()">Save</button>
+                                    <button *ngIf="!editing" class="btn btn-outline-primary float-right mt-4 ml-2" (click)="saveJobCard()" [disabled]="!basicDetails.valid">Save</button>
+                                    <button *ngIf="editing" class="btn btn-outline-primary float-right mt-4 ml-2" (click)="editCard()" [disabled]="!basicDetails.valid">Update</button>
                                     <button (click)="previous()" class="btn btn-outline-primary float-right mt-4 mb-4">Previous</button>
                                 </div>
                             </div>

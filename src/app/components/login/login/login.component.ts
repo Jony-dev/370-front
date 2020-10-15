@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
   logInSuccess(){
 
     if(this.auth.isLoggedIn)
-      this.router.navigate(['/Dashboard']);
+      this.router.navigate(['/Dashboard/Home']);
   }
 
   loginFailed(error: any){

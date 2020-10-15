@@ -38,6 +38,7 @@ export class ViewApplicationComponent implements OnInit {
     this.languages = res.languageAnswers;
     this.cvLocation = res.cv;
     this.test = res.test;
+    console.log(this.test);
   }
   fail( err : any){
     this.toast.display({type : "Error", heading : err.error.Title, message : err.errorr.message});
