@@ -437,6 +437,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
   }
 
   failUploadCard(error){
+    console.log(error);
     this.toast.display({type:"Error",heading: error.error.Title, message : error.error.message+" "+error});
   }
 
