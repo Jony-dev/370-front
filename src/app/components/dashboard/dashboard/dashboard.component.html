@@ -67,7 +67,7 @@
         </ul>
       </li>
       <li [routerLink]="['/Dashboard/JobListing']" routerLinkActive="active-link" *ngIf="searchView('job listing')"><i class="fad fa-list-alt"></i><span>Job Listings</span></li>
-      <li [routerLink]="['/Dashboard/JobCardApproval']" routerLinkActive="active-link"><i class="far fa-stamp" *ngIf="searchView('job approve')"></i><span>Approve Job Card</span></li>
+      <li [routerLink]="['/Dashboard/JobCardApproval']" routerLinkActive="active-link" *ngIf="searchView('job approve')"><i class="far fa-stamp"></i><span>Approve Job Card</span></li>
       <li class="accordian-parent" (click)="auditToggle = !auditToggle" *ngIf="searchView('audit')"><i class="fas fa-eye"></i><span>Audit</span><span class="arrow"><i [class]="(!auditToggle) ? 'far fa-chevron-down' : 'far fa-chevron-up'"></i></span>
         <ul class="accordian" *ngIf="auditToggle" (click)="auditToggle = !auditToggle">
           <li [routerLink]="['/Dashboard/AuditLog']" routerLinkActive="active-link">Log</li>

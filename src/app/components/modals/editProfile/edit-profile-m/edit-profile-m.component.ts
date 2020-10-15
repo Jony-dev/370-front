@@ -40,6 +40,10 @@ export class EditProfileMComponent implements OnInit {
 
     this.country$ = this.api.getCountries();
     this.nationality$ = this.api.getNationalities();
+    this.api.getUserSkills().subscribe( x => {
+      this.skills = x.skills;
+      this.languages = x.languages;
+    })
     this.getProfileDetails();
     this.buildForm();
   }

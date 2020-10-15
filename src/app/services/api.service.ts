@@ -55,6 +55,7 @@ import { Audit } from '../models/audit';
 import { HomeCard } from '../models/homeCard';
 import { TeamMembers } from '../models/teamMembers';
 import { SearchUser } from '../models/searchUser';
+import { Skill } from '../models/skill';
 
 
 
@@ -770,9 +771,12 @@ export class ApiService {
   }
 
   ////////////////////////////////////USER//////////////////////////////////////////////////////////
-
   getUsersForSearch(){
     return this.http.post<SearchUser[]>( this.user, {request : "getUsersForSearch" });
+  }
+
+  getUserSkills(){
+    return this.http.post<{skills : Skill[], languages : Language[]}>(this.user , {request : "getSkillsAndLangs"});
   }
 
 
