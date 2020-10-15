@@ -143,7 +143,7 @@ export class ConfigRolesAndAuthComponent implements OnInit {
     });
   }
 
-  deleteViewAuthorisation(viewId : number, roleId: number){
+  deleteViewAuthorisation(viewId: number, roleId: number){
     //console.log(viewAuth);
     this.api.deleteViewAuthorisation(viewId, roleId).subscribe( suc => this.deleteViewSuccess(suc), err => this.deleteViewFail(err));
   }
