@@ -88,12 +88,12 @@ export class CreateInterviewComponent implements OnInit {
   }
 
   addInterviewer(id : number){
-    this.interviewers.push(this.employees.find(x => x.id));
+    this.interviewers.push(this.employees.find(x => x.id == id));
     this.employees = this.employees.filter(x => x.id != id);
   }
 
   removeInterviewer(id : number){
-    this.employees.push(this.interviewers.find(x => x.id));
+    this.employees.push(this.interviewers.find(x => x.id == id));
     this.interviewers = this.interviewers.filter(x => x.id != id);
   }
 
