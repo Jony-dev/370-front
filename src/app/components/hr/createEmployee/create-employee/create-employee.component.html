@@ -58,19 +58,28 @@
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="startDate">Start Date</label>
+                                <label for="startDate">
+                                  <a placement="right" ngbTooltip="Select the contractors start date of buisness." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>Start Date</label>
                                 <input class="form-control" type="date" name="startDate" id="startDate" formControlName="startDate">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="endDate">End Date</label>
+                                <label for="endDate">
+                                  <a placement="top" ngbTooltip="Select the contractors end date of business." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>End Date</label>
                                 <input class="form-control" type="date" name="endDate" id="endDate" formControlName="endDate">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
-                                <label for="department">Department</label>
+                                <label for="department">
+                                  <a placement="right" ngbTooltip="Select what department the contractor is working in." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>Department</label>
                                 <select name="department" id="department" class="form-control" formControlName="departmentId">
                                     <option value="null" selected disabled>Please Select Department</option>
                                     <option [value]="item.departmentId" *ngFor="let item of departments">{{item.name}}</option>
