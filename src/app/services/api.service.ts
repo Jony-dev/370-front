@@ -711,7 +711,7 @@ export class ApiService {
     return this.http.post( this.booking, {request : "cancelBooking", payload })
   }
   // edituserBooking(){
-  //   THERE IS NO EDIT SO I DONNO IF I SHOULD EDIT OR A USER NEEDS TO FIRST CANCEL A BOOKING  
+  //   THERE IS NO EDIT SO I DONNO IF I SHOULD EDIT OR A USER NEEDS TO FIRST CANCEL A BOOKING
   // }
   getAssistantSearch(){
     return this.http.post( this.booking, {request : "getAssistantSearch"});
@@ -749,7 +749,6 @@ export class ApiService {
   getAudits(){
     return this.http.post<Audit[]>( this.audit, {request : "getAudits" });
   }
-
 
 
 }
