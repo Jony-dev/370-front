@@ -118,7 +118,7 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
       closingDate : ['',[Validators.required]],
       scheduleId : [null, [Validators.required]],
       locationId : [null, [Validators.required]],
-      raApprovalId : [null, [Validators.required]],
+      raApprovalId : [+3, [Validators.required]],
       workingHours : [null,[Validators.required,Validators.min(0)]]
     },{
       validators : [validatePublish, validateContractDate]

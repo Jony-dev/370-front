@@ -11,14 +11,20 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class SkillComponent implements OnInit {
 
+  userSkills : Skill [] = [];
   @Input() skills : Skill [] = [];
   constructor( private modal :NgbModal, private api : ApiService, ) { }
 
   ngOnInit(): void {
+    this.userSkills = this.skills;
   }
 
   skillAddition(){
     const modalInstance = this.modal.open(ProfileAddSkillComponent,{ windowClass : "largeModal"});
+  }
+
+  removeSkill(id : number){
+    
   }
 
 }
