@@ -52,14 +52,9 @@ import { BookingCap } from '../models/bookingCap';
 import { GroupBookingCap } from '../models/groupBookingCap';
 import { SlotTable } from '../models/slotTable';
 import { Audit } from '../models/audit';
-<<<<<<< HEAD
 import { HomeCard } from '../models/homeCard';
 import { TeamMembers } from '../models/teamMembers';
 import { SearchUser } from '../models/searchUser';
-=======
-import { SearchUser } from '../models/searchUser';
-import { TeamMembers } from '../models/teamMembers';
->>>>>>> validation
 
 
 
