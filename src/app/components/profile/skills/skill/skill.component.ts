@@ -3,6 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileAddSkillComponent } from 'src/app/components/modals/profileAddSkill/profile-add-skill/profile-add-skill.component';
 import { Skill } from 'src/app/models/skill';
 import { ApiService } from 'src/app/services/api.service';
+import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
+import { ToastsService } from 'src/app/services/toasts.service';
 
 @Component({
   selector: 'app-skill',
@@ -12,11 +14,13 @@ import { ApiService } from 'src/app/services/api.service';
 export class SkillComponent implements OnInit {
 
   userSkills : Skill [] = [];
-  @Input() skills : Skill [] = [];
-  constructor( private modal :NgbModal, private api : ApiService, ) { }
+  @Input() set setSkills(skills : Skill[]){
+    this.userSkills = skills;
+  }
+  constructor( private modal :NgbModal, private api : ApiService,private helper :JobCardHelperService, private toast : ToastsService ) { }
 
   ngOnInit(): void {
-    this.userSkills = this.skills;
+    
   }
 
   skillAddition(){
@@ -24,7 +28,7 @@ export class SkillComponent implements OnInit {
   }
 
   removeSkill(id : number){
-    
+    this.api.removeUsersSkill(id).subscribe(x => this.helper.emitRefresh(), er => this.toast.display({type:"Error",heading:er.error.Title, message : er.error.message}));
   }
 
 }

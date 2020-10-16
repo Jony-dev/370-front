@@ -779,6 +779,27 @@ export class ApiService {
     return this.http.post<{skills : Skill[], languages : Language[]}>(this.user , {request : "getSkillsAndLangs"});
   }
 
+  addUsersSkill(id:number){
+    return this.http.post(this.user, {request : "addUserSkill", payload : {id}});
+  }
 
+  addUsersLanguage(id:number){
+    return this.http.post(this.user, {request : "addUserLanguage", payload : {id}});
+  }
 
+  removeUsersSkill(id:number){
+    return this.http.post(this.user, {request : "removeUserSkill", payload : {id}});
+  }
+
+  removeUsersLanguage(id:number){
+    return this.http.post(this.user, {request : "removeUserLanguage", payload : {id}});
+  }
+
+  getUnassignedLangs(){
+    return this.http.post<Language[]>(this.user, {request : "getUnassignedLangs"});
+  }
+
+  getUnassignedSkills(){
+    return this.http.post<Skill[]>(this.user, {request : "getUnassignedSkills"});
+  }
 }

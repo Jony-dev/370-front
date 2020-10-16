@@ -17,15 +17,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th scope="row">{{ 1 }}</th>
-
-            <td>This is where skill name will be</td>
-
-         <td>
-          <a placement="left" ngbTooltip="Select to add this skill to your profile.">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-          </a></td>
+        <tr *ngFor="let item of skills; let i = index">
+          <th scope="row">{{ i }}</th>
+          <td>{{item.skill}}</td>
+            <td>
+              <a placement="left" ngbTooltip="Select to add this skill to your profile.">
+                <i class="fa fa-plus" aria-hidden="true" (click)="addSkill(item.id)"></i>
+              </a>
+            </td>
         </tr>
         </tbody>
       </table>
