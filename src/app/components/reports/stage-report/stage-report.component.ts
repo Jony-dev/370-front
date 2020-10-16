@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,9 +12,9 @@ import { Audit } from 'src/app/models/audit';
 })
 export class StageReportComponent implements OnInit {
 
-  audits : Audit[] = [];
+  audit : Audit[] = [];
 
-  constructor( private modal : NgbModal, private toast : ToastsService, private api : ApiService, private formBuilder : FormBuilder) { }
+  constructor( private modal : NgbModal, private toast : ToastsService, private api : ApiService) { }
 
   ngOnInit(): void {
 
@@ -32,7 +31,8 @@ export class StageReportComponent implements OnInit {
   }
   //success
   getAuditSuccess(success){
-    this.audits = success;
+    this.audit = success;
+    console.log(success);
   }
   //fail
   getAuditFail(error){
