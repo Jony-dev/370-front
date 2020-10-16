@@ -56,6 +56,7 @@ import { HomeCard } from '../models/homeCard';
 import { TeamMembers } from '../models/teamMembers';
 import { SearchUser } from '../models/searchUser';
 import { Skill } from '../models/skill';
+import { Notification } from '../models/notification';
 
 
 
@@ -109,6 +110,7 @@ export class ApiService {
   date : string = `${this.globalRoot}API/Date`;
   backUp : string = `${this.globalRoot}API/Backup`;
   audit: string = `${this.globalRoot}API/Audit/`;
+  notification: string = `${this.globalRoot}API/Notification/`;
 
   teamMember: string = `${this.globalRoot}API/TeamMembers/`;
 
@@ -778,7 +780,27 @@ export class ApiService {
   getUserSkills(){
     return this.http.post<{skills : Skill[], languages : Language[]}>(this.user , {request : "getSkillsAndLangs"});
   }
+///////////////////////////////////////////////////////////////////////////////Notifications///////////////////////////
+getUserNotifications(){
+  return this.http.post<Notification[]>(this.notification, {request : "getUserNotifications"});
+  
+}
+getUserCount(){
+  return this.http.post<Notification[]>(this.notification, {request : "getUserCount"});
+  
+}
 
-
+getSkillPending()
+{
+  return this.http.post<Skill[]>(this.skill, {request : "getSkillPending"});
+}
+getRequirementPending()
+{
+  return this.http.post<Requirement[]>(this.requirement, {request : "getRequirementPending"});
+}
+getQuestionPending()
+{
+  return this.http.post<LongQuestion[]>(this.longQuestion, {request : "getQuestionPending"});
+}
 
 }

@@ -4,4 +4,5 @@ export class Requirement{
     requirement : string;
     critical : boolean;
     expectedAnswer : boolean;
+    pending: number;
 }
