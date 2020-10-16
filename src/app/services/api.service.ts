@@ -790,7 +790,6 @@ getUserCount(){
   
 }
 
-<<<<<<< HEAD
   addUsersSkill(id:number){
     return this.http.post(this.user, {request : "addUserSkill", payload : {id}});
   }
@@ -798,7 +797,6 @@ getUserCount(){
   addUsersLanguage(id:number){
     return this.http.post(this.user, {request : "addUserLanguage", payload : {id}});
   }
-=======
 getSkillPending()
 {
   return this.http.post<Skill[]>(this.skill, {request : "getSkillPending"});
@@ -811,7 +809,6 @@ getQuestionPending()
 {
   return this.http.post<LongQuestion[]>(this.longQuestion, {request : "getQuestionPending"});
 }
->>>>>>> shawn
 
   removeUsersSkill(id:number){
     return this.http.post(this.user, {request : "removeUserSkill", payload : {id}});
