@@ -1,31 +1,6 @@
 <div class="container-fluid">
   <div class="sm-container panel-container panel-ext">
-      <h3>Filter Audit Log</h3>
-      <form>
           <div class="container-fluid">
-          <div class="row">
-              <div class="col-lg-3 col-sm-12">
-                  <label for="database">Database Table</label>
-                  <select class="form-control" name="database" id="database">
-                      <option value="null" selected>All Databases</option>
-                  </select>
-              </div>
-              <div class="col-lg-2 col-sm-12">
-                  <label for="startDate">Starting Date</label>
-                  <input class="form-control" placeholder="yyyy/mm/dd" type="date" name="startDate" id="startDate">
-              </div>
-              <div class="col-lg-2 col-sm-12">
-                  <label for="startDate">Starting Date</label>
-                  <input class="form-control" placeholder="yyyy/mm/dd" type="date" name="startDate" id="startDate">
-              </div>
-              <div class="col-lg-3 col-sm-12">
-                  <label for="startDate">Employee</label>
-                  <input class="form-control" type="text" name="startDate" id="startDate">
-              </div>
-              <div class="col-lg-2 col-sm-12">
-                  <button class="btn btn-outline-primary mt-lg-4 mt-sm-0">Filter</button>
-              </div>
-          </div>
           <table class="table greyHead mt-2">
               <thead>
                   <th>#</th>
@@ -36,10 +11,11 @@
                   <th class="text-right">Date Performed</th>
               </thead>
               <tbody>
-                  <tr *ngFor="let item of audits"><td>{{item.id}}</td><td>{{item.userId}}</td><td>{{item.userName}}</td><td>{{item.userSurname}} </td><td>{{item.operationPerformed}} </td><td class="text-right"> {{item.date}} </td></tr>
+                <tr *ngFor="let item of audit"><td>{{item.id}}</td><td>{{item.userId}}</td><td>{{item.userName}}</td><td>{{item.userSurname}}</td><td>{{item.operationPerformed}}</td><td class="text-right">{{item.date}}</td></tr>
+                  <!-- <tr *ngFor="let item of audit"><td>{{item.id}}</td><td>{{item.userId}}</td><td>{{item.userName}}</td><td>{{item.userSurname}} </td><td>{{item.operationPerformed}} </td><td class="text-right"> {{item.date}} </td></tr> -->
               </tbody>
           </table>
           </div>
-      </form>
   </div>
 </div>
+
