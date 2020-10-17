@@ -20,7 +20,7 @@ export class AuthorizationComponent implements OnInit {
 
   constructor(private modal : NgbModal , private api : ApiService, private toast : ToastsService, private formBuilder : FormBuilder) { }
 
-  authForm : FormGroup;
+  
   newAuthForm : FormGroup;
   operationAuthorisations : OperationAuthorisation [] = [];
   operations : Operation [] = [];
@@ -33,16 +33,9 @@ export class AuthorizationComponent implements OnInit {
   ngOnInit(): void {
     this.getData();
     this.buildForm();
-
-    this.onChanges();
   }
 
-  onChanges(): void {
-    this.authForm.get('dbtableid').valueChanges.subscribe(val => {
-      this.filteredOperationsAuthorisations = val.getFormDetails();
-    });
-    console.log('change supposed to happen.')
-  }
+  
 
 
   getData(){
@@ -54,12 +47,7 @@ export class AuthorizationComponent implements OnInit {
   }
 
   buildForm(){
-    this.authForm = this.formBuilder.group({
-      roleaffected : [null,[Validators.required]],
-      roletarget: [null, [Validators.required]],
-       dbtableid : [null, [Validators.required]],
-       operationid : [null, [Validators.required]],
-    });
+
     this.newAuthForm = this.formBuilder.group({
       roleaffected : [null,[Validators.required]],
       roletarget: [null, [Validators.required]],
@@ -70,10 +58,10 @@ export class AuthorizationComponent implements OnInit {
 
   getFormDetails(){
     return {
-      roleaffected: this.authForm.get('roleaffected').value,
-      roletarget: this.authForm.get('roletarget').value,
-      dbtableid : this.authForm.get('dbtableid').value,
-      operationid : this.authForm.get('operationid').value,
+      roleaffected: this.newAuthForm.get('roleaffected').value,
+      roletarget: this.newAuthForm.get('roletarget').value,
+      dbtableid : this.newAuthForm.get('dbtableid').value,
+      operationid : this.newAuthForm.get('operationid').value,
 
     }
   }

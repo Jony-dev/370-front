@@ -3,13 +3,12 @@
               <div class="col-lg-8 col-md-12">
                   <div class="panel-container sm-container panel-ext">
                       <h2>Filter</h2>
-                      <form [formGroup]="authForm">
                           <div class="container-fluid">
                               <div class="row">
                                   <div class="col-lg-3 col-md-12">
                                       <div class="form-group">
                                           <label for="roleEffecting">Role Effecting</label>
-                                          <select name="roleEffecting" id="roleEffecting" class="form-control" formControlName="roleaffected" [class.is-invalid]="roleEffected.touched && !roleEffected.valid">
+                                          <select name="roleEffecting" id="roleEffecting" class="form-control" [class.is-invalid]="roleEffected.touched && !roleEffected.valid">
                                             <option value="null" selected disabled>Select a Role affected</option>
                                             <option *ngFor="let item of roles" [value]="item.roleId">{{item.roleName}} </option>
 
@@ -19,7 +18,7 @@
                                   </div>
                                   <div class="col-lg-3 col-md-12">
                                           <label for="roleTarget">Role Target</label>
-                                          <select name="roleTarget" id="roleTarget" class="form-control" formControlName="roletarget"  [class.is-invalid]="roleTarget.touched && !roleTarget.valid">
+                                          <select name="roleTarget" id="roleTarget" class="form-control"  [class.is-invalid]="roleTarget.touched && !roleTarget.valid">
                                             <!--<tr *ngFor="let item of operationAuthorisations"><td>{{item.roletarget}}</td><td class="text-center"><i class="fas fa-trash-alt ml-4" (click)="deleteOperationAuthorisation(item.roleaffected, item.roletarget, item.operationid, item.dbtableid)"></i></td></tr>-->
                                             <option value="null" selected disabled>Select a Role target</option>
                                             <option *ngFor="let item of roles" [value]="item.roleId">{{item.roleName}} </option>
@@ -29,7 +28,7 @@
                                   </div>
                                   <div class="col-lg-3 col-md-12">
                                           <label for="database">Database Table</label>
-                                          <select name="database" id="database" class="form-control" formControlName="dbtableid"  [class.is-invalid]="database.touched && !database.valid">
+                                          <select name="database" id="database" class="form-control"  [class.is-invalid]="database.touched && !database.valid">
                                             <option value="null" selected disabled>Select a Database Table</option>
                                             <option *ngFor="let item of databaseTables" [value]="item.id">{{item.name}} </option>
 
@@ -37,7 +36,7 @@
                                   </div>
                                   <div class="col-lg-3 col-md-12">
                                       <label for="operation">Operation</label>
-                                      <select name="operation" id="operation" class="form-control" formControlName="operationid" [class.is-invalid]="Operation.touched && !Operation.valid">
+                                      <select name="operation" id="operation" class="form-control" [class.is-invalid]="Operation.touched && !Operation.valid">
                                         <option value="null" selected disabled>Select an Operation</option>
                                         <option *ngFor="let item of operations" [value]="item.operationid">{{item.operationname}} </option>
 
@@ -65,13 +64,12 @@
                               </tbody>
                           </table>
                       </div>
-                    </form>
                   </div>
 
               </div>
               <div class="col-lg-4 col-md-12 mt-lg-0 mt-md-4">
                   <div class="sm-container">
-                      <form [formGroup]= "newAuthForm">
+                      <form [formGroup]="newAuthForm">
                           <div class=" sm-container panel pt-2 pb-2">
                               <h2>Add Operation Authorisation</h2>
                                   <div class="container-fluid">
