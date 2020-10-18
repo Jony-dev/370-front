@@ -54,6 +54,7 @@ import { SlotTable } from '../models/slotTable';
 import { Audit } from '../models/audit';
 import { SearchUser } from '../models/searchUser';
 import { TeamMembers } from '../models/teamMembers';
+import { DepartmentsMembers } from '../models/departmentsMembers';
 
 
 
@@ -108,7 +109,8 @@ export class ApiService {
   backUp : string = `${this.globalRoot}API/Backup`;
   audit: string = `${this.globalRoot}API/Audit/`;
 
-  teamMember: string = `${this.globalRoot}API/TeamMembers/`;
+  teamMember: string = `${this.globalRoot}API/TeamMember/`;
+  departmentsMembers: string = `${this.globalRoot}API/Department/`; ///departmentsMember
 
 
 
@@ -448,6 +450,7 @@ export class ApiService {
     return this.http.post<Department[]>(this.department, {request: "getDepartments"});
   }
 
+
   getTeamsByDepartment(departmentId: number){
     return this.http.post<Team[]>(this.team, {request: "getTeamsByDepartment", payload: {departmentId} });
   }
@@ -755,18 +758,57 @@ export class ApiService {
   }
 
   ///////////////////////////////////////////////TEAM///////////////////////////////////////////////////
-  /*getTeams(){
+  getTeams(){
     return this.http.post<Team[]>( this.team, {request : "getTeams" });
-  }*/ //ask courtney about all the teams (getTeams)
-
-  getMembersInTeam(){
-    return this.http.post<TeamMembers[]>( this.teamMember, {request : "getMembersInTeam" });
   }
+
+  createTeam(teamobj : any ){
+    return this.http.post( this.team, {request : "createTeam", payload : teamobj});
+  }
+
+  updateTeam(teamobj : any ){
+    return this.http.post( this.team, {request : "updateTeam", payload : teamobj});
+  }
+
+  deleteTeam( teamId: number){
+    return this.http.post(this.team , {request : "deleteTeam", payload :{teamId}});
+  }
+
+  getTeamCards(){
+
+    return this.http.post<Team[]>( this.team, {request : "getTeamCards" });
+  }
+
+  ///////////////////////////////////////////////TEAMMember///////////////////////////////////////////////////
+
+  createTeamMember(teamId : number, userId :number ){
+    return this.http.post( this.teamMember, {request : "createTeamMember", payload : { teamId, userId}});
+  }
+
+  updateTeamMember(teamId : number, userId :number  ){
+    return this.http.post( this.teamMember, {request : "updateTeam", payload : { teamId, userId} });
+  }
+
+  deleteTeamMember( teamId : number, userId :number ){
+    return this.http.post(this.teamMember , {request : "deleteTeamMember", payload : { teamId, userId}});
+  }
+
+  getTeamMembers(teamId : number){
+    return this.http.post<TeamMembers[]>( this.teamMember, {request : "getTeamsMembers", payload : { teamId} });
+  }
+
+  // getMembersInTeam(){
+  //   return this.http.post<TeamMembers[]>( this.teamMember, {request : "getMembersInTeam" });
+  // }
 
   ////////////////////////////////////USER//////////////////////////////////////////////////////////
 
   getUsersForSearch(){
     return this.http.post<SearchUser[]>( this.user, {request : "getUsersForSearch" });
+  }
+
+  getDepartmentsMembers(){
+    return this.http.post<DepartmentsMembers[]>( this.departmentsMembers, {request : "getDepartmentsMembers" });
   }
 
 

@@ -1,52 +1,98 @@
 <div class="container-fluid">
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <h1 *ngIf="!editing && !addMember">Create Team</h1>
-    <h1 *ngIf="editing && !addMember">Edit Team</h1>
-    <h1 *ngIf="addMember">Add Team Members</h1>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close('Close click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h1 *ngIf="!editTeam">Create Team</h1>
+  <h1 *ngIf="editTeam ">Edit Team</h1>
+  <h1 *ngIf="addMember">Add Team Members</h1>
+  <form [formGroup]="teamForm">
     <div class="row">
-        <div class="col-sm-12 col-md-4" *ngIf="!addMember">
-            <div class="panel">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <h3>New Team Name</h3>
-                            <input type="text" id="teamName" name="teamName" class="form-control">
-                            <button class="btn btn-outline-primary mt-4 mb-4 float-right">Create Team</button>
-                        </div>
-                    </div>
-                </div>
+      <div class="col-sm-12 col-md-4" *ngIf="!addMember">
+        <div class="panel">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <label>New Team Name</label>
+                <input type="text" id="teamName" name="teamName" class="form-control" formControlName="name" [class.is-invalid]="teamName.touched && !teamName.valid"/>
+              </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-4">
-            <div class="panel-container panel-ext">
-                <h3 class="text-center">Added Members</h3>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <!-- <app-profile-card class="img-sm border-el" removable="true"></app-profile-card> -->
-                        </div>
-                    </div>
-                </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="department">Select Department</label>
+                <select name="department" id="department" class="form-control" formControlName="departmentId" [class.is-invalid]="departmentID.touched && !departmentID.valid">
+                  <option value="null" selected disabled>
+                    Please select a Department
+                  </option>
+                  <option *ngFor="let item of departments" [value]="item.departmentId">
+                    {{ item.name }}
+                  </option>
+                </select>
+              </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-4">
-            <div class="panel-container panel-ext">
-                <h3 class="text-center">Search for Members</h3>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <label for="searchMember">Search</label>
-                            <input type="text" class="form-control">
-                            <hr>
-                        </div>
-                        <div class="col-12">
-                            <!-- <app-profile-card class="img-sm border-el" addable="true"></app-profile-card> -->
-                        </div>
-                    </div>
-                </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label for="teamDetails">Team Details</label>
+                <textarea name="teamDetails" id="teamDetails" cols="30" rows="3" class="form-control" formControlName="description" [class.is-invalid]="teamDescription.touched && !teamDescription.valid"></textarea>
+              </div>
+              <button class="btn btn-outline-primary mb-4 float-right" [disabled]="!teamForm.valid" (click)="save()" >
+                Create Team
+              </button>
             </div>
+          </div>
         </div>
+      </div>
+
+      <div class="col-sm-12 col-md-4">
+        <div class="panel-container panel-ext">
+          <h3 class="text-center">Search for Members</h3>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <label for="searchMember">Search</label>
+                <input type="text" class="form-control" />
+                <hr />
+              </div>
+              <div class="col-12">
+                <!-- <app-profile-card class="img-sm border-el" addable="true"></app-profile-card> -->
+                <table class="table">
+                  <th>Name</th>
+                  <th>Surname</th>
+                   <tr *ngFor="let item of departmentsMembers"><td>{{item.name}}</td><td>{{item.surname}}</td><td><i class="fa fa-plus" aria-hidden="true" ></i></td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <div class="panel-container panel-ext">
+          <h3 class="text-center">Added Members</h3>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <!-- <app-profile-card class="img-sm border-el" removable="true"></app-profile-card> -->
+                <table class="table">
+                  <th>Name</th>
+                  <th>Surname</th>
+                   <tr *ngFor="let item of teamMembers"><td>{{item.name}}</td><td>{{item.surname}}</td><td><i class="fas fa-minus" aria-hidden="true" ></i></td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <!--Validations-->
+    <div *ngIf="teamName.invalid && ( teamName.dirty || teamName.touched)" class="alert alert-danger">
+      Team Name  is required.
+    </div>
+
+    <div *ngIf="departmentID.invalid && ( departmentID.dirty || departmentID.touched)" class="alert alert-danger">
+      Department is required.
+    </div>
+
+    <div *ngIf="teamDescription.invalid && ( teamDescription.dirty || teamDescription.touched)" class="alert alert-danger">
+      Team description is required.
+    </div>
+  </form>
 </div>

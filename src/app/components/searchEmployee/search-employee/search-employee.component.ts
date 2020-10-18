@@ -25,6 +25,8 @@ export class SearchEmployeeComponent implements OnInit {
     this.getSearchUser();
   }
 
+
+
   getSearchUser(){
 
     this.api.getUsersForSearch().subscribe( s => this.getSearchSuccess(s), e => this.getSearchError(e));
@@ -32,7 +34,7 @@ export class SearchEmployeeComponent implements OnInit {
   }
   getSearchSuccess(s){
     this.users = s;
-    console.log(this.users);
+
   }
   getSearchError(e){
     this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message });
