@@ -121,6 +121,8 @@ import { FilterMyListings } from './components/system/pipes/filterJobListing.pip
 import { BackupRestoreComponent } from './components/config/backup-restore/backup-restore.component';
 import { FilterApplicants } from './components/system/pipes/filterPool.pipe';
 import { HomeComponent } from './components/home/home/home.component';
+import { FilterOperationAuth } from './components/system/pipes/filterOperationAuth.pipe';
+import { FilterFloorDrop } from './components/system/pipes/filterFloorDrop.pipe';
 
 @NgModule({
   declarations: [
@@ -224,8 +226,10 @@ import { HomeComponent } from './components/home/home/home.component';
     FilterViewAuth,
     FilterMyListings,
     FilterMyListings,
+    FilterOperationAuth,
     AssistBookingComponent,
     FilterApplicants,
+    FilterFloorDrop,
     BackupRestoreComponent,
     HomeComponent
     

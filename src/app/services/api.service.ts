@@ -57,6 +57,9 @@ import { TeamMembers } from '../models/teamMembers';
 import { SearchUser } from '../models/searchUser';
 import { Skill } from '../models/skill';
 import { Notification } from '../models/notification';
+import { Database } from '../models/database';
+import { SlotSetup } from '../models/slotSetup';
+import { Date } from '../models/date';
 
 
 
@@ -498,6 +501,13 @@ export class ApiService {
     return this.http.post(this.table, {request : "deleteTable", payload : {id}})
   }
 
+  getDates(){
+    return this.http.post<Date[]>(this.date, {request : "getDates"})
+  }
+
+  changeDateVal(dateId : number, bookable : boolean){
+    return this.http.post(this.date, {request : "changeBookable", payload : { dateId, bookable}})
+  }
   ///////////////////////////////////////////////////  tableType /////////////////////////////////////////////
   getTableTypes(){
     return this.http.post<TableType[]>(this.tableType, {request: "getTableTypes"});
@@ -507,7 +517,7 @@ export class ApiService {
     return this.http.post<OperationAuthorisation[]>(this.operationAuthorisation, {request : "getOperationAuthorisation"});
   }
   deleteOperationAuthorisation(operationAuthorisation : any){
-    return this.http.post(this.operationAuthorisation, {request : "deleteOperationAuthorisation", payload : {operationAuthorisation}})
+    return this.http.post(this.operationAuthorisation, {request : "deleteOperationAuthorisation", payload : operationAuthorisation})
   }
   createOperationAuthorisation(operationAuthorisation: any ){
     return this.http.post(this.operationAuthorisation,{request :"createOperationAuthorisation", payload : operationAuthorisation});
@@ -534,7 +544,7 @@ export class ApiService {
   }
   ///////////////////////////////////////////////////////
   getDatabaseTables(){
-    return this.http.post<DatabaseTable[]>(this.databaseTable, {request : "getDatabaseTables"});
+    return this.http.post<Database[]>(this.databaseTable, {request : "getDatabaseTables"});
   }
   getRecords(){
     return this.http.post<DatabaseTable[]>(this.audit, {request : "getRecords"});
@@ -824,5 +834,9 @@ getQuestionPending()
 
   getUnassignedSkills(){
     return this.http.post<Skill[]>(this.user, {request : "getUnassignedSkills"});
+  }
+
+  getSlotInformation(){
+    return this.http.post<SlotSetup>(this.table, {request : "getSlotDetails"});
   }
 }

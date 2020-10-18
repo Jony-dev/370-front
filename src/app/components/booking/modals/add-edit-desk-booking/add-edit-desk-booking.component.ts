@@ -47,7 +47,7 @@ export class AddEditDeskBookingComponent implements OnInit {
     {
       this.tables = x;
       if(this.editing)
-        this.tables.push({id: this.booking.tableId, name : this.booking.tableName, ttypeId : null, floorId : null, barcode : null});
+        this.tables.push({id: this.booking.tableId, name : this.booking.tableName, ttypeId : null, floorId : null, barcode : null, buildingId : null, buildingName : null});
     });
 
     console.log(this.buildings);

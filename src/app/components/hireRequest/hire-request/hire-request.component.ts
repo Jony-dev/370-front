@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Justification } from 'src/app/models/justification';
 import { Job } from 'src/app/models/job';
 import { JobReqCard } from 'src/app/models/jobReqCard';
+
 @Component({
   selector: 'app-hire-request',
   host: {class:'full-component'},

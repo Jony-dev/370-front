@@ -62,15 +62,14 @@
                     </form>
                     <table class="greyHead table">
                         <thead>
-                            <th>Table</th> <!---->
+                            <th>Table</th>
                             <th>Table Type</th>
                             <th>Building</th>
                             <th>Floor</th>
                             <th class="text-right">Actions</th>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of tables"><td>{{item.name}}</td><td>{{item.ttypeId}}</td><td></td><td>{{item.floorId}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
-                        <!--<td>{{item.buildingId}}</td>-->
+                          <tr *ngFor="let item of tables"><td>{{item.name}}</td><td>{{item.ttypeId}}</td><td>{{item.buildingName}}</td><td>{{item.floorId}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -93,7 +92,7 @@
                                                     <i class="fa fa-info-circle"></i>
                                                   </a>
                                                   Table ID/Name</label>
-                                                <input class="form-control" type="text" name="tableName" id="tableName" formControlName="tableId">
+                                                <input class="form-control" type="text" name="tableName" id="tableName" formControlName="name">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
@@ -131,7 +130,7 @@
                                                   Floor</label>
                                                 <select class="form-control" name="newFloor" id="newFloor" formControlName="floorId">
                                                   <option value="null" selected disabled>Select Floor</option>
-                                                  <option *ngFor="let item of floors" [value]="item.floorId" >{{item.floorNumber}} </option>
+                                                  <option *ngFor="let item of floors | filterFlrDrop:addTableForm.get('buildingId').value" [value]="item.floorId" >{{item.floorNumber}} </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -142,6 +141,7 @@
                                       </div>
                                     </form>
                                     <h1>Setting Group Slots</h1>
+                                    <form [formGroup]="slotSetup">
                                     <div class="row">
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="form-group">
@@ -150,7 +150,7 @@
                                                     <i class="fa fa-info-circle"></i>
                                                   </a>
                                                   First Slot Starting Time</label>
-                                                <input class="form-control" type="time" name="slotStartTime" id="slotStartTime">
+                                                <input class="form-control" type="time" name="slotStartTime" id="slotStartTime" formControlName="startTime">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
@@ -160,7 +160,7 @@
                                                     <i class="fa fa-info-circle"></i>
                                                   </a>
                                                   Last Slot Ending Time</label>
-                                                <input class="form-control" type="time" name="slotEndTime" id="slotEndTime">
+                                                <input class="form-control" type="time" name="slotEndTime" id="slotEndTime" formControlName="endTime">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-sm-12">
@@ -170,7 +170,7 @@
                                                     <i class="fa fa-info-circle"></i>
                                                   </a>
                                                   No. Slots per hour</label>
-                                                <input class="form-control" type="number" name="noSlots" id="noSlots">
+                                                <input class="form-control" type="number" name="noSlots" id="noSlots" formControlName="numSlots">
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -178,6 +178,7 @@
                                         </div>
                                         <hr>
                                     </div>
+                                  </form>
                             </div>
                           </ng-template>
                         </ngb-tab>
@@ -205,11 +206,8 @@
                                             <th>Date</th>
                                             <th>Allow Booking</th>
                                         </thead>
-                                        <tbody>
-                                            <!-- DATES GO HERE -->
-                                          <!-- <tr *ngFor="let item of tables"><td>{{item.name}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable()(item.id)"></i></td></tr>-->
-                                            <tr><td>1</td><td>01-26-2020</td><td><input type="checkbox" name="date1" id="date1"></td></tr>
-                                            <tr><td>2</td><td>01-27-2020</td><td><input type="checkbox" name="date2" id="date2"></td></tr>
+                                        <tbody>  
+                                          <tr *ngFor="let item of bookableDates; let i = index"><td>x</td><td>{{item.date}}</td><td><input type="checkbox" name="date2" [value]="item.bookable" [formControl]="bookableControls.controls[i]" (change)="changeDate($event.target.checked, item.dateId)"></td></tr>
                                         </tbody>
                                     </table>
                                 </div>

@@ -29,6 +29,7 @@ export class EditTableComponent implements OnInit {
   tableForm : FormGroup;
 
   ngOnInit(): void {
+    console.log(this.editTable);
     this.getData();
     this.buildForm();
 
@@ -36,7 +37,7 @@ export class EditTableComponent implements OnInit {
     {
       this.tableForm.get('name').setValue(this.editTable.name);
       this.tableForm.get('ttypeId').setValue(this.editTable.ttypeId);
-      //this.tableForm.get('buildingId').setValue(this.editTable.buildingId);///need to fix building id
+      this.tableForm.get('buildingId').setValue(this.editTable.buildingId);
       this.tableForm.get('floorId').setValue(this.editTable.floorId);
     }
   }
@@ -93,7 +94,6 @@ export class EditTableComponent implements OnInit {
       ttypeId: this.tableForm.get('ttypeId').value,
       buildingId: this.tableForm.get('buildingId').value,
       floorId: this.tableForm.get('floorId').value,
-
     }
   }
 
@@ -104,6 +104,7 @@ export class EditTableComponent implements OnInit {
       this.api.addTable(tableObj).subscribe( success => this.addTableSuccess(success),error => this.addTableFailed(error));
     else{
       tableObj.id = this.editTable.id;
+      console.log(tableObj);
       this.api.editTable(tableObj).subscribe( success => this.editTableSuccess(success),error => this.editTableFailed(error));
      }
   }

@@ -2,13 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { ApiService } from 'src/app/services/api.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EditAddViewAuthorizationComponent } from 'src/app/components/config/modals/edit-add-view-authorization/edit-add-view-authorization.component';
 import { OperationAuthorisation } from 'src/app/models/operationAuthorization';
 import { Toast } from 'src/app/models/toast';
 import { Role } from 'src/app/models/role';
-import { DatabaseTable } from 'src/app/models/databaseTable';
 import { Operation } from 'src/app/models/operation';
+import { Database } from 'src/app/models/database';
 @Component({
   selector: 'app-authorization',
   host: {class:'full-component'},
@@ -20,11 +20,16 @@ export class AuthorizationComponent implements OnInit {
 
   constructor(private modal : NgbModal , private api : ApiService, private toast : ToastsService, private formBuilder : FormBuilder) { }
 
+  //FILTER FORM CONTROLS
+  roleEffecting : FormControl = new FormControl();
+  roleTarget : FormControl = new FormControl();
+  database : FormControl = new FormControl();
+  operation : FormControl = new FormControl();
   
   newAuthForm : FormGroup;
   operationAuthorisations : OperationAuthorisation [] = [];
   operations : Operation [] = [];
-  databaseTables : DatabaseTable [] = [];
+  databaseTables : Database [] = [];
   roles : Role [] = [];
   filteredOperationsAuthorisations : OperationAuthorisation [] = [];
 
@@ -49,20 +54,19 @@ export class AuthorizationComponent implements OnInit {
   buildForm(){
 
     this.newAuthForm = this.formBuilder.group({
-      roleaffected : [null,[Validators.required]],
-      roletarget: [null, [Validators.required]],
-       dbtableid : [null, [Validators.required]],
-       operationid : [null, [Validators.required]],
-    });
+        roleAffected : [null,[Validators.required]],
+        roleTarget: [null, [Validators.required]],
+        dbTableId : [null, [Validators.required]],
+        operationId : [null, [Validators.required]],
+      });
   }
 
   getFormDetails(){
     return {
-      roleaffected: this.newAuthForm.get('roleaffected').value,
-      roletarget: this.newAuthForm.get('roletarget').value,
-      dbtableid : this.newAuthForm.get('dbtableid').value,
-      operationid : this.newAuthForm.get('operationid').value,
-
+      roleAffected: this.newAuthForm.get('roleAffected').value,
+      roleTarget: this.newAuthForm.get('roleTarget').value,
+      dbTableId : this.newAuthForm.get('dbTableId').value,
+      operationId : this.newAuthForm.get('operationId').value,
     }
   }
 
@@ -71,7 +75,6 @@ export class AuthorizationComponent implements OnInit {
   }
   //success
   getOperationAuthSuccess(operationAuth: OperationAuthorisation[]){
-    console.log(operationAuth);
     this.operationAuthorisations = operationAuth;
   }
   //fail
@@ -82,8 +85,7 @@ export class AuthorizationComponent implements OnInit {
     this.api.getDatabaseTables().subscribe( success => this.getDatabaseTSuccess(success), error => this.getDatabaseTFail(error))
   }
   //success
-  getDatabaseTSuccess(databaseTable: DatabaseTable[]){
-    console.log(databaseTable);
+  getDatabaseTSuccess(databaseTable: Database[]){
     this.databaseTables = databaseTable;
   }
   //fail
@@ -96,7 +98,6 @@ export class AuthorizationComponent implements OnInit {
   }
   //success
   getRoleSuccess(role: Role[]){
-    console.log(role);
     this.roles = role;
   }
   //fail
@@ -108,7 +109,6 @@ export class AuthorizationComponent implements OnInit {
   }
   //success
   getOperationSuccess(operation: Operation[]){
-    console.log(operation);
     this.operations = operation;
   }
   //fail
@@ -118,11 +118,12 @@ export class AuthorizationComponent implements OnInit {
 
 
 
-  deleteOperationAuthorisation(operationAuthorisation : OperationAuthorisation){
-    this.api.deleteOperationAuthorisation( operationAuthorisation).subscribe( suc => this.deleteSuccess(suc, operationAuthorisation), err => this.deleteFail(err))
+  deleteOperationAuthorisation(operationId : number, roleTarget : number, roleAffected : number, dbTableId : number){
 
+    let authObj = {operationId , roleTarget, roleAffected, dbTableId};
+    this.api.deleteOperationAuthorisation( authObj).subscribe( suc => this.deleteSuccess(suc), err => this.deleteFail(err))
   }
-  deleteSuccess(success, operationAuthorisation){
+  deleteSuccess(success){
     this.toast.display({type:"Success", heading : success.Title, message : success.message});
     this.getOperationAuthorisation();
   }
@@ -146,10 +147,8 @@ export class AuthorizationComponent implements OnInit {
   }
 
   save(){
-    let authorisationObj : OperationAuthorisation = <OperationAuthorisation>this.getFormDetails();
-    //let department : any = this.getFormDetails();
-
-      this.api.createOperationAuthorisation(authorisationObj).subscribe( success => this.addOperationAuthorisationSuccess(success),error => this.addOperationAuthorisationFailed(error));
+    let authorisationObj = this.getFormDetails();
+    this.api.createOperationAuthorisation(authorisationObj).subscribe( success => this.addOperationAuthorisationSuccess(success),error => this.addOperationAuthorisationFailed(error));
   }
 
   addOperationAuthorisationSuccess(success){
@@ -158,7 +157,7 @@ export class AuthorizationComponent implements OnInit {
     toast.heading = success.Title;
     toast.message = success.message;
     this.toast.display(toast);
-    this.activeModal.close();
+    this.getOperationAuthorisation();
   }
   addOperationAuthorisationFailed(error){
     let toast = new Toast;
@@ -169,50 +168,21 @@ export class AuthorizationComponent implements OnInit {
     this.activeModal.close();
   }
 
-  /////////////////////////
-  get roleEffected(){
-
-    return this.authForm.get("roleaffected");
+  get getTargetId(){
+    return this.newAuthForm.get("roleTarget");
   }
 
-  get roleTarget(){
-
-    return this.authForm.get("roletarget");
+  get getDatabaseId(){
+    return this.newAuthForm.get("dbTableId");
   }
 
-  get database(){
-    return this.authForm.get("dbtableid");
+  get getOperationId(){
+    return this.newAuthForm.get("operationId");
   }
 
-  get Operation(){
-    return this.authForm.get("operationid");
-
+  get getEffectorId(){
+    return this.newAuthForm.get("roleAffected");
   }
-
-  get roleEffectedn(){
-
-    return this.authForm.get("roleaffected");
-  }
-
-  get roleTargetn(){
-
-    return this.newAuthForm.get("roletarget");
-  }
-
-  get databasen(){
-    return this.newAuthForm.get("dbtableid");
-  }
-
-  get Operationn(){
-    return this.newAuthForm.get("operationid");
-
-  }
-
-
-
-
-
-
 
 
 

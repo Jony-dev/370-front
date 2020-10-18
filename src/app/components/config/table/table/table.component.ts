@@ -3,12 +3,14 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditTableComponent } from '../../modals/edit-table/edit-table.component';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { ApiService } from 'src/app/services/api.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Tafel } from 'src/app/models/tafel';
 import {Building} from 'src/app/models/building';
 import {Floor} from 'src/app/models/floor';
 import { TableType } from 'src/app/models/tableType';
 import { FilterFloor } from 'src/app/components/system/pipes/filterFloor.pipe';
+import { SlotSetup } from 'src/app/models/slotSetup';
+import { Date } from 'src/app/models/date';
 
 @Component({
   selector: 'app-table',
@@ -27,8 +29,12 @@ export class TableComponent implements OnInit {
   searchText : string;
   requestDetails : Building;
 
+  slotSetup : FormGroup;
+
   tableForm:FormGroup;
   addTableForm:FormGroup;
+  bookableDates : Date [] = [];
+  bookableControls : FormArray = new FormArray([]);
 
   ngOnInit(): void {
     this.getData();
@@ -40,7 +46,8 @@ export class TableComponent implements OnInit {
     this.getTableTypes();
     this.getBuildings();
     this.getFloors();
-    //this.getFloorsByPipe();
+    this.getSlotSetup();
+    this.getDates();
 
   }
 
@@ -54,31 +61,32 @@ export class TableComponent implements OnInit {
     });
 
     this.addTableForm = this.formBuilder.group({
-      tableId : ["", [Validators.required]],
+      name : ["", [Validators.required]],
       ttypeId : [null,[Validators.required]],
       buildingId : [null,[Validators.required]],
       floorId : [null,[Validators.required]],
     });
 
+    this.slotSetup = this.formBuilder.group({
+      startTime : [null, [Validators.required]],
+      endTime : [null, [Validators.required]],
+      numSlots : [null, [Validators.required]]
+    })
+
   }
 
   addTable(){
-    const modalInstance = this.modal.open(EditTableComponent);
-    modalInstance.result.then((res)=>{
-      this.getTables();
-    });
+    let table = this.addTableForm.value;
   }
 
   editTable(id : number){
     const modalInstance = this.modal.open(EditTableComponent);
-    console.log(this.tables);
+    
     let table = this.tables.find( x => x.id == id);
-    //let location = this.locations.find( x => x.name == lo);
     modalInstance.componentInstance.editTable = table;
     modalInstance.result.then(res =>{
       this.getTables();
     });
-   // console.log(this.tables);
   }
   getTables(){
     this.api.getTables().subscribe( success => this.getTableSuccess(success), error => this.getTableFail(error))
@@ -155,6 +163,31 @@ export class TableComponent implements OnInit {
   }
 
   ////////////////////////////////////////////////////////////////
+  getSlotSetup(){
+    this.api.getSlotInformation().subscribe(x => {
+      this.slotSetup.setValue({
+        startTime : x.startTime,
+        endTime : x.endTime,
+        numSlots : x.numSlots
+      });
+    },
+    er =>{
+      this.retTableTypeErr(er);
+    });
+
+  }
+  getDates(){
+    this.api.getDates().subscribe(x => {
+      
+      this.bookableDates = x;
+      console.log(this.bookableDates);
+      this.bookableDates.forEach(el => this.bookableControls.push(new FormControl(el.bookable)));
+    })
+  }
+
+  changeDate(val : boolean, dateId : number){
+    this.api.changeDateVal(dateId,val).subscribe(x =>{}, er => this.retFloorsErr(er));
+  }
 
 
 
