@@ -23,13 +23,13 @@ export class AddTeamMemberComponent implements OnInit {
 
   }
 
-@Input() teamMember : TeamMembers = null;
+@Input() updateTeamMember : TeamMembers = null;
 
 save(teamId: number, userId: number){
-    this.api.createTeamMember(teamId, userId).subscribe( success => this.addTeamSuccess(success),error => this.addTeamFailed(error));
+    this.api.createTeamMember(teamId, userId).subscribe( success => this.addTeamMemberSuccess(success),error => this.addTeamMemberFailed(error));
 }
 
-addTeamSuccess(success){
+addTeamMemberSuccess(success){
   let toast = new Toast;
   toast.type = "Success";
   toast.heading = success.Title;
@@ -38,7 +38,7 @@ addTeamSuccess(success){
   this.activeModal.close();
 }
 
-addTeamFailed(error){
+addTeamMemberFailed(error){
   //console.log(error);
   let toast = new Toast;
   toast.type = "Error";

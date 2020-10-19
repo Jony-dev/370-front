@@ -156,7 +156,7 @@
                         <div class="container-fluid mb-4" *ngIf="isHrManager">
                             <h3>HR Manager Controls</h3>
                             <hr>
-                            <div class="row mt-4">                        
+                            <div class="row mt-4">
                                 <div class="col-lg-2 col-md-12">
                                     <button class="btn btn-outline-warning form-control" (click)="hrConfirm()">Confirm List</button>
                                 </div>
@@ -205,7 +205,7 @@
                                             <td>{{item.applicantName}} {{item.applicantSurname}}</td>
                                             <td>{{item.date | date : "dd/MM/yyyy"}}</td>
                                             <td>{{item.time}}</td>
-                                            <td><i class="far fa-pencil-alt" (click)="editInterview(item.id)"></i><i class="fas fa-trash-alt ml-4"></i></td>
+                                            <td> <i class="far fa-pencil-alt" (click)="editInterview(item.id)"></i> <i class="fas fa-trash-alt ml-4" (click)="deleteInterview(item.id)"></i></td>
                                         </tr>
                                     </tbody>
                                 </table>

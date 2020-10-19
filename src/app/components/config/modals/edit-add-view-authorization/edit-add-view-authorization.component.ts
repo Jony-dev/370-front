@@ -24,8 +24,9 @@ export class EditAddViewAuthorizationComponent implements OnInit {
 
   roles : Role[] = [];
   views : View[] = [];
-  constructor(public activeModal: NgbActiveModal, private toasts: ToastsService, private formBuilder : FormBuilder, private api : ApiService) { }
+  constructor(public activeModal : NgbActiveModal, private toast : ToastsService, private api : ApiService, private formBuilder : FormBuilder) { }
   viewAuthForm : FormGroup;
+
 
   ngOnInit(): void {
     this.getData();
@@ -75,7 +76,6 @@ export class EditAddViewAuthorizationComponent implements OnInit {
 
   saveViewAuth(){
     let viewAuthObj : any = this.getFormDetails();
-    console.log(viewAuthObj);
     this.api.createViewAuthorisation(viewAuthObj).subscribe( success => this.addViewAuthSuccess(success),error => this.addViewAuthFailed(error));
 
   }
@@ -88,8 +88,8 @@ export class EditAddViewAuthorizationComponent implements OnInit {
     this.toast.display(toast);
     this.activeModal.close();
   }
+
   addViewAuthFailed(error){
-    console.log(error);
     let toast = new Toast;
     toast.type = "Error";
     toast.heading = error.error.Title;
