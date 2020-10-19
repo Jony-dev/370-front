@@ -44,16 +44,16 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
 
   upComingInterviews : UpCommingInterviews [] = [];
   passedInterviews : PassedInterview [] = [];
-  
+
   shortList : ApplicantPoolCard [] = [];
   undecided : ApplicantPoolCard [] = [];
   disqualified : ApplicantPoolCard [] = [];
 
-  constructor( private modal : NgbModal, 
+  constructor( private modal : NgbModal,
     private api : ApiService,
      private toast : ToastsService,
       private router : ActivatedRoute,
-       private helper : JobCardHelperService, 
+       private helper : JobCardHelperService,
        private auth : AuthService) { }
 
   ngOnInit(): void {
@@ -147,11 +147,11 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
     }
   }
   moveToShortList(applicationId : number){
-    
+
     this.updateApplication(+applicationId,6);
   }
   moveToUndecided(applicationId : number){
-    
+
     this.updateApplication(+applicationId,8);
   }
 
@@ -173,10 +173,10 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
       if(current)
         return t+=1;
     },0);
-  
+
     if(approved == answers.length){
       return true;
-    } 
+    }
     else{
       return false;
     }
@@ -194,7 +194,7 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
   }
   togglePublish(){
     if(!this.cardPublished){
-      this.api.publishCard(this.routeId).subscribe( x => 
+      this.api.publishCard(this.routeId).subscribe( x =>
         {
           this.toast.display({type:"Success",heading : (<any>x).Title, message: (<any>x).message});
           this.getCardStatus();
@@ -203,7 +203,7 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
        );
     }
     else{
-      this.api.unPublishCard(this.routeId).subscribe( x => 
+      this.api.unPublishCard(this.routeId).subscribe( x =>
         {
           this.toast.display({type:"Success",heading : (<any>x).Title, message: (<any>x).message});
           this.getCardStatus();
@@ -221,14 +221,14 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
 
   recruiterConfirm(){
     this.api.requestConfirmation(this.routeId).subscribe( suc =>
-      { 
+      {
         this.toast.display({type : "Success", heading : (<any>suc).Title, message : (<any>suc).message});
     }, e => this.loadError(e))
   }
 
   hrConfirm(){
     this.api.confirmCard(this.routeId).subscribe( suc =>
-      { 
+      {
         this.toast.display({type : "Success", heading : (<any>suc).Title, message : (<any>suc).message});
         this.getCardStatus();
     }, e => this.loadError(e))
@@ -244,6 +244,19 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
   }
 
   closeJobCard(){
-    
+
   }
+
+  deleteInterview(id: number){
+    this.api.deleteInterview(id).subscribe( suc => this.deleteInterviewSuccess(suc), err => this.deleteInterviewFail(err));
+  }
+
+  deleteInterviewSuccess(success){
+    this.toast.display({type:"Success", heading : success.Title, message : success.message});
+    this.getUpComing(this.routeId);
+  }
+  deleteInterviewFail(error){
+    this.toast.display({type:"Error", heading : error.error.Title, message : error.error.message});
+  }
+
 }

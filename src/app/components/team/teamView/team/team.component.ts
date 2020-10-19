@@ -23,7 +23,7 @@ export class TeamComponent implements OnInit {
 
    teams : Team [] = [];
    teamView : Team = null;
-
+p
    teamMembers : TeamMembers [] = [];
 
   ngOnInit(): void {
@@ -108,7 +108,7 @@ export class TeamComponent implements OnInit {
     const modalInstance = this.modal.open(EditAddTeamComponent, {windowClass: "largeModal"});
     teamObj = this.teams.find( x => x.teamId == teamObj.teamId);
 
-    modalInstance.componentInstance.updateTeam = teamObj;
+    modalInstance.componentInstance.editTeam = teamObj;
     modalInstance.result.then(res =>{
      this.getTeams();
     })
@@ -156,3 +156,4 @@ export class TeamComponent implements OnInit {
   }
 
 }
+

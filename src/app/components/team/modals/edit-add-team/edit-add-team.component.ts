@@ -9,6 +9,7 @@ import { Toast } from 'src/app/models/toast';
 import { Department } from 'src/app/models/department';
 import { User } from 'src/app/models/user';
 import { DepartmentsMembers } from 'src/app/models/departmentsMembers';
+import { AddTeamMemberComponent } from '../add-team-member/add-team-member.component';
 
 @Component({
   selector: 'app-edit-add-team',
@@ -18,10 +19,10 @@ import { DepartmentsMembers } from 'src/app/models/departmentsMembers';
 export class EditAddTeamComponent implements OnInit {
 
   constructor(public activeModal : NgbActiveModal, private api : ApiService, private toast : ToastsService, private formBuilder : FormBuilder) { }
-
+  @Input() editTeam : Team = null;
   @Input() addMember = false;
   @Input() editing = false;
-  @Input() editTeam : Team = null;
+
 
   teams : Team [] = [];
   teamMembers : TeamMembers [] = [];
@@ -37,14 +38,63 @@ export class EditAddTeamComponent implements OnInit {
     this.buildForm();
 
     if(this.editTeam){
+      console.log('if edit works');
         this.teamForm.get('name').setValue(this.editTeam.name);
         this.teamForm.get('departmentId').setValue(this.editTeam.departmentId);
         this.teamForm.get('description').setValue(this.editTeam.description);
       }
   }
 
-  buildForm(){
+  getData(){
 
+    this.getTeams();
+    this.getDepartmentsMembers();
+    this.getDepartments();
+  }
+
+
+  getDepartments()
+  {
+    this.api.getDepartments().subscribe( success => this.getDepartmenSuccess(success), error => this.getDepartmentFail(error))
+  }
+  //success
+  getDepartmenSuccess(success){
+    this.departments = success;
+  }
+  //fail
+  getDepartmentFail(error){
+    this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
+  }
+
+  getTeams()
+  {
+    this.api.getTeamCards().subscribe( success => this.getTeamSuccess(success), error => this.getTeamFail(error));
+  }
+  //success
+  getTeamSuccess(success){
+    this.teams = success;
+  }
+  //fail
+  getTeamFail(error){
+    this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
+  }
+
+
+  getDepartmentsMembers(){
+    this.api.getDepartmentsMembers().subscribe( s => this.getDpMemberSuccess(s), e => this.getDpMemberError(e));
+
+    //console.log(this.departmentsMembers);
+  }
+  getDpMemberSuccess(s){
+    this.departmentsMembers = s;
+    console.log(this.departmentsMembers);
+  }
+  getDpMemberError(e){
+    this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message });
+  }
+
+
+  buildForm(){
     this.teamForm = this.formBuilder.group({
       name : ['', [Validators.required]],
       departmentId : [null,[Validators.required]],
@@ -52,19 +102,8 @@ export class EditAddTeamComponent implements OnInit {
     });
   }
 
-
-
-  getData(){
-
-    this.getTeams();
-    this.getDepartmentsMembers();
-    this.getDepartments();
-
-  }
-
   getFormDetails(){
     return {
-
       name: this.teamForm.get('name').value,
       departmentId: this.teamForm.get('departmentId').value,
       description: this.teamForm.get('description').value
@@ -125,46 +164,6 @@ export class EditAddTeamComponent implements OnInit {
 
   }
 
-  getDepartments()
-  {
-    this.api.getDepartments().subscribe( success => this.getDepartmenSuccess(success), error => this.getDepartmentFail(error))
-  }
-  //success
-  getDepartmenSuccess(success){
-    this.departments = success;
-  }
-  //fail
-  getDepartmentFail(error){
-    this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
-  }
-
-  getTeams()
-  {
-    this.api.getTeamCards().subscribe( success => this.getTeamSuccess(success), error => this.getTeamFail(error));
-  }
-  //success
-  getTeamSuccess(success){
-    this.teams = success;
-  }
-  //fail
-  getTeamFail(error){
-    this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
-  }
-
-
-  getDepartmentsMembers(){
-    this.api.getDepartmentsMembers().subscribe( s => this.getDpMemberSuccess(s), e => this.getDpMemberError(e));
-
-    //console.log(this.departmentsMembers);
-  }
-  getDpMemberSuccess(s){
-    this.departmentsMembers = s;
-    console.log(this.departmentsMembers);
-  }
-  getDpMemberError(e){
-    this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message });
-  }
-
   deleteTeamMember(teamId: number, userId: number){
     this.api.deleteTeamMember(teamId, userId).subscribe( suc => this.deleteTeamMemSuccess(suc), err => this.deleteTeamMemFail(err))
   }
@@ -183,11 +182,8 @@ export class EditAddTeamComponent implements OnInit {
     });*/
 
     this.api.getTeamMembers(id).subscribe( s => this.getaddedMemberSuccess(s), e => this.getaddedMemberError(e));
-
-
     console.log(this.teamMembers);
   }
-
   getaddedMemberSuccess(s){
     this.departmentsMembers = s;
     console.log(this.departmentsMembers);
@@ -197,28 +193,29 @@ export class EditAddTeamComponent implements OnInit {
   }
 
   addTeamMembers(teamId : number, userId :number ){
-    /*const modalInstance = this.modal.open(AddTeamMemberComponent, {windowClass: "largeModal"});
+   /* const modalInstance = this.activeModal.open(AddTeamMemberComponent, {windowClass: "largeModal"});
     modalInstance.result.then((res)=>{
 
-      this.getTeamMembers(teamId);
+      this.getTeamMembers(teamId, userId);
     });
-   // console.log(this.teams);
-   */
+   // console.log(this.teams);*/
+
+  }
+
+  getTeamMembers(teamId: number, userId: number){
+
+
   }
 
 
+//validators
   get teamName(){
-
     return this.teamForm.get('name');
   }
-
   get departmentID(){
-
     return this.teamForm.get('departmentId');
   }
-
   get teamDescription(){
-
     return this.teamForm.get('description');
   }
 

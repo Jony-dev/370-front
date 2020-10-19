@@ -628,6 +628,10 @@ export class ApiService {
     return this.http.post( this.interview, {request : "createInterview", payload});
   }
 
+  deleteInterview(interviewId : number){
+    return this.http.post(this.interview , {request : "deleteInterview", payload :{interviewId}});
+  }
+
   editInterview(payload : any){
     return this.http.post( this.interview, {request : "editInterview", payload});
   }
