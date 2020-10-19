@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Skill } from 'src/app/models/skill';
 import { ApiService } from 'src/app/services/api.service';
@@ -11,6 +12,7 @@ import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
 })
 export class ProfileAddSkillComponent implements OnInit {
 
+  searchSkill : FormControl = new FormControl();
   skills : Skill [] = [];
   constructor(public activeModal : NgbActiveModal, private api : ApiService, private helper : JobCardHelperService) { }
 

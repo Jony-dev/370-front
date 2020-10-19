@@ -37,6 +37,7 @@ import { BookingReportComponent } from './components/reports/booking-report/book
 import { AssistBookingComponent } from './components/booking/assist-booking/assist-booking.component';
 import { BackupRestoreComponent } from './components/config/backup-restore/backup-restore.component';
 import { HomeComponent } from './components/home/home/home.component';
+import { UserManualComponent } from './components/user-manual/user-manual.component';
 
 const routes: Routes = [
 { path: "", component : LoginComponent},
@@ -74,6 +75,7 @@ const routes: Routes = [
       { path : "AssistBooking", component : AssistBookingComponent,},
       { path : "backupRestore", component : BackupRestoreComponent,},
       { path : "Home", component : HomeComponent,},
+      { path : "UserManual", component : UserManualComponent,},
   ]},
 { path: "AccountCreated", component : AccountSuccessCreateComponent},
 ];

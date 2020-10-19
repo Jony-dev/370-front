@@ -11,6 +11,7 @@ import { TableType } from 'src/app/models/tableType';
 import { FilterFloor } from 'src/app/components/system/pipes/filterFloor.pipe';
 import { SlotSetup } from 'src/app/models/slotSetup';
 import { Date } from 'src/app/models/date';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-table',
@@ -80,6 +81,14 @@ export class TableComponent implements OnInit {
 
   addTable(){
     let table = this.addTableForm.value;
+    console.log(table);
+    this.api.addTable(this.addTableForm.value).subscribe(x => {
+      this.toast.display({type : "Success", heading : (<any>x).Title, message : (<any>x).message});
+      this.getTables();
+    },
+    er =>{
+      this.toast.display({type : "Error", heading : (<any>er).Title, message : (<any>er).error.message+"/n"+(<any>er).message});
+    })
   }
 
   editTable(id : number){
@@ -193,11 +202,14 @@ export class TableComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
+  setSlots(){
+    let slotDetails = this.slotSetup.value;
+    this.api.createSlots(slotDetails.startTime, slotDetails.endTime, slotDetails.numSlots).subscribe(x=>{
+      this.toast.display({type : "Success",heading : (<any>x).Title, message : (<any>x).message});
+      this.getSlotSetup();
+    },er =>{
+      this.fetchFailed(er);
+    })
+  }
 
 }

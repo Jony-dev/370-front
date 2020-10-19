@@ -69,7 +69,7 @@
                             <th class="text-right">Actions</th>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of tables"><td>{{item.name}}</td><td>{{item.ttypeId}}</td><td>{{item.buildingName}}</td><td>{{item.floorId}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
+                          <tr *ngFor="let item of tables"><td>{{item.name}}</td><td>{{item.ttypeId == 3? "Group" : "Individual"}}</td><td>{{item.buildingName}}</td><td>{{item.floorName}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -135,7 +135,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-lg-4">
-                                            <button class="btn btn-outline-primary float-right mt-lg-4 mt-sm-0"  (click)="addTable()">Add Table</button>
+                                            <button class="btn btn-outline-primary float-right mt-lg-4 mt-sm-0"  (click)="addTable()" [disabled]="!addTableForm.valid">Add Table</button>
                                         </div>
                                         <hr>
                                       </div>
@@ -174,7 +174,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button class="btn btn-outline-primary float-right mt-lg-4 mt-md-0">Set Slots</button>
+                                            <button class="btn btn-outline-primary float-right mt-lg-4 mt-md-0" (click)="setSlots()" [disabled]="!slotSetup.valid">Set Slots</button>
                                         </div>
                                         <hr>
                                     </div>
@@ -207,7 +207,7 @@
                                             <th>Allow Booking</th>
                                         </thead>
                                         <tbody>  
-                                          <tr *ngFor="let item of bookableDates | filterBetweenDates:sControl.value:eControl.value; let i = index"><td>x</td><td>{{item.date}}</td><td><input type="checkbox" name="date2" [value]="item.bookable" [formControl]="bookableControls.controls[i]" (change)="changeDate($event.target.checked, item.dateId)"></td></tr>
+                                          <tr *ngFor="let item of bookableDates | filterBetweenDates:sControl.value:eControl.value; let i = index"><td>{{i}}</td><td>{{item.date}}</td><td><input type="checkbox" name="date2" [value]="item.bookable" [formControl]="bookableControls.controls[i]" (change)="changeDate($event.target.checked, item.dateId)"></td></tr>
                                         </tbody>
                                     </table>
                                 </div>

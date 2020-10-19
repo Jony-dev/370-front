@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Language } from 'src/app/models/language';
 import { ApiService } from 'src/app/services/api.service';
@@ -12,7 +13,8 @@ import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
 export class ProfileAddLanguageComponent implements OnInit {
 
   languages : Language [] = [];
-
+  searchLang : FormControl = new FormControl();
+  
   constructor(public activeModal : NgbActiveModal, private api : ApiService, private helper : JobCardHelperService) { }
   
   ngOnInit(): void {

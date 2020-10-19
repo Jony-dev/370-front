@@ -63,6 +63,7 @@ import { SlotSetup } from '../models/slotSetup';
 import { Date } from '../models/date';
 import { TeamReport } from '../models/teamReport';
 import { BuildingReport } from '../models/buildingReport';
+import { Time } from '@angular/common';
 
 
 
@@ -119,7 +120,7 @@ export class ApiService {
   notification: string = `${this.globalRoot}API/Notification/`;
   teamReports: string = `${this.globalRoot}API/Team/`;
   buildingReport: string = `${this.globalRoot}API/Building/`;
-
+  slot : string = `${this.globalRoot}API/Slot/`;
   teamMember: string = `${this.globalRoot}API/TeamMember/`;
   departmentsMembers: string = `${this.globalRoot}API/Department/`; ///departmentsMember
 
@@ -506,6 +507,10 @@ export class ApiService {
   }
   deleteTable(id: number){
     return this.http.post(this.table, {request : "deleteTable", payload : {id}})
+  }
+
+  createSlots( startTime : Time, endTime : Time, noSlots : number){
+    return this.http.post(this.slot, {request : "createSlots", payload : {startTime, endTime, noSlots}})
   }
 
   getDates(){
