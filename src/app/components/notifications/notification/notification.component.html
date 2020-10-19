@@ -3,7 +3,10 @@
         <div class="row">
             <!-- NG FOR STUFF -->
             <table class="table greyHead">
-                <tr *ngFor="let item of notification"><td>{{item.message}}</td><td>{{item.date}}</td></tr>
+                <tr *ngFor="let item of notification"><td>{{item.message}}</td><td>{{item.date}}</td>
+                  <td><a placement="left" ngbTooltip="Select this to delete the corresponding notification.">
+                  <i class="fas fa-trash-alt ml-4" (click)="deleteNotification(item.id)"></i>
+                </a></td></tr>
             </table>
         </div>
     </div>

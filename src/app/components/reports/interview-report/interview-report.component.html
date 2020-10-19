@@ -1,1 +1,34 @@
-<iframe src='http://localhost:4848/single/?appid=C%3A%5CUsers%5CHP%5COneDrive%5CDocuments%5CQlik%5CSense%5CApps%5CBMW%20REPORTS.qvf&obj=JuMu&opt=nointeraction&select=clearall' style='border:none;width:100%;height:100%;'></iframe>
+<div class="container-fluid">
+  <button  type="button" class="btn btn-outline-info" style="float: right;">Help</button>
+    <div class="row">
+        <div class="col-sm-12 col-md-10 mt-4">
+            <div class="panel-container panel-ext sm-container">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <h1>Locations Report</h1>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                  <table class="table greyHead">
+                    <thead>
+                        <tr>
+                            <th>Country Name</th>
+                            <th>Location Name</th>
+                            <th>Building Name</th>
+                            <th>Floor Number</th>
+                        </tr>
+                    </thead>
+                    <!-- Skills GO HERE -->
+                    <tr *ngFor="let item of buildings"><td>{{item.countryName}}</td><td>{{item.locationName}}</td><td>{{item.buildingName}}</td>
+                      <td>{{item.floorNumber}}</td>
+                      </tr>
+                  </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
