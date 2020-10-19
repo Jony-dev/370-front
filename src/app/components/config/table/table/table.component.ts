@@ -36,6 +36,9 @@ export class TableComponent implements OnInit {
   bookableDates : Date [] = [];
   bookableControls : FormArray = new FormArray([]);
 
+  sControl : FormControl = new FormControl();
+  eControl : FormControl = new FormControl();
+
   ngOnInit(): void {
     this.getData();
     this.buildForm();

@@ -191,13 +191,13 @@
                                     <div class="col-lg-4 col-sm-12">
                                         <div class="form-group">
                                             <label for="startDate">Starting Date</label>
-                                            <input class="form-control" type="date" name="startDate" id="startDate">
+                                            <input class="form-control" type="date" name="startDate" id="startDate" [formControl]="sControl">
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-sm-12">
                                         <div class="form-group">
                                             <label for="endDate">Ending Date</label>
-                                            <input class="form-control" type="date" name="endDate" id="endDate">
+                                            <input class="form-control" type="date" name="endDate" id="endDate" [formControl]="eControl">
                                         </div>
                                     </div>
                                     <table class="table greyHead">
@@ -207,7 +207,7 @@
                                             <th>Allow Booking</th>
                                         </thead>
                                         <tbody>  
-                                          <tr *ngFor="let item of bookableDates; let i = index"><td>x</td><td>{{item.date}}</td><td><input type="checkbox" name="date2" [value]="item.bookable" [formControl]="bookableControls.controls[i]" (change)="changeDate($event.target.checked, item.dateId)"></td></tr>
+                                          <tr *ngFor="let item of bookableDates | filterBetweenDates:sControl.value:eControl.value; let i = index"><td>x</td><td>{{item.date}}</td><td><input type="checkbox" name="date2" [value]="item.bookable" [formControl]="bookableControls.controls[i]" (change)="changeDate($event.target.checked, item.dateId)"></td></tr>
                                         </tbody>
                                     </table>
                                 </div>

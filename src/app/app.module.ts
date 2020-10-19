@@ -123,6 +123,7 @@ import { FilterApplicants } from './components/system/pipes/filterPool.pipe';
 import { HomeComponent } from './components/home/home/home.component';
 import { FilterOperationAuth } from './components/system/pipes/filterOperationAuth.pipe';
 import { FilterFloorDrop } from './components/system/pipes/filterFloorDrop.pipe';
+import { FilterBetweenDates } from './components/system/pipes/filterBetweenDates.pipe';
 
 @NgModule({
   declarations: [
@@ -227,6 +228,7 @@ import { FilterFloorDrop } from './components/system/pipes/filterFloorDrop.pipe'
     FilterMyListings,
     FilterMyListings,
     FilterOperationAuth,
+    FilterBetweenDates,
     AssistBookingComponent,
     FilterApplicants,
     FilterFloorDrop,
