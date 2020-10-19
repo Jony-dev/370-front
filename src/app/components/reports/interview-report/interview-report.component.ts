@@ -12,9 +12,11 @@ import { BuildingReport } from 'src/app/models/buildingReport';
 })
 export class InterviewReportComponent implements OnInit {
 
+  buildings : BuildingReport [] = [];
+
   constructor(private modal : NgbModal , private api : ApiService, private toast : ToastsService) { }
 
-  buildings : BuildingReport [] = [];
+
 
   ngOnInit(): void {
     this.getData();

@@ -237,22 +237,24 @@ import { UserManualComponent } from './components/user-manual/user-manual.compon
     FilterFloorDrop,
     BackupRestoreComponent,
     HomeComponent,
-    UserManualComponent
-    
-     
+    UserManualComponent,
+    StageReportComponent,
+    InterviewReportComponent,
+    TeamReportComponent,
+    CandidateReportComponent,
+    BookingReportComponent,
+    AssistBookingComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserModule,
     BsDropdownModule,
     TooltipModule,
     ModalModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserModule,
     BrowserAnimationsModule,
 
 

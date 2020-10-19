@@ -10,7 +10,7 @@
                         </div>
                     </div>
                 </div>
-                <div>
+               <div>
                   <table class="table greyHead">
                     <thead>
                         <tr>
@@ -21,15 +21,17 @@
                             <th>Team Member Surname</th>
                         </tr>
                     </thead>
-                    <!-- Skills GO HERE -->
-                    <tr *ngFor="let item of teams"><td>{{item.divisionName}}</td><td>{{item.departmentName}}</td><td>{{item.teamName}}</td>
-                      <td>{{item.userName}}</td><td>{{item.userSurname}}</td>
-                      </tr>
+                    <!--Skills GO HERE-->
+                    <tbody>
+                      <tr *ngFor="let item of teamReports"><td>{{item.divisionName}}</td><td>{{item.departmentName}}</td><td>{{item.teamName}}</td>
+                        <td>{{item.userName}}</td><td>{{item.userSurname}}</td></tr>
+                    </tbody>
                   </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 

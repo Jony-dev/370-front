@@ -1,8 +1,8 @@
 export class TeamReport
 {
-  divisionName : String;
-  departmentName : String;
-  teamName: String;
-  userName : String;
-  userSurname : String;
+  divisionName : string;
+  departmentName : string;
+  teamName: string;
+  userName : string;
+  userSurname : string;
 }

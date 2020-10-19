@@ -64,6 +64,8 @@ import { Date } from '../models/date';
 import { TeamReport } from '../models/teamReport';
 import { BuildingReport } from '../models/buildingReport';
 import { Time } from '@angular/common';
+import { CardReport } from '../models/cardReport';
+import { CardCount } from '../models/cardCount';
 
 
 
@@ -123,6 +125,8 @@ export class ApiService {
   slot : string = `${this.globalRoot}API/Slot/`;
   teamMember: string = `${this.globalRoot}API/TeamMember/`;
   departmentsMembers: string = `${this.globalRoot}API/Department/`; ///departmentsMember
+  cardReport: string = `${this.globalRoot}API/JobCard/`;
+  cardCount: string = `${this.globalRoot}API/JobCard/`;
 
 
 
@@ -906,6 +910,14 @@ getQuestionPending()
 
   getBuildingReport(){
     return this.http.post<BuildingReport[]>(this.buildingReport, {request : "getBuildingReport"});
+  }
+
+  getCardReport(){
+    return this.http.post<CardReport>( this.cardReport, {request : "getCardReport"});
+  }
+
+  getCardCount(){
+    return this.http.post<CardCount>( this.cardCount, {request : "getCardCount"});
   }
 
 }
