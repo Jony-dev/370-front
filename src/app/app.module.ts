@@ -120,6 +120,7 @@ import { FilterViewAuth } from './components/system/pipes/filterViewAuths.pipe';
 import { FilterMyListings } from './components/system/pipes/filterJobListing.pipe';
 import { BackupRestoreComponent } from './components/config/backup-restore/backup-restore.component';
 import { FilterApplicants } from './components/system/pipes/filterPool.pipe';
+import { HomeComponent } from './components/home/home/home.component';
 
 @NgModule({
   declarations: [
@@ -225,7 +226,8 @@ import { FilterApplicants } from './components/system/pipes/filterPool.pipe';
     FilterMyListings,
     AssistBookingComponent,
     FilterApplicants,
-    BackupRestoreComponent
+    BackupRestoreComponent,
+    HomeComponent
     
      
   ],

@@ -3,7 +3,7 @@ import Stepper from 'bs-stepper';
 import { JobRequestInfo } from 'src/app/models/jobReqDetails';
 import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
 import { Observer, Observable, Subject, Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { Schedule } from 'src/app/models/schedule';
 import { RequisitionApproval } from 'src/app/models/requisitionApproval';
 import { ApiService } from 'src/app/services/api.service';
@@ -20,6 +20,22 @@ import { UserProfile } from 'src/app/models/userProfile';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditJobCard } from 'src/app/models/editJobCard';
 import { FilterName } from 'src/app/components/system/pipes/filterName.pipe'
+
+const validatePublish: ValidatorFn = (fg: FormGroup) => {
+  const start = fg.get('publishDate').value;
+  const end = fg.get('closingDate').value;
+  return start !== null && end !== null && start < end
+    ? null
+    : { publish: true };
+};
+
+const validateContractDate: ValidatorFn = (fg: FormGroup) => {
+  const start = fg.get('startDate').value;
+  const end = fg.get('endDate').value;
+  return start !== null && end !== null && start < end
+    ? null
+    : { contract: true };
+};
 
 @Component({
   selector: 'app-job-card-create',
@@ -87,6 +103,9 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
 
   private stepper: Stepper;
   private jobHelpSub : Subscription;
+  test(){
+    console.log(this.basicDetails);
+  }
   buildForm(){
     this.basicDetails = this.formBuilder.group({
       jobCardName : ['',[Validators.required]],
@@ -99,8 +118,10 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
       closingDate : ['',[Validators.required]],
       scheduleId : [null, [Validators.required]],
       locationId : [null, [Validators.required]],
-      raApprovalId : [null, [Validators.required]],
-      workingHours : [null,[Validators.required]]
+      raApprovalId : [+3, [Validators.required]],
+      workingHours : [null,[Validators.required,Validators.min(0)]]
+    },{
+      validators : [validatePublish, validateContractDate]
     });
 
     this.testForm = this.formBuilder.group({questions : FormArray});
@@ -149,8 +170,19 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
     this.payload.basicDetails = this.getBasicFrom();
     this.payload.tests = this.testsObj();
     this.payload.id = this.requestDetails.jobCardId;
-    console.log(this.payload);
     this.api.populateJobCard(this.payload).subscribe( success => this.successUploadCard(success),err => this.failUploadCard(err));
+  }
+
+  editCard(){
+    this.payload.approvers = this.approversObj();
+    this.payload.longQuestions = this.questionsObj();
+    this.payload.requirements = this.requirementsObj();
+    this.payload.languages = this.languagesObj();
+    this.payload.skills = this.skillsObj();
+    this.payload.basicDetails = this.getBasicFrom();
+    this.payload.tests = this.testsObj();
+    this.payload.id = this.requestDetails.jobCardId;
+    this.api.editJobCard(this.payload).subscribe( success => this.successUploadCard(success),err => this.failUploadCard(err));
   }
   
   getData(){
@@ -166,9 +198,8 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
 
     if(this.editing)
     {
-      console.log()
       //DO STUFF HERE
-      this.getCardValues();
+      setTimeout(x => this.getCardValues(),1500);
     }
   }
   next() {
@@ -234,7 +265,6 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
   getSkillSuccess(succ){
     this.skills = succ;
     this.skillCollectionSize = this.skills.length;
-    console.log(this.skills);
     
   }
 
@@ -261,8 +291,11 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
 
   gotEmployees(success){
     this.employees = success;
-    this.approvers.push(this.employees.find(x => x.id == this.requestDetails.user.id));
-    this.employees = this.employees.filter( x => x.id != this.requestDetails.user.id);
+    if(!this.editing){
+      this.approvers.push(this.employees.find(x => x.id == this.requestDetails.user.id));
+      this.employees = this.employees.filter( x => x.id != this.requestDetails.user.id);
+    }
+    
   }
   fetchFailed(error){
     this.toast.display({type:"Error",heading: error.error.Title, message : error.error.message});
@@ -288,7 +321,6 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
   
   languageFArray = new FormArray([]);
   addLanguage(id : number){
-    console.log(id);
     let obj = this.languages.find(x => x.id == id);
     this.addedLanguages.push(obj);
     this.languages = this.languages.filter( x => x.id != id);
@@ -309,9 +341,6 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
     this.addedSkills.push(obj);
     this.skills = this.skills.filter( x => x.id != id);
     this.skillFArray.push(new FormControl(false));
-  }
-  test(){
-    console.log(this.skillFArray.value);
   }
 
   removeSkill(id : number){
@@ -408,13 +437,15 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
   }
 
   failUploadCard(error){
-    this.toast.display({type:"Error",heading: error.error.Title, message : error.error.message});
+    console.log(error);
+    this.toast.display({type:"Error",heading: error.error.Title, message : error.error.message+" "+error});
   }
 
   getCardValues(){
     this.api.getEditJobCard(this.requestDetails.jobCardId).subscribe( succ => this.getCardValueSucc(succ), err => this.getCardValueFailed(err))
   }
   getCardValueSucc(succ : EditJobCard){
+    console.log("VALUES");
     console.log(succ);
     this.setBasicDetails(succ);
     this.setTests(succ);
@@ -435,41 +466,39 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
 
   setTests(details : EditJobCard){
     details.tests.forEach( (el, index) => {
-      this.addTest(el.testId);
-      this.testsFArray.controls[index].setValue(el.critical);
+      this.addTest(+el.testId);
+      this.testsFArray.controls[index].setValue(+el.critical);
     });
   }
   setRequirements(details : EditJobCard){
+
     details.requirements.forEach( (el, index) => {
-      this.addRequirement(el.id);
-      this.requirementFArray.controls[index].setValue({expectedAnswr : el.expectedAnswer, critical : el.critical});
+      this.addRequirement(+el.id);
+      this.requirementFArray.controls[index].setValue({expectedAnswr : +el.expectedAnswer, critical : +el.critical});
     });
   }
   setLanguages(details : EditJobCard){
     details.languages.forEach( (el, index) => {
-      this.addLanguage(el.id);
-      this.languageFArray.controls[index].setValue(el.critical);
+      this.addLanguage(+el.id);
+      this.languageFArray.controls[index].setValue(+el.critical);
     });
   }
   setSkills(details : EditJobCard){
     details.skills.forEach( (el, index) => {
-      this.addSkill(el.id);
-      this.skillFArray.controls[index].setValue(el.critical);
+      this.addSkill(+el.id);
+      this.skillFArray.controls[index].setValue(+el.critical);
     });
   }
   setLongQuestions(details : EditJobCard){
+    console.log(details.longQuestions);
     details.longQuestions.forEach( (el, index) => {
-      this.addLQuestion(el.id);
-      this.questionFArray.controls[index].setValue(el.critical);
+      this.addLQuestion(+el.id);
+      this.questionFArray.controls[index].setValue(+el.critical);
     });
   }
 
   setApprovers(details : EditJobCard){
-    setTimeout( ()=>{
-      details.approvers.forEach(el => {
-        if(!this.approvers.map(x => x.id).includes(el.id))
-          this.addApprover(el.id)});
-    },1500)
+    details.approvers.forEach( el => this.addApprover(el.id));
     
     // this.employees = this.employees.filter( emp => details.approvers.find(x => x.id = emp.id));
   }

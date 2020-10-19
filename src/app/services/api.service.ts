@@ -52,9 +52,12 @@ import { BookingCap } from '../models/bookingCap';
 import { GroupBookingCap } from '../models/groupBookingCap';
 import { SlotTable } from '../models/slotTable';
 import { Audit } from '../models/audit';
-import { SearchUser } from '../models/searchUser';
+import { HomeCard } from '../models/homeCard';
 import { TeamMembers } from '../models/teamMembers';
 import { DepartmentsMembers } from '../models/departmentsMembers';
+import { SearchUser } from '../models/searchUser';
+import { Skill } from '../models/skill';
+import { Notification } from '../models/notification';
 
 
 
@@ -108,6 +111,7 @@ export class ApiService {
   date : string = `${this.globalRoot}API/Date`;
   backUp : string = `${this.globalRoot}API/Backup`;
   audit: string = `${this.globalRoot}API/Audit/`;
+  notification: string = `${this.globalRoot}API/Notification/`;
 
   teamMember: string = `${this.globalRoot}API/TeamMember/`;
   departmentsMembers: string = `${this.globalRoot}API/Department/`; ///departmentsMember
@@ -223,9 +227,11 @@ export class ApiService {
     return this.http.post(this.job, {request: "updateJob", payload: jobName});
   }
   deleteJob(id : number){
-    return this.http.post(this.job, {request: "deleteJob", payload : {id} }); // NEEDS BACK END
+    return this.http.post(this.job, {request: "deleteJob", payload : {id} });
   }
-
+  editJobCard(details : any){
+    return this.http.post(this.jobCard, {request: "updateJobCard", payload : details });
+  }
   createJob(job : any){
     return this.http.post(this.job, {request: "createJob", payload : job});
   }
@@ -757,6 +763,9 @@ export class ApiService {
     return this.http.post<Audit[]>( this.audit, {request : "getAudits" });
   }
 
+  getHomeCards(){
+    return this.http.post<HomeCard>( this.user, {request : "getHomeData"})
+  }
   ///////////////////////////////////////////////TEAM///////////////////////////////////////////////////
   getTeams(){
     return this.http.post<Team[]>( this.team, {request : "getTeams" });
@@ -802,7 +811,6 @@ export class ApiService {
   // }
 
   ////////////////////////////////////USER//////////////////////////////////////////////////////////
-
   getUsersForSearch(){
     return this.http.post<SearchUser[]>( this.user, {request : "getUsersForSearch" });
   }
@@ -811,6 +819,52 @@ export class ApiService {
     return this.http.post<DepartmentsMembers[]>( this.departmentsMembers, {request : "getDepartmentsMembers" });
   }
 
+  getUserSkills(){
+    return this.http.post<{skills : Skill[], languages : Language[]}>(this.user , {request : "getSkillsAndLangs"});
+  }
+///////////////////////////////////////////////////////////////////////////////Notifications///////////////////////////
+getUserNotifications(){
+  return this.http.post<Notification[]>(this.notification, {request : "getUserNotifications"});
 
+}
+getUserCount(){
+  return this.http.post<Notification[]>(this.notification, {request : "getUserCount"});
 
+}
+
+  addUsersSkill(id:number){
+    return this.http.post(this.user, {request : "addUserSkill", payload : {id}});
+  }
+
+  addUsersLanguage(id:number){
+    return this.http.post(this.user, {request : "addUserLanguage", payload : {id}});
+  }
+getSkillPending()
+{
+  return this.http.post<Skill[]>(this.skill, {request : "getSkillPending"});
+}
+getRequirementPending()
+{
+  return this.http.post<Requirement[]>(this.requirement, {request : "getRequirementPending"});
+}
+getQuestionPending()
+{
+  return this.http.post<LongQuestion[]>(this.longQuestion, {request : "getQuestionPending"});
+}
+
+  removeUsersSkill(id:number){
+    return this.http.post(this.user, {request : "removeUserSkill", payload : {id}});
+  }
+
+  removeUsersLanguage(id:number){
+    return this.http.post(this.user, {request : "removeUserLanguage", payload : {id}});
+  }
+
+  getUnassignedLangs(){
+    return this.http.post<Language[]>(this.user, {request : "getUnassignedLangs"});
+  }
+
+  getUnassignedSkills(){
+    return this.http.post<Skill[]>(this.user, {request : "getUnassignedSkills"});
+  }
 }

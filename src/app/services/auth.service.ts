@@ -26,6 +26,10 @@ export class AuthService {
     // });
   }
 
+  public getUsersViews(){
+    return this.userViews;
+  }
+
   public getUserId(){
 
     const token = localStorage.getItem("bmwToken");

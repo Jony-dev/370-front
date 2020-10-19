@@ -5,4 +5,5 @@ export class UserApprover{
     surname : string;
     url : string;
     approved : boolean;
+    rejectMessage : string;
 }

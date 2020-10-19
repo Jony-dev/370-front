@@ -76,37 +76,34 @@ export class JobApplicationComponent implements OnInit {
   }
 
   setSkillQuestions(skills : Skill[]){
-    this.skills = skills;
-
-    this.skills.forEach( el =>{
+    skills.forEach( el =>{
       this.skillAnswers.push(new FormControl(null));
-      
+      this.skills.push(el);
     });
   
   }
 
   setLongQuestions(questions : LongQuestion[]){
-    this.longQuestions = questions;
-    this.longQuestions.forEach( el =>{
+    
+    questions.forEach( el =>{
       this.longQuestionAnswers.push(new FormControl(''));
-      
+      this.longQuestions.push(el);
     });
 
   }
 
   setRequirements( requirements : Requirement[]){
-    this.requirements = requirements;
-    this.requirements.forEach( el =>{
+    requirements.forEach( el =>{
       this.requirementAnswers.push(new FormControl(null));
-      
+      this.requirements.push(el);
     });
   }
 
   setLanguages( langs : Language[]){
-    this.languages = langs;
-    this.requirements.forEach( el =>{
+
+    langs.forEach( lang =>{
       this.languageAnswers.push(new FormControl(null));
-      
+      this.languages.push(lang);
     });
   }
 

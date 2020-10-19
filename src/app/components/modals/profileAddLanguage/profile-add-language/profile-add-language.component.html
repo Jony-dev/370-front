@@ -17,14 +17,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th scope="row">{{ 1 }}</th>
-
-            <td>This is where language name will be</td>
-
+        <tr *ngFor="let lang of languages; let i = index;">
+          <th scope="row">{{ i }}</th>
+            <td>{{lang.language}}</td>
          <td>
           <a placement="left" ngbTooltip="Select to add this language to your profile.">
-            <i class="fa fa-plus" aria-hidden="true"></i>
+            <i class="fa fa-plus" aria-hidden="true" (click)="addLanguage(lang.id)"></i>
           </a>
           </td>
         </tr>

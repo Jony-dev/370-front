@@ -9,7 +9,7 @@
     <div class="fill-flex">
         <div class="container-fluid">
             <h2 *ngIf="user.approved == true" class="float-right mt-3"><i class="far fa-check-square"></i></h2>
-            <h2 *ngIf="user.approved == false"class="float-right mt-3"><i class="far fa-times-square"></i></h2>
+            <h2 *ngIf="user.approved == false"class="float-right mt-3" [ngbTooltip]="user.rejectMessage" placement="left"><i class="far fa-times-square"></i></h2>
             <h2 *ngIf="user.approved == null"class="float-right mt-3"><i class="far fa-square"></i></h2>
         </div>
         

@@ -9,7 +9,7 @@
                             <h1>Skills</h1>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <button class="btn btn-outline-primary mt-4 float-right" (click)="pendingSkills()">Pending Skills 6</button>
+                            <button class="btn btn-outline-primary mt-4 float-right" (click)="pendingSkills()" *ngIf="pendingSkill">Pending Skills {{pendingSkill}}</button> 
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                                     </form>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <button class="mt-4 float-right btn btn-outline-primary" (click)="pendingRequirements()"> Pending Requirements 6</button>
+                                    <button class="mt-4 float-right btn btn-outline-primary" (click)="pendingRequirements()" *ngIf="pendingRequirement">Pending Requirements {{pendingRequirement}}</button>
                                 </div>
                                 <div class="col-12">
                                     <div class="mt-2">
@@ -107,7 +107,7 @@
                                     </form>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <button class="mt-4 float-right btn btn-outline-primary" (click)="pendingQuestions()"> Pending Questions 6</button>
+                                    <button class="mt-4 float-right btn btn-outline-primary" (click)="pendingQuestions()" *ngIf="pendingRequirement"> Pending Questions {{pendingQuestion}}</button>
                                 </div>
                                 <div class="col-12">
                                     <div class="mt-2">

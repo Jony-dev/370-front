@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UploadImageComponent } from '../../uploadImage/upload-image/upload-image.component';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -9,35 +9,51 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Toast } from 'src/app/models/toast';
 import { ToastsService } from 'src/app/services/toasts.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UserProfile } from 'src/app/models/userProfile';
 import { userCard } from 'src/app/models/userCard';
 import { ResetPasswordComponent } from '../../reset-password/reset-password.component';
+import { Skill } from 'src/app/models/skill';
+import { Language } from 'src/app/models/language';
+import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
 
 @Component({
   selector: 'app-edit-profile-m',
   templateUrl: './edit-profile-m.component.html',
   styleUrls: ['./edit-profile-m.component.css']
 })
-export class EditProfileMComponent implements OnInit {
+export class EditProfileMComponent implements OnInit, OnDestroy {
 
+  refreshSub$ : Subscription;
   profileOwner : UserProfile = null;
   editProfile :FormGroup;
   userDetails : User;
   country$ : Observable<Country[]>;
   nationality$ : Observable<Nationality[]>;
+  skills : Skill [] = [];
+  languages : Language [] = [];
 
-  constructor( public activeModal : NgbActiveModal, private modal : NgbModal, private formBuilder : FormBuilder, private api : ApiService, private toast : ToastsService) {
+  constructor( public activeModal : NgbActiveModal, private modal : NgbModal, private formBuilder : FormBuilder, private api : ApiService, private toast : ToastsService, private helper : JobCardHelperService) {
 
   }
 
-
+  ngOnDestroy(){
+    this.refreshSub$.unsubscribe();
+  }
   ngOnInit(): void {
+    this.loadData();
+    this.buildForm();
+    this.refreshSub$ = this.helper.shouldRefresh$.subscribe( x => this.loadData());
+  }
 
+  loadData(){
     this.country$ = this.api.getCountries();
     this.nationality$ = this.api.getNationalities();
+    this.api.getUserSkills().subscribe( x => {
+      this.skills = x.skills;
+      this.languages = x.languages;
+    });
     this.getProfileDetails();
-    this.buildForm();
   }
 
 

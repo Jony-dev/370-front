@@ -107,7 +107,6 @@ export class FullJobCardComponent implements OnInit, OnDestroy {
     this.getCardStatus();
   }
   gotAllApplicants( success : ApplicantPoolCard []){
-    console.log(success);
     this.undecided = [];
     this.shortList = [];
     this.disqualified = [];
