@@ -243,22 +243,24 @@ import { FilterDepartmentMembers } from './components/system/pipes/filterDepartm
     FilterDepartmentMembers,
     BackupRestoreComponent,
     HomeComponent,
-    UserManualComponent
-    
-     
+    UserManualComponent,
+    StageReportComponent,
+    InterviewReportComponent,
+    TeamReportComponent,
+    CandidateReportComponent,
+    BookingReportComponent,
+    AssistBookingComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserModule,
     BsDropdownModule,
     TooltipModule,
     ModalModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserModule,
     BrowserAnimationsModule,
 
 

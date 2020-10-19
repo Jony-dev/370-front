@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastsService } from 'src/app/services/toasts.service';
-import { TeamReport } from 'src/app/models/teamReport';
+import {TeamReport} from 'src/app/models/teamReport';
 
 @Component({
   selector: 'app-team-report',
@@ -11,12 +11,13 @@ import { TeamReport } from 'src/app/models/teamReport';
 })
 export class TeamReportComponent implements OnInit {
 
-  constructor(private modal : NgbModal , private api : ApiService, private toast : ToastsService) { }
+  teamReports : TeamReport [] = [];
 
-  teams : TeamReport [] = [];
+  constructor(private modal : NgbModal , private api : ApiService, private toast : ToastsService) { }
 
   ngOnInit(): void {
     this.getData();
+
   }
 
   getData(){
@@ -25,13 +26,13 @@ export class TeamReportComponent implements OnInit {
 
   teamReport(){
     this.api.teamReport().subscribe( s => this.teamReportSuccess(s), e => this.teamReportError(e));
-    console.log(this.teams);
+
   }
-  teamReportSuccess(s){
-    this.teams = s;
+  teamReportSuccess(s : TeamReport[]){
+    this.teamReports = s;
+    console.log(this.teamReports);
   }
   teamReportError(e){
     this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message });
   }
-
 }
