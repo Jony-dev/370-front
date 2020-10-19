@@ -66,6 +66,9 @@ import { BuildingReport } from '../models/buildingReport';
 import { Time } from '@angular/common';
 import { CardReport } from '../models/cardReport';
 import { CardCount } from '../models/cardCount';
+import { GroupBookingReport } from '../models/groupBookingReport';
+
+import { IndividualBookingReport } from '../models/individualBookingReport';
 
 
 
@@ -127,6 +130,8 @@ export class ApiService {
   departmentsMembers: string = `${this.globalRoot}API/Department/`; ///departmentsMember
   cardReport: string = `${this.globalRoot}API/JobCard/`;
   cardCount: string = `${this.globalRoot}API/JobCard/`;
+  groupBooking: string = `${this.globalRoot}API/UserBooking/`;
+  individualBooking: string = `${this.globalRoot}API/UserBooking/`;
 
 
 
@@ -931,4 +936,11 @@ getQuestionPending()
     return this.http.post<CardCount>( this.cardCount, {request : "getCardCount"});
   }
 
+  getGroupBookingReport(){
+    return this.http.post<GroupBookingReport>( this.groupBooking, {request : "getGroupBookingReport"});
+  }
+
+  getIndividualBookingReport(){
+    return this.http.post<IndividualBookingReport>( this.individualBooking, {request : "getIndividualBookingReport"});
+  }
 }
