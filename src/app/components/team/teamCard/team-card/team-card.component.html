@@ -41,9 +41,10 @@
 
       </div>
 
-      <!-- kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk-->
+      <!-- kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
       <div class="teamCard container-fluid">
-        <h3 class="ml-1">FAST</h3>
+
+        <h3 *ngFor="let item of teams" class="ml-1">{{item.name}}</h3>
         <div class="flex-container">
             <p class="membership ml-2" *ngIf="owner"><i class="fad fa-crown"></i> Owner</p>
             <p class="membership ml-2" *ngIf="!owner"><i class="fad fa-users"></i> Member</p>
@@ -55,8 +56,9 @@
             <div ngbDropdownMenu aria-labelledby="dropdownManual" >
               <button ngbDropdownItem>Leave Team</button>
               <button ngbDropdownItem>Edit Team</button>
-              <button ngbDropdownItem>Delete Team</button>
+              <button ngbDropdownItem >Delete Team</button>
             </div>
         </div>
 
     </div>
+-->

@@ -12,11 +12,33 @@
                     <div class="row">
                         <!-- FOR EACH TEAM ADD THE BELOW DIV WITH A TEAMCARD -->
                         <div class="col-12 mt-2">
-                            <app-team-card></app-team-card>
+                           <!-- <app-team-card></app-team-card>-->
+                           <table class="table greyHead mt-2">
+                            <thead>
+                                <tr>
+                                    <th>Team</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <tr *ngFor="let item of teams"><td>{{item.name}}</td><td class="text-center">
+                                      <a placement="top" ngbTooltip="Select this to view the corresponding team">
+                                        <i class="fas fa-eye ml-4"(click)="viewTeam(item.teamId)"></i>
+                                      </a>
+                                      <a placement="top" ngbTooltip="Select this to edit the corresponding team">
+                                        <i class="far fa-pencil-alt ml-4" (click)="editTeam(item.teamId)"></i>
+                                      </a>
+                                      <a placement="top" ngbTooltip="Select this to delete the corresponding team">
+                                        <i class="fas fa-trash-alt ml-4" (click)="deleteTeam(item.teamId)"></i>
+                                      </a></td>
+                                    </tr>
+                                    <tr>
+                                </tr>
+                            </tbody>
+                        </table>
                         </div>
-                        <div class="col-12 mt-2">
-                            <app-team-card owner="true"></app-team-card>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -24,24 +46,68 @@
         <div class="col-lg-6 col-md-12">
             <h1>Team Members</h1>
             <div class="sm-container panel-container panel-ext ">
-                <div class="group-right mt-2 mb-2" (click)="addTeamMembers()">
+               <!-- <div class="group-right mt-2 mb-2" (click)="addTeamMembers()">
                     <h5>Add Team Member</h5><h5><i class="fa fa-plus" aria-hidden="true"></i></h5>
-                </div>
+                </div>-->
+
                 <div class="container-fluid">
                     <div class="row">
-                        <!-- ADD ALL THE TEAM MEMBERS IN HERE -->
                         <div class="col-lg-4 col-md-12">
-                            <!-- <app-profile-card class=" border-el img-sm" addable="true" ></app-profile-card> -->
+
+
                         </div>
                         <div class="col-lg-4 col-md-12">
-                            <!-- <app-profile-card class=" border-el img-sm"></app-profile-card> -->
+
                         </div>
+                        <table class="table greyHead mt-2">
+                          <thead>
+                              <tr>
+                                  <th>Team Members</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr><!--
+                                  <tr *ngFor="let item of teamMembers"><td>{{item.name}}</td><td class="text-center">
+                                    <a placement="top" ngbTooltip="Select this to view the corresponding team">
+                                      <i class="fas fa-eye ml-4"(click)="viewTeamMember(item.teamId)"></i>
+                                    </a>
+                                    <a placement="top" ngbTooltip="Select this to edit the corresponding team">
+                                      <i class="far fa-pencil-alt ml-4" (click)="editTeamMember(item)"></i>
+                                    </a>
+                                    <a placement="top" ngbTooltip="Select this to delete the corresponding team">
+                                      <i class="fas fa-trash-alt ml-4" (click)="deleteTeamMember(item.teamId)"></i>
+                                    </a></td>
+                                  </tr>
+                                  <tr>-->
+                                    <div class="col-sm-12 col-md-6">
+                                      <div class="panel-container sm-container" *ngIf="teamView">
+                                          <h2>Team Details</h2>
+                                           <p>Description: {{teamView.description}}</p>
+                                           <h3>Team Members</h3>
+                                           <table class="table">
+                                             <th>Name</th>
+                                             <th>Surname</th>
+                                              <tr *ngFor="let item of teamMembers"><td>{{item.name}}</td><td>{{item.surname}}</td></tr>
+                                           </table>
+                                      </div>
+                                   </div>
+                              </tr>
+                          </tbody>
+                      </table>
+
                     </div>
                 </div>
+
+
             </div>
         </div>
         <div class="col-lg-3 col-md-12 text-center">
             <button class="btn btn-outline-primary mt-4 pl-4 pr-4">Search All Teams</button>
         </div>
+
+
+
+
     </div>
+
 </div>

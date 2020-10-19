@@ -1,7 +1,8 @@
 export class TeamMembers{
 
-    id: number;
-    name: string;
-    surname : string;
-    pic: string;
-  }
+  teamId: number;
+  userId: number;
+  name: string;
+  surname : string;
+  pic: string;
+}

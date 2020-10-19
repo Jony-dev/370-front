@@ -25,7 +25,7 @@ export class TeamCardComponent implements OnInit {
   }
 
   getData(){
-    ////this.getTeams();
+    this.getTeams();
 
   }
 
@@ -33,49 +33,61 @@ export class TeamCardComponent implements OnInit {
     const modalInstance = this.modal.open(EditAddTeamComponent);
     modalInstance.result.then((res)=>{
 
-     // this.getTeams();
+      this.getTeams();
     });
   }
-/*
+
   getTeams()
   {
-    this.api.getTeams().subscribe( success => this.getTeamSuccess(success), error => this.getTeamFail(error));
+   // this.api.getTeams().subscribe( success => this.getTeamSuccess(success), error => this.getTeamFail(error));
   }
 
   //success
   getTeamSuccess(success){
-    //console.log(departments);
+
     this.teams = success;
   }
   //fail
   getTeamFail(error){
     this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
   }
-*/
+
   deleteTeam(teamId : number){
-   // this.api.deleteTeam(teamId).subscribe( suc => this.deleteSuccess(suc), err => this.deleteFail(err))
+    this.api.deleteTeam(teamId).subscribe( suc => this.deleteSuccess(suc), err => this.deleteFail(err))
   }
 
   deleteSuccess(success){
     this.toast.display({type:"Success", heading : success.Title, message : success.message});
-   // //this.getTeams();
+
   }
   deleteFail(error){
     this.toast.display({type:"Error", heading : error.error.Title, message : error.error.message});
   }
 
-  editTeam(id : number){
+  editTeam(teamObj : any){
     //console.log(this.teams);
     const modalInstance = this.modal.open(EditAddTeamComponent);
-    let team = this.teams.find( x => x.teamId == id);
-    //let location = this.locations.find( x => x.name == lo);
-    modalInstance.componentInstance.editDepartment = team;
-    modalInstance.result.then(res =>{
+    teamObj = this.teams.find( x => x.teamId == teamObj.teamId);
 
-     // this.getTeams();
+    modalInstance.componentInstance.updateTeam = teamObj;
+    modalInstance.result.then(res =>{
+     this.getTeams();
     })
     //console.log(this.teams);
+
+    /*
+      editSkill(id : number){
+    const modalInstance = this.modal.open(EditAddSkillComponent)
+    modalInstance.componentInstance.editSkill = this.skills.find( x => x.id == id);
+    modalInstance.result.then( (res) =>{
+      this.getSkills();
+    })
   }
+    */
+  }
+
+
+
 
   /*viewTeams(id : number){
     this.teamView = this.teams.find( x => x.teamId == id);
