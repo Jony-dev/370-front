@@ -126,6 +126,9 @@ import { FilterFloorDrop } from './components/system/pipes/filterFloorDrop.pipe'
 import { FilterLanguages } from './components/system/pipes/filterLanguages.pipe';
 import { FilterBetweenDates } from './components/system/pipes/filterBetweenDates.pipe';
 import { UserManualComponent } from './components/user-manual/user-manual.component';
+import { FilterAudit } from './components/system/pipes/filterAudit.pipe';
+import { FilterTables } from './components/system/pipes/filterTables.pipe';
+import { FilterDepartmentMembers } from './components/system/pipes/filterDepartmentMembers.pipe';
 
 @NgModule({
   declarations: [
@@ -235,6 +238,9 @@ import { UserManualComponent } from './components/user-manual/user-manual.compon
     AssistBookingComponent,
     FilterApplicants,
     FilterFloorDrop,
+    FilterAudit,
+    FilterTables,
+    FilterDepartmentMembers,
     BackupRestoreComponent,
     HomeComponent,
     UserManualComponent

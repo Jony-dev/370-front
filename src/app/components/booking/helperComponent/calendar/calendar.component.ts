@@ -93,7 +93,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
         
         
     });
-    console.log(this.days);
   }
 
   openBookingScreen(booking?:any){
@@ -157,18 +156,19 @@ export class CalendarComponent implements OnInit, OnDestroy {
       if(!this.user)
       this.api.getGroupDates( month, this.year).subscribe( x => 
         {
+          console.log(x);
             this.groupEncap = x;
             this.bookingDays = x.bookableDates;
             this.groupDays = x.groupBookings;
             this.constructCalendar(); 
         });
       else{
-        this.api.getEmpBookableDates( month, this.year, this.user.id).subscribe( x => 
+        this.api.getEmpGroupDates( month, this.year, this.user.id).subscribe( x => 
           {
-              this.bookingEncap = x;
+              this.groupEncap = x;
               this.bookingDays = x.bookableDates;
-              this.userBookings = x.userBookings;
-              this.constructCalendar(); 
+              this.groupDays = x.groupBookings;
+              this.constructCalendar();
           });
       }
     }

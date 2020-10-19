@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Audit } from 'src/app/models/audit';
+import { Database } from 'src/app/models/database';
 
 @Component({
   selector: 'app-log',
@@ -14,6 +15,13 @@ import { Audit } from 'src/app/models/audit';
 export class LogComponent implements OnInit {
 
   audits : Audit[] = [];
+  databaseTables : Database [] = [];
+
+  startingDate : FormControl = new FormControl();
+  endDate : FormControl = new FormControl();
+  employeeSearch : FormControl = new FormControl();
+  database : FormControl = new FormControl(null);
+
 
   constructor( private modal : NgbModal, private toast : ToastsService, private api : ApiService, private formBuilder : FormBuilder) { }
 
@@ -25,6 +33,7 @@ export class LogComponent implements OnInit {
   getData(){
 
     this.getAudits();
+    this.getDatabases();
   }
 
   getAudits(){
@@ -37,6 +46,15 @@ export class LogComponent implements OnInit {
   //fail
   getAuditFail(error){
     this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
+  }
+
+  getDatabases(){
+    this.api.getDatabaseTables().subscribe(x => this.databaseTables = x, er => this.getAuditFail(er));
+  }
+  clearFilter(){
+    this.employeeSearch.setValue(null);
+    this.startingDate.setValue(null);
+    this.endDate.setValue(null);
   }
 
 }

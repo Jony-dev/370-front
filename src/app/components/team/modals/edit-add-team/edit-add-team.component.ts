@@ -23,7 +23,8 @@ export class EditAddTeamComponent implements OnInit {
   @Input() addMember = false;
   @Input() editing = false;
 
-
+  searchControl : FormControl = new FormControl();
+  
   teams : Team [] = [];
   teamMembers : TeamMembers [] = [];
 

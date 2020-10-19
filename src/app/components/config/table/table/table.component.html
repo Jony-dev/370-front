@@ -12,7 +12,7 @@
                                 <div class="col-lg-3 col-sm-12">
                                     <div class="form-group">
                                         <label for="tableSearch">Search Table</label>
-                                        <input class="form-control" type="text" name="tableSearch" id="tableSearch" [ngModel]="searchText" formControlName= "tableSearch">
+                                        <input class="form-control" type="text" name="tableSearch" id="tableSearch" [ngModel]="searchText" formControlName="tableSearch">
                                     </div>
                                 </div>
                                 <!--TableType Dropdown-->
@@ -24,7 +24,7 @@
                                           </a>
                                           Table Type</label>
                                         <select class="form-control" name="ttypeId" id="ttypeId" formControlName="ttypeId">
-                                          <option value="null" selected disabled>Please Select a Table Type</option>
+                                          <option [ngValue]="null" selected>All Types</option>
                                           <option *ngFor="let item of tableTypes" [value]="item.id" >{{item.type}} </option>
                                         </select>
                                     </div>
@@ -38,7 +38,7 @@
                                           </a>
                                           Building</label>
                                         <select class="form-control" name="building" id="building" formControlName="buildingId">
-                                            <option value="null" selected disabled>Please Select a building</option>
+                                            <option [ngValue]="null" selected>All Buildings</option>
                                             <option *ngFor="let item of buildings" [value]="item.buildingId" >{{item.name}} </option>
                                         </select>
                                     </div>
@@ -52,8 +52,8 @@
                                           </a>
                                           Floor</label>
                                         <select class="form-control" name="floor" id="floor" formControlName="floorId">
-                                          <option value="null" selected disabled>Please Select a floor</option>
-                                          <option *ngFor="let item of floors | filterName : searchText " [value]="item.floorId" >{{item.floorNumber}} </option>
+                                          <option value="null" selected>All Floors</option>
+                                          <option *ngFor="let item of floors | filterFlrDrop:tableForm.get('buildingId').value" [value]="item.floorId" >{{item.floorNumber}} </option>
                                         </select>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                             <th class="text-right">Actions</th>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of tables"><td>{{item.name}}</td><td>{{item.ttypeId == 3? "Group" : "Individual"}}</td><td>{{item.buildingName}}</td><td>{{item.floorName}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
+                          <tr *ngFor="let item of tables | filterTables:tableForm.get('tableSearch').value:tableForm.get('ttypeId').value:tableForm.get('buildingId').value:tableForm.get('floorId').value"><td>{{item.name}}</td><td>{{item.ttypeId == 3? "Group" : "Individual"}}</td><td>{{item.buildingName}}</td><td>{{item.floorName}}</td><td class="text-center"><i class="far fa-pencil-alt" (click)="editTable(item.id)"></i><i class="fas fa-trash-alt ml-4" (click)="deleteTable(item.id)"></i></td></tr>
                         </tbody>
                     </table>
                 </div>

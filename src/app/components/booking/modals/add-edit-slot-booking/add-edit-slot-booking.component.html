@@ -31,7 +31,7 @@
                 <h3 class="text-center">{{item.name}}</h3>
                 <table class="table">
                     <tbody>
-                        <tr *ngFor="let slot of item.slots" [ngStyle]="{'background-color': usersId == slot.userId && usersId ? '#e7e7e7' : '#ffffff'}" (click)="toggleBooking(slot)">
+                        <tr *ngFor="let slot of item.slots" [ngStyle]="{'background-color': usersId == slot.userId && usersId ? '#e7e7e7' : '#ffffff'}" (click)="toggleBooking(slot,item.tableId)">
                             <td>{{slot.startTime}}</td>
                             <td>{{slot.userName}} {{slot.userSurname}}</td>
                         </tr>

@@ -72,14 +72,9 @@ export class AddEditSlotBookingComponent implements OnInit {
     
     return false;
   }
-  toggleBooking(slot : Slot){
-
+  toggleBooking(slot : Slot, tableId : number){
+    let request :any = { tableId , dateId : slot.dateId, slotId : slot.slotId};
     if(!slot.userId){
-      let tableId = this.tables.find(x =>{
-        if(x.slots.find(y => (y.slotId == slot.slotId && y.dateId == slot.dateId)))
-          return x;
-      }).tableId;
-      let request :any = { tableId : tableId, dateId : slot.dateId, slotId : slot.slotId};
       if(!this.user)
         this.api.makeOwnGroupBooking(request).subscribe(x => {this.getSlots(); this.helper.emitRefresh();},er => this.loadError(er));
       else{

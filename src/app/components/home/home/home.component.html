@@ -5,7 +5,7 @@
                 <h2>Todays Table Booking</h2>
                 <hr>
                 <div class="container">
-                    <h3 class="text-center">{{homeCards.table?.tableName != null ? homeCards.table.tableName : "No booking"}}</h3>
+                    <h3 class="text-center">{{homeCards?.table?.tableName != null ? homeCards.table.tableName : "No booking"}}</h3>
                     <h1 class="text-right"><i class="far fa-chair-office"></i></h1>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                 <h2>Assigned Cards</h2>
                 <hr>
                 <div class="container">
-                    <h3 class="text-center">{{homeCards.assignedCards.total}}</h3>
+                    <h3 class="text-center">{{homeCards?.assignedCards.total}}</h3>
                     <h1 class="text-right"><i class="fas fa-id-card"></i></h1>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <h2>Job Requests</h2>
                 <hr>
                 <div class="container">
-                    <h3 class="text-center">{{homeCards.jobRequests.total}}</h3>
+                    <h3 class="text-center">{{homeCards?.jobRequests.total}}</h3>
                     <h1 class="text-right"><i class="fad fa-list-alt"></i></h1>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <h2>Approve Job Cards</h2>
                 <hr>
                 <div class="container">
-                    <h3 class="text-center">{{homeCards.jobApprovals.total}}</h3>
+                    <h3 class="text-center">{{homeCards?.jobApprovals.total}}</h3>
                     <h1 class="text-right"><i class="far fa-stamp"></i></h1>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <h2>Awaiting interviews</h2>
                 <hr>
                 <div class="container">
-                    <h3 class="text-center">{{homeCards.interviews.total}}</h3>
+                    <h3 class="text-center">{{homeCards?.interviews.total}}</h3>
                     <h1 class="text-right"><i class="fal fa-copy"></i></h1>
                 </div>
             </div>

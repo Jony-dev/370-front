@@ -4,26 +4,27 @@
         <form>
             <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-sm-12">
+                <div class="col-lg-3 col-sm-12" hidden>
                     <label for="database">Database Table</label>
-                    <select class="form-control" name="database" id="database">
-                        <option value="null" selected>All Databases</option>
+                    <select class="form-control" name="database" id="database" [formControl]="database">
+                        <option [ngValue]="null" selected>All Databases</option>
+                        <option [value]="item.id" *ngFor="let item of databaseTables">{{item.name}}</option>
                     </select>
                 </div>
                 <div class="col-lg-2 col-sm-12">
                     <label for="startDate">Starting Date</label>
-                    <input class="form-control" placeholder="yyyy/mm/dd" type="date" name="startDate" id="startDate">
+                    <input class="form-control" placeholder="yyyy/mm/dd" type="date" name="startDate" id="startDate" [formControl]="startingDate">
                 </div>
                 <div class="col-lg-2 col-sm-12">
-                    <label for="startDate">Starting Date</label>
-                    <input class="form-control" placeholder="yyyy/mm/dd" type="date" name="startDate" id="startDate">
+                    <label for="endDate">End Date</label>
+                    <input class="form-control" placeholder="yyyy/mm/dd" type="date" name="endDate" id="endDate" [formControl]="endDate">
                 </div>
                 <div class="col-lg-3 col-sm-12">
-                    <label for="startDate">Employee</label>
-                    <input class="form-control" type="text" name="startDate" id="startDate">
+                    <label for="employee">Employee</label>
+                    <input class="form-control" type="text" name="employee" id="employee" [formControl]="employeeSearch">
                 </div>
                 <div class="col-lg-2 col-sm-12">
-                    <button class="btn btn-outline-primary mt-lg-4 mt-sm-0">Filter</button>
+                    <button class="btn btn-outline-warning mt-lg-4 mt-sm-0"(click)="clearFilter()">Clear Filter</button>
                 </div>
             </div>
             <table class="table greyHead mt-2">
@@ -36,7 +37,7 @@
                     <th class="text-right">Date Performed</th>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of audits"><td>{{item.id}}</td><td>{{item.userId}}</td><td>{{item.userName}}</td><td>{{item.userSurname}} </td><td>{{item.operationPerformed}} </td><td class="text-right"> {{item.date}} </td></tr>
+                    <tr *ngFor="let item of audits | filterAudit:database.value:startingDate.value:endDate.value:employeeSearch.value"><td>{{item.id}}</td><td>{{item.userId}}</td><td>{{item.userName}}</td><td>{{item.userSurname}} </td><td>{{item.operationPerformed}} </td><td class="text-right"> {{item.date}} </td></tr>
                 </tbody>
             </table>
             </div>

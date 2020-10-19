@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import Stepper from 'bs-stepper';
 import { Observable } from 'rxjs';
@@ -21,6 +21,8 @@ export class CreateInterviewComponent implements OnInit {
   @Input() applicant : ApplicantPoolCard;
   private stepper : Stepper;
 
+  searchControl : FormControl = new FormControl();
+  
   interviewDetials : EditInterview;
   appointmentForm : FormGroup;
   employees : userCard [] = [];

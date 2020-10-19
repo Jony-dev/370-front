@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidatorFn } from '@angular/forms';
 import { ToastsService } from 'src/app/services/toasts.service';
 import { ApiService } from 'src/app/services/api.service';
 import { Justification } from 'src/app/models/justification';
 import { Job } from 'src/app/models/job';
 import { JobReqCard } from 'src/app/models/jobReqCard';
 
+
+
+ function dateVerify(control : AbstractControl){
+  let currentDate = new Date();
+  let controlDate = new Date(control.value);
+  if( controlDate < currentDate)
+    return { invalidDate : true}
+  return null;
+}
 @Component({
   selector: 'app-hire-request',
   host: {class:'full-component'},
@@ -28,12 +37,15 @@ export class HireRequestComponent implements OnInit {
     this.buildForm();
   }
 
+  test(){
+    console.log(this.requestForm.get('requestDate').getError('invalidDate'));
+  }
   buildForm(){
 
     this.requestForm = this.formBuilder.group({
         justification : [null, [Validators.required]],
         job : [null, [Validators.required]],
-        requestDate :[null, [Validators.required]],
+        requestDate :[null, [Validators.required,dateVerify]],
         brief : ['',[Validators.required]]
     })
 
@@ -142,5 +154,14 @@ export class HireRequestComponent implements OnInit {
   }
   editReqFail(event){
     this.toast.display({type : "Error", heading : event.error.Title, message : event.error.message + "\n" + event.message});
+  }
+
+  deleteRequest(event : JobReqCard){
+    this.api.deleteHireRequest(event.requestId).subscribe(x => {
+      this.getData();
+      this.editReqSuccess(x);
+    },er =>{
+      this.editReqFail(er);
+    })
   }
 }

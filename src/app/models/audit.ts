@@ -5,5 +5,6 @@ export class Audit {
   userName : string;
   userSurname : string;
   operationPerformed : string ;
+  operationId : number;
   date : Date;
 }

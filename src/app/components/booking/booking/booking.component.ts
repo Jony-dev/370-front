@@ -36,7 +36,7 @@ export class BookingComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    
+  
   }
 
 

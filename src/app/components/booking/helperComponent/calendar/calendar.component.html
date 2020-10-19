@@ -29,7 +29,7 @@
                 <h5 class="date">{{day.date}}</h5>
                 <div *ngIf="!day.bookingId && day.date > 0 && day.bookable == 1 && !day.tableName && calendarType=='individual'" class="text-center" (click)="openBookingScreen(day);">No Booking</div>
                 <div *ngIf="!day.bookingId && day.date > 0 && day.bookable == 1 && !day.tableName && calendarType !='individual'" class="text-center" (click)="openBookingScreen(day);">_____</div>
-                <div *ngIf="!day.bookingId && day.date > 0 && day.bookable == 1 && day.tableName" class="text-center" (click)="openBookingScreen(day);">{{day.tableName}} Booking</div>
+                <div *ngIf="!day.bookingId && day.date > 0 && day.bookable == 1 && day.tableName" class="text-center" (click)="openBookingScreen(day);">{{day.tableName}} Bookings</div>
                 <div *ngIf="day.bookingId && day.date > 0" class="text-center"><span>{{day.tableName}}</span>
                   <a placement="top" ngbTooltip="Delete booking." style="font-size: xx-small;">
                     <button class="btn btn-sm btn-outline-danger ml-4"(click)="cancelBooking(day)">X</button>

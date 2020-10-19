@@ -50,28 +50,12 @@
                                     <div class="col-lg-4 col-md-12">
                                         <div class="form-group">
                                             <label for="searchInterviewer">Search</label>
-                                            <input type="text" name="searchInterviewer" id="searchInterviewer" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="searchTeam">Search</label>
-                                            <select name="searchTeam" id="searchTeam" class="form-control">
-                                                <option value="all" selected>All</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="form-group">
-                                            <label for="searchDepartment">Department</label>
-                                            <select name="searchDepartment" id="searchDepartment" class="form-control">
-                                                <option value="all" selected>All</option>
-                                            </select>
+                                            <input type="text" name="searchInterviewer" id="searchInterviewer" class="form-control" [formControl]="searchControl">
                                         </div>
                                     </div>
                                     <hr>
                                     <!-- LIST ALL PEOPLE BELOW HERE -->
-                                    <div class="col-md-4 col-sm-12" *ngFor="let item of employees">
+                                    <div class="col-md-4 col-sm-12" *ngFor="let item of employees | filterName:searchControl.value">
                                         <app-profile-card class="img-sm border-el mt-2" addable="True" [cardDetails]="item" (click)="addInterviewer(item.id)"></app-profile-card>
                                     </div>
                                 </div>

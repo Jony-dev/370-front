@@ -8,7 +8,7 @@
                     <div class="row">
                         <!-- THIS IS WHERE WE WILL ADD THE JOB REQUEST CARDS WITH THE DIV WRAPPER OF class="col-12" -->
                         <div class="col-12">
-                            <app-request-card *ngFor="let item of requests" [cardDetails]="item" (editRequest)="fillForm($event)"></app-request-card>
+                            <app-request-card *ngFor="let item of requests" [cardDetails]="item" (editRequest)="fillForm($event)" (deleteReq)="deleteRequest($event)"></app-request-card>
                             <h1 class="text-center no-content" *ngIf="requests.length === 0">No Job Requests</h1>
                         </div>
                     </div>
@@ -57,7 +57,10 @@
                                         <i class="fa fa-info-circle"></i>
                                       </a>
                                       Fulfilment Date</label>
-                                    <input type="date" name="fulfilldate" id="fulfilldate" class="form-control" formControlName="requestDate">
+                                    <input type="date" name="fulfilldate" id="fulfilldate" class="form-control" formControlName="requestDate" [class.is-invalid]="requestForm.get('requestDate').getError('invalidDate') && requestForm.get('requestDate').touched">
+                                    <div class="alert alert-danger" *ngIf="requestForm.get('requestDate').getError('invalidDate') && requestForm.get('requestDate').touched">
+                                        The date must be bigger than today
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12">

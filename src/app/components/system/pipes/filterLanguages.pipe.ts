@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Job } from 'src/app/models/job';
 import { Language } from 'src/app/models/language';
 
 @Pipe({

@@ -3,7 +3,7 @@ import Stepper from 'bs-stepper';
 import { JobRequestInfo } from 'src/app/models/jobReqDetails';
 import { JobCardHelperService } from 'src/app/services/job-card-helper.service';
 import { Observer, Observable, Subject, Subscription } from 'rxjs';
-import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Schedule } from 'src/app/models/schedule';
 import { RequisitionApproval } from 'src/app/models/requisitionApproval';
 import { ApiService } from 'src/app/services/api.service';
@@ -20,6 +20,14 @@ import { UserProfile } from 'src/app/models/userProfile';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditJobCard } from 'src/app/models/editJobCard';
 import { FilterName } from 'src/app/components/system/pipes/filterName.pipe'
+
+function dateVerify(control : AbstractControl){
+  let currentDate = new Date();
+  let controlDate = new Date(control.value);
+  if( controlDate < currentDate)
+    return { invalidDate : true}
+  return null;
+}
 
 const validatePublish: ValidatorFn = (fg: FormGroup) => {
   const start = fg.get('publishDate').value;
@@ -109,12 +117,12 @@ export class JobCardCreateComponent implements OnInit, OnDestroy {
   buildForm(){
     this.basicDetails = this.formBuilder.group({
       jobCardName : ['',[Validators.required]],
-      startDate : [null,[Validators.required]],
+      startDate : [null,[Validators.required,dateVerify]],
       endDate : [ null, [Validators.required]],
       introduction : ['',[Validators.required]],
       description : ['', [Validators.required]],
       travel : [false,],
-      publishDate : ['',[Validators.required]],
+      publishDate : ['',[Validators.required,dateVerify]],
       closingDate : ['',[Validators.required]],
       scheduleId : [null, [Validators.required]],
       locationId : [null, [Validators.required]],

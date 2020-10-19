@@ -10,7 +10,7 @@
                   <a placement="left" ngbTooltip="Select this to edit the corresponding request">
                     <i class="far fa-pencil-alt" *ngIf="!cardDetails?.jobCardId && (cardDetails?.status !='Rejected')" (click)="outputRequest()"></i>
                   </a>
-                  <a placement="left" ngbTooltip="Select this to delete the corresponding request">
+                  <a placement="left" ngbTooltip="Select this to delete the corresponding request" (click)="deleteRequest()">
                     <i class="fas fa-trash-alt ml-4"></i>
                   </a></h4>
             </div>

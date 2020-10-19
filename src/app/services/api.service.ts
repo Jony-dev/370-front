@@ -358,6 +358,13 @@ export class ApiService {
     return this.http.post<HiringTeam>(this.userRole, { request : "getHiringTeam"});
   }
 
+  deleteHireRequest(id : number){
+    return this.http.post( this.jobRequest, {request : "deleteJobRequest", payload : {id}})
+  }
+
+  deleteJobCard(id : number){
+    return this.http.post( this.jobCard, {request : "deleteJobCard", payload : {id}})
+  }
   rejectRequest(message){
     return this.http.post(this.jobRequest, { request : "rejectJobRequest", payload : message});
   }
@@ -755,6 +762,10 @@ export class ApiService {
 
   getGroupDates(month : number, year : number){
     return this.http.post<GroupBookingCap>( this.booking, { request : "getGroupAndAvailable", payload : { month , year} });
+  }
+
+  getEmpGroupDates(month : number, year : number, userId : number){
+    return this.http.post<GroupBookingCap>( this.booking, { request : "getEmpGroupAndAvailable", payload : { month , year, userId} });
   }
 
   getBoardRoomSlots(buildingId,dateId){
