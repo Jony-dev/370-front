@@ -33,6 +33,7 @@ export class ConfigskillsAndQsComponent implements OnInit {
   pendingSkill: Number;
   pendingRequirement: Number;
   pendingQuestion: Number;
+
   ngOnInit(): void {
     this.getData();
   }
@@ -188,16 +189,15 @@ export class ConfigskillsAndQsComponent implements OnInit {
   deleteLongQFail(error){
     this.toast.display({type:"Error", heading : error.error.Title, message : error.error.message});
   }
-  
+
   getSkillPending(){
     this.api.getSkillPending().subscribe( s => this.getSkillPendingSuccess(s), e => this.getSkillPendingError(e));
-    
+
   }
   getSkillPendingSuccess(s){
     this.pendingSkill = s.pending;
-    console.log(s);
-    
-    
+
+
   }
   getSkillPendingError(e){
     this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message });
@@ -205,13 +205,12 @@ export class ConfigskillsAndQsComponent implements OnInit {
 /////////////////////////////////requirement
 getRequirementPending(){
   this.api.getRequirementPending().subscribe( s => this.getRequirementPendingSuccess(s), e => this.getRequirementPendingError(e));
-  
+
 }
 getRequirementPendingSuccess(s){
   this.pendingRequirement = s.pending;
-  console.log(s);
-  
-  
+
+
 }
 getRequirementPendingError(e){
   this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message });
@@ -219,13 +218,12 @@ getRequirementPendingError(e){
 //////////////////////////question
 getQuestionPending(){
   this.api.getQuestionPending().subscribe( s => this.getQuestionPendingSuccess(s), e => this.getQuestionPendingError(e));
-  
+
 }
 getQuestionPendingSuccess(s){
   this.pendingQuestion = s.pending;
-  console.log(s);
-  
-  
+
+
 }
 getQuestionPendingError(e){
   this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message });

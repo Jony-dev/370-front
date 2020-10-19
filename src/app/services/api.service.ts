@@ -57,6 +57,8 @@ import { TeamMembers } from '../models/teamMembers';
 import { SearchUser } from '../models/searchUser';
 import { Skill } from '../models/skill';
 import { Notification } from '../models/notification';
+import { TeamReport } from '../models/teamReport';
+import { BuildingReport } from '../models/buildingReport';
 
 
 
@@ -111,6 +113,8 @@ export class ApiService {
   backUp : string = `${this.globalRoot}API/Backup`;
   audit: string = `${this.globalRoot}API/Audit/`;
   notification: string = `${this.globalRoot}API/Notification/`;
+  teamReports: string = `${this.globalRoot}API/Team/`;
+  buildingReport: string = `${this.globalRoot}API/Building/`;
 
   teamMember: string = `${this.globalRoot}API/TeamMembers/`;
 
@@ -783,11 +787,11 @@ export class ApiService {
 ///////////////////////////////////////////////////////////////////////////////Notifications///////////////////////////
 getUserNotifications(){
   return this.http.post<Notification[]>(this.notification, {request : "getUserNotifications"});
-  
+
 }
 getUserCount(){
   return this.http.post<Notification[]>(this.notification, {request : "getUserCount"});
-  
+
 }
 
   addUsersSkill(id:number){
@@ -822,7 +826,23 @@ getQuestionPending()
     return this.http.post<Language[]>(this.user, {request : "getUnassignedLangs"});
   }
 
+
   getUnassignedSkills(){
     return this.http.post<Skill[]>(this.user, {request : "getUnassignedSkills"});
   }
+
+  deleteNotification(id : number){
+    return this.http.post(this.notification, {request : "deleteNotification", payload : {id}});
+  }
+
+
+  /////////////////////////////////////////////Report
+  teamReport(){
+    return this.http.post<TeamReport[]>(this.teamReports, {request : "teamReport"});
+  }
+
+  getBuildingReport(){
+    return this.http.post<BuildingReport[]>(this.buildingReport, {request : "getBuildingReport"});
+  }
+
 }

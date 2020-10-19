@@ -14,7 +14,7 @@ export class NotificationComponent implements OnInit {
 
   notification : Notification[] = [];
 
-  constructor(private modal : NgbModal, private toast : ToastsService, private api : ApiService, private formBuilder : FormBuilder) { 
+  constructor(private modal : NgbModal, private toast : ToastsService, private api : ApiService, private formBuilder : FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -22,7 +22,7 @@ export class NotificationComponent implements OnInit {
     this.getData();
   }
 
-  
+
   getData(){
 
     this.getUserNotifications();
@@ -57,6 +57,24 @@ export class NotificationComponent implements OnInit {
   }
   //fail
   getUserCountFail(error){
+
+    this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
+    console.log(this.notification);
+  }
+
+  deleteNotification(id:number)
+  {
+    this.api.deleteNotification(id).subscribe(success=> this.deleteNotificationSuccess(success), error => this.deleteNotificationFail(error));
+    console.log(this.notification);
+  }
+
+  deleteNotificationSuccess(success){
+
+    this.notification = success;
+    console.log(this.notification);
+  }
+  //fail
+  deleteNotificationFail(error){
 
     this.toast.display({type : "Error", heading :error.error.Title, message : error.error.message });
     console.log(this.notification);
