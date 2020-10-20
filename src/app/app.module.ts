@@ -129,6 +129,7 @@ import { UserManualComponent } from './components/user-manual/user-manual.compon
 import { FilterAudit } from './components/system/pipes/filterAudit.pipe';
 import { FilterTables } from './components/system/pipes/filterTables.pipe';
 import { FilterDepartmentMembers } from './components/system/pipes/filterDepartmentMembers.pipe';
+import { FilterSearchUser } from './components/system/pipes/filterSearchUser.pipe';
 
 @NgModule({
   declarations: [
@@ -241,6 +242,7 @@ import { FilterDepartmentMembers } from './components/system/pipes/filterDepartm
     FilterAudit,
     FilterTables,
     FilterDepartmentMembers,
+    FilterSearchUser,
     BackupRestoreComponent,
     HomeComponent,
     UserManualComponent,

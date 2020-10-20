@@ -33,6 +33,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routeSub = this.router.params.subscribe( params => {this.routeId = params['id']});
+    console.log(this.routeId);
     this.loadData();
     this.buildForm();
   }
@@ -44,7 +45,7 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
   buildForm(){
     
     this.employementForm = this.formBuilder.group({
-      jobId : [this.userDetails?.jobId, [Validators.required]],
+      jobId : [this.userDetails? this.userDetails.jobId : null, [Validators.required]],
       scheduleId : [this.userDetails?.scheduleId, [Validators.required]],
       salary : [this.userDetails?.salary, [Validators.required]],
       locationId : [this.userDetails?.locationId , [Validators.required]],
@@ -61,23 +62,24 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
   }
 
   loadData(){
-    this.getUserDetails();
     this.getSchedule();
     this.getJobs();
     this.getLocation();
     this.getDepartments();
+    this.getUserDetails();
   }
 
   getUserDetails(){
     this.api.createEmployeeDetails(this.routeId).subscribe(x => 
       {
         this.userDetails = x;
+        console.log("HELLOOOOOOO");
         console.log(x);
         if(!this.userDetails.picture)
           this.userDetails.picture = "../../../../../assets/profile/empty.png";
 
         this.employementForm.setValue({
-          jobId : this.userDetails.jobId,
+          jobId : this.userDetails?.jobId,
           scheduleId : this.userDetails?.scheduleId,
           salary : this.userDetails?.salary,
           locationId : this.userDetails?.locationId,
