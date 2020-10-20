@@ -19,17 +19,7 @@
       </li>
       <li style="position:relative; cursor: pointer;" >
         <!-- <img (click)="notificationToggle = !notificationToggle" class="notificationImg" src="../assets/icons/bellWarn.svg" alt="Notification"> -->
-<<<<<<< HEAD
-        <h3><i (click)="notificationToggle = !notificationToggle" class="fas fa-bell"></i></h3>
-        <div style="height:25px; width:25px; border:1px red solid;">
-          <p>{{unreadNotification}}</p>
-        </div>
-        <a href="https://karabongqobe.github.io/370-Help_Manual/pages/view-notifications1.html">
-          <button  type="button" class="btn btn-outline-info" style="float: right;" > Help</button>
-          </a>
-=======
         <h3 class="mt-4"><i (click)="notificationToggle = !notificationToggle" class="fas fa-bell"></i></h3>
->>>>>>> config
         <app-notification *ngIf="notificationToggle"></app-notification>
       </li>
       <li>
