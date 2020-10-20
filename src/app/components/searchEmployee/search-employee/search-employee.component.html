@@ -4,36 +4,36 @@
         <div class="col-lg-3 col-sm-12">
             <div class="form-group">
                 <label for="search">Search</label>
-                <input type="text" name="search" id="search" class="form-control">
+                <input type="text" name="search" id="search" class="form-control" [formControl]="searchText">
             </div>
         </div>
         <div class="col-lg-2 col-sm-12">
             <div class="form-group">
                 <label for="userType">Select User Type</label>
-                <select name="userType" id="userType" class="form-control">
-                    <option value="all" selected>All</option>
-                    <option value="all">Employee</option>
-                    <option value="all">Applicant</option>
+                <select name="userType" id="userType" class="form-control" [formControl]="userType">
+                    <option [ngValue]="null" selected>All</option>
+                    <option [ngValue]="2">Employee</option>
+                    <option [ngValue]="1">Applicant</option>
                 </select>
             </div>
         </div>
         <div class="col-lg-3 col-sm-12">
             <div class="form-group">
                 <label for="userDepartment">Select Department</label>
-                <select name="userDepartment" id="userDepartment" class="form-control">
-                    <option value="all" selected>All</option>
-                    <option value="all">Fz 2</option>
-                    <option value="all">Fz 3</option>
+                <select name="userDepartment" id="userDepartment" class="form-control" [formControl]="departmentId">
+                    <option [ngValue]="null" selected>All</option>
+                    <option [value]="item.departmentId" *ngFor="let item of departments">{{item.name}}</option>
+                    
                 </select>
             </div>
         </div>
-        <div class="col-lg-2 col-sm-12">
+        <div class="col-lg-2 col-sm-12" hidden>
             <div class="form-group">
                 <label for="skills">Skills</label><br>
                 <input type="text" name="skills" id="skills" class="form-control">
             </div>
         </div>
-        <div class="col-lg-2 col-sm-12">
+        <div class="col-lg-2 col-sm-12" hidden>
             <div class="form-group">
                 <label for="languages">Languages</label>
                 <input type="text" id="languages" name="languages" class="form-control">
@@ -52,9 +52,9 @@
                 </thead>
                 <tbody>
 
-                    <tr *ngFor="let item of users">
-                        <td>{{item.name}}</td><td>{{item.surname}}</td><td>{{item.type}}</td><td>{{item.departmentName}}</td><td>id: {{item.id}}</td><td class="text-center"></td>
-                        <td><i class="far fa-pencil-alt" [routerLink]="['/Dashboard/UpdateEmployee/'+item.id]"></i><i class="fas fa-eye ml-4" [routerLink]="['/Dashboard/UpdateEmployee/'+item.id]"></i></td>
+                    <tr *ngFor="let item of users | filterSearchUser:searchText.value:userType.value:departmentId.value">
+                        <td>{{item.name}}</td><td>{{item.surname}}</td><td>{{item.type}}</td><td>{{item.departmentName}}</td>
+                        <td><i class="fas fa-eye ml-4" [routerLink]="['/Dashboard/CreateEmployee/'+item.id]"></i></td>
                         <!--(click)="editProfile()"-->
                     </tr>
                 </tbody>

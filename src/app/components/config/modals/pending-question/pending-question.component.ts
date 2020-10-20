@@ -51,6 +51,7 @@ export class PendingQuestionComponent implements OnInit {
     toast.message = success.message;
     this.toast.display(toast);
     this.activeModal.close();
+    location.reload();
   }
 
   addQuestionFailed(error){

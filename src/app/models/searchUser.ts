@@ -4,7 +4,9 @@ export class SearchUser{
   name: string;
   surname : string;
   type: string;
+  typeId: number;
   departmentName: string;
+  departmentId : number;
 
 
 }

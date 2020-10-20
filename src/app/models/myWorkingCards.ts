@@ -1,6 +1,6 @@
 export class MyWorkingCards{
 
-    cardId : Number;
+    cardId : number;
     cardName : string;
     requestingManager : string;
     fulfillmentDate : Date;

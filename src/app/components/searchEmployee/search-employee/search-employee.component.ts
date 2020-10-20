@@ -6,6 +6,8 @@ import { SearchUser} from 'src/app/models/searchUser';
 import { EditProfileMComponent } from '../../modals/editProfile/edit-profile-m/edit-profile-m.component';
 import { userCard } from 'src/app/models/userCard';
 import { User } from 'src/app/models/user';
+import { Department } from 'src/app/models/department';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-search-employee',
@@ -20,8 +22,12 @@ export class SearchEmployeeComponent implements OnInit {
   users : SearchUser[] = [];
   userProfileCard : userCard;
   user : User;
+  departments : Department [] = [];
 
-
+  searchText : FormControl = new FormControl();
+  userType : FormControl = new FormControl();
+  departmentId : FormControl = new FormControl();
+  
   ngOnInit(): void {
 
     this.getData();
@@ -29,43 +35,31 @@ export class SearchEmployeeComponent implements OnInit {
 
   getData(){
     this.getSearchUser();
+    this.getDepartments();
   }
-
-
 
   getSearchUser(){
 
     this.api.getUsersForSearch().subscribe( s => this.getSearchSuccess(s), e => this.getSearchError(e));
-    console.log(this.users);
+    
 
   }
   getSearchSuccess(s){
     this.users = s;
+    console.log(this.users);
 
   }
   getSearchError(e){
     this.toast.display({type : 'Error', heading : e.error.Title, message : e.error.message });
   }
 
-  editProfile(){
-   /* const editProfileInstance = this.modal.open(EditProfileMComponent,  { windowClass : "largeModal",backdrop:"static" });
-    editProfileInstance.result.then((res) =>{
-
-      console.log(res);
-      if(res)
-      {
-
-        this.user.imgUrl = res.imgUrl;
-        this.user.name = res.name;
-        this.user.surname = res.surname;
-
-
-      }
-
-    })*/
-
+  getDepartments(){
+    this.api.getDepartments().subscribe(x => {
+      this.departments = x;
+    }, er =>{
+      this.getSearchError(er);
+    })
   }
-
 
 
 
