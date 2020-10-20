@@ -53,4 +53,14 @@ export class JobCardDashComponent implements OnInit, OnDestroy {
  gotWorkingCards( cards : MyWorkingCards []){
   this.workingCards = cards;
  }
+
+ deleteJobCard(card : MyWorkingCards){
+    this.api.deleteJobCard(card.cardId).subscribe(x =>{
+      this.toast.display({type:"Success", heading : (<any>x).Title, message : (<any>x).message});
+      this.loadData();
+    },er =>{
+      this.retCardFail(er);
+    })
+ }
+ 
 }

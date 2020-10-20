@@ -26,12 +26,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let card of workingCards">
-                            <td>{{card.cardName}}</td><td>{{card.requestingManager}}</td><td>{{card.fulfillmentDate}}</td><td>{{card.stage}}</td><td>{{card.applicants}}</td><td [routerLink]="['/Dashboard/FullJobCard',card.cardId]">
+                            <td>{{card.cardName}}</td><td>{{card.requestingManager}}</td><td>{{card.fulfillmentDate}}</td><td>{{card.stage}}</td><td>{{card.applicants}}</td><td>
                               <a placement="top" ngbTooltip="Select to view the job card details.">
-                                <i class="fas fa-eye ml-4"></i>
+                                <i class="fas fa-eye ml-4" [routerLink]="['/Dashboard/FullJobCard',card.cardId]"></i>
                               </a>
                               <a placement="top" ngbTooltip="Select to delete the job card.">
-                                <i class="fas fa-trash-alt ml-4"></i>
+                                <i class="fas fa-trash-alt ml-4" (click)="deleteJobCard(card)"></i>
                               </a></td>
                         </tr>
                     </tbody>
