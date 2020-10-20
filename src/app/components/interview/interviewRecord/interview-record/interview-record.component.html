@@ -1,4 +1,7 @@
 <div class="container-fluid">
+  <a href="https://karabongqobe.github.io/370-Help_Manual/pages/conduct-interview1.html">
+    <button  type="button" class="btn btn-outline-info" style="float: right;" >Help</button>
+    </a>
     <table class="table mt-2 interview-tb">
         <thead>
             <th>Applicant</th>
@@ -10,7 +13,7 @@
         <tbody>
             <tr *ngFor="let interview of myInterviews">
                 <td>
-                   <app-profile-card [cardDetails]="interview"></app-profile-card> 
+                   <app-profile-card [cardDetails]="interview"></app-profile-card>
                 </td>
                 <td>
                     {{interview.date}}
@@ -25,7 +28,7 @@
                     <i class="fad fa-star-half"></i>
                 </td>
             </tr>
-            
+
         </tbody>
     </table>
 </div>
