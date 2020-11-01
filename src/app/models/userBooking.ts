@@ -6,4 +6,7 @@ export class UserBooking {
     name : string;
     bookingId : number;
     buildingId : number;
+    buildingName: string;
+    locationId : number;
+    locationName : string;
 }

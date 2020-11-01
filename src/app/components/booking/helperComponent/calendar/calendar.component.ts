@@ -81,7 +81,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
             }
         } )){
           if(this.calendarType == "individual")
-            return {date:counter,dateId: dateRecord.dateId, bookable : dateRecord.bookable , bookingId: bookingRecord ? bookingRecord.bookingId: null, tableId: bookingRecord ? bookingRecord.tableId: null, tableName: bookingRecord ? bookingRecord.name: null, time: null, buildingId : bookingRecord ? bookingRecord.buildingId : null};
+            return {date:counter,dateId: dateRecord.dateId, bookable : dateRecord.bookable , bookingId: bookingRecord ? bookingRecord.bookingId: null, tableId: bookingRecord ? bookingRecord.tableId: null, tableName: bookingRecord ? bookingRecord.name: null, time: null, buildingId : bookingRecord ? bookingRecord.buildingId : null, buildingName : bookingRecord ? bookingRecord.buildingName : null, locationName : bookingRecord ? bookingRecord.locationName : null};
           else
             return {date:counter,dateId: dateRecord.dateId, bookable : dateRecord.bookable , bookingId: null, tableId: null, tableName: groupRecord ? groupRecord.numBookings: null, time: null, buildingId : null};
 
