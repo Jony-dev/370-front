@@ -38,6 +38,8 @@ import { AssistBookingComponent } from './components/booking/assist-booking/assi
 import { BackupRestoreComponent } from './components/config/backup-restore/backup-restore.component';
 import { HomeComponent } from './components/home/home/home.component';
 import { UserManualComponent } from './components/user-manual/user-manual.component';
+import { UserAccountComponent } from './components/searchEmployee/user-account/user-account.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 const routes: Routes = [
 { path: "", component : LoginComponent},
@@ -75,9 +77,11 @@ const routes: Routes = [
       { path : "AssistBooking", component : AssistBookingComponent,},
       { path : "backupRestore", component : BackupRestoreComponent,},
       { path : "Home", component : HomeComponent,},
+      { path : "UserProfile/:id", component : UserAccountComponent,},
       { path : "UserManual", component : UserManualComponent,},
   ]},
 { path: "AccountCreated", component : AccountSuccessCreateComponent},
+{ path: "About-Us", component : AboutUsComponent},
 ];
 
 @NgModule({

@@ -24,7 +24,7 @@ import { FilterName } from 'src/app/components/system/pipes/filterName.pipe'
 function dateVerify(control : AbstractControl){
   let currentDate = new Date();
   let controlDate = new Date(control.value);
-  if( controlDate < currentDate)
+  if( controlDate <= currentDate)
     return { invalidDate : true}
   return null;
 }

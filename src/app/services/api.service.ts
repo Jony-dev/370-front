@@ -717,6 +717,10 @@ export class ApiService {
     return this.http.post<CreateEmployee>( this.user, { request : "getUserByInterview", payload : { interviewId }});
   }
 
+  getUserDetails(userId: number){
+    return this.http.post<CreateEmployee>( this.user, { request : "getUsersProfile", payload : { userId }});
+  }
+
   getUserRoles(userId : number){
     return this.http.post<Role[]>( this.user, { request : "getUserRoles", payload : { userId }});
   }

@@ -1,22 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CreateEmployee } from 'src/app/models/createEmployee';
 import { Department } from 'src/app/models/department';
 import { Job } from 'src/app/models/job';
-import { Location } from 'src/app/models/location';
 import { Schedule } from 'src/app/models/schedule';
 import { ApiService } from 'src/app/services/api.service';
 import { ToastsService } from 'src/app/services/toasts.service';
+import { Location } from 'src/app/models/location';
 
 @Component({
-  selector: 'app-create-employee',
+  selector: 'app-user-account',
   host: {class:'full-component'},
-  templateUrl: './create-employee.component.html',
-  styleUrls: ['./create-employee.component.css']
+  templateUrl: './user-account.component.html',
+  styleUrls: ['./user-account.component.css']
 })
-export class CreateEmployeeComponent implements OnInit, OnDestroy {
+export class UserAccountComponent implements OnInit {
 
   routeSub : Subscription;
   routeId : number = null;
@@ -70,21 +70,21 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
   }
 
   getUserDetails(){
-    this.api.createEmployeeDetails(this.routeId).subscribe(x => 
+    this.api.getUserDetails(this.routeId).subscribe(x => 
       {
         this.userDetails = x;
         if(!this.userDetails.picture)
           this.userDetails.picture = "../../../../../assets/profile/empty.png";
 
         this.employementForm.setValue({
-          jobId : this.userDetails?.jobId,
-          scheduleId : this.userDetails?.scheduleId,
-          salary : this.userDetails?.salary,
-          locationId : this.userDetails?.locationId,
-          email : this.userDetails?.email,
-          startDate : this.userDetails?.startDate,
-          endDate : this.userDetails?.endDate,
-          departmentId : this.userDetails?.departmentId,
+          jobId : this.userDetails?.jobId ? this.userDetails?.jobId : null,
+          scheduleId : this.userDetails?.scheduleId ? this.userDetails?.scheduleId : null,
+          salary : this.userDetails?.salary ? this.userDetails?.salary : 0,
+          locationId : this.userDetails?.locationId ? this.userDetails?.locationId : null,
+          email : this.userDetails?.email ? this.userDetails?.email : "",
+          startDate : this.userDetails?.startDate ? this.userDetails?.startDate : null,
+          endDate : this.userDetails?.endDate ? this.userDetails?.endDate : null,
+          departmentId : this.userDetails?.departmentId ? this.userDetails?.departmentId : null,
         });
       },er => this.loadError(er) );
   }
@@ -121,4 +121,5 @@ export class CreateEmployeeComponent implements OnInit, OnDestroy {
     formData.append("contract",file.target.file);
     
   }
+
 }

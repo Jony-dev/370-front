@@ -130,6 +130,8 @@ import { FilterAudit } from './components/system/pipes/filterAudit.pipe';
 import { FilterTables } from './components/system/pipes/filterTables.pipe';
 import { FilterDepartmentMembers } from './components/system/pipes/filterDepartmentMembers.pipe';
 import { FilterSearchUser } from './components/system/pipes/filterSearchUser.pipe';
+import { UserAccountComponent } from './components/searchEmployee/user-account/user-account.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -251,7 +253,9 @@ import { FilterSearchUser } from './components/system/pipes/filterSearchUser.pip
     TeamReportComponent,
     CandidateReportComponent,
     BookingReportComponent,
-    AssistBookingComponent
+    AssistBookingComponent,
+    UserAccountComponent,
+    AboutUsComponent
   ],
   imports: [
     HttpClientModule,

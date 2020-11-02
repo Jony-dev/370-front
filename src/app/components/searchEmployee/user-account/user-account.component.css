@@ -1,0 +1,13 @@
+.profile-img{
+    width: 30vh;
+    height: 30vh;
+}
+.img-container{
+    
+    overflow: hidden;
+    border-radius: 180px;
+    width: 30vh;
+    height: 30vh;
+    margin-left: auto;
+    margin-right: auto;
+}

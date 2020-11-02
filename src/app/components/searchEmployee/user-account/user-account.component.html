@@ -1,0 +1,170 @@
+<div class="container-fluid">
+    <Form [formGroup]="employementForm">
+        <a href="https://karabongqobe.github.io/370-Help_Manual/pages/create-employee-profile1.html">
+            <button  type="button" class="btn btn-outline-info" style="float: right;" >Help</button>
+            </a>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <h2>Employee Details</h2>
+            <div class="panel-container sm-container panel-ext">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="jobPosition">
+                                  <a placement="right" ngbTooltip="Select the job the contractor will fulfil." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Job Position</label>
+                                  <select name="jobPosition" id="jobPosition" class="form-control" formControlName="jobId">
+                                    <option value="null" selected disabled>Please Select Job Position</option>
+                                    <option [value]="item.id" *ngFor="let item of jobs">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="jobSchedule">
+                                  <a placement="bottom" ngbTooltip="Select the schedule the contractor will have." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Schedule</label>
+                                <select name="jobSchedule" id="jobSchedule" class="form-control" formControlName="scheduleId">
+                                    <option value="null" selected disabled>Please Select Schedule</option>
+                                    <option [value]="item.id" *ngFor="let item of schedule">{{item.schedule}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="jobSalary">
+                                  <a placement="right" ngbTooltip="Enter the contractors salary per month without tax." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Salary</label>
+                                  <input type="number" name="jobSalary" id="jobSalary" class="form-control" formControlName="salary">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="jobLocation">
+                                  <a placement="right" ngbTooltip="Select the location the contractor will primarily be at." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Location</label>
+                                  <select name="jobLocation" id="jobLocation" class="form-control" formControlName="locationId">
+                                    <option value="null" selected disabled>Please Select Location</option>
+                                    <option [value]="item.locationId" *ngFor="let item of locations">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="startDate">
+                                  <a placement="right" ngbTooltip="Select the contractors start date of buisness." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>Start Date</label>
+                                <input class="form-control" type="date" name="startDate" id="startDate" formControlName="startDate">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="endDate">
+                                  <a placement="top" ngbTooltip="Select the contractors end date of business." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>End Date</label>
+                                <input class="form-control" type="date" name="endDate" id="endDate" formControlName="endDate">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="department">
+                                  <a placement="right" ngbTooltip="Select what department the contractor is working in." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>Department</label>
+                                <select name="department" id="department" class="form-control" formControlName="departmentId">
+                                    <option value="null" selected disabled>Please Select Department</option>
+                                    <option [value]="item.departmentId" *ngFor="let item of departments">{{item.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-sm-12" hidden>
+                            <div class="form-group">
+                                <label for="contract">
+                                  <a placement="right" ngbTooltip="Download the contracors signed contract." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Contract</label>
+                                  <input type="file" name="contract" id="contract" class="form-control" (change)="uploadFile($event)">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <button class="btn btn-outline-primary mt-4" *ngIf="userDetails?.contract">Download Contract</button>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <app-role-picker [setUser]="userDetails?.userId"></app-role-picker>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-outline-primary float-right mt-4 mb-4" *ngIf="userDetails?.userType==1"(click)="createEmploye()"><h3>Make Employee</h3></button>
+                            <button class="btn btn-outline-primary float-right mt-4 mb-4" *ngIf="userDetails?.userType==2" (click)="updateDetails()"><h3>Update Details</h3></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <h2>Applicant Details</h2>
+            <div class="panel-container sm-container panel-ext">
+                <div class="container mt-4">
+                    <div class="img-container">
+                        <img src="{{userDetails?.picture }}" alt="Profile" class="profile-img">
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-0"></div>
+                        <div class="col-md-4 col-sm-12">
+                            <h3>Name</h3>
+                            <p>{{userDetails?.name}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-0"></div>
+                        <div class="col-md-4 col-sm-12">
+                            <h3>Surname</h3>
+                            <p>{{userDetails?.surname}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-0"></div>
+                        <div class="col-md-4 col-sm-12">
+                            <h3>Nationality</h3>
+                            <p>South African</p>
+                        </div>
+                        <div class="col-md-2 col-sm-0"></div>
+                        <div class="col-md-4 col-sm-12">
+                            <h3>Country</h3>
+                            <p>{{userDetails?.country}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-0"></div>
+                        <div class="col-md-4 col-sm-12">
+                            <h3>Contact</h3>
+                            <p>{{userDetails?.contact}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-0"></div>
+                        <div class="col-md-3 col-sm-12">
+                           <div class="form-group">
+                                <h3>
+                                  <a placement="right" ngbTooltip="Enter in the contractors new employee email address." style="font-size: xx-small;">
+                                    <i class="fa fa-info-circle"></i>
+                                  </a>
+                                  Email</h3>
+                                <input type="text" name="email" id="email" class="form-control" formControlName="email">
+                           </div>
+                        </div>
+                        <div class="col-md-1 col-sm-0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </Form>
+</div>
