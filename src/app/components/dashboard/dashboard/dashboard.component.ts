@@ -65,8 +65,7 @@ export class DashboardComponent implements OnInit {
       {
 
         this.userProfileCard.imgUrl = res.imgUrl;
-        this.userProfileCard.userName = res.name;
-        this.userProfileCard.userSurname = res.surname;
+       
       }
 
     });
